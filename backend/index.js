@@ -8,7 +8,7 @@ let data = [
 ];
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/" && req.method === "GET") {
+  if (req.url === "/endpoint" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(data));
   } else {
@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 server.listen(PORT, () => {
   console.log(`백엔드 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
 });
