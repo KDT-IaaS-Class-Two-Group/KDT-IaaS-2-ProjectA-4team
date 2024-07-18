@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul, li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+#root{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+nav{
+  width: 282px;
+  height: 100vh;
+}
+
+#container{
+  width: calc(100vw - 282px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#user-name{
+  width: 181px;
+  height: 43px;
+}
+
+#content{
+  width: 100%;
+  height: calc(100vh - 43px);
+}
