@@ -7,6 +7,7 @@ const addExampleData = () => {
     addMemberData();
     addRoleData();
     addProductData();
+    addSaleData();
   } catch (err) {
     console.log(err);
   }
@@ -76,5 +77,6 @@ const addProductData = async () => {
   await chickenPatty.save();
   await coke.save();
 };
+const addSaleData = async () => {};
 
 module.exports = addExampleData;
