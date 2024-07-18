@@ -30,7 +30,16 @@ nav{
   flex-direction: column;
 }
 
+#header-box{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
 #user-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 181px;
   height: 43px;
 }
