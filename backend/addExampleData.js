@@ -3,6 +3,11 @@ const Product = require("../shared/Product");
 const Role = require("../shared/Role");
 const Sale = require("../shared/Sale");
 
+/**
+ * @yuxincxoi 24.07.18
+ * * 더미데이터 데이터베이스에 추가하는 함수
+ */
+
 const addExampleData = () => {
   try {
     addMemberData();
@@ -14,6 +19,7 @@ const addExampleData = () => {
   }
 };
 
+// * 회원정보 더미데이터 추가하는 함수
 const addMemberData = async () => {
   await Member.deleteMany({});
   const member1 = new Member({
@@ -34,6 +40,7 @@ const addMemberData = async () => {
   await member1.save();
   await member2.save();
 };
+// * 권한 더미데이터 추가하는 함수
 const addRoleData = async () => {
   await Role.deleteMany({});
   const admin = new Role({
@@ -50,6 +57,7 @@ const addRoleData = async () => {
   await admin.save();
   await user.save();
 };
+// * 제품정보 더미데이터 추가하는 함수
 const addProductData = async () => {
   await Product.deleteMany({});
   const basicBun = new Product({
@@ -81,6 +89,7 @@ const addProductData = async () => {
   await chickenPatty.save();
   await coke.save();
 };
+// * 판매정보 더미데이터 추가하는 함수
 const addSaleData = async () => {
   await Sale.deleteMany({});
   const first = new Sale({
