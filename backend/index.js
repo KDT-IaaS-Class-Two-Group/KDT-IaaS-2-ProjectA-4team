@@ -1,4 +1,4 @@
-const Member = require("../db/Member");
+const Member = require("../shared/Member");
 
 //백엔드 서버 진입점
 
