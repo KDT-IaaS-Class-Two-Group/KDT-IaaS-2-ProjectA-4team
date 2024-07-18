@@ -34,8 +34,14 @@ const addRoleData = async () => {
     roleName: "관리자",
     permission: "checkInAdminPage",
   });
+  const user = new Role({
+    roleID: 2,
+    roleName: "사용자",
+    permission: "checkInUserPage",
+  });
 
   await admin.save();
+  await user.save();
 };
 
 module.exports = addExampleData;
