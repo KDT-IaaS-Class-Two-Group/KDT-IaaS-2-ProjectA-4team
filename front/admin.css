@@ -27,7 +27,7 @@ main {
 }
 
 #first-aside {
-  width: 15%;
+  width: 15vw;
   height: var(--100p);
   background-color: var(--bg-white);
 }
@@ -92,47 +92,59 @@ main {
 }
 
 #first-section {
-  width: 85%;
+  width: 85vw;
   height: var(--100p);
+  display: flex;
+  flex-direction: column;
 }
 
-#first-section > div:first-child {
+#header{
+  display: flex;
+  width: var(--100p);
+  height: 43px;
+  justify-content: end;
+  align-items: end;
+  position: relative;
+}
+
+#header__username{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 181px;
+  height: var(--100p);
+  background-color: white;
+}
+
+#content-box{
+  width: var(--100p);
+  height: calc(100vh - 43px);
+}
+
+#content-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content{
+  width: 90%;
+  height: 90%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+#content-header{
   width: var(--100p);
   height: 10%;
-  display: flex;
+}
+
+#content-description{
+  display: grid;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
-}
-
-.first-section-top-content {
-  width: 15%;
-  height: 60%;
-  background-color: var(--bg-deepGray);
-}
-
-#first-section > div:nth-child(2) {
-  width: 95%;
-  height: 85%;
-  display: flex;
-  background-color: var(--bg-white);
-}
-
-#first-section > div:nth-child(2) > div:first-child {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  background-color: var(--bg-white);
-}
-
-.first-section-first-content {
-  width: 15%;
-  height: 5%;
-  background-color: var(--bg-deepGray);
-}
-
-.first-section-second-content {
-  width: 30%;
-  height: 5%;
-  background-color: var(--bg-deepGray);
+  overflow-y: scroll;
+  grid-template-rows: repeat(9, 1fr);
 }
