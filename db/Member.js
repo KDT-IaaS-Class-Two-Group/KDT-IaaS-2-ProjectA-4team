@@ -7,3 +7,7 @@ const memberSchema = new mongoose.Schema({
   password: { type: String, required: true },
   roleID: { type: Number, required: true },
 });
+
+const Member = mongoose.model("Member", memberSchema);
+
+module.exports = Member;
