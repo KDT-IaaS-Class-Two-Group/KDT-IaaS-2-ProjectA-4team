@@ -1,6 +1,7 @@
 //백엔드 서버 진입점
 
 const http = require("http");
+require('../db/src/connect.js');
 
 let data = [
   { id: 1, name: "최유진" },
