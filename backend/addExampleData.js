@@ -54,8 +54,17 @@ const addProductData = async () => {
     restockDate: new Date("2024-07-15"),
     expirationDate: new Date("2024-08-13"),
   });
+  const chickenPatty = new Product({
+    productID: 2,
+    productName: "치킨 패티",
+    unitPrice: 4000,
+    quantity: 120,
+    restockDate: new Date("2024-07-16"),
+    expirationDate: new Date("2024-10-09"),
+  });
 
   await basicBun.save();
+  await chickenPatty.save();
 };
 
 module.exports = addExampleData;
