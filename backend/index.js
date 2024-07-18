@@ -13,7 +13,6 @@ let data = [
 ];
 
 const mongoose = require("mongoose");
-const addExampleData = require("./addExampleData");
 mongoose
   .connect("mongodb://localhost:27017/rockcodersERP")
   .then(() => {
