@@ -8,3 +8,7 @@ const productSchema = new mongoose.Schema({
   restockDate: { type: Date },
   expirationDate: { type: Date, required: true },
 });
+
+const Product = mongoose.model("Product", productSchema);
+
+module.exports = Product;
