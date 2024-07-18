@@ -6,6 +6,7 @@ const addExampleData = () => {
   try {
     addMemberData();
     addRoleData();
+    addProductData();
   } catch (err) {
     console.log(err);
   }
