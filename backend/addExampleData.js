@@ -1,6 +1,7 @@
 const Member = require("../shared/Member");
 const Product = require("../shared/Product");
 const Role = require("../shared/Role");
+const Sale = require("../shared/Sale");
 
 const addExampleData = () => {
   try {
@@ -77,6 +78,21 @@ const addProductData = async () => {
   await chickenPatty.save();
   await coke.save();
 };
-const addSaleData = async () => {};
+const addSaleData = async () => {
+  const first = new Sale({
+    saleId: 24071801,
+    memberId: 1,
+    products: {
+      productId: 1,
+      productName: "기본 빵",
+      unitPrice: 1000,
+      quantity: 2,
+      totalPrice: 2000,
+    },
+    saleDate: new Date("2024-07-18"),
+  });
+
+  await first.save();
+};
 
 module.exports = addExampleData;
