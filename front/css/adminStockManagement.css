@@ -1,5 +1,6 @@
 * {
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 :root {
@@ -139,12 +140,28 @@ main {
 #content-header{
   width: var(--100p);
   height: 10%;
+  padding: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 #content-description{
+  height: 90%;
+  width: 100%;
   display: grid;
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
   grid-template-rows: repeat(9, 1fr);
+  gap: 0.5rem;
+}
+
+.content-description-box{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  height: 100%;
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
