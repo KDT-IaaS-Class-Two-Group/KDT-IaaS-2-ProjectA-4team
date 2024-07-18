@@ -1,6 +1,7 @@
 const Member = require("../shared/Member");
 const Product = require("../shared/Product");
 const Role = require("../shared/Role");
+const addExampleData = require("./addExampleData");
 
 //백엔드 서버 진입점
 
@@ -12,6 +13,7 @@ let data = [
 ];
 
 const mongoose = require("mongoose");
+const addExampleData = require("./addExampleData");
 mongoose
   .connect("mongodb://localhost:27017/rockcodersERP")
   .then(() => {
@@ -19,6 +21,8 @@ mongoose
     checkCollection();
   })
   .catch(() => console.log(error));
+
+addExampleData();
 
 // * 컬렉션 확인 함수
 async function checkCollection() {
