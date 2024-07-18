@@ -170,4 +170,17 @@ main {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.content-description-box > div:not(:first-child,:last-child){
+  width: 15%;
+}
+
+.stock-name{
+  width: 35%;
+}
+
+.stock-delete{
+  width: 20%;
 }
