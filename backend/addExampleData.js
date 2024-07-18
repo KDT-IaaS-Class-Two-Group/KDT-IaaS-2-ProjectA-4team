@@ -15,6 +15,7 @@ const addExampleData = () => {
 };
 
 const addMemberData = async () => {
+  await Member.deleteMany({});
   const member1 = new Member({
     memberId: 1,
     name: "유호영",
@@ -34,6 +35,7 @@ const addMemberData = async () => {
   await member2.save();
 };
 const addRoleData = async () => {
+  await Role.deleteMany({});
   const admin = new Role({
     roleID: 1,
     roleName: "관리자",
@@ -49,6 +51,7 @@ const addRoleData = async () => {
   await user.save();
 };
 const addProductData = async () => {
+  await Product.deleteMany({});
   const basicBun = new Product({
     productID: 1,
     productName: "기본 빵",
@@ -79,6 +82,7 @@ const addProductData = async () => {
   await coke.save();
 };
 const addSaleData = async () => {
+  await Sale.deleteMany({});
   const first = new Sale({
     saleId: 24071801,
     memberId: 1,
