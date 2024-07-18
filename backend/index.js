@@ -1,3 +1,5 @@
+const Member = require("../db/Member");
+
 //백엔드 서버 진입점
 
 const http = require("http");
@@ -8,13 +10,35 @@ let data = [
 ];
 
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/rockcodersERP').then(() => console.log('MongoDB is connected !')).catch(() => console.log(error));
+mongoose
+  .connect("mongodb://localhost:27017/rockcodersERP")
+  .then(() => {
+    console.log("MongoDB is connected !");
+    checkMemberCollection();
+  })
+  .catch(() => console.log(error));
+
+// * Member 컬렉션 확인 함수
+async function checkMemberCollection() {
+  try {
+    const members = await Member.find();
+    console.log("Existing members:", members);
+  } catch (error) {
+    console.error("Error checking Member collection:", error);
+  }
+}
 
 const server = http.createServer((req, res) => {
   // CORS 헤더 추가
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
 
   if (req.url === "/endpoint" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
