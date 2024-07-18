@@ -1,17 +1,17 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const SaleScheme = new mongoose.Schema({
-  saleId : {type : number, required: true, unique: true},
-  memberId : {type : string, required: true},
-  products : {
-    productId: {type : number, required: true, unique: true},
-    productName: {type : string, required: true},
-    unitPrice: {type: number, required: true},
-    quantity: {type: number, required: true},
-    totalPrice: {type: number, required: true},
+  saleId: { type: Number, required: true, unique: true },
+  memberId: { type: String, required: true },
+  products: {
+    productId: { type: Number, required: true, unique: true },
+    productName: { type: String, required: true },
+    unitPrice: { type: Number, required: true },
+    quantity: { type: Number, required: true },
+    totalPrice: { type: Number, required: true },
   },
-  saleDate: {type :date, required: true}
-})
-const Sale = mongoose.model("Sale",SaleScheme);
+  saleDate: { type: Date, required: true },
+});
+const Sale = mongoose.model("Sale", SaleScheme);
 
-module.exports = Sale
+module.exports = Sale;

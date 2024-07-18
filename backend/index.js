@@ -1,6 +1,7 @@
 const Member = require("../shared/Member");
 const Product = require("../shared/Product");
 const Role = require("../shared/Role");
+const addExampleData = require("./addExampleData");
 
 //백엔드 서버 진입점
 
@@ -16,25 +17,10 @@ mongoose
   .connect("mongodb://localhost:27017/rockcodersERP")
   .then(() => {
     console.log("MongoDB is connected !");
-    checkCollection();
   })
   .catch(() => console.log(error));
 
-// * 컬렉션 확인 함수
-async function checkCollection() {
-  try {
-    const members = await Member.find();
-    console.log("Existing members:", members);
-
-    const products = await Product.find();
-    console.log("Existing products:", products);
-
-    const roles = await Role.find();
-    console.log("Existing roles:", roles);
-  } catch (error) {
-    console.error("Error checking Member collection:", error);
-  }
-}
+addExampleData();
 
 const server = http.createServer((req, res) => {
   // CORS 헤더 추가
