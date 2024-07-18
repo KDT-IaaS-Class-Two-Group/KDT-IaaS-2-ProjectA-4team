@@ -1,4 +1,5 @@
 const Member = require("../shared/Member");
+const Role = require("../shared/Role");
 
 const addExampleData = () => {
   try {
@@ -26,6 +27,15 @@ const addMemberData = async () => {
 
   await member1.save();
   await member2.save();
+};
+const addRoleData = async () => {
+  const admin = new Role({
+    roleID: 1,
+    roleName: "관리자",
+    permission: "checkInAdminPage",
+  });
+
+  await admin.save();
 };
 
 module.exports = addExampleData;
