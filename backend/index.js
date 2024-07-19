@@ -1,20 +1,15 @@
 const Member = require("../shared/Member");
-const Product = require("../shared/Product");
-const Role = require("../shared/Role");
 const addExampleData = require("./addExampleData");
 const http = require("http");
 
 /*
   * @eonduck2 24.07.19
-  ! 정적인 서버 스켈레톤임을 알림
+  ! 임의의 데이터를 전달받았다는 전제 하에 작업 진행
   todo, 기능 별 모듈화
   todo, 동적인 컬렉션 지정
  */
 
-let data = [
-  { id: 1, name: "최유진" },
-  { id: 2, name: "커피먹어" },
-];
+let data = { email: "js@kirby.com", password: "js123" };
 
 const mongoose = require("mongoose");
 mongoose
@@ -22,34 +17,17 @@ mongoose
   .then(() => console.log("MongoDB is connected !"))
   .catch((error) => console.log(error));
 
-// 스키마 정의
-const userSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-});
-
-// 모델 생성
-const User = mongoose.model("User", userSchema);
-
-async function saveInitialData() {
+async function findUserByEmailAndPassword(email, password) {
   try {
-    await User.deleteMany({}); // 기존 데이터 삭제
-    const savedUsers = await User.insertMany(data);
-    console.log("Initial data saved:", savedUsers);
-    return savedUsers;
-  } catch (error) {
-    console.error("Error saving initial data:", error);
-    throw error;
-  }
-}
-
-// 사용자 이름으로 검색하는 함수
-async function findUserByName(value) {
-  try {
-    const user = await User.findOne({ name: value });
+    // 데이터베이스에서 이메일과 비밀번호로 사용자 검색
+    const user = await Member.findOne({
+      email: email,
+      password: password,
+    }).exec();
+    // 사용자가 존재하면 true, 아니면 false 반환
     return user !== null;
   } catch (error) {
-    console.error("Error finding user by name:", error);
+    console.error("Error finding user by email and password:", error);
     throw error;
   }
 }
@@ -78,16 +56,17 @@ const server = http.createServer((req, res) => {
 const PORT = 4000;
 
 async function startServer() {
-  const dummyName = "최유진";
   try {
-    await saveInitialData();
     server.listen(PORT, () => {
       console.log(`백엔드 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
     });
 
     // 데이터 저장 후 사용자 검색
-    const userExists = await findUserByName(dummyName);
-    console.log(`User 컬렉션에 ${dummyName} 존재 여부:`, userExists);
+    const userExists = await findUserByEmailAndPassword(
+      data.email,
+      data.password
+    );
+    console.log(`존재 여부:`, userExists);
   } catch (error) {
     throw new Error("Error starting server:", error);
   }
