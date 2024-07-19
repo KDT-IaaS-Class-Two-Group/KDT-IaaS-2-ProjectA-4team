@@ -8,37 +8,31 @@ const path = require("path");
 /**
  * * 서버생성
  */
+
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url);
-  let pathname = `./public${parsedUrl.pathname}`;
-  if (pathname === "./public/") {
-    pathname = "./public/index.html";
-  }
+  const parsedUrl = url.parse(req.url, true);
 
-  const ext = path.parse(pathname).ext;
-  const map = {
-    ".html": "text/html",
-    ".css": "text/css",
-    ".js": "application/javascript",
-  };
-
-  fs.exists(pathname, function (exist) {
-    if (!exist) {
-      res.statusCode = 404;
-      res.end(`File ${pathname} not found!`);
-      return;
-    }
-
-    fs.readFile(pathname, function (err, data) {
+  if (parsedUrl.pathname === "/") {
+    const indexPath = path.join(__dirname, "public", "index.html");
+    fs.readFile(indexPath, (err, data) => {
       if (err) {
-        res.statusCode = 500;
-        res.end(`Error getting the file: ${err}.`);
+        res.writeHead(500);
+        res.end("Internal Server Error");
       } else {
-        res.setHeader("Content-type", map[ext] || "text/plain");
+        res.writeHead(200, { "Content-Type": "text/html" });
         res.end(data);
       }
     });
-  });
+  } else if (parsedUrl.pathname === "/api/data") {
+    // API 엔드포인트 처리
+    const responseData = { message: "데이터를 가져왔습니다." };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(responseData));
+  } else {
+    // 에러처리
+    res.writeHead(404);
+    res.end("Not Found");
+  }
 });
 
 const PORT = 3000;
