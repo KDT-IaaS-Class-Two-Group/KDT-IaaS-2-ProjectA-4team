@@ -13,7 +13,7 @@ document
       name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
-      testPw: formData.get("test-pw"),
+      roleID: 1,
     };
     console.log("userData:", userData);
     try {
@@ -23,16 +23,19 @@ document
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
+        credentials: "include",
       });
       console.log("res:", response);
-
-      const result = await response.json();
 
       console.log("result:", result);
       alert(result.message);
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! Status: ${response.status}`
+        );
       }
+      const result = await response.json();
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while sending the data.");
