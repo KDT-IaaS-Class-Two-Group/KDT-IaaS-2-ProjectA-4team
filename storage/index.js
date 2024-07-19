@@ -11,6 +11,10 @@ const server = http.createServer((req, res) => {
   if (req.url === "/" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(data));
+  } else if (req.url === "/end" && req.method === "GET") {
+      console.log("하아아아 우짜냐~!~!~!~!~!~!")
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(data));
   } else {
     res.writeHead(404);
     res.end("Not Found");
