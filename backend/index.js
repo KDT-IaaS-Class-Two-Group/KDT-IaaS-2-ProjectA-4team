@@ -18,28 +18,37 @@ mongoose
   .catch((error) => console.log("MongoDB connection error:", error));
 
 // CORS 설정
-app.use(cors({ origin: "http://localhost:3000/" }));
-const allowedOrigins = ["http://localhost:3000/"];
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization",
-  credentials: true,
-};
+// const allowedOrigins = ["http://localhost:3000/"];
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   allowedHeaders: "Content-Type,Authorization",
+//   credentials: true,
+// };
+
+// app.use(cors(corsOptions));
 app.use(express.json());
 
 // 사용자 저장 및 처리
+console.log("Sending request to:", "http://localhost:4000/join");
 app.post("/join", async (req, res) => {
   console.log("join 접근");
+  res.header("http://localhost:3000/join");
   try {
     const { memberId, name, email, password, roleID } = req.body;
     // 데이터가 잘 들어왔는지 확인하기 위해 로그 출력
