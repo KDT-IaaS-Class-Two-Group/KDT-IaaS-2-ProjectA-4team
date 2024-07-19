@@ -18,7 +18,8 @@ mongoose
   .catch((error) => console.log("MongoDB connection error:", error));
 
 // CORS 설정
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000/" }));
+const allowedOrigins = ["http://localhost:3000/"];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -30,6 +31,7 @@ const corsOptions = {
   },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: "Content-Type,Authorization",
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
