@@ -14,6 +14,8 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "mongoose": "^8.5.1"
+    "cors": "^2.8.5",
+    "mongoose": "^8.5.1",
+    "mongoose-auto-increment-plugin": "^1.0.2"
   }
 }
