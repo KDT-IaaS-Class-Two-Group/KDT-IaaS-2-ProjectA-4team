@@ -1,0 +1,79 @@
+* {
+  padding: 0%;
+  margin: 0;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 85% 15%;
+}
+
+/* 메인 */
+#main {
+  width: 100%;
+  height: 100%;;
+  background-color: #fff;
+  border: 1px solid black;
+}
+#UserName {
+  width: 10%;
+  height: 3%;
+  background-color: bisque  ;
+  display: flex;
+}
+#menus {
+  width: 100%;
+  height: 3%;
+  display: flex;
+  justify-content: flex-end;
+}
+#menus > div {
+  border: 1px solid black; 
+  width: 10%;
+  height: 100%;
+  
+}
+#ingredient {
+  width: 100%;
+  height: 70%;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-items: center;
+  justify-content: space-evenly;
+  margin-top: 10%;
+}
+#ingredient >div {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;  
+  padding-top: 10%;
+} 
+
+/* 사이드 바 */
+#sidebar {
+  width: 100%;
+  background-color:gray;
+}
+#sidebar > div:nth-child(1){
+  width: 60%;
+  height: 3%;
+}
+
+#sidebar > div:nth-child(2){
+  width: 80%;
+  height: 50%;
+}
+
+#sidebar > button:nth-child(3){
+  width: 80%;
+  height: 3%;
+  display: block;
+}
+#sidebar > button:nth-child(4){
+  width: 80%;
+  height: 3%;
+  display: block;
+}
