@@ -11,15 +11,15 @@ const path = require("path");
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url);
   let pathname = `./public${parsedUrl.pathname}`;
-  if (pathname === './public/') {
-    pathname = './public/index.html';
+  if (pathname === "./public/") {
+    pathname = "./public/index.html";
   }
 
   const ext = path.parse(pathname).ext;
   const map = {
-    '.html': 'text/html',
-    '.css': 'text/css',
-    '.js': 'application/javascript',
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "application/javascript",
   };
 
   fs.exists(pathname, function (exist) {
@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
         res.statusCode = 500;
         res.end(`Error getting the file: ${err}.`);
       } else {
-        res.setHeader('Content-type', map[ext] || 'text/plain');
+        res.setHeader("Content-type", map[ext] || "text/plain");
         res.end(data);
       }
     });

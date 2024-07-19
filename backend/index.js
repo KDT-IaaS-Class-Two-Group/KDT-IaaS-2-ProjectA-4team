@@ -2,10 +2,14 @@ const Member = require("../shared/Member");
 const Product = require("../shared/Product");
 const Role = require("../shared/Role");
 const addExampleData = require("./addExampleData");
-
-//백엔드 서버 진입점
-
 const http = require("http");
+
+/*
+  * @eonduck2 24.07.19
+  ! 정적인 서버 스켈레톤임을 알림
+  todo, 기능 별 모듈화
+  todo, 동적인 컬렉션 지정
+ */
 
 let data = [
   { id: 1, name: "최유진" },
@@ -15,12 +19,40 @@ let data = [
 const mongoose = require("mongoose");
 mongoose
   .connect("mongodb://localhost:27017/rockcodersERP")
-  .then(() => {
-    console.log("MongoDB is connected !");
-  })
-  .catch(() => console.log(error));
+  .then(() => console.log("MongoDB is connected !"))
+  .catch((error) => console.log(error));
 
-addExampleData();
+// 스키마 정의
+const userSchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+});
+
+// 모델 생성
+const User = mongoose.model("User", userSchema);
+
+async function saveInitialData() {
+  try {
+    await User.deleteMany({}); // 기존 데이터 삭제
+    const savedUsers = await User.insertMany(data);
+    console.log("Initial data saved:", savedUsers);
+    return savedUsers;
+  } catch (error) {
+    console.error("Error saving initial data:", error);
+    throw error;
+  }
+}
+
+// 사용자 이름으로 검색하는 함수
+async function findUserByName(value) {
+  try {
+    const user = await User.findOne({ name: value });
+    return user !== null;
+  } catch (error) {
+    console.error("Error finding user by name:", error);
+    throw error;
+  }
+}
 
 const server = http.createServer((req, res) => {
   // CORS 헤더 추가
@@ -44,6 +76,21 @@ const server = http.createServer((req, res) => {
 });
 
 const PORT = 4000;
-server.listen(PORT, () => {
-  console.log(`백엔드 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
-});
+
+async function startServer() {
+  const dummyName = "최유진";
+  try {
+    await saveInitialData();
+    server.listen(PORT, () => {
+      console.log(`백엔드 서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
+    });
+
+    // 데이터 저장 후 사용자 검색
+    const userExists = await findUserByName(dummyName);
+    console.log(`User 컬렉션에 ${dummyName} 존재 여부:`, userExists);
+  } catch (error) {
+    throw new Error("Error starting server:", error);
+  }
+}
+
+startServer();
