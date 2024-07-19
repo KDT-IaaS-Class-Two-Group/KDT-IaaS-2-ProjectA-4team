@@ -7,10 +7,7 @@ const http = require("http");
   todo, 동적인 컬렉션 지정
  */
 
-let data = [
-  { id: 1, name: "최유진" },
-  { id: 2, name: "커피먹어" },
-];
+let data = [{ email: "js@kirby.com", password: "js123" }];
 
 const mongoose = require("mongoose");
 mongoose
