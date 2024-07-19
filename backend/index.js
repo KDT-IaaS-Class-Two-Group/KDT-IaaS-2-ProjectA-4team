@@ -41,7 +41,7 @@ app.post("/join", async (req, res) => {
     }
 
     // * 이메일 중복 여부 확인
-    const emailUnique = await isEmailUnique(email);
+    const emailUnique = await isEamilUnique(email);
 
     if (!emailUnique) {
       return res.status(400).json({ message: "Email already exists." });
