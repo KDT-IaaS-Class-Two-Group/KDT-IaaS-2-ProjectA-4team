@@ -1,5 +1,3 @@
-//백엔드 서버 진입점
-
 const http = require("http");
 
 let data = [
@@ -23,6 +21,25 @@ const server = http.createServer((req, res) => {
   if (req.url === "/" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(data));
+  } else if (req.url === "/" && req.method === "POST") {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString(); // 데이터 청크를 문자열로 변환
+    });
+    req.on('end', () => {
+      try {
+        const parsedData = JSON.parse(body);
+        console.log('Received POST data:', parsedData);
+
+        // 여기서 데이터 저장 등의 처리를 할 수 있습니다.
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: 'Data received successfully' }));
+      } catch (error) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: 'Invalid JSON data' }));
+      }
+    });
   } else {
     res.writeHead(404);
     res.end("Not Found");

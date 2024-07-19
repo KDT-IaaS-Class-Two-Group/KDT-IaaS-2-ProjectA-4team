@@ -1,5 +1,3 @@
-//프론트 서버 진입점
-
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
