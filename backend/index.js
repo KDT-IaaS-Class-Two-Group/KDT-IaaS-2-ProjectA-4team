@@ -4,11 +4,11 @@ const http = require("http");
 
 let data = [
   { id: 1, name: "최유진" },
-  { id: 2, name: "커피먹어" },
+  { id: 2, name: "커피 그만 먹어" },
 ];
 
-const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/rockcodersERP').then(() => console.log('MongoDB is connected !')).catch(() => console.log(error));
+// const mongoose = require("mongoose");
+// mongoose.connect('mongodb://localhost:27017/rockcodersERP').then(() => console.log('MongoDB is connected !')).catch(() => console.log(error));
 
 const server = http.createServer((req, res) => {
   // CORS 헤더 추가
@@ -19,6 +19,11 @@ const server = http.createServer((req, res) => {
   if (req.url === "/endpoint" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(data));
+  } else if (req.url === "/index" && req.method === "GET") {
+    console.log("들어오나")
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(data));
+    return;
   } else {
     res.writeHead(404);
     res.end("Not Found");
