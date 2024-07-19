@@ -1,13 +1,11 @@
 const Member = require("../shared/Member");
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const isEamilUnique = require("./modules/isEmailUnique");
 
 const app = express();
 const PORT = 4000;
-app.use(bodyParser.json());
 
 mongoose
   .connect("mongodb://localhost:27017/rockcodersERP")
@@ -22,14 +20,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); // CORS 미들웨어 추가
-app.use(bodyParser.json());
 app.use(express.json());
 
 // 사용자 저장 및 처리
-console.log("Sending request to:", "http://localhost:4000/join");
 app.post("/join", async (req, res) => {
-  console.log("join 접근");
-  res.header("http://localhost:3000/join");
   try {
     const { name, email, password } = req.body;
     // 데이터가 잘 들어왔는지 확인하기 위해 로그 출력
