@@ -11,7 +11,10 @@ const path = require("path");
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url);
   let pathname = `./public${parsedUrl.pathname}`;
-  if (pathname === "./public/") {
+  // `/join` 경로에 대한 처리를 추가합니다.
+  if (parsedUrl.pathname === "/join") {
+    pathname = "./public/join.html";
+  } else if (pathname === "./public/") {
     pathname = "./public/index.html";
   }
 
