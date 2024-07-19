@@ -19,7 +19,6 @@ const mongoose = require("mongoose");
 
 // * Member 스키마 정의
 const memberSchema = new mongoose.Schema({
-  memberId: { type: Number },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
