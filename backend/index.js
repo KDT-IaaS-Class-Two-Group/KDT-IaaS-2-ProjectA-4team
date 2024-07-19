@@ -1,3 +1,7 @@
+const Member = require("../shared/Member");
+const Product = require("../shared/Product");
+const Role = require("../shared/Role");
+const addExampleData = require("./addExampleData");
 const http = require("http");
 
 /*
