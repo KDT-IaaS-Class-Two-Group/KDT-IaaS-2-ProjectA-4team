@@ -1,11 +1,20 @@
-import { allLightsGreen } from "../module/lightFunctions.js";
-// import { validationFunctions } from "../module/validationFunctions.js";
+import {
+  validationFunctions,
+  validateField,
+  validateAllFields,
+} from "../module/validationFunctions.js";
+// blur 이벤트에서 필드 유효성 검사
+validationFunctions.forEach(({ elementId, validator }) => {
+  validateField(elementId, validator);
+});
 
 const form = document.getElementById("join-container");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!allLightsGreen()) {
+  const isFormValid = await validateAllFields();
+
+  if (!isFormValid) {
     alert("모든 값이 바른지 확인해주세요.");
     return;
   }
@@ -23,6 +32,7 @@ form.addEventListener("submit", async (e) => {
     alert("모든 값이 입력되어 있습니다.");
     return;
   }
+
   try {
     const response = await fetch("http://localhost:4000/join", {
       method: "POST",
