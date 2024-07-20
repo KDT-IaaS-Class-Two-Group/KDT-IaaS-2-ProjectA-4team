@@ -11,9 +11,4 @@ function redLight(n) {
   light[n].style.backgroundColor = "";
   lightStatus[n] = false;
 }
-
-function allLightsGreen() {
-  return lightStatus.every((status) => status === true);
-}
-
-export { greenLight, redLight, allLightsGreen, lightStatus };
+export { greenLight, redLight, lightStatus };
