@@ -7,6 +7,8 @@ const app = express();
 
 // app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "module")));
+app.use("/module", express.static(path.join(__dirname, "module")));
 
 app.get("/join", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "join.html"));
