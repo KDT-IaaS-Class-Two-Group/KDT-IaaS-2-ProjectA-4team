@@ -4,7 +4,7 @@
  * @param {*} name
  * @returns boolean
  */
-export const ValidateName = (name) => {
+export default (name) => {
   // 띄어쓰기 금지
   if (/\s/.test(name)) {
     return { valid: false, message: "띄어쓰기는 사용할 수 없습니다." };
