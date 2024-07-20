@@ -19,21 +19,39 @@ const validationFunctions = [
   },
 ];
 
-validationFunctions.forEach(({ elementId, validator, index }) => {
+const validateField = (elementId, validator) => {
   const inputElement = document.getElementById(elementId).firstElementChild;
+  console.log("Input Value:", inputElement.value);
   const errorMessageElement = document.querySelector(".error-message");
 
-  inputElement.addEventListener("blur", () => {
-    const result = validator(inputElement.value);
-    if (result === true) {
-      greenLight(index);
-      errorMessageElement.style.display = "none";
-    } else {
-      redLight(index);
-      errorMessageElement.style.display = "block";
-      errorMessageElement.textContent = result.message; // 오류 메시지 설정
-    }
+  return new Promise((resolve) => {
+    inputElement.addEventListener("blur", () => {
+      const result = validator(inputElement.value);
+      const fieldIndex = validationFunctions.find(
+        (vf) => vf.elementId === elementId
+      ).index;
+      if (result === true) {
+        greenLight(fieldIndex);
+        errorMessageElement.style.display = "none";
+        resolve(true);
+        console.log("초록불");
+      } else {
+        redLight(fieldIndex);
+        errorMessageElement.style.display = "block";
+        errorMessageElement.textContent = result.message; // 오류 메시지 설정
+        resolve(false);
+      }
+    });
   });
-});
+};
 
-export { validationFunctions };
+const validateAllFields = async () => {
+  let allValid = true;
+  for (const { elementId, validator } of validationFunctions) {
+    const isValid = await validateField(elementId, validator);
+    if (!isValid) allValid = false;
+  }
+  return allValid;
+};
+
+export { validationFunctions, validateField, validateAllFields };
