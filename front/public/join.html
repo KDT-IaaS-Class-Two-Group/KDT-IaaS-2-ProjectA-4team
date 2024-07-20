@@ -61,6 +61,11 @@
         background-color: white;
         border: #ccc 1px solid;
       }
+      .error-message {
+        color: red;
+        font-size: 12px;
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -68,23 +73,24 @@
       <form id="join-container" method="post" action="">
         <div id="name" class="join-input">
           <input type="text" name="name" placeholder="이름" />
-          <div></div>
+          <div class="light"></div>
         </div>
         <div id="email" class="join-input">
           <input type="text" name="email" placeholder="이메일" />
-          <div></div>
+          <div class="light"></div>
         </div>
         <div id="password" class="join-input">
           <input type="password" name="password" placeholder="비밀번호" />
-          <div></div>
+          <div class="light"></div>
         </div>
         <div id="password-check" class="join-input">
           <input type="password" name="test-pw" placeholder="비밀번호 확인" />
-          <div></div>
+          <div class="light"></div>
         </div>
+        <div class="error-message"></div>
         <input type="submit" id="join-button" value="회원가입" />
       </form>
     </div>
-    <script src="join.script.js"></script>
+    <script type="module" src="join.script.js"></script>
   </body>
 </html>

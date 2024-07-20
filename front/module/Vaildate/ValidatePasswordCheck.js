@@ -5,7 +5,7 @@
  * @param {*} passwordCheck
  * @returns boolean
  */
-export const validatePasswordCheck = (password, passwordCheck) => {
+export default (password, passwordCheck) => {
   if (password === passwordCheck) {
     return true;
   } else {
