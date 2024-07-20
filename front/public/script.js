@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
+  const joinBtn = document.getElementById('join-button');
+  joinBtn.addEventListener('click', () => {
+    window.location.href = '/join';
+  });
 
   fetch("http://localhost:4000/endpoint")
     .then((response) => response.json())
@@ -8,3 +12,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error("Error fetching data:", error));
 });
+
