@@ -1,6 +1,15 @@
+import { allLightsGreen } from "../module/lightFunctions.js";
+// import { validationFunctions } from "../module/validationFunctions.js";
+
 const form = document.getElementById("join-container");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  if (!allLightsGreen()) {
+    alert("모든 값이 바른지 확인해주세요.");
+    return;
+  }
+
   const formData = new FormData(form);
   const userData = {
     name: formData.get("name"),
@@ -11,7 +20,7 @@ form.addEventListener("submit", async (e) => {
 
   // 모든 필드가 포함되어 있는지 확인
   if (!userData.name || !userData.email || !userData.password) {
-    alert("All fields are required.");
+    alert("모든 값이 입력되어 있습니다.");
     return;
   }
   try {
