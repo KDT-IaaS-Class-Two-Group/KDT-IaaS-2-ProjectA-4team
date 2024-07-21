@@ -9,8 +9,7 @@ validationFunctions.forEach(({ elementId, validator }) => {
 });
 
 const form = document.getElementById("join-container");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+form.addEventListener("submit", async () => {
 
   const isFormValid = await validateAllFields();
 

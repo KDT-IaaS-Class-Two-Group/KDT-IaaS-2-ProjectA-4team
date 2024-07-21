@@ -16,6 +16,9 @@ app.get("/", (req, res) => {
 app.get("/join", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "pages", "join.html"));
 });
+app.post("/join", (req, res) => {
+  res.redirect("/");
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
