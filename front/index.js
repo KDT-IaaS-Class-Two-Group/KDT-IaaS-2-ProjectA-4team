@@ -10,8 +10,11 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static(path.join(__dirname, "module")));
 app.use("/module", express.static(path.join(__dirname, "module")));
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "pages", "index.html"));
+})
 app.get("/join", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "join.html"));
+  res.sendFile(path.join(__dirname, "public", "pages", "join.html"));
 });
 
 const PORT = 3000;
