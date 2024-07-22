@@ -17,10 +17,7 @@ const exampleSchema = new Schema({
   age: { type: Number, required: true },
 });
 
-console.log(exampleSchema);
-
 const ExampleModel = mongoose.model("Example", exampleSchema);
-console.log(typeof ExampleModel);
 
 async function createDocument() {
   try {
