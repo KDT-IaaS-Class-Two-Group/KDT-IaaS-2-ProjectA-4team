@@ -1,3 +1,3 @@
-export default interface TotalPrice {
+export default interface ITotalPrice {
   totalPrice : number;
 }
