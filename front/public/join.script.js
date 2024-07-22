@@ -9,10 +9,9 @@ validationFunctions.forEach(({ elementId, validator }) => {
 });
 
 const form = document.getElementById("join-container");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+form.addEventListener("submit", async () => {
 
-  const isFormValid = await validateAllFields();
+  const isFormValid = validateAllFields();
 
   if (!isFormValid) {
     alert("모든 값이 바른지 확인해주세요.");
