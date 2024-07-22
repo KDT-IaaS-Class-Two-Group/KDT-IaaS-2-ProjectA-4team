@@ -13,4 +13,6 @@ const productSchema: Schema<IProduct> = new Schema({
   quantity: { type: Number, required: true },
   restockData: { type: Date },
   expirationDate: { type: Date, required: true },
-})
+});
+
+export default productSchema;
