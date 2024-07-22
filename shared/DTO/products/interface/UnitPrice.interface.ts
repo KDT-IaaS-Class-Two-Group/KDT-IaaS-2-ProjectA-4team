@@ -1,3 +1,3 @@
-export default interface UnitPrice {
+export default interface IUnitPrice {
   unitPrice : number;
 }

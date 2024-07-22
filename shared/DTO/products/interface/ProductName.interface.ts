@@ -1,3 +1,3 @@
-export default interface ProductName {
+export default interface IProductName {
   productName : string;
 }

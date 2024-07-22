@@ -1,3 +1,3 @@
-export default interface ExpirationDate {
+export default interface IExpirationDate {
   expirationDate : Date;
 }
