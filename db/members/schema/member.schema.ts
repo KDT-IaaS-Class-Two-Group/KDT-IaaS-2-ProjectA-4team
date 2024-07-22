@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { IMember } from '../../../shared/DTO/members/interfaces/member.interface';
+import IMember from '../member.interface';
 
 // * Member 스키마 정의
 const memberSchema: Schema<IMember> = new Schema({
