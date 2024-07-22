@@ -1,3 +1,3 @@
-export default interface Quantity {
+export default interface IQuantity {
   quantity : number;
 }
