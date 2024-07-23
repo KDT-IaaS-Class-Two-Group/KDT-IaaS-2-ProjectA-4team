@@ -1,3 +1,12 @@
-const updateData = () => {};
+import mongoose from "mongoose";
 
-module.exports = updateData;
+const updateOneDocument = async (collection, field, value, data) => {
+  try {
+  } catch {
+    console.error("Error : ", err);
+  } finally {
+    mongoose.connection.close();
+  }
+};
+
+module.exports = updateOneDocument;
