@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 /**
  * @yuxincxoi 24.07.23
- * * 특정 데이터 업데이트
+ * * 하나의 특정 데이터 업데이트
  * @param {string} collection 업데이트 할 컬렉션 이름
  * @param {string} field 업데이트 할 필드 이름
  * @param {string|number|object|array} value 필드에서 찾을 값
