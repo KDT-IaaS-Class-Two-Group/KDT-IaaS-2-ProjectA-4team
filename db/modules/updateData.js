@@ -17,7 +17,7 @@ const updateOneDocument = async (collectionName, field, value, data) => {
     // * 컬렉션 가져오기
     const collection = db.collection(collectionName);
 
-    await collection.updateOne(filter, { $set: data }, { new: true });
+    await collection.updateOne(filter, { $set: data });
   } catch (error) {
     console.error("Error : ", error);
   } finally {
