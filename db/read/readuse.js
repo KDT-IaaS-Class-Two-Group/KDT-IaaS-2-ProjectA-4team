@@ -10,12 +10,12 @@ mongoserver()
     try {
       await allread(); //"name"하면 불러와지고 비우면 전체 불러오기
     } catch (err) {
-      console.log(err + "")
+      console.log(err + "문서 조회 할떄 오류임")
     }finally {
-      process.exit(); //
+      process.exit(); 
     }
   })
   .catch(err => {
-    console.log(err + "")
-    process.exit(1); //
+    console.log(err + "오류 - 몽고 연결에 오류")
+    process.exit(1); 
   })

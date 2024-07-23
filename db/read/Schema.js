@@ -2,7 +2,7 @@
 //원래 있는 스키마로 대체 해야함
 import mongoose from "mongoose";
 
-const member = new mongoose.Schema({
+const memberSchema  = new mongoose.Schema({
   memberID : String,
   name : String,
   email : String,
@@ -10,6 +10,6 @@ const member = new mongoose.Schema({
   roleID : Number
 })
 
-const memberSchema = mongoose.model("member", member)
+const member = mongoose.model("member", memberSchema )
 
-export default memberSchema;
+export default member;
