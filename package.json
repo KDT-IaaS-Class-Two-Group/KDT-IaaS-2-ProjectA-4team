@@ -1,23 +1,3 @@
 {
-  "name": "kdt-iaas-2-projecta-4team",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "description": "",
-  "devDependencies": {
-    "@types/mongoose": "^5.11.97",
-    "@types/node": "^20.14.10",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.5.1",
-    "mongoose-auto-increment-plugin": "^1.0.2"
-  }
+  "workspaces":["client", "server", "db"]
 }
