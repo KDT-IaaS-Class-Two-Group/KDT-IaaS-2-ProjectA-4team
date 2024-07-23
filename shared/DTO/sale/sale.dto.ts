@@ -1,5 +1,4 @@
-
-import ISale from "../../../db/Sale.interface";
+import ISale from "../../../db/sale/Sale.interface";
 import { SaleProductDTO } from "./saleProduct.dto";
 
 
