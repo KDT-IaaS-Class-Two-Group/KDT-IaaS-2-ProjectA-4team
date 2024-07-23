@@ -57,5 +57,3 @@ const updateAllDocument = async (collectionName, field, value, data) => {
 };
 
 module.export = { updateOneDocument, updateAllDocument };
-
-updateOneDocument("products", "unitPrice", 1, { unitPrice: 2 });
