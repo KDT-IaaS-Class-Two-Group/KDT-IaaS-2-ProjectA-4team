@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import ISale from "../../Sale.interface";
 import saleSchema from "../schema/sale.schema";
+import ISale from "../Sale.interface";
 
 /**
  * @crystal23733 24.07.22
