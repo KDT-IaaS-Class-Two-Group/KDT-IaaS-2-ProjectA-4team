@@ -1,6 +1,6 @@
 //몽고 서버
 //이것도 몽고 서버있는거에 대체해야함
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const mongoserver = async () => {
   try {
@@ -10,4 +10,4 @@ const mongoserver = async () => {
   }
 }
 
-export default mongoserver
+module.exports = mongoserver;
