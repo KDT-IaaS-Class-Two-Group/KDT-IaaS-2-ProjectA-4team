@@ -8,11 +8,14 @@ import mongoose from "mongoose";
  * @param {string|number|object|array} value 필드에서 찾을 값
  * @param {object} data 변경할 데이터
  */
-const updateOneDocument = async (collection, field, value, data) => {
+const updateOneDocument = async (collectionName, field, value, data) => {
   try {
     // * 업데이트할 문서를 찾기 위한 조건을 정의
     const filter = {};
     filter[field] = value;
+
+    // * 컬렉션 가져오기
+    const collection = db.collection(collectionName);
 
     await collection.findOneAndUpdate(filter, { $set: data }, { new: true });
   } catch {
