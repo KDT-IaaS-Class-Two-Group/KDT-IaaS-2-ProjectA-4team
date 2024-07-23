@@ -14,7 +14,7 @@ const updateOneDocument = async (collection, field, value, data) => {
     const filter = {};
     filter[field] = value;
 
-    await collection.updateOne(filter, { $set: data }, { new: true });
+    await collection.findOneAndUpdate(filter, { $set: data }, { new: true });
   } catch {
     console.error("Error : ", err);
   } finally {
