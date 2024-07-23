@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 /**
  * @yuxincxoi 24.07.23
@@ -56,4 +56,4 @@ const updateAllDocument = async (collectionName, field, value, data) => {
   }
 };
 
-export { updateOneDocument, updateAllDocument };
+module.export = { updateOneDocument, updateAllDocument };
