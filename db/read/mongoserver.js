@@ -1,4 +1,5 @@
 //몽고 서버
+//이것도 몽고 서버있는거에 대체해야함
 import mongoose from "mongoose";
 
 const mongoserver = async () => {
