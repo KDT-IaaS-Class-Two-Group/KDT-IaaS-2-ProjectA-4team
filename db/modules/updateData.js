@@ -5,6 +5,8 @@ const updateOneDocument = async (collection, field, value, data) => {
     // * 업데이트할 문서를 찾기 위한 조건을 정의
     const filter = {};
     filter[field] = value;
+
+    await collection.updateOne(filter, { $set: data }, { new: true });
   } catch {
     console.error("Error : ", err);
   } finally {
