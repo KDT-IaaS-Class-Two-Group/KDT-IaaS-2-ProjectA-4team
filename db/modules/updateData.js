@@ -18,8 +18,8 @@ const updateOneDocument = async (collectionName, field, value, data) => {
     const collection = db.collection(collectionName);
 
     await collection.findOneAndUpdate(filter, { $set: data }, { new: true });
-  } catch {
-    console.error("Error : ", err);
+  } catch (error) {
+    console.error("Error : ", error);
   } finally {
     mongoose.connection.close();
   }
