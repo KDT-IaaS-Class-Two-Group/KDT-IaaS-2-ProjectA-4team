@@ -17,7 +17,10 @@ const updateOneDocument = async (collectionName, field, value, data) => {
     // * 컬렉션 가져오기
     const collection = db.collection(collectionName);
 
-    await collection.updateOne(filter, { $set: data });
+    const result = await collection.updateOne(filter, { $set: data });
+    console.log(
+      `일치하는 ${result.matchedCount}개의 문서 중, ${result.modifiedCount}개의 문서가 수정되었습니다.`
+    );
   } catch (error) {
     console.error("Error : ", error);
   } finally {
@@ -42,7 +45,10 @@ const updateAllDocument = async (collectionName, field, value, data) => {
     // * 컬렉션 가져오기
     const collection = db.collection(collectionName);
 
-    await collection.updateMany(filter, { $set: data });
+    const result = await collection.updateMany(filter, { $set: data });
+    console.log(
+      `일치하는 ${result.matchedCount}개의 문서 중, ${result.modifiedCount}개의 문서가 수정되었습니다.`
+    );
   } catch (error) {
     console.error("Error : ", error);
   } finally {
