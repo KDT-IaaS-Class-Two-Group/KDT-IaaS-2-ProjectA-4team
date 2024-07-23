@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 
 export default class {
+  /**
+   * @crystal23733 24.07.23
+   * @param modelName 모델이름
+   * @param fieldName 
+   * @param options 인덱스 내용
+   * * 인덱스 생성
+   */
   public async createIndex(modelName:string, fieldName:string, options?:object):Promise<void>{
     const model = mongoose.model(modelName);
     try{
@@ -11,6 +18,12 @@ export default class {
       console.error(`${fieldName}의 인덱스를 삭제하였습니다.`);
     }
   };
+  /**
+   * @crystal23733 24.07.23
+   * @param modelName 모델 이름
+   * @param indexName 인덱스 이름
+   * * 인덱스 삭제
+   */
   public async dropIndex(modelName: string, indexName: string): Promise<void> {
     const model = mongoose.model(modelName);
     try {
@@ -20,6 +33,11 @@ export default class {
       console.error(`Error dropping index ${indexName} for ${modelName}:`, error);
     }
   };
+  /**
+   * @crystal23733 24.07.23
+   * @param modelName 모델 이름
+   * * 인덱스 조회
+   */
   public async listIndexes(modelName: string): Promise<void> {
     const model = mongoose.model(modelName);
     try {
