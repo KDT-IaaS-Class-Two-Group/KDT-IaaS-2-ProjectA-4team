@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export default interface IInsertData {
-  insertData(field: string, value: unknown): void;
+  insertData<T extends Document>(model: Model<T>, data: object): Promise<void>;
 }

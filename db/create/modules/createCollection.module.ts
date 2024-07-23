@@ -35,7 +35,7 @@
 
 // createDocument();
 
-import Creator from "../create/CREATOR";
+import Creator from "../CREATOR";
 
 const testCreator = new Creator("mongodb://localhost:27017/rockcodersERP");
 
