@@ -8,7 +8,7 @@ import allread from "./Allread";
 mongoserver()
   .then(async() => {
     try {
-      await allread();
+      await allread(); //"name"하면 불러와지고 비우면 전체 불러오기
     } catch (err) {
       console.log(err + "")
     }finally {
