@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 /**
  * @yuxincxoi 24.07.23
@@ -15,7 +15,7 @@ const updateOneDocument = async (collectionName, field, value, data) => {
     filter[field] = value;
 
     // * 컬렉션 가져오기
-    const collection = db.collection(collectionName);
+    const collection = mongoose.connection.collection(collectionName);
 
     const result = await collection.updateOne(filter, { $set: data });
     console.log(
@@ -43,7 +43,7 @@ const updateAllDocument = async (collectionName, field, value, data) => {
     filter[field] = value;
 
     // * 컬렉션 가져오기
-    const collection = db.collection(collectionName);
+    const collection = mongoose.connection.collection(collectionName);
 
     const result = await collection.updateMany(filter, { $set: data });
     console.log(
@@ -56,4 +56,4 @@ const updateAllDocument = async (collectionName, field, value, data) => {
   }
 };
 
-export { updateOneDocument, updateAllDocument };
+module.export = { updateOneDocument, updateAllDocument };
