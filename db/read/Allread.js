@@ -1,9 +1,11 @@
 //읽기 하는 부분 스키마불러와서 작업
+//전부찾기
 import memberSchema from "./Schema"
 
-const allread = async () => {
+const allread = async (name) => {
   try {
-    const user = await memberSchema.find({}); //find 비여놓으면 모두 불러오기 
+    const query = name ? { name } : {};
+    const user = await memberSchema.find({query});
     console.log("성공")
     return user
   } catch (err) {
