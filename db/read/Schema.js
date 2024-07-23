@@ -1,4 +1,5 @@
 //스키마
+//원래 있는 스키마로 대체 해야함
 import mongoose from "mongoose";
 
 const member = new mongoose.Schema({
