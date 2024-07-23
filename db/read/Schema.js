@@ -1,6 +1,6 @@
 //스키마
 //원래 있는 스키마로 대체 해야함
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const memberSchema  = new mongoose.Schema({
   memberID : String,
@@ -12,4 +12,4 @@ const memberSchema  = new mongoose.Schema({
 
 const member = mongoose.model("member", memberSchema )
 
-export default member;
+module.exports = member;
