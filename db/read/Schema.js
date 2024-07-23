@@ -1,5 +1,7 @@
-//스키마
-//원래 있는 스키마로 대체 해야함
+/** @jojayeon 20.07.23
+ * * 몽고 스키마 , 모델 
+ * * 원래 스키마에 연결 필요
+ */
 const mongoose = require("mongoose");
 
 const memberSchema  = new mongoose.Schema({
