@@ -1,6 +1,8 @@
+import { Model } from "mongoose";
+
 export default interface IInsertManyData {
-  insertManyData(
-    modelName: string,
+  insertManyData<T extends Document>(
+    model: Model<T>,
     datas: object[],
     options?: object
   ): Promise<void>;
