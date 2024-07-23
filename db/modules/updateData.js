@@ -21,7 +21,7 @@ const updateOneDocument = async (collectionName, field, value, data) => {
   } catch (error) {
     console.error("Error : ", error);
   } finally {
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
 };
 
@@ -46,7 +46,7 @@ const updateAllDocument = async (collectionName, field, value, data) => {
   } catch (error) {
     console.error("Error : ", error);
   } finally {
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
 };
 
