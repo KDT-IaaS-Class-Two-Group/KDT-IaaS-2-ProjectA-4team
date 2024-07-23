@@ -1,8 +1,18 @@
-import mongoose, { InsertManyOptions, Model, Schema } from "mongoose";
+import mongoose, {
+  InsertManyOptions,
+  Model,
+  Schema,
+  SchemaDefinition,
+  SchemaOptions,
+} from "mongoose";
 import ICreator from "./Creator.interface";
 
 abstract class AbstractedCreator implements ICreator {
   public abstract createSchema(field: string, constraints: object): object;
+
+  public abstract createManySchema<T extends Document>(
+    definitions: SchemaDefinition<T>
+  ): Schema<T>;
 
   public abstract createModel(model: string, Schema: object): object;
 
@@ -31,6 +41,12 @@ class implementedCreator extends AbstractedCreator {
     return new Schema({
       [field]: constraints,
     });
+  }
+
+  public createManySchema<T>(
+    definitions: SchemaDefinition<T>
+  ): Schema<T & Document> {
+    return new Schema<T & Document>(definitions);
   }
 
   public createModel<T extends Document>(
