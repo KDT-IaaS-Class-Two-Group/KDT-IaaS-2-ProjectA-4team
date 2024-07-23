@@ -1,5 +1,7 @@
-//몽고 서버
-//이것도 몽고 서버있는거에 대체해야함
+/** @jojayeon 20.07.23
+ * * 몽구DB 서버
+ * * 원래 몽고 서버로 교체 해야함 
+ */
 const mongoose = require("mongoose");
 
 const mongoserver = async () => {
