@@ -1,6 +1,7 @@
-//사용부분 
-// 몽고서버랑 read부분을 가져와서 
-//서버안에 성공하면 read 불러오기 
+/** @jojayeon 20.07.23
+ * * 사용 하는 부분도 만들어본 것
+ * * 지금 은 비여있음 -> 전체를 가져오겠다.
+ */
 
 const mongoserver = require("./mongoserver");
 const allread = require("./Allread");
@@ -8,7 +9,8 @@ const allread = require("./Allread");
 mongoserver()
   .then(async() => {
     try {
-      await allread(); //"name"하면 불러와지고 비우면 전체 불러오기
+      await allread(); 
+      //"name"하면 불러와지고 비우면 전체 불러오기
     } catch (err) {
       console.log(err + "문서 조회 할떄 오류임")
     }finally {
