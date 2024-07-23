@@ -50,4 +50,4 @@ const updateAllDocument = async (collectionName, field, value, data) => {
   }
 };
 
-module.exports = { updateOneDocument, updateAllDocument };
+export { updateOneDocument, updateAllDocument };
