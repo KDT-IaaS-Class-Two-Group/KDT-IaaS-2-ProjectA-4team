@@ -1,7 +1,15 @@
 import React, { FC } from "react";
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../../components/ui/card";
 
-const Card: FC = () => {
+const CardComponent: FC = () => {
   return <div></div>;
 };
 
-export default Card;
+export default CardComponent;
