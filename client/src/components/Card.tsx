@@ -12,8 +12,18 @@ interface CardComponentProps {
   content: string;
 }
 
-const CardComponent: FC<CardComponentProps> = () => {
-  return <div></div>;
+const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
+  return (
+    <div>
+      <Card>
+        <CardContent></CardContent>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{content}</CardDescription>
+        </CardHeader>
+      </Card>
+    </div>
+  );
 };
 
 export default CardComponent;
