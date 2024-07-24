@@ -1,1 +1,0 @@
-console.log("title 컴포너트 준비")
