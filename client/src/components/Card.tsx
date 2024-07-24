@@ -8,15 +8,16 @@ import {
 } from "../../components/ui/card";
 
 interface CardComponentProps {
+  imgUrl: string;
   title: string;
   content: string;
 }
 
-const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
+const CardComponent: FC<CardComponentProps> = ({ imgUrl, title, content }) => {
   return (
     <div>
       <Card>
-        <CardContent></CardContent>
+        <CardContent>{imgUrl}</CardContent>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{content}</CardDescription>
