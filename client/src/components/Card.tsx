@@ -13,11 +13,11 @@ interface CardComponentProps {
   content: string;
 }
 
-const CardComponent: FC<CardComponentProps> = ({ imgUrl, title, content }) => {
+const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
   return (
     <div>
       <Card>
-        <CardContent>{imgUrl}</CardContent>
+        <CardContent></CardContent>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{content}</CardDescription>
