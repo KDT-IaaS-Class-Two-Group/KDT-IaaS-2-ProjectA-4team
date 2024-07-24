@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import MyForm from "./test";
+import InputComponent from "src/components/Input";
 
 const App: React.FC = () => {
   const [test, setTest] = useState(1);
@@ -8,7 +10,11 @@ const App: React.FC = () => {
     setTest(test + 1);
   };
 
-  return <div className="w-svw h-svh bg-black"></div>;
+  return (
+    <div className="w-svw h-svh bg-red-200">
+      <MyForm />
+    </div>
+  );
 };
 
 export default App;

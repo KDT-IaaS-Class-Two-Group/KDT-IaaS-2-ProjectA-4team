@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import InputComponent from "src/components/Input";
 
 // Zod 스키마 정의
 const schema = z.object({
@@ -27,6 +28,7 @@ const MyForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="username">Username</label>
+        <InputComponent className="bg-red-400" type="check" />
         <input id="username" {...register("username")} />
         {errors.username && <p>{errors.username.message}</p>}
       </div>
