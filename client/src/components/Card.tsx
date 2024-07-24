@@ -7,7 +7,12 @@ import {
   CardContent,
 } from "../../components/ui/card";
 
-const CardComponent: FC = () => {
+interface CardComponentProps {
+  title: string;
+  content: string;
+}
+
+const CardComponent: FC<CardComponentProps> = () => {
   return <div></div>;
 };
 
