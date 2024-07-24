@@ -1,12 +1,11 @@
-//타이틀 컨포넌트 파일
 import React from "react";
+import TitleComponent from "./titleComponent";
+import test from "./static/TestText";
 
-interface Divh1 {
-  titletext: string
-}
-
-const Title:React.FC<Divh1> = ({titletext}) => {
+const Title:React.FC = () => {
   return (
-    <div><h1>{titletext}</h1></div>
+    <div>
+      <TitleComponent titletext= {test}/>
+    </div>
   )
 }
