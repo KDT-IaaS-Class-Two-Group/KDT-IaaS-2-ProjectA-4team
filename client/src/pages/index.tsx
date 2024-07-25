@@ -1,5 +1,16 @@
-import Modal from "src/components/Modal";
+import CustomButton from "src/components/button";
+import React from "react";
 
-export default function Home() {
-  return <div>ㅎㅇ</div>;
-}
+const MyComponent: React.FC = () => {
+  return (
+    <div>
+      <CustomButton
+        text="Destructive Button"
+        variant="destructive"
+        size="default"
+      />
+    </div>
+  );
+};
+
+export default MyComponent;
