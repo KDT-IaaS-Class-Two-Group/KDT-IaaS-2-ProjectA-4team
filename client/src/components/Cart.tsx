@@ -21,11 +21,31 @@ const Cart: FC = () => {
     <div>
       <div>Cart</div>
       <div>
-        <CartItemComponent menu="게살 패티" unitPrice={4000} />
-        <CartItemComponent menu="징징이다리 패티" unitPrice={4000} />
-        <CartItemComponent menu="집게사장 손 패티" unitPrice={4000} />
-        <CartItemComponent menu="치킨 패티" unitPrice={4000} />
-        <CartItemComponent menu="불고기 패티" unitPrice={4000} />
+        <CartItemComponent
+          menu="게살 패티"
+          unitPrice={4000}
+          onPriceChange={(price) => handlePriceChange(price)}
+        />
+        <CartItemComponent
+          menu="징징이다리 패티"
+          unitPrice={4000}
+          onPriceChange={(price) => handlePriceChange(price)}
+        />
+        <CartItemComponent
+          menu="집게사장 손 패티"
+          unitPrice={4000}
+          onPriceChange={(price) => handlePriceChange(price)}
+        />
+        <CartItemComponent
+          menu="치킨 패티"
+          unitPrice={4000}
+          onPriceChange={(price) => handlePriceChange(price)}
+        />
+        <CartItemComponent
+          menu="불고기 패티"
+          unitPrice={4000}
+          onPriceChange={(price) => handlePriceChange(price)}
+        />
       </div>
       <div>{totalPrice}</div>
     </div>
