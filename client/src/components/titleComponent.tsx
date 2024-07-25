@@ -6,11 +6,12 @@ import React from "react";
 
 interface h1 {
   titletext: string
+  className? : string
 }
 
-const TitleComponent:React.FC<h1> = ({titletext}) => {
+const TitleComponent:React.FC<h1> = ({titletext, className}) => {
   return (
-    <h1 className=" text-center text-xl font-bold w-50 h-10 mt-3">{titletext}</h1>
+    <h1 className={`text-center text-xl font-bold w-50 h-10 mt-3 ${className}`}>{titletext}</h1>
   )
 }
 
