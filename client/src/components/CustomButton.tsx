@@ -1,13 +1,14 @@
 import React from "react";
 import { Button } from "components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { IButton } from "src/types/Ibutton.type";
+import { useRouter } from "next/router";
+import { IButton } from "src/types/IButton.type";
 
 const CustomButton: React.FC<IButton> = ({ to, text, variant, size }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = () => {
-    navigate(to);
+    console.log(to);
+    router.push(to);
   };
 
   return (

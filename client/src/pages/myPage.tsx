@@ -1,5 +1,6 @@
 import { Input } from "components/ui/input";
-import React from "react";
+import React, { useState } from "react";
+import CustomButton from "src/components/CustomButton";
 import UserHeaderComponent from "src/components/users/userHeaderComponent";
 
 const MyPage:React.FC = () => {
@@ -8,7 +9,8 @@ const MyPage:React.FC = () => {
       <UserHeaderComponent />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
-          <a href="/userPage" className="text-xl h-2">&larr; 돌아가기</a>
+          {/* <a href="/userPage" className="text-xl h-2">&larr; 돌아가기</a> */}
+          <CustomButton to="/UserPage" text="&larr; 돌아가기" />
         </div>
         <form action="" id="password-change-box" className="h-30% w-full">
           <p>비밀번호 변경</p>
