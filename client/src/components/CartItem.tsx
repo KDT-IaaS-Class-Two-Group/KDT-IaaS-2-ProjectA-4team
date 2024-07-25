@@ -3,6 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
+  onPriceChange: (price: number) => void;
 }
 
 /**
@@ -10,10 +11,15 @@ interface CartItemComponentProps {
  * * 장바구니에 들어가는 개별 메뉴 컴포넌트
  * @param {string} menu 메뉴명
  * @param {number} unitPrice 가격
+ * @param {function} onPriceChange 총액을 업데이트해주는 함수
  * @returns { JSXElement }
  */
 
-const CartItemComponent: FC<CartItemComponentProps> = ({ menu, unitPrice }) => {
+const CartItemComponent: FC<CartItemComponentProps> = ({
+  menu,
+  unitPrice,
+  onPriceChange,
+}) => {
   const initialCount = 1;
   const [count, setCount] = useState(initialCount);
   const [price, setPrice] = useState(unitPrice);
@@ -22,8 +28,10 @@ const CartItemComponent: FC<CartItemComponentProps> = ({ menu, unitPrice }) => {
   const decrementCount = () => setCount(count > 1 ? count - 1 : count);
 
   useEffect(() => {
-    setPrice(count * unitPrice);
-  }, [count, unitPrice]);
+    const newPrice = count * unitPrice;
+    setPrice(newPrice);
+    onPriceChange(newPrice);
+  }, [count, unitPrice, onPriceChange]);
 
   return (
     <div className="px-10 py-3 w-72">
