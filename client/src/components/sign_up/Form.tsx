@@ -7,6 +7,11 @@ const handleSubmit = (e: React.FormEvent) => {
   console.log(e);
 };
 
+const handleInput = (e: React.FormEvent) => {
+  e.preventDefault();
+  console.log(e);
+};
+
 const SignUpForm: React.FC = () => {
   return (
     <form id="sign-up-form" method="post" onSubmit={handleSubmit}>
@@ -21,6 +26,7 @@ const SignUpForm: React.FC = () => {
                 key={key}
                 placeholder={itemArray[2]}
                 type={itemArray[0]}
+                onInput={handleInput}
               />
             </>
           );
