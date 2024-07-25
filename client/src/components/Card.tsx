@@ -4,11 +4,9 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
 } from "../../components/ui/card";
 
 interface CardComponentProps {
-  imgUrl: string;
   title: string;
   content: string;
 }
@@ -17,7 +15,6 @@ const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
   return (
     <div>
       <Card>
-        <CardContent></CardContent>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{content}</CardDescription>
