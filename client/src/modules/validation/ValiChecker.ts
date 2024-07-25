@@ -35,9 +35,9 @@ class implementedValiChecker extends ValiCheckerForStatic {
   }
 
   public static checkPW(value: string): object {
-    const noSpacesRegex = /^\S*$/; // 띄어쓰기가 없는지 확인
-    const validCharactersRegex = /^[a-zA-Z0-9]*$/; // 영어 소문자, 대문자, 숫자만 포함하는지 확인
-    const validLengthRegex = /^.{8,25}$/; // 길이가 8자 이상 25자 이하인지 확인
+    const noSpacesRegex = /^\S*$/;
+    const validCharactersRegex = /[a-zA-Z0-9]*$/;
+    const validLengthRegex = /^.{8,25}$/;
 
     let errorMessage: string | undefined;
 
