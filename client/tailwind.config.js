@@ -19,6 +19,23 @@ const commonConfig = {
       },
     },
     extend: {
+      width:{
+        '80vw': '80vw'
+      },
+      height:{
+        '80vh': '80vh'
+      },
+      spacing: {
+        '2%': '2%',
+        '10%': '10%',
+        '15%': '15%',
+        '30%': '30%',
+        '50%': '50%',
+        '55%': '55%',
+        '90%': '90%',
+        '80%': '80%',
+        '2.5rem': '2.5rem',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
