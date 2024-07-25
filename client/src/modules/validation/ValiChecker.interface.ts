@@ -5,9 +5,7 @@ import IPassword from "src/interfaces/Password.interface";
 interface IValiChecker {
   checkName(value: string): boolean;
 
-  checkEmail(value: string): boolean;
-
-  checkPW(value: string): boolean;
+  checkPW(value: string): object;
 
   isEqualTo(
     targetValue: string | number,

@@ -1,5 +1,5 @@
 interface IValidEnglishLengthValidator {
-  isValidEnglishLength(value: string): boolean;
+  isValidEnglishLength(value: string, length: number): boolean;
 }
 
 export default IValidEnglishLengthValidator;

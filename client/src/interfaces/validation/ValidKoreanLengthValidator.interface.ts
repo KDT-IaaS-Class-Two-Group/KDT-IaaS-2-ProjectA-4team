@@ -1,5 +1,9 @@
 interface IValidKoreanLengthValidator {
-  isValidKoreanLength(value: string): boolean;
+  isValidKoreanLength(
+    value: string,
+    minLength: number,
+    maxLength: number
+  ): boolean;
 }
 
 export default IValidKoreanLengthValidator;
