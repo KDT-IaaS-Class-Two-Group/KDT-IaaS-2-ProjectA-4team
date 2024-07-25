@@ -22,5 +22,11 @@
       "lib/*": ["lib/*"]
     }
   },
-  "include": ["src", "pages", ".next/types/**/*.ts"]
+  "include": [
+    "src",
+    "pages",
+    ".next/types/**/*.ts",
+    "../static/client/**/*.ts",
+    "static/SignUpInputs.ts"
+  ]
 }
