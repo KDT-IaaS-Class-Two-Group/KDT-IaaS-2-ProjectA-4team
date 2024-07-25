@@ -1,8 +1,14 @@
-const mongoose = require("mongoose");
+import { Schema } from "mongoose";
+import ISale from "../../Sale.interface";
 
-const SaleScheme = new mongoose.Schema({
-  saleId: { type: Number, required: true, unique: true },
-  memberId: { type: String, required: true },
+/**
+ * @crystal23733 24.07.22
+ * * sale schema 정의
+ */
+
+const saleSchema:Schema<ISale> = new Schema({
+  saleID: { type: Number, required: true, unique: true },
+  memberID: { type: String, required: true },
   products: {
     productId: { type: Number, required: true, unique: true },
     productName: { type: String, required: true },
@@ -11,7 +17,6 @@ const SaleScheme = new mongoose.Schema({
     totalPrice: { type: Number, required: true },
   },
   saleDate: { type: Date, required: true },
-});
-const Sale = mongoose.model("Sale", SaleScheme);
+})
 
-module.exports = Sale;
+export default saleSchema;
