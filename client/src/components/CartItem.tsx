@@ -1,30 +1,35 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 interface CartItemComponentProps {
   menu: string;
-  price: string;
+  unitPrice: number;
 }
 
 /**
  * @yuxincxoi 24.07.25
  * * 장바구니에 들어가는 개별 메뉴 컴포넌트
  * @param {string} menu 메뉴명
- * @param {string} price 가격
+ * @param {number} unitPrice 가격
  * @returns { JSXElement }
  */
 
-const CartItemComponent: FC<CartItemComponentProps> = ({ menu, price }) => {
+const CartItemComponent: FC<CartItemComponentProps> = ({ menu, unitPrice }) => {
   const initialCount = 1;
   const [count, setCount] = useState(initialCount);
+  const [price, setPrice] = useState(unitPrice);
 
   const incrementCount = () => setCount(count + 1);
-  const decrementCount = () => setCount(count > 0 ? count - 1 : 0);
+  const decrementCount = () => setCount(count > 1 ? count - 1 : count);
+
+  useEffect(() => {
+    setPrice(count * unitPrice);
+  }, [count, unitPrice]);
 
   return (
     <div className="px-10 py-3 w-72">
       <div className="flex justify-between text-base">
         <div id="menu">{menu}</div>
-        <div id="price">{price}</div>
+        <div id="price">{price}원</div>
       </div>
       <div className="flex justify-start">
         <div
