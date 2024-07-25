@@ -3,7 +3,6 @@ import React, { FC, useState } from "react";
 interface CartItemComponentProps {
   menu: string;
   price: string;
-  count: number;
 }
 
 /**
@@ -11,7 +10,6 @@ interface CartItemComponentProps {
  * * 장바구니에 들어가는 개별 메뉴 컴포넌트
  * @param {string} menu 메뉴명
  * @param {string} price 가격
- * @param {number} count 구매 개수
  * @returns { JSXElement }
  */
 
