@@ -5,10 +5,14 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'prettier'
   ],
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
-    // 다른 규칙들을 여기에 추가할 수 있습니다.
+    '@typescript-eslint/no-unused-vars': 'warn', // 혹은 'off'
+    'prefer-const': 'warn', // 혹은 'off'
+    'import/no-anonymous-default-export': 'off', // 익명 함수 사용 허용
   },
+  ignorePatterns: ['test/app.e2e-spec.ts'],  // 특정 파일 무시
 };
