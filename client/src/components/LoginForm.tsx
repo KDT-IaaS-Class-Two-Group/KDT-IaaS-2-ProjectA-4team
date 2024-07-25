@@ -52,7 +52,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <form className="flex flex-col items-center justify-center gap-4 w-80 ">
+    <form className="flex flex-col items-center justify-center w-full gap-4 ">
       <InputComponent
         type="text"
         className="w-full"
