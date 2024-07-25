@@ -1,14 +1,9 @@
 import React from "react";
 import { Button } from "components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { CustomButtonProps } from "src/types/Tbutton.type";
+import { IButton } from "src/types/Ibutton.type";
 
-const CustomButton: React.FC<CustomButtonProps> = ({
-  to,
-  text,
-  variant,
-  size,
-}) => {
+const CustomButton: React.FC<IButton> = ({ to, text, variant, size }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
