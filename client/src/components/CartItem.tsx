@@ -8,10 +8,10 @@ import React, { FC } from "react";
 
 const CartItemComponent: FC = () => {
   return (
-    <div>
-      <div className="flex justify-between">
-        <div id="menu"></div>
-        <div id="price"></div>
+    <div className="px-10 py-3 w-72">
+      <div className="flex justify-between text-base">
+        <div id="menu">징징이다리 패티</div>
+        <div id="price">4000원</div>
       </div>
       <div className="flex justify-start">
         <div id="minusMenu" className="bg-slate-600 w-6 h-6"></div>
