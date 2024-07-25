@@ -21,7 +21,7 @@ const MyPage:React.FC = () => {
             <h1 className="font-bold text-lg">장바구니</h1>
           </div>
           <div id="order-details__content" className="flex flex-col h-full overflow-y-scroll">
-            <div className="order-details__items flex justify-center items-center">
+            <div className="order-details__items flex justify-around items-center mt-4">
               <p>아이템</p>
               <p>아이템 내용</p>
             </div>
