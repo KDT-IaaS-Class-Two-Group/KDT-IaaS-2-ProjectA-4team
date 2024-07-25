@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserHeaderComponent:React.FC = () => {
+const UserHeaderComponent: React.FC = () => {
   return (
     <header className="w-full h-10% flex items-center">
       <div className="w-15% h-80% ml-10">
@@ -8,6 +8,6 @@ const UserHeaderComponent:React.FC = () => {
       </div>
     </header>
   );
-}
+};
 
 export default UserHeaderComponent;
