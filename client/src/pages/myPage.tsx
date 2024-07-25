@@ -20,6 +20,7 @@ const MyPage:React.FC = () => {
         </div>
         <form action="" id="password-change-box" className="h-30% w-full">
           <p>비밀번호 변경</p>
+          <Input type="password" placeholder="기존 비밀번호를 입력해주세요." name="password" className="text-xl" />
           <Input type="password" placeholder="변경할 비밀번호를 입력해주세요." name="password" className="text-xl" />
           <Input type="password" placeholder="비밀번호 확인" name="checkPassword" className="text-xl" />
           <Input type="submit" value="변경하기" />
