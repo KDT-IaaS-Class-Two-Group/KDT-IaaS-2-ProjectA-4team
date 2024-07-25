@@ -20,9 +20,9 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ email }) => {
   }, [email]);
 
   return (
-    <div>
-      <div id="userIcon" className="w-38 h-38 bg-slate-600"></div>
-      <div>
+    <div className="flex">
+      <div id="userIcon" className="w-12 h-12 bg-slate-600"></div>
+      <div className="font-light text-s ml-3">
         <div>안녕하세요 !</div>
         <div>{localEmail} 님</div>
       </div>
