@@ -1,14 +1,12 @@
 import React from "react";
 
 interface LogoComponentProps {
-  imageUrl : string;
   className? : string;
-  alt? : string;
 }
 
-const Logo:React.FC<LogoComponentProps> = ({imageUrl, alt, className}) => {
+const Logo:React.FC<LogoComponentProps> = ({className}) => {
   return (
-    <img src={imageUrl} alt={alt} className={className} />
+    <img src='/clclLogo.png' alt="" className={className} />
   );
 }
 
