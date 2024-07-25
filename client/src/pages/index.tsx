@@ -1,15 +1,23 @@
-import CustomButton from "src/components/button";
+import CustomButton from "src/components/CustomButton";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import React from "react";
 
 const MyComponent: React.FC = () => {
   return (
-    <div>
-      <CustomButton
-        text="Destructive Button"
-        variant="destructive"
-        size="default"
-      />
-    </div>
+    <Router>
+      <div>
+        <CustomButton
+          to="/"
+          text="Go to Home Page"
+          variant="secondary"
+          size="sm"
+        />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
