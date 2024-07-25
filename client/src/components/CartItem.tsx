@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 interface CartItemComponentProps {
   menu: string;
@@ -15,11 +15,13 @@ interface CartItemComponentProps {
  * @returns { JSXElement }
  */
 
-const CartItemComponent: FC<CartItemComponentProps> = ({
-  menu,
-  price,
-  count,
-}) => {
+const CartItemComponent: FC<CartItemComponentProps> = ({ menu, price }) => {
+  const initialCount = 1;
+  const [count, setCount] = useState(initialCount);
+
+  const incrementCount = () => setCount(count + 1);
+  const decrementCount = () => setCount(count > 0 ? count - 1 : 0);
+
   return (
     <div className="px-10 py-3 w-72">
       <div className="flex justify-between text-base">
@@ -27,11 +29,19 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
         <div id="price">{price}</div>
       </div>
       <div className="flex justify-start">
-        <div id="minusMenu" className="bg-slate-600 w-6 h-6"></div>
+        <div
+          onClick={decrementCount}
+          id="minusMenu"
+          className="bg-slate-600 w-6 h-6"
+        ></div>
         <div id="count" className="mx-3 font-light text-s">
           {count}
         </div>
-        <div id="plusMenu" className="bg-slate-600 w-6 h-6"></div>
+        <div
+          onClick={incrementCount}
+          id="plusMenu"
+          className="bg-slate-600 w-6 h-6"
+        ></div>
       </div>
     </div>
   );
