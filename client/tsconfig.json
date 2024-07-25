@@ -27,6 +27,6 @@
     "pages",
     ".next/types/**/*.ts",
     "../static/client/**/*.ts",
-    "static/SignUpInputs.ts"
+    "static/sign-up/SignUpInputs.ts"
   ]
 }
