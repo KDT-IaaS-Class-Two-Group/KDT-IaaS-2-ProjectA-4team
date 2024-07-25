@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import MyForm from "./test";
-import InputComponent from "src/components/Input";
+import MyForm from "../../components/sign_up/Form";
 
-const App: React.FC = () => {
+const SignUp: React.FC = () => {
   const [test, setTest] = useState(1);
 
-  // 상태 업데이트 핸들러 정의
   const handleClick = () => {
     setTest(test + 1);
   };
 
+  // CHECKPOINT: first
   return (
     <div className="w-svw h-svh bg-red-200">
       <MyForm />
@@ -17,4 +16,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default SignUp;

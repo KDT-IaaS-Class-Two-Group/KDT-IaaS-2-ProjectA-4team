@@ -28,7 +28,7 @@ const MyForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="username">Username</label>
-        <InputComponent className="bg-red-400" type="check" />
+        <InputComponent />
         <input id="username" {...register("username")} />
         {errors.username && <p>{errors.username.message}</p>}
       </div>
