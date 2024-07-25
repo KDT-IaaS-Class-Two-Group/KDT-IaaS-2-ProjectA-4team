@@ -8,7 +8,7 @@ import CartItemComponent from "./CartItem";
  */
 
 const Cart: FC = () => {
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(20000);
 
   const handlePriceChange = (price: number) => {
     setTotalPrice((prevTotal) => {
