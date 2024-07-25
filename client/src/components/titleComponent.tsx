@@ -1,5 +1,6 @@
 /** @jojayeon 24.07.24
  *  타이틀 h1태그
+ * * titletext text 넣어 줘야함 
  */
 import React from "react";
 
