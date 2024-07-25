@@ -1,30 +1,21 @@
 import React, { FC } from "react";
-import Div from "./modal/div";
-import Divin2div from "./modal/div2";
-import Divin3divfrom from "./modal/div3";
-import Divin3div from "./modal/div3";
+import Div from "./modal/divprops";
+import Div3props from "./modal/div3props";
 
-
-
+import sidebarmenutext1 from "./modal/text/sidebarmenu1";
+import sidebarmenutext2 from "./modal/text/sidebarmenu2";
+import sidebarmenutext3 from "./modal/text/sidebarmenu3";
+import mainprduchlist from "./modal/text/mianprductlist";
 const InputComponent: FC = () => {
   return (
     <div id="root">
       <main>
       <aside id="first-aside">
         <div>
-          {/* <Div text="사용자 프로필"/> */} // ? 우선 test로 만들어 본것
-
-          <Divin2div/>
-          <div >
-            <Div text="매출 관리"/>
-            <Div text="매출 조회"/>
-            <Div text="매출 순위"/>
-          </div>
-          <div >
-            <Div text="회원 관리"/>
-            <Div text="회원 조회"/>
-            <Div text="회원 순위"/>
-          </div>
+          <div>사용자 프로필</div>// 가져다 쓰기 
+          <Div3props text3={sidebarmenutext1}/>
+          <Div3props text3={sidebarmenutext2}/>
+          <Div3props text3={sidebarmenutext3}/>         
         </div>
         <div>하단
           <div>마이페이지</div>// ! 버튼으로 대체
@@ -33,7 +24,7 @@ const InputComponent: FC = () => {
       </aside>
       <section id="first-section">
         <div>
-          <div id="LOGO">로고 자리</div>
+          <div id="LOGO">로고 자리</div>// 이것도 가져다 쓰기 
         </div>
         <div id="content-box">
           <div id="content">
@@ -45,47 +36,13 @@ const InputComponent: FC = () => {
               </form>
             </div>
             <div id="content-description">
-              <Divin3div/>                          // ? text용
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
-              <div >
-                <Div text="재고 명"/>
-                <Div text="유통기한"/>
-                <Div text="유통기한 페기 버튼"/>
-              </div>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
+              <Div3props text3 = {mainprduchlist}/>
             </div>
           </div>
         </div>
