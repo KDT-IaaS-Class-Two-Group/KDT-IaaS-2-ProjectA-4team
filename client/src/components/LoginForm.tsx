@@ -55,13 +55,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     <form className="flex flex-col items-center justify-center w-full gap-4 ">
       <InputComponent
         type="text"
-        className="w-full"
+        className="w-full bg-white opacity-50 hover:bg-red-400/70"
         placeholder="email"
         onChange={(e) => setEmail(e.target.value)}
       />
       <InputComponent
         type="password"
-        className="w-full"
+        className="w-full bg-white opacity-50 hover:bg-red-400/70"
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />

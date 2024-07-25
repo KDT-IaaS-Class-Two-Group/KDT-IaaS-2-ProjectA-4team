@@ -1,5 +1,5 @@
-import Modal from "src/components/Modal";
+import LoginPage from "./LoginPage";
 
-export default function Home() {
-  return <div>ㅎㅇ</div>;
+export default function home() {
+  return <LoginPage />;
 }
