@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 interface LoginInfoComponentProps {
   email: string;
@@ -13,12 +13,18 @@ interface LoginInfoComponentProps {
  */
 
 const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ email }) => {
+  const [localEmail, setLocalEmail] = useState(email);
+
+  useEffect(() => {
+    setLocalEmail(email);
+  }, [email]);
+
   return (
     <div>
       <div id="userIcon" className="w-38 h-38 bg-slate-600"></div>
       <div>
         <div>안녕하세요 !</div>
-        <div>{email} 님</div>
+        <div>{localEmail} 님</div>
       </div>
     </div>
   );
