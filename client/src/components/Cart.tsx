@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import CartItemComponent from "./CartItem";
 
 /**
@@ -8,6 +8,15 @@ import CartItemComponent from "./CartItem";
  */
 
 const Cart: FC = () => {
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const handlePriceChange = (price: number) => {
+    setTotalPrice((prevTotal) => {
+      const updatedTotal = prevTotal + price;
+      return updatedTotal;
+    });
+  };
+
   return (
     <div>
       <div>Cart</div>
@@ -18,7 +27,7 @@ const Cart: FC = () => {
         <CartItemComponent menu="치킨 패티" unitPrice={4000} />
         <CartItemComponent menu="불고기 패티" unitPrice={4000} />
       </div>
-      <div>20000원</div>
+      <div>{totalPrice}</div>
     </div>
   );
 };
