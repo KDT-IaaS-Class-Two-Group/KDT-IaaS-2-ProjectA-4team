@@ -1,10 +1,5 @@
 import React, { FC } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "../../components/ui/card";
+import { Card, CardTitle, CardDescription } from "../../components/ui/card";
 
 interface CardComponentProps {
   title: string;
@@ -23,13 +18,13 @@ const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
   return (
     <div>
       <Card className="w-[350px] h-56 rounded-xl">
-        <div className="bg-slate-500 w-52 h-36"></div>
-        <CardHeader>
+        <div className="bg-slate-500 w-52 h-36 mx-auto my-2"></div>
+        <div className="my-2">
           <CardTitle className="text-center text-xl">{title}</CardTitle>
           <CardDescription className="text-center text-sm">
             {content}
           </CardDescription>
-        </CardHeader>
+        </div>
       </Card>
     </div>
   );
