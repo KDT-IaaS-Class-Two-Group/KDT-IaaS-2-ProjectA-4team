@@ -20,7 +20,7 @@ const Cart: FC = () => {
   return (
     <div className="w-72">
       <div className="font-extrabold text-2xl m-4 relative z-10">Cart</div>
-      <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div>
+      {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
       <div>
         <CartItemComponent
           menu="게살 패티"
