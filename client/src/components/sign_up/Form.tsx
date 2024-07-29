@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import InputComponent from "src/components/Input";
 import SignUpInputs from "../../../static/sign-up/SignUpInputs";
 
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  console.log(e);
-};
-
-const handleInput = (e: React.FormEvent) => {
-  e.preventDefault();
-  console.log(e);
-};
-
 const SignUpForm: React.FC = () => {
   return (
-    <form id="sign-up-form" method="post" onSubmit={handleSubmit}>
+    <form id="sign-up-form" method="post">
       <div>
         {SignUpInputs.map((itemArray, key) => {
           return (
@@ -26,13 +16,11 @@ const SignUpForm: React.FC = () => {
                 key={key}
                 placeholder={itemArray[2]}
                 type={itemArray[0]}
-                onInput={handleInput}
               />
             </>
           );
         })}
       </div>
-      <button type="submit">ㅎㅇ</button>
     </form>
   );
 };
