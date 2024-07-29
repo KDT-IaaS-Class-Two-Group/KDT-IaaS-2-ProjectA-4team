@@ -19,7 +19,7 @@ const Cart: FC = () => {
 
   return (
     <div className="w-72">
-      <div className="font-extrabold text-2xl m-4 relative z-10">Cart</div>
+      <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
       <div>
         <CartItemComponent
@@ -48,7 +48,7 @@ const Cart: FC = () => {
           onPriceChange={(price) => handlePriceChange(price)}
         />
       </div>
-      <div className="w-72 font-extrabold text-xl text-right mt-6 px-10 pt-6 border-t-2 border-dashed border-black relative z-10">
+      <div className="w-60 font-extrabold text-xl text-right mt-6 mx-6 pt-6 border-t border-dashed border-slate-500 relative z-10">
         {totalPrice}원
       </div>
     </div>
