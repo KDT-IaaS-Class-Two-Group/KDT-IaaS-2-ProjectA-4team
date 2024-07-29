@@ -1,6 +1,6 @@
 import { Button } from "components/ui/button";
-import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
+import Link from "next/link";
 
 interface LinkButtonComponentProps {
   children: ReactNode;
@@ -8,14 +8,16 @@ interface LinkButtonComponentProps {
 }
 
 const LinkButtonComponent: React.FC<LinkButtonComponentProps> = ({
-  href,
   children,
+  href
 }) => {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push(href);
-  };
-  return <Button onClick={handleClick}>{children}</Button>;
+  return (
+    <div> 
+      <Link href={href}>
+        <Button>{children}</Button>
+      </Link>
+    </div>
+  )
 };
 
 export default LinkButtonComponent;
