@@ -1,10 +1,10 @@
 /** @jojayeon 20.07.23
- * * 사용 하는 부분도 만들어본 것
+ * * 사용 하는 부분 예시
  * * 전체 조회
  */
 
-const mongoserver = require("./mongoserver");
-const allread = require("./Allread");
+const mongoserver = require("./schema/mongoserver");
+const allread = require("./read/Allread");
 
 mongoserver()
   .then(async() => {
