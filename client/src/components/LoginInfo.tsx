@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 
 interface LoginInfoComponentProps {
   email: string;
-  className: string;
+  className?: string;
 }
 
 /**
