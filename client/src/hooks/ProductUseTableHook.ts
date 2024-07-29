@@ -1,9 +1,8 @@
-// useTableViewModel.ts
 import { useState, useEffect } from "react";
-import { fetchTableData } from "src/model/TableModel";
+import { productFetchTableData } from "src/model/productFetchTableData";
 import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 
-export const useTableViewModel = (endpoint: string) => {
+export const ProductUseTableHook = (endpoint: string) => {
   const [data, setData] = useState<ProductDTO>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +10,7 @@ export const useTableViewModel = (endpoint: string) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const tableData = await fetchTableData(endpoint);
+        const tableData = await productFetchTableData(endpoint);
         setData(tableData);
       } catch (error) {
         setError("데이터 로드 실패");

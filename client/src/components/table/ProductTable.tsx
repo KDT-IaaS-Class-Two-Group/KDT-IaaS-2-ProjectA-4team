@@ -9,10 +9,10 @@ import {
 } from "@../../components/ui/table";
 import ButtonComponent from "../CustomButton";
 
-import { useTableViewModel } from "src/hook/useTableViewHook";
+import { ProductUseTableHook } from "src/hooks/productUseTableHook";
 
 export const ProductTable: React.FC = () => {
-  const { data, loading, error } = useTableViewModel("/");
+  const { data, loading, error } = ProductUseTableHook("/");
 
   if (loading) {
     return <div>Loading...</div>;

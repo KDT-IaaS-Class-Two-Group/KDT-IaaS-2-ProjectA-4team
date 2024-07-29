@@ -5,7 +5,9 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
  * @param endpoint api받아올 엔드포인트
  * @returns json
  */
-export const fetchTableData = async (endpoint: string): Promise<ProductDTO> => {
+export const productFetchTableData = async (
+  endpoint: string
+): Promise<ProductDTO> => {
   const response = await fetch(`$http://localhost:3001/${endpoint}`);
   if (!response.ok) {
     throw new Error("Failed to fetch data");
