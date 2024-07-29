@@ -16,13 +16,13 @@ const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
   return (
     <div className={`mt-auto text-sm ${className}`}>
       <p
-        onClick={() => handleNavigation('/myPage')}
+        onClick={() => handleNavigation("/myPage")}
         className="cursor-pointer hover:underline"
       >
         마이페이지
       </p>
       <p
-        onClick={() => handleNavigation('/logout')}
+        onClick={() => handleNavigation("/logout")}
         className="cursor-pointer hover:underline"
       >
         로그아웃
