@@ -8,7 +8,7 @@ import {
 
 interface CardComponentProps {
   title: string;
-  content: string;
+  content: number;
 }
 
 /**
