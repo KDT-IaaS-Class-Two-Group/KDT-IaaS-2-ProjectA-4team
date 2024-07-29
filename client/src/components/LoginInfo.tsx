@@ -25,8 +25,8 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({
 
   return (
     <div className={`flex ${className}`}>
-      <div id="userIcon" className="w-12 h-12 bg-slate-600"></div>
-      <div className="font-light text-s ml-3">
+      <div id="userIcon" className="w-10 h-10 bg-slate-600"></div>
+      <div className="font-light text-sm ml-3">
         <div>안녕하세요 !</div>
         <div>{localEmail} 님</div>
       </div>
