@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import UserNav from "src/components/UserNav";
 
 /**
  * @yuxincxoi 24.07.25
@@ -7,7 +8,11 @@ import React, { FC } from "react";
  */
 
 const UserPage: FC = () => {
-  return <div></div>;
+  return (
+    <div>
+      <UserNav />
+    </div>
+  );
 };
 
 export default UserPage;
