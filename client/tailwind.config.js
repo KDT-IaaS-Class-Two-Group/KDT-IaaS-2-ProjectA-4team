@@ -21,6 +21,7 @@ const commonConfig = {
     extend: {
       width: {
         '15vw': '15vw',
+        '20vw': '20vw',
         '80vw': '80vw'
       },
       height: {
