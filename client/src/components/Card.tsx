@@ -22,10 +22,13 @@ interface CardComponentProps {
 const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
   return (
     <div>
-      <Card>
+      <Card className="w-[350px] h-56 rounded-xl">
+        <div className="bg-slate-500 w-52 h-36"></div>
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{content}</CardDescription>
+          <CardTitle className="text-center text-xl">{title}</CardTitle>
+          <CardDescription className="text-center text-sm">
+            {content}
+          </CardDescription>
         </CardHeader>
       </Card>
     </div>
