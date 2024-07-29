@@ -3,6 +3,12 @@ import LoginInfoComponent from "./LoginInfo";
 import Cart from "./Cart";
 import FooterLinks from "./footerComponent";
 
+/**
+ * @yuxincxoi 24.07.29
+ * * 사용자페이지에 사용될 네비게이션
+ * @returns {JSXElement}
+ */
+
 const UserNav = () => {
   return (
     <div className="w-72 float-right shadow-xl h-screen">
