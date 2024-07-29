@@ -1,22 +1,22 @@
-/** @jojayeon 20.07.23
- * * 사용 하는 부분도 만들어본 것
- * * 전체 조회
+/** @jojayeon 20.07.25
+ * * 사용 하는 부분 예시
+ * * 원하는 값 조회(단일)
  */
 
-const mongoserver = require("./mongoserver");
-const allread = require("./Allread");
+const mongoserver = require("./schema/mongoserver");
+const oneread = require("./read/oneread");
 
-mongoserver()
-  .then(async(menu , select) => {
-    try {
-      await allread(menu , select); 
-    } catch (err) {
-      console.log(err + "문서 조회 할떄 오류임")
-    }finally {
-      process.exit(); 
-    }
-  })
-  .catch(err => {
-    console.log(err + "오류 - 몽고 연결에 오류")
-    process.exit(1); 
-  })
+
+const run = async (menu, select) => {
+  try {
+    await mongoserver();
+    const a = await oneread(menu, select);
+    console.log(a)
+  } catch (err) {
+    console.log("오류 발생:", err);
+  } finally {
+    process.exit(); // 비동기 처리가 완료된 후 종료
+  }
+};
+
+run('name', '조자연');
