@@ -5,7 +5,7 @@ import NavListBox from "./navListBox";
 const AdminNav: React.FC = () => {
   return (
     <div id="aside" className="w-15vw h-screen">
-      <div className="w-100% h-10%">
+      <div className="w-full h-10%">
         <LoginInfoComponent email="rockCoders" />
       </div>
       <NavListBox />
