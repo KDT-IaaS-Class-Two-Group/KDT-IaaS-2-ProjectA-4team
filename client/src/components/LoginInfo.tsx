@@ -10,6 +10,7 @@ interface LoginInfoComponentProps {
  * * 사이드바의 로그인 정보를 나타내는 컴포넌트
  * * "안녕하세요 ! [이메일]님"
  * @param {string} email 로그인한 이메일 데이터
+ * @param {string} className 컴포넌트 스타일
  * @returns { JSXElement }
  */
 
