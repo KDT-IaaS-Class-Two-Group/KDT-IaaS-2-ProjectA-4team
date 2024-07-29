@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import CardComponent from "src/components/Card";
 import UserNav from "src/components/UserNav";
 
 /**
@@ -10,6 +11,11 @@ import UserNav from "src/components/UserNav";
 const UserPage: FC = () => {
   return (
     <div>
+      <div className="absolute flex m-10 justify-between w-[1100px]">
+        <CardComponent title="게살 패티" content={4000} />
+        <CardComponent title="징징이다리 패티" content={4000} />
+        <CardComponent title="치킨 패티" content={4000} />
+      </div>
       <UserNav />
     </div>
   );
