@@ -1,5 +1,7 @@
-import LoginPage from "./LoginPage";
+import { ProductTable } from "src/components/table/ProductTable";
+import React from "react";
 
-export default function home() {
-  return <LoginPage />;
+function Home() {
+  return <ProductTable />;
 }
+export default Home;
