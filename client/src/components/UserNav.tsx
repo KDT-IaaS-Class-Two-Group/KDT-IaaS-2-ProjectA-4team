@@ -17,7 +17,7 @@ const UserNav = () => {
         email="rockcoders@kdt.com"
       />
       <Cart />
-      <FooterLinks className="w-72 mt-24 mx-6" />
+      <FooterLinks className="w-72 mt-20 mx-6" />
     </div>
   );
 };
