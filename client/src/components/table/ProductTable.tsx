@@ -9,10 +9,10 @@ import {
 } from "@../../components/ui/table";
 import ButtonComponent from "../CustomButton";
 
-import { ProductUseTableHook } from "src/hooks/productUseTableHook";
+import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
 
 export const ProductTable: React.FC = () => {
-  const { data, loading, error } = ProductUseTableHook("/");
+  const { data, loading, error } = ProductUseTableHook();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -34,16 +34,19 @@ export const ProductTable: React.FC = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">{data!.productName}</TableCell>
-          <TableCell>{data!.quantity}</TableCell>
-          <TableCell>{data!.unitPrice}</TableCell>
-          <TableCell className="text-right">
-            <ButtonComponent variant="default" type="submit">
-              주문하기
-            </ButtonComponent>
-          </TableCell>
-        </TableRow>
+        {/* 데이터 수만큼 열 생성 */}
+        {data.map((row) => (
+          <TableRow key={row.productID}>
+            <TableCell className="font-medium">{row!.productName}</TableCell>
+            <TableCell>{row!.quantity}</TableCell>
+            <TableCell>{row!.unitPrice}</TableCell>
+            <TableCell className="text-right">
+              <ButtonComponent variant="default" type="submit">
+                주문하기
+              </ButtonComponent>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );
