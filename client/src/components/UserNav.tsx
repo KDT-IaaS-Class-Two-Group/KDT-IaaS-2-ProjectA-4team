@@ -5,7 +5,7 @@ import FooterLinks from "./footerComponent";
 
 const UserNav = () => {
   return (
-    <div className="w-72 float-right shadow-md h-screen">
+    <div className="w-72 float-right shadow-xl h-screen">
       <LoginInfoComponent
         className="w-72 ml-6 mt-6 mb-20"
         email="rockcoders@kdt.com"
