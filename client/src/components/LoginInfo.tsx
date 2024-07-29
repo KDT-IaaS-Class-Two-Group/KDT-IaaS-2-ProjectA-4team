@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 
 interface LoginInfoComponentProps {
   email: string;
+  className: string;
 }
 
 /**
@@ -12,7 +13,10 @@ interface LoginInfoComponentProps {
  * @returns { JSXElement }
  */
 
-const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ email }) => {
+const LoginInfoComponent: FC<LoginInfoComponentProps> = ({
+  email,
+  className,
+}) => {
   const [localEmail, setLocalEmail] = useState(email);
 
   useEffect(() => {
@@ -20,7 +24,7 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ email }) => {
   }, [email]);
 
   return (
-    <div className="flex">
+    <div className={`flex ${className}`}>
       <div id="userIcon" className="w-12 h-12 bg-slate-600"></div>
       <div className="font-light text-s ml-3">
         <div>안녕하세요 !</div>
