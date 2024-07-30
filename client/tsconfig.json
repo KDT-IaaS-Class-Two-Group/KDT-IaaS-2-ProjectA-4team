@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "allowJs": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "incremental": true,
     "resolveJsonModule": true,
     "plugins": [
@@ -19,8 +19,18 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "lib/*": ["lib/*"]
+      "lib/*": ["lib/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["src", "components", "pages", ".next/types/**/*.ts"]
+  "include": [
+    "src",
+    "components",
+    "pages",
+    ".next/types/**/*.ts",
+    "../shared",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
