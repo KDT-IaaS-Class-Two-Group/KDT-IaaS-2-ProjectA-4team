@@ -21,7 +21,7 @@ const LinkButtonComponent: React.FC<LinkButtonComponentProps> = ({
   return (
     <div>
       <Link href={href} onClick={onClick}>
-        <Button className="p-0">{children}</Button>
+        <Button>{children}</Button>
       </Link>
     </div>
   );
