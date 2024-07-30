@@ -21,7 +21,7 @@ const Cart: FC = () => {
     <div className="w-72">
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
-      <div>
+      <div className="h-96 overflow-scroll">
         <CartItemComponent
           menu="게살 패티"
           unitPrice={4000}
