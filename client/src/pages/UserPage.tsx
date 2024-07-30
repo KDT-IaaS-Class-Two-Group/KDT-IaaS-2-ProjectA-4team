@@ -23,6 +23,7 @@ const UserPage: FC = () => {
 
   return (
     <div>
+      <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
       <UserMenu setSelectCategory={setSelectCategory} />
       <MenuItems selectCategory={selectCategory} />
       <UserNav />
