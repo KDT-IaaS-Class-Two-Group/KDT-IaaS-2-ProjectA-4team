@@ -2,19 +2,15 @@ import React from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@../../components/ui/table";
 import ButtonComponent from "../CustomButton";
-// import OrderModal from "../modal/OrderModal";
-// import UpdateModal from "../modal/updateModal";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
-// import useOrderModalHook from "src/hooks/useOrderModalHook";
 
-export const ProductTable: React.FC = () => {
+const ProductTable: React.FC = () => {
   const { data, loading, error } = ProductUseTableHook();
 
   if (loading) {
@@ -26,17 +22,17 @@ export const ProductTable: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col items-end justify-center gap-4">
+      <ButtonComponent variant="secondary">메뉴 추가</ButtonComponent>
       <Table>
-        <TableCaption>재고조회</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]">카테고리</TableHead>
+            <TableHead className="w-[100px]">카테고리</TableHead>
             <TableHead>재품명</TableHead>
             <TableHead>수량</TableHead>
             <TableHead>단가</TableHead>
-            <TableHead>발주</TableHead>
-            <TableHead className="text-right">수정</TableHead>
+            <TableHead className="text-center">발주</TableHead>
+            <TableHead className="text-center">수정</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -49,19 +45,13 @@ export const ProductTable: React.FC = () => {
               <TableCell>{row!.productName}</TableCell>
               <TableCell>{row!.quantity}</TableCell>
               <TableCell>{row!.unitPrice}</TableCell>
-              <TableCell className="text-right">
-                <ButtonComponent
-                  variant="default"
-                  type="button"
-                  // onClick={() => openModal(row)}
-                >
-                  주문하기
+              <TableCell className="text-center">
+                <ButtonComponent variant="default" type="button">
+                  발주하기
                 </ButtonComponent>
-                <ButtonComponent
-                  variant="default"
-                  type="button"
-                  // onClick={() => openModal(row)}
-                >
+              </TableCell>
+              <TableCell className="text-center">
+                <ButtonComponent variant="default" type="button">
                   수정하기
                 </ButtonComponent>
               </TableCell>
@@ -69,6 +59,8 @@ export const ProductTable: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
+
+export default ProductTable;
