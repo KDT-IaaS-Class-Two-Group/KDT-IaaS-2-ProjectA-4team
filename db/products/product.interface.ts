@@ -1,8 +1,9 @@
 import IExpirationDate from "../../shared/DTO/products/interface/ExpirationDate.interface";
+import IProductCategory from "../../shared/DTO/products/interface/ProductCategory.interface";
 import IProductID from "../../shared/DTO/products/interface/ProductID.interface";
 import IProductName from "../../shared/DTO/products/interface/ProductName.interface";
 import IQuantity from "../../shared/DTO/products/interface/Quantity.interface";
-import IRestockData from "../../shared/DTO/products/interface/RestockData.interface";
+import IRestockDate from "../../shared/DTO/products/interface/RestockData.interface";
 import IUnitPrice from "../../shared/DTO/products/interface/UnitPrice.interface";
 
 /**
@@ -10,6 +11,11 @@ import IUnitPrice from "../../shared/DTO/products/interface/UnitPrice.interface"
  * * product interface
  */
 
-export default interface IProduct extends IProductID, IProductName, IUnitPrice, IQuantity, IRestockData, IExpirationDate{
-
-}
+export default interface IProduct
+  extends IProductID,
+    IProductName,
+    IUnitPrice,
+    IQuantity,
+    IRestockDate,
+    IExpirationDate,
+    IProductCategory {}
