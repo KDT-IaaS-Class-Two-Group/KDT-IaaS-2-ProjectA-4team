@@ -2,9 +2,9 @@
  * * 몽구DB 서버
  * * 원래 몽고 서버로 교체 해야함 
  */
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const mongoserver = async () => {
+const mongoserver = async (): Promise<void> => {
   try {
     await mongoose.connect("mongodb://localhost:27017/mydatabase")
   } catch(err) {
@@ -12,4 +12,5 @@ const mongoserver = async () => {
   }
 }
 
-module.exports = mongoserver;
+
+export default mongoserver
