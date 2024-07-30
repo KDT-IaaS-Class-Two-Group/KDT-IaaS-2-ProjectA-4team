@@ -5,6 +5,13 @@ interface MenuItemsProps {
   selectCategory: string;
 }
 
+/**
+ * @yuxincxoi 24.07.30
+ * * 사용자페이지의 선택된 카테고리에 따라 조건부 렌더링 시킬 제품 리스트 컴포넌트
+ * @param {string} selectCategory 선택된 제품 카테고리
+ * @returns {JSXElement}
+ */
+
 const MenuItems: React.FC<MenuItemsProps> = ({ selectCategory }) => {
   const renderMenuItems = () => {
     switch (selectCategory) {
