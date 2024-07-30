@@ -4,7 +4,7 @@ import SalesTable from "src/components/table/salesTable";
 
 const SalesInquiry: React.FC = () => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row w-screen">
       <AdminNav />
       <SalesTable />
     </div>

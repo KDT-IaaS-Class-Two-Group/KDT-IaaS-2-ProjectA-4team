@@ -55,29 +55,31 @@ const SalesTable: React.FC = () => {
   );
 
   return (
-    <Table className="flex flex-col">
-      <TableCaption>매출 조회</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[200px]">상품명</TableHead>
-          <TableHead>판매 수량</TableHead>
-          <TableHead>판매 액수</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {/* 집계된 데이터로 테이블의 각 행을 생성 */}
-        {Object.keys(aggregatedData).map((productName) => {
-          const { totalQuantity, totalPrice } = aggregatedData[productName];
-          return (
-            <TableRow key={productName}>
-              <TableCell className="font-medium">{productName}</TableCell>
-              <TableCell>{totalQuantity}</TableCell>
-              <TableCell>{totalPrice}</TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+    <div className="flex flex-col w-full h-full">
+      <h1>매출 조회</h1>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[200px]">상품명</TableHead>
+            <TableHead>판매 수량</TableHead>
+            <TableHead>판매 액수</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {/* 집계된 데이터로 테이블의 각 행을 생성 */}
+          {Object.keys(aggregatedData).map((productName) => {
+            const { totalQuantity, totalPrice } = aggregatedData[productName];
+            return (
+              <TableRow key={productName}>
+                <TableCell className="font-medium">{productName}</TableCell>
+                <TableCell>{totalQuantity}</TableCell>
+                <TableCell>{totalPrice}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
