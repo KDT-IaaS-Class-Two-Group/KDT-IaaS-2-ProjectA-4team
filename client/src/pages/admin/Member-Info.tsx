@@ -6,7 +6,6 @@ export default () => {
     <>
       <AdminNav></AdminNav>
       <TableSetter
-        className="text-2xl"
         buttonValue="테스트벨류"
         head={["ㅎㅇ"]}
         data={[{ 회원: "이종수" }]}
