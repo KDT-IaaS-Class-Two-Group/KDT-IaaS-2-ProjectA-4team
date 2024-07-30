@@ -1,10 +1,11 @@
 import { Button } from "components/ui/button";
-import React, { ReactNode } from "react";
+import React, { ReactNode, MouseEventHandler } from "react";
 import Link from "next/link";
 
 interface LinkButtonComponentProps {
   children: ReactNode;
   href: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 /**
@@ -15,10 +16,11 @@ interface LinkButtonComponentProps {
 const LinkButtonComponent: React.FC<LinkButtonComponentProps> = ({
   children,
   href,
+  onClick,
 }) => {
   return (
     <div>
-      <Link href={href}>
+      <Link href={href} onClick={onClick}>
         <Button>{children}</Button>
       </Link>
     </div>
