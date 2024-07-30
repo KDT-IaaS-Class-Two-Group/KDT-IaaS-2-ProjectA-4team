@@ -25,7 +25,7 @@ const SalesRankingTable: React.FC = () => {
   if (error) {
     return <div>{error}</div>;
   }
-  
+
   /**
    * @crystal23733 24.07.30
    * * 상품명, 매출 수량, 매출 금액 집계 함수

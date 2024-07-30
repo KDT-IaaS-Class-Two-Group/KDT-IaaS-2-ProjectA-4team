@@ -1,4 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import UserNav from "src/components/users/UserNav";
+import UserMenu from "src/components/users/UserMenu";
+import MenuItems from "src/components/users/MenuItems";
 
 /**
  * @yuxincxoi 24.07.25
@@ -7,7 +11,24 @@ import React, { FC } from "react";
  */
 
 const UserPage: FC = () => {
-  return <div></div>;
+  const router = useRouter();
+  const [selectCategory, setSelectCategory] = useState("bread");
+
+  useEffect(() => {
+    const category = router.query.category as string;
+    if (category) {
+      setSelectCategory(category);
+    }
+  }, [router.query.category]);
+
+  return (
+    <div>
+      <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
+      <UserMenu setSelectCategory={setSelectCategory} />
+      <MenuItems selectCategory={selectCategory} />
+      <UserNav />
+    </div>
+  );
 };
 
 export default UserPage;
