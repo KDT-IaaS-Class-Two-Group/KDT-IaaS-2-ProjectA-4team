@@ -24,9 +24,7 @@ const UserPage: FC = () => {
   return (
     <div>
       <UserMenu setSelectCategory={setSelectCategory} />
-      <div className="absolute flex m-10 justify-between w-[1100px]">
-        <MenuItems selectCategory={selectCategory} />
-      </div>
+      <MenuItems selectCategory={selectCategory} />
       <UserNav />
     </div>
   );
