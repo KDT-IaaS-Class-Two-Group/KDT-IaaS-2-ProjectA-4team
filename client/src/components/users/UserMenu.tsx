@@ -1,4 +1,9 @@
 import React from "react";
+import LinkButtonComponent from "src/components/linkButtonComponent";
+
+interface UserMenuProps {
+  setSelectCategory: (category: string) => void;
+}
 
 /**
  * @yuxincxoi 24.07.30
@@ -6,8 +11,26 @@ import React from "react";
  * @returns {JSXElement}
  */
 
-const UserMenu = () => {
-  return <div></div>;
+const UserMenu: React.FC<UserMenuProps> = ({ setSelectCategory }) => {
+  return (
+    <div className="flex">
+      <LinkButtonComponent href="#" onClick={() => setSelectCategory("bread")}>
+        빵
+      </LinkButtonComponent>
+      <LinkButtonComponent href="#" onClick={() => setSelectCategory("patty")}>
+        패티
+      </LinkButtonComponent>
+      <LinkButtonComponent href="#" onClick={() => setSelectCategory("source")}>
+        소스
+      </LinkButtonComponent>
+      <LinkButtonComponent href="#" onClick={() => setSelectCategory("side")}>
+        사이드
+      </LinkButtonComponent>
+      <LinkButtonComponent href="#" onClick={() => setSelectCategory("drink")}>
+        음료
+      </LinkButtonComponent>
+    </div>
+  );
 };
 
 export default UserMenu;
