@@ -6,10 +6,10 @@ export default () => {
     <>
       <AdminNav></AdminNav>
       <TableSetter
-        caption="dma"
+        className="text-2xl"
         buttonValue="테스트벨류"
-        head={["ㅎㅇ", "ㅂㅇ"]}
-        data={[{ 밥: "먹음" }, { 빵: "먹을까" }, { gd: "음" }]}
+        head={["ㅎㅇ"]}
+        data={[{ 회원: "이종수" }]}
       ></TableSetter>
     </>
   );
