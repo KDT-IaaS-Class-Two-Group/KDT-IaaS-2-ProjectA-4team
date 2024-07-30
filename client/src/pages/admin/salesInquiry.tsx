@@ -1,6 +1,6 @@
 import React from "react";
 import AdminNav from "src/components/admin/adminNav";
-import SalesTable from "src/components/table/salesTable";
+import SalesTable from "src/components/table/SalesInquiryTable";
 
 const SalesInquiry: React.FC = () => {
   return (
