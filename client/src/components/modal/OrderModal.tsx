@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,15 +6,27 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../components/ui/dialog";
-import TModal from "./Modal.type";
 import InputComponent from "../Input";
 import ButtonComponent from "../CustomButton";
+import { ProductDTO } from "@shared/DTO/products/product.dto";
 
-const OrderModal: React.FC<TModal> = ({ onClose, title, content }) => {
+interface OrderModalProps {
+  isOpen: boolean;
+  product: ProductDTO | null;
+  quantity: number;
+  setQuantity: (quantity: number) => void;
+  onSave: () => void;
+  onClose: () => void;
+}
+
+const OrderModal: React.FC<OrderModalProps> = ({
+  product,
+  quantity,
+  setQuantity,
+  onSave,
+  onClose,
+}) => {
   // 수량 상태를 관리
-  const [quantity, setQuantity] = useState<number>(0);
-
-  // 수량 입력 필드의 값이 변경될 때 호출되는 함수
   const handleOrderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     setQuantity(value);
@@ -22,16 +34,25 @@ const OrderModal: React.FC<TModal> = ({ onClose, title, content }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onClose(); // 모달 닫기
+    onSave(); // 저장 함수 호출
+    setQuantity(0);
   };
+
+  const OrderModalHeader: React.FC<{ product: ProductDTO | null }> = ({
+    product,
+  }) => (
+    <DialogHeader>
+      <DialogTitle>주문하기</DialogTitle>
+      <DialogDescription>
+        {product ? `제품명: ${product.productName}` : "선택된 제품이 없습니다."}
+      </DialogDescription>
+    </DialogHeader>
+  );
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="bg-slate-100">
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{content}</DialogDescription>
-        </DialogHeader>
+        <OrderModalHeader product={product} />
         <form onSubmit={handleSubmit}>
           <label>
             수량:
@@ -44,8 +65,11 @@ const OrderModal: React.FC<TModal> = ({ onClose, title, content }) => {
               className="mb-3"
             />
           </label>
-          <ButtonComponent variant={"outline"} type="submit">
+          <ButtonComponent variant="outline" type="submit">
             주문하기
+          </ButtonComponent>
+          <ButtonComponent variant="default" onClick={onClose}>
+            닫기
           </ButtonComponent>
         </form>
       </DialogContent>
