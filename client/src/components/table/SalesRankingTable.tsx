@@ -11,9 +11,9 @@ import salesUseTableHook from "src/hooks/salesUseTableHook";
 
 /**
  * @crystal23733 24.07.29
- * @returns 매출조회 컴포넌트
+ * @returns 매출순위 컴포넌트
  */
-const SalesTable: React.FC = () => {
+const SalesRankingTable: React.FC = () => {
   const { data, loading, error } = salesUseTableHook();
 
   // 데이터 로딩 중일 때
@@ -88,4 +88,4 @@ const SalesTable: React.FC = () => {
   );
 };
 
-export default SalesTable;
+export default SalesRankingTable;
