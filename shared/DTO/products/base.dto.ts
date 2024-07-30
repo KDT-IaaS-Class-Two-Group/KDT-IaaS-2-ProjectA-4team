@@ -5,6 +5,7 @@
 
 export abstract class BaseDTO {
   protected productID: number;
+  protected productCategory: string;
   protected productName: string;
   protected unitPrice: number;
   protected quantity: number;
@@ -13,6 +14,7 @@ export abstract class BaseDTO {
 
   constructor(
     productID: number,
+    productCategory: string,
     productName: string,
     unitPrice: number,
     quantity: number,
@@ -20,6 +22,7 @@ export abstract class BaseDTO {
     expirationDate: Date
   ) {
     this.productID = productID;
+    this.productCategory = productCategory;
     this.productName = productName;
     this.unitPrice = unitPrice;
     this.quantity = quantity;
@@ -30,6 +33,7 @@ export abstract class BaseDTO {
   public toJSON(): object {
     return {
       productID: this.productID,
+      productCategory: this.productCategory,
       productName: this.productName,
       unitPrice: this.unitPrice,
       quantity: this.quantity,
