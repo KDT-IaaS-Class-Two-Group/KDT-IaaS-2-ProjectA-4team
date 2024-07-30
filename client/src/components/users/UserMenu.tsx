@@ -7,7 +7,8 @@ interface UserMenuProps {
 
 /**
  * @yuxincxoi 24.07.30
- * 사용자페이지의 구매할 제품 카테고리를 나타내는 메뉴 컴포넌트
+ * * 사용자페이지의 제품 카테고리를 나타내는 메뉴 컴포넌트
+ * @param {function(string):void} props.setSelectCategory 선택된 제품 카테고리를 설정하는 함수
  * @returns {JSXElement}
  */
 
