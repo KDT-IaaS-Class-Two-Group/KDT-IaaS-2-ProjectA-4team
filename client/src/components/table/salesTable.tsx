@@ -1,35 +1,84 @@
-import { Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "components/ui/table";
+import {
+  Table,
+  TableCaption,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "components/ui/table";
 import React from "react";
-// import ButtonComponent from "../CustomButton";
+import salesUseTableHook from "src/hooks/salesUseTableHook";
 
-const SalesTable:React.FC = () => {
+/**
+ * @crystal23733 24.07.29
+ * @returns 매출조회 컴포넌트
+ */
+const SalesTable: React.FC = () => {
+  const { data, loading, error } = salesUseTableHook();
+
+  // 데이터 로딩 중일 때
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // 데이터 로딩 중 오류 발생 시
+  if (error) {
+    return <div>{error}</div>;
+  }
+  /**
+   * @crystal23733 24.07.30
+   * * 상품명, 매출 수량, 매출 금액 집계 함수
+   */
+  const aggregatedData = data.reduce(
+    (acc, sale) => {
+      // sale.products가 단일 객체로 가정
+      const product = sale.products;
+
+      if (!acc[product.productName]) {
+        acc[product.productName] = {
+          totalQuantity: 0,
+          totalPrice: 0,
+          unitPrice: product.unitPrice,
+        };
+      }
+
+      acc[product.productName].totalQuantity += product.quantity;
+      acc[product.productName].totalPrice += product.totalPrice;
+
+      return acc;
+    },
+    {} as Record<
+      string,
+      { totalQuantity: number; totalPrice: number; unitPrice: number }
+    >,
+  );
+
   return (
     <Table className="flex flex-col">
-      <TableCaption>재고조회</TableCaption>
+      <TableCaption>매출 조회</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[200px]">상품명</TableHead>
-          <TableHead>수량</TableHead>
-          <TableHead>단가</TableHead>
+          <TableHead>판매 수량</TableHead>
+          <TableHead>판매 액수</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {/* 데이터 수만큼 열 생성 */}
-        {/* {data.map((row) => (
-          <TableRow key={row.productID}>
-            <TableCell className="font-medium">{row!.productName}</TableCell>
-            <TableCell>{row!.quantity}</TableCell>
-            <TableCell>{row!.unitPrice}</TableCell>
-            <TableCell className="text-right">
-              <ButtonComponent variant="default" type="submit">
-                주문하기
-              </ButtonComponent>
-            </TableCell>
-          </TableRow>
-        ))} */}
+        {/* 집계된 데이터로 테이블의 각 행을 생성 */}
+        {Object.keys(aggregatedData).map((productName) => {
+          const { totalQuantity, totalPrice } = aggregatedData[productName];
+          return (
+            <TableRow key={productName}>
+              <TableCell className="font-medium">{productName}</TableCell>
+              <TableCell>{totalQuantity}</TableCell>
+              <TableCell>{totalPrice}</TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );
-}
+};
 
 export default SalesTable;

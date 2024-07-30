@@ -1,5 +1,9 @@
-import {SaleDTO} from '../../../shared/DTO/sale/sale.dto';
+import { SaleDTO } from "../../../shared/DTO/sale/sale.dto";
 
+/**
+ * @crystal23733 24.07.30
+ * @return data 매출관련 데이터
+ */
 export default async (): Promise<SaleDTO[]> => {
   const response = await fetch("http://localhost:3001/sales");
   if (!response.ok) {

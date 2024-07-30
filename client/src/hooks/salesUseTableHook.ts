@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { SaleDTO } from "../../../shared/DTO/sale/sale.dto";
 import salesFetchTableData from "src/model/salesFetchTableData";
 
+/**
+ * @crystal23733 24.07.30
+ * * 데이터, 초기 로딩값, 에러 설정 함수
+ * @return data, loading, error
+ */
 export default () => {
   const [data, setData] = useState<SaleDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
