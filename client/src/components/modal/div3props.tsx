@@ -1,5 +1,3 @@
-//제품명 유통기한 제품 페기
-//사이드 바 - 선택 메뉴 ex) 재고관리 ,재고 조회 ,유통기한 페이지이동
 import React from "react";
 
 interface Div3propstext {
