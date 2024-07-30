@@ -9,7 +9,7 @@ import NavListBox from "./navListBox";
 const AdminNav: React.FC = () => {
   return (
     // !!!!!! 최상위 div bg 빼야됨
-    <div id="aside" className="w-72 h-screen bg-slate-500">
+    <div id="aside" className="w-72 h-screen">
       <div className="w-full h-10%">
         <LoginInfoComponent email="rockCoders" />
       </div>

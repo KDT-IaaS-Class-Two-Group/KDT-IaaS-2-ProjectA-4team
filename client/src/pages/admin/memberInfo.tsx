@@ -18,11 +18,20 @@ export default () => {
       <div className="flex">
         <AdminNav />
         <MemberInfoTable
-          buttonValue="권한 변경"
-          head={["회원 번호", "이름", "이메일", "권한"]}
+          head={["회원 번호", "이름", "이메일", "관리자 권한"]}
           data={[
-            { id: "1000", 회원: "이종수", 이메일: "qwewq@qwewqe123" },
-            { id: "2000", 회원: "이종수", 이메일: "qwewq@qwewqe123" },
+            {
+              id: "1000",
+              회원: "이종수",
+              이메일: "qwewq@qwewqe123",
+              role: "0",
+            },
+            {
+              id: "2000",
+              회원: "호날두",
+              이메일: "qwewq@qwewqe123",
+              role: "1",
+            },
           ]}
         />
       </div>
