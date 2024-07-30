@@ -8,7 +8,7 @@ import CartItemComponent from "./CartItem";
  */
 
 const Cart: FC = () => {
-  const [totalPrice, setTotalPrice] = useState(20000);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handlePriceChange = (price: number) => {
     setTotalPrice((prevTotal) => {
@@ -18,35 +18,15 @@ const Cart: FC = () => {
   };
 
   return (
-    <div className="w-72">
+    <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
-      <div className="h-96 overflow-scroll">
-        <CartItemComponent
+      <div className="max-h-96 overflow-scroll">
+        {/* <CartItemComponent
           menu="게살 패티"
           unitPrice={4000}
           onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="징징이다리 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="집게사장 손 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="치킨 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="불고기 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
+        /> */}
       </div>
       <div className="w-60 font-extrabold text-xl text-right mt-6 mx-6 pt-6 border-t border-dashed border-slate-500 relative z-10">
         {totalPrice}원
