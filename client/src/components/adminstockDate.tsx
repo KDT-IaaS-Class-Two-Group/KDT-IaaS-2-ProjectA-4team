@@ -9,7 +9,8 @@ const InputComponent: FC = () => {
   return (
     <div id="root">
       <main>
-        {/* <aside id="first-aside">
+{/* --------------사이바 컴포넌트 사용---------------*/}
+        <aside id="first-aside">
           <div>
             <div>사용자 프로필</div>// 가져다 쓰기
             <Div3props text3={sidebarmenutext1} />
@@ -21,29 +22,28 @@ const InputComponent: FC = () => {
             <div>마이페이지</div>
             <div>로그아웃</div>
           </div>
-        </aside> */}
+        </aside>
+{/* ------------------------------------------------ */}
 
-        //!위는 만들어진거 사용할 듯
-        //수정할 파트
         <section id="first-section">
+{/* ----------- 로고 컴포넌트 사용------------*/}
           <div>
-            <div id="LOGO">로고 자리</div>//! 이것도 만들어진거 쓰기
+            <div id="LOGO">로고 자리</div>
           </div>
+{/* ------------------------------------------------ */}
           <div id="content-box">
             <div id="content">
               <div id="content-header">
-                // * 여기에 제목 검색창 검색버튼
-                <h1>콘텐츠 헤더</h1> // * 아마 유통 관리 라는 말이 들어갈듯
-                <form action="">
-                  {" "}
-                  // ! 이거 샤드에 있는지 찾아보기 // 있다 샤드에 버튼이랑
-                  폼으로 해서 만들기
+{/* -----------타이틀 컴포넌트 사용------------*/}
+                <h1>콘텐츠 헤더</h1>
+{/* ------------------------------------------------ */}
+                {/* <form action=""> //! 샤드 폼 추가
                   <input type="text" placeholder="이름을 입력해주세요" />
                   <input type="submit" value="검색" />
-                </form>
+                </form> */}
               </div>
+                //?  여기는 db 추가할 수 있게 동적으로 계속마들어져 야하지 않을까 생각
               <div id="content-description">
-                //? 여기는 내용들이 db 조회로 해야하지 않을까?
                 <Div3props text3={mainprduchlist} />
                 <Div3props text3={mainprduchlist} />
                 <Div3props text3={mainprduchlist} />
@@ -52,6 +52,7 @@ const InputComponent: FC = () => {
                 <Div3props text3={mainprduchlist} />
                 <Div3props text3={mainprduchlist} />
               </div>
+            
             </div>
           </div>
         </section>
