@@ -9,7 +9,7 @@ import {
 } from "@../../components/ui/table";
 import ButtonComponent from "../CustomButton";
 import { useMemo } from "react";
-import TTableSetter from "./TableSetter.type";
+import TMemberInfoTable from "./MemberInfoTable.type";
 
 /**
  * @eonduck2 24.07.30
@@ -19,24 +19,29 @@ import TTableSetter from "./TableSetter.type";
  * @param { object[] } data 테이블 데이터
  * @param { string } buttonValue 버튼 값
  */
-const TableSetter: React.FC<TTableSetter> = (props) => {
+const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
   const { caption, head, data, buttonValue } = props;
 
   const headers = useMemo(() => {
-    return head.map((item, index) => <TableHead key={index}>{item}</TableHead>);
+    return head.map((item, key) => (
+      <TableHead className="font-bold text-base" key={key}>
+        {item}
+      </TableHead>
+    ));
   }, [head]);
 
   const rows = useMemo(() => {
-    return data.map((row, rowIndex) => (
-      <TableRow key={rowIndex}>
-        {Object.entries(row).map((value, cellIndex) => (
+    return data.map((row, rowkey) => (
+      <TableRow key={rowkey}>
+        {Object.values(row).map((value, cellKey) => (
           <>
-            <TableCell key={cellIndex}>{value[0]}</TableCell>
-            <TableCell key={cellIndex}>{value[1]}</TableCell>
+            <TableCell key={cellKey}>{value}</TableCell>
           </>
         ))}
         <TableCell>
-          <ButtonComponent>{buttonValue}</ButtonComponent>
+          <ButtonComponent className="bg-blue-100">
+            {buttonValue}
+          </ButtonComponent>
         </TableCell>
       </TableRow>
     ));
@@ -53,4 +58,4 @@ const TableSetter: React.FC<TTableSetter> = (props) => {
   );
 };
 
-export default TableSetter;
+export default MemberInfoTable;
