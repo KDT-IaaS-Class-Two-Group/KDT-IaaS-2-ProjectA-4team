@@ -14,7 +14,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ setSelectCategory }) => {
   return (
-    <div className="flex">
+    <div className="flex w-[75%] m-5 justify-center">
       <LinkButtonComponent href="#" onClick={() => setSelectCategory("bread")}>
         빵
       </LinkButtonComponent>

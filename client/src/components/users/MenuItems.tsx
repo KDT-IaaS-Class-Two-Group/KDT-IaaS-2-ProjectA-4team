@@ -61,7 +61,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({ selectCategory }) => {
   };
 
   return (
-    <div className="absolute flex m-10 justify-between w-[1100px]">
+    <div className="mx-10 w-[73%] grid gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 2xl:bg-black">
       {renderMenuItems()}
     </div>
   );

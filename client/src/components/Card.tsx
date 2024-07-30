@@ -17,7 +17,7 @@ interface CardComponentProps {
 const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
   return (
     <div>
-      <Card className="w-[350px] h-56 rounded-xl">
+      <Card className="h-56 rounded-xl">
         <div className="bg-slate-500 w-52 h-36 mx-auto my-2"></div>
         <div className="my-2">
           <CardTitle className="text-center text-xl">{title}</CardTitle>
