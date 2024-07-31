@@ -8,7 +8,7 @@ abstract class AbstractedValiChecker implements IValiChecker {
 
   public abstract isEqualTo(
     targetValue: string | number,
-    comparedValue: string | number
+    comparedValue: string | number,
   ): boolean;
 }
 
@@ -19,7 +19,7 @@ class ValiCheckerForStatic extends AbstractedValiChecker {
 
   public isEqualTo = (
     value: string | number,
-    secondValue: string | number
+    secondValue: string | number,
   ): boolean => false;
 }
 
@@ -61,7 +61,7 @@ class implementedValiChecker extends ValiCheckerForStatic {
 
   public static isEqualTo = (
     targetValue: string | number,
-    comparedValue: string | number
+    comparedValue: string | number,
   ): boolean => targetValue === comparedValue;
 }
 

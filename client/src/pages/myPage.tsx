@@ -1,7 +1,8 @@
 import { Input } from "components/ui/input";
 import React from "react";
 import LinkButtonComponent from "src/components/linkButtonComponent";
-import UserHeaderComponent from "src/components/users/userHeaderComponent";
+import LoginInfoComponent from "src/components/LoginInfo";
+import MyPageFormComponent from "src/components/myPageFormComponent";
 
 const MyPage: React.FC = () => {
   return (
@@ -9,38 +10,17 @@ const MyPage: React.FC = () => {
       id="root"
       className="w-screen h-screen flex flex-col justify-center items-center"
     >
-      <UserHeaderComponent />
+      <LoginInfoComponent email="rockCoders" />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
           <LinkButtonComponent href="/UserPage">
             &larr; 돌아가기
           </LinkButtonComponent>
         </div>
-        <form action="" id="password-change-box" className="h-30% w-full">
-          <p>비밀번호 변경</p>
-          <Input
-            type="password"
-            placeholder="기존 비밀번호를 입력해주세요."
-            name="password"
-            className="text-xl"
-          />
-          <Input
-            type="password"
-            placeholder="변경할 비밀번호를 입력해주세요."
-            name="password"
-            className="text-xl"
-          />
-          <Input
-            type="password"
-            placeholder="비밀번호 확인"
-            name="checkPassword"
-            className="text-xl"
-          />
-          <Input type="submit" value="변경하기" />
-        </form>
+        <MyPageFormComponent />
         <div id="order-details" className="h-50% w-full">
           <div id="order-details__header" className="">
-            <h1 className="font-bold text-lg">장바구니</h1>
+            <h1 className="font-bold text-lg">주문내역</h1>
           </div>
           <div
             id="order-details__content"

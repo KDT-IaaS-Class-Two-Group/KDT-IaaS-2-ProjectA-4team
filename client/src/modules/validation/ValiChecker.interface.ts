@@ -9,7 +9,7 @@ interface IValiChecker {
 
   isEqualTo(
     targetValue: string | number,
-    comparedValue: string | number
+    comparedValue: string | number,
   ): boolean;
 }
 
