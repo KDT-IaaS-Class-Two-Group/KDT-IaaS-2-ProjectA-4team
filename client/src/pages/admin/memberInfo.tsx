@@ -1,21 +1,10 @@
-import { useState } from "react";
 import AdminNav from "src/components/admin/adminNav";
-import Modal from "src/components/modal/Modal";
 import MemberInfoTable from "src/components/table/MemberInfoTable";
 
 export default () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleClose = () => {
-    setModalOpen(false);
-  };
-
   return (
     <>
-      {isModalOpen && (
-        <Modal title="테스트" content="ㅎㅇ" onClose={handleClose} />
-      )}
-      <div className="flex">
+      <div className="flex w-svw h-svh">
         <AdminNav />
         <MemberInfoTable
           head={["회원 번호", "이름", "이메일", "관리자 권한"]}
@@ -35,7 +24,6 @@ export default () => {
           ]}
         />
       </div>
-      <button onClick={() => setModalOpen(true)}>open</button>
     </>
   );
 };

@@ -10,7 +10,6 @@ import {
 import { useMemo } from "react";
 import TMemberInfoTable from "./MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
-import Modal from "../modal/Modal";
 
 /**
  * @eonduck2 24.07.30
@@ -41,16 +40,11 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
         })}
         <TableCell className="w-32 flex justify-center">
           <CheckCircle
-            className={row.role == 1 ? "text-green-400" : "text-gray-400"}
-            onClick={() => (
-              <Modal
-                title="ㅎㅇ"
-                content="ㅎㅇ"
-                onClose={() => {
-                  console.log(1);
-                }}
-              ></Modal>
-            )}
+            className={`${row.role == 1 ? "text-green-400" : "text-gray-400"} cursor-pointer`}
+            onClick={() => {
+              if (row.role == 1) 0;
+              else if (row.role == 0) 1;
+            }}
           />
         </TableCell>
       </TableRow>
