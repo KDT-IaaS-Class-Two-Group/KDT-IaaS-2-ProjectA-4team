@@ -1,8 +1,7 @@
 import React from "react";
 
 import NavListBox from "src/components/admin/navListBox";
-import Logo from "src/components/logo";
-import { StockTable } from "src/components/table/stockdataTable";
+import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
 
 const AdminstockDate: React.FC = () => {
   return (
@@ -12,11 +11,8 @@ const AdminstockDate: React.FC = () => {
           <NavListBox/>
         </div>
         <section>
-          <div>
-            <Logo/>
-          </div>
-          <div id = "asdadsd" className="flex items-center justify-start w-auto h-16 p-3 border border-black border-solid">
-            <StockTable/>
+          <div id = "asdadsd" className="flex items-center justify-start w-50 h-auto p-3 border border-black border-solid">
+            <ExpirationDataTable/>
           </div>
         </section>
       </main>
