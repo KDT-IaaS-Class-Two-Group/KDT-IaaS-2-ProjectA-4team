@@ -15,7 +15,7 @@ const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
 
   return (
     <div
-      className={`text-gray-500 underline mt-auto text-sm leading-loose ${className}`}
+      className={`text-gray-500 underline text-sm leading-loose ${className}`}
     >
       <p
         onClick={() => handleNavigation("/myPage")}
