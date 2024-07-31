@@ -18,7 +18,8 @@ const Cart: FC<CartProps> = ({ items }) => {
 
   const handleRemoveItem = (menu: string) => {
     const itemIndex = items.findIndex((item) => item.menu === menu);
-    console.log(itemIndex);
+    items.splice(itemIndex, 1);
+    console.log(items);
   };
 
   const handlePriceChange = (price: number) => {
