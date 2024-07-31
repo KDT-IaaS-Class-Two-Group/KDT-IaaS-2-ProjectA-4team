@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import CartItemComponent from "./CartItem";
 
 interface CartProps {
@@ -21,6 +21,14 @@ const Cart: FC<CartProps> = ({ items }) => {
     });
   };
 
+  useEffect(() => {
+    const initialTotalPrice = items.reduce(
+      (acc, item) => acc + item.unitPrice,
+      0,
+    );
+    setTotalPrice(initialTotalPrice);
+  }, [items]);
+
   return (
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
@@ -31,7 +39,7 @@ const Cart: FC<CartProps> = ({ items }) => {
             key={index}
             menu={item.menu}
             unitPrice={item.unitPrice}
-            onPriceChange={(price) => handlePriceChange(price)}
+            onPriceChange={handlePriceChange}
           />
         ))}
         {/* <CartItemComponent
