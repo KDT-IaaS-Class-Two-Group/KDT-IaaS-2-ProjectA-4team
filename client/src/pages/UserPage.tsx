@@ -44,7 +44,7 @@ const UserPage: FC = () => {
           email="rockcoders@kdt.com"
         />
         <Cart items={cartItems} />
-        <FooterLinks className="w-72 mt-24 mx-6" />
+        <FooterLinks className="w-72 mt-20 mx-6" />
       </div>
     </div>
   );
