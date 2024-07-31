@@ -11,7 +11,7 @@ abstract class AbstractedValidationUtils implements IValidationUtils {
   public abstract isValidKoreanLength(
     value: string,
     minLength: number,
-    maxLength: number
+    maxLength: number,
   ): boolean;
 
   public abstract isValidEnglishLength(value: string, length: number): boolean;
@@ -27,7 +27,7 @@ class ValidationUtilsForStatic implements AbstractedValidationUtils {
   public isValidKoreanLength = (
     value: string,
     minLength: number,
-    maxLength: number
+    maxLength: number,
   ): boolean => false;
 
   public isValidEnglishLength = (value: string, length: number): boolean =>
@@ -53,7 +53,7 @@ class ImplementedValidationUtils extends ValidationUtilsForStatic {
   public static isValidKoreanLength(
     value: string,
     minLength: number,
-    maxLength: number
+    maxLength: number,
   ): boolean {
     return value.length >= minLength && value.length <= maxLength;
   }

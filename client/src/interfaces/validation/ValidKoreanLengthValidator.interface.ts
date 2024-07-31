@@ -2,7 +2,7 @@ interface IValidKoreanLengthValidator {
   isValidKoreanLength(
     value: string,
     minLength: number,
-    maxLength: number
+    maxLength: number,
   ): boolean;
 }
 
