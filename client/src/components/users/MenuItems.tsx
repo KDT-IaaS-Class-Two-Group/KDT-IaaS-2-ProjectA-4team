@@ -3,6 +3,7 @@ import CardComponent from "src/components/Card";
 
 interface MenuItemsProps {
   selectCategory: string;
+  onAddToCart: (title: string, price: number) => void;
 }
 
 /**
@@ -12,47 +13,110 @@ interface MenuItemsProps {
  * @returns {JSXElement}
  */
 
-const MenuItems: React.FC<MenuItemsProps> = ({ selectCategory }) => {
+const MenuItems: React.FC<MenuItemsProps> = ({
+  selectCategory,
+  onAddToCart,
+}) => {
   const renderMenuItems = () => {
     switch (selectCategory) {
       case "bread":
         return (
           <>
-            <CardComponent title="화이트" content={4000} />
-            <CardComponent title="허니오트" content={4000} />
-            <CardComponent title="플랫 브레드" content={4000} />
+            <CardComponent
+              title="화이트"
+              content={4000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="허니오트"
+              content={4000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="플랫 브레드"
+              content={4000}
+              onAddToCart={onAddToCart}
+            />
           </>
         );
       case "patty":
         return (
           <>
-            <CardComponent title="게살 패티" content={5000} />
-            <CardComponent title="징징이다리 패티" content={5000} />
-            <CardComponent title="집게사장 손 패티" content={5000} />
+            <CardComponent
+              title="게살 패티"
+              content={5000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="징징이다리 패티"
+              content={5000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="집게사장 손 패티"
+              content={5000}
+              onAddToCart={onAddToCart}
+            />
           </>
         );
       case "source":
         return (
           <>
-            <CardComponent title="랜치 소스" content={2000} />
-            <CardComponent title="칠리 소스" content={2500} />
-            <CardComponent title="스위트어니언 소스" content={1800} />
+            <CardComponent
+              title="랜치 소스"
+              content={2000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="칠리 소스"
+              content={2500}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="스위트어니언 소스"
+              content={1800}
+              onAddToCart={onAddToCart}
+            />
           </>
         );
       case "side":
         return (
           <>
-            <CardComponent title="감자튀김" content={1500} />
-            <CardComponent title="치킨 너겟" content={2000} />
-            <CardComponent title="어니언 링" content={1800} />
+            <CardComponent
+              title="감자튀김"
+              content={1500}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="치킨 너겟"
+              content={2000}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="어니언 링"
+              content={1800}
+              onAddToCart={onAddToCart}
+            />
           </>
         );
       case "drink":
         return (
           <>
-            <CardComponent title="콜라" content={1200} />
-            <CardComponent title="사이다" content={1200} />
-            <CardComponent title="주스" content={1500} />
+            <CardComponent
+              title="콜라"
+              content={1200}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="사이다"
+              content={1200}
+              onAddToCart={onAddToCart}
+            />
+            <CardComponent
+              title="주스"
+              content={1500}
+              onAddToCart={onAddToCart}
+            />
           </>
         );
       default:
