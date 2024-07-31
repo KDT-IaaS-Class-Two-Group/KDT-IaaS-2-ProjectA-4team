@@ -3,7 +3,6 @@ import CartItemComponent from "./CartItem";
 
 interface CartProps {
   items: { menu: string; unitPrice: number }[];
-  eventHandle: (data: string) => void;
 }
 
 /**
@@ -13,8 +12,13 @@ interface CartProps {
  * @returns { JSXElement }
  */
 
-const Cart: FC<CartProps> = ({ items, eventHandle }) => {
+const Cart: FC<CartProps> = ({ items }) => {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartItems, setCartItems] = useState(items);
+
+  const handleRemoveItem = (menu: string) => {
+    console.log(menu);
+  };
 
   const handlePriceChange = (price: number) => {
     setTotalPrice((prevTotal) => {
@@ -24,33 +28,25 @@ const Cart: FC<CartProps> = ({ items, eventHandle }) => {
   };
 
   useEffect(() => {
-    const initialTotalPrice = items.reduce(
+    const initialTotalPrice = cartItems.reduce(
       (acc, item) => acc + item.unitPrice,
       0,
     );
     setTotalPrice(initialTotalPrice);
-  }, [items]);
-
-  const handleRemoveItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const currentElement = event.currentTarget.textContent;
-    // const parentElement = currentElement.parentElement;
-    // const grandparentElement = parentElement.parentElement;
-    // const grandparentFirstChild = grandparentElement?.firstChild;
-    // const grandparentFirstfirstChild = grandparentFirstChild?.firstChild;
-    console.log(eventHandle(currentElement)); // 클릭된 버튼의 ID
-  };
+  }, [cartItems]);
 
   return (
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
-      <div className="h-96 overflow-scroll" onClick={handleRemoveItem}>
+      <div className="h-96 overflow-scroll">
         {items.map((item, index) => (
           <CartItemComponent
             key={index}
             menu={item.menu}
             unitPrice={item.unitPrice}
             onPriceChange={handlePriceChange}
+            eventHandle={handleRemoveItem}
           />
         ))}
       </div>
