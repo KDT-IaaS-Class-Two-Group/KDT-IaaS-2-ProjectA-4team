@@ -1,7 +1,7 @@
+import React from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -9,21 +9,9 @@ import {
 } from "@../../components/ui/table";
 import ButtonComponent from "../CustomButton";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
-import OrderModal from "../modal/OrderModal";
-import React from "react";
-import useOrderModalHook from "src/hooks/useOrderModalHook";
 
-export const ProductTable: React.FC = () => {
+const ProductTable: React.FC = () => {
   const { data, loading, error } = ProductUseTableHook();
-  const {
-    modalOpen,
-    selectedProduct,
-    quantity,
-    setQuantity,
-    openModal,
-    closeModal,
-    saveOrder,
-  } = useOrderModalHook();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -34,48 +22,45 @@ export const ProductTable: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col items-end justify-center gap-4">
+      <ButtonComponent variant="secondary">메뉴 추가</ButtonComponent>
       <Table>
-        <TableCaption>재고조회</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]">재고명</TableHead>
+            <TableHead className="w-[100px]">카테고리</TableHead>
+            <TableHead>재품명</TableHead>
             <TableHead>수량</TableHead>
             <TableHead>단가</TableHead>
-            <TableHead className="text-right">주문</TableHead>
+            <TableHead className="text-center">발주</TableHead>
+            <TableHead className="text-center">수정</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {/* 데이터 수만큼 열 생성 */}
           {data.map((row) => (
             <TableRow key={row.productID}>
-              <TableCell className="font-medium">{row!.productName}</TableCell>
+              <TableCell className="font-medium">
+                {row!.productCategory}
+              </TableCell>
+              <TableCell>{row!.productName}</TableCell>
               <TableCell>{row!.quantity}</TableCell>
               <TableCell>{row!.unitPrice}</TableCell>
-              <TableCell className="text-right">
-                <ButtonComponent
-                  variant="default"
-                  type="button"
-                  onClick={() => openModal(row)}
-                >
-                  주문하기
+              <TableCell className="text-center">
+                <ButtonComponent variant="default" type="button">
+                  발주하기
+                </ButtonComponent>
+              </TableCell>
+              <TableCell className="text-center">
+                <ButtonComponent variant="default" type="button">
+                  수정하기
                 </ButtonComponent>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
-      {modalOpen && (
-        <OrderModal
-          isOpen={modalOpen}
-          product={selectedProduct}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          onSave={saveOrder}
-          onClose={closeModal}
-        />
-      )}
-    </>
+    </div>
   );
 };
+
+export default ProductTable;

@@ -8,8 +8,8 @@ import NavListBox from "./navListBox";
  */
 const AdminNav: React.FC = () => {
   return (
-    <div id="aside" className="w-72 h-screen">
-      <div className="w-full h-10%">
+    <div id="aside" className="fixed top-0 left-0 h-screen p-10 shadow-xl w-72">
+      <div className="w-80% h-10%">
         <LoginInfoComponent email="rockCoders" />
       </div>
       <NavListBox />

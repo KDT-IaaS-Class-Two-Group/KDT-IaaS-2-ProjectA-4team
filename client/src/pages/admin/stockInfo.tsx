@@ -1,12 +1,12 @@
 // * 재고 조회
-import { ProductTable } from "src/components/table/ProductTable";
+import ProductTable from "src/components/table/ProductTable";
 import AdminNav from "src/components/admin/adminNav";
 import TitleComponent from "src/components/titleComponent";
 
 const StockInfo = () => {
   return (
     <>
-      <div className="grid w-screen h-screen gap-4 p-3 overflow-hidden grid-cols-custom-30-70">
+      <div className="grid w-screen gap-4 p-3 overflow-hidden grid-cols-custom-30-70">
         <div className="ml-5">
           <AdminNav />
         </div>
