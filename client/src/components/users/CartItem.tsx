@@ -4,6 +4,7 @@ interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
   onPriceChange: (price: number) => void;
+  eventHandle: (data: string) => void;
 }
 
 /**
@@ -19,6 +20,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   menu,
   unitPrice,
   onPriceChange,
+  eventHandle,
 }) => {
   const initialCount = 1;
   const [count, setCount] = useState(initialCount);
@@ -44,6 +46,16 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
     }
   };
 
+  const handleRemoveItem = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const currentElement = event.currentTarget;
+    const parentElement = currentElement.parentElement;
+    const grandparentElement = parentElement.parentElement;
+    const grandparentFirstChild = grandparentElement?.firstChild;
+    const grandparentFirstfirstChild = grandparentFirstChild?.firstChild;
+
+    eventHandle(grandparentFirstfirstChild?.textContent);
+  };
+
   return (
     <div className="px-10 py-3 w-72">
       <div className="flex justify-between text-base">
@@ -67,7 +79,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
           ></div>
         </div>
         <div
-          onClick={() => console.log("remove")}
+          onClick={handleRemoveItem}
           className="hover:text-black cursor-pointer"
         >
           X
