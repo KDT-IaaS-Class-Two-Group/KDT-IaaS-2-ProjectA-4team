@@ -13,6 +13,9 @@ import MenuItems from "src/components/users/MenuItems";
 const UserPage: FC = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
+  const [cartItems, setCartItems] = useState<
+    { menu: string; unitPrice: number }[]
+  >([]);
 
   useEffect(() => {
     const category = router.query.category as string;
@@ -21,12 +24,20 @@ const UserPage: FC = () => {
     }
   }, [router.query.category]);
 
+  const handleAddToCart = (menu: string, unitPrice: number) => {
+    setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
+  };
+
   return (
     <div>
       <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
       <UserMenu setSelectCategory={setSelectCategory} />
-      <MenuItems selectCategory={selectCategory} />
+      <MenuItems
+        selectCategory={selectCategory}
+        onAddToCart={handleAddToCart}
+      />
       <UserNav />
+      {/* <UserNav /> */}
     </div>
   );
 };
