@@ -11,6 +11,7 @@ import ButtonComponent from "../CustomButton";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
 import UpdateModal from "../modal/UpdateModal";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import OrderModal from "../modal/OrderModal";
 
 /**
  * @moonhr 24.07.31
@@ -18,25 +19,37 @@ import { ProductDTO } from "@shared/DTO/products/product.dto";
  */
 const ProductTable: React.FC = () => {
   const { data, loading, error, refetch } = ProductUseTableHook();
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+  const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductDTO | null>(
     null,
   );
 
-  const openModal = (product: ProductDTO) => {
+  const openUpdateModal = (product: ProductDTO) => {
     setSelectedProduct(product);
-    setModalOpen(true);
+    setUpdateModalOpen(true);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
+  const closeUpdateModal = () => {
+    setUpdateModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  const openOrderModal = (product: ProductDTO) => {
+    setSelectedProduct(product);
+    setOrderModalOpen(true);
+  };
+
+  const closeOrderModal = () => {
+    setOrderModalOpen(false);
     setSelectedProduct(null);
   };
 
   const handleSave = async (updatedProduct: ProductDTO) => {
     try {
       await refetch();
-      closeModal;
+      closeUpdateModal();
+      closeOrderModal();
     } catch (err) {
       console.error("Failed to fetch updated products:", err);
     }
@@ -76,7 +89,11 @@ const ProductTable: React.FC = () => {
                 <TableCell>{row!.quantity}</TableCell>
                 <TableCell>{row!.unitPrice}</TableCell>
                 <TableCell className="text-center">
-                  <ButtonComponent variant="default" type="button">
+                  <ButtonComponent
+                    variant="default"
+                    type="button"
+                    onClick={() => openOrderModal(row)}
+                  >
                     발주하기
                   </ButtonComponent>
                 </TableCell>
@@ -84,7 +101,7 @@ const ProductTable: React.FC = () => {
                   <ButtonComponent
                     variant="default"
                     type="button"
-                    onClick={() => openModal(row)}
+                    onClick={() => openUpdateModal(row)}
                   >
                     수정하기
                   </ButtonComponent>
@@ -94,11 +111,19 @@ const ProductTable: React.FC = () => {
           </TableBody>
         </Table>
       </div>
-      {modalOpen && selectedProduct && (
+      {updateModalOpen && selectedProduct && (
         <UpdateModal
-          isOpen={modalOpen}
+          isOpen={updateModalOpen}
           product={selectedProduct}
-          onClose={closeModal}
+          onClose={closeUpdateModal}
+          onSave={handleSave}
+        />
+      )}
+      {orderModalOpen && selectedProduct && (
+        <OrderModal
+          isOpen={orderModalOpen}
+          product={selectedProduct}
+          onClose={closeOrderModal}
           onSave={handleSave}
         />
       )}
