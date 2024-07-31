@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import ISale from "../../Sale.interface";
+import ISale from "../Sale.interface";
 
 /**
  * @crystal23733 24.07.22

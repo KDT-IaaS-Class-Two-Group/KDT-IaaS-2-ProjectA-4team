@@ -9,5 +9,5 @@ import ITotalPrice from "../../shared/DTO/sale/interface/TotalPrice.interface";
  * * sale interface
  */
 export default interface ISale extends IMemberID, ISaleDate, ISaleID, ITotalPrice{
-  products : ISaleProducts[];
+  products : ISaleProducts;
 }
