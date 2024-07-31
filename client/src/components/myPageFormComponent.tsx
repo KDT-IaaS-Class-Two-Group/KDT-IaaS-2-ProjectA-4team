@@ -11,10 +11,15 @@ const MyPageFormComponent: React.FC = () => {
     changePasswordConfirm,
     setChangePasswordConfirm,
     error,
-    handleSubmit
+    handleSubmit,
   } = useChangePasswordHook();
   return (
-    <form action="" id="password-change-box" className="h-30% w-full" onSubmit={handleSubmit}>
+    <form
+      action=""
+      id="password-change-box"
+      className="h-30% w-full"
+      onSubmit={handleSubmit}
+    >
       <p>비밀번호 변경</p>
       <Input
         type="password"
