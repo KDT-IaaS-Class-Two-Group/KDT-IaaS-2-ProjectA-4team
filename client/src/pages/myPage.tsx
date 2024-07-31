@@ -1,7 +1,7 @@
 import { Input } from "components/ui/input";
 import React from "react";
 import LinkButtonComponent from "src/components/linkButtonComponent";
-import UserHeaderComponent from "src/components/users/userHeaderComponent";
+import LoginInfoComponent from "src/components/LoginInfo";
 
 const MyPage: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const MyPage: React.FC = () => {
       id="root"
       className="w-screen h-screen flex flex-col justify-center items-center"
     >
-      <UserHeaderComponent />
+      <LoginInfoComponent email="rockCoders" />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
           <LinkButtonComponent href="/UserPage">
@@ -40,7 +40,7 @@ const MyPage: React.FC = () => {
         </form>
         <div id="order-details" className="h-50% w-full">
           <div id="order-details__header" className="">
-            <h1 className="font-bold text-lg">장바구니</h1>
+            <h1 className="font-bold text-lg">주문내역</h1>
           </div>
           <div
             id="order-details__content"
