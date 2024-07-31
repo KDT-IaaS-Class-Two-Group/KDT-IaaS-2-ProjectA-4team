@@ -66,7 +66,12 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
             className="bg-slate-600 w-6 h-6"
           ></div>
         </div>
-        <div className="hover:text-black cursor-pointer">X</div>
+        <div
+          onClick={() => console.log("remove")}
+          className="hover:text-black cursor-pointer"
+        >
+          X
+        </div>
       </div>
     </div>
   );
