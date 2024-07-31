@@ -8,6 +8,7 @@ interface CartProps {
 /**
  * @yuxincxoi 24.07.25
  * * 장바구니 컴포넌트
+ * @param {array} items 선택된 장바구니 메뉴
  * @returns { JSXElement }
  */
 
@@ -42,11 +43,6 @@ const Cart: FC<CartProps> = ({ items }) => {
             onPriceChange={handlePriceChange}
           />
         ))}
-        {/* <CartItemComponent
-          menu="게살 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        /> */}
       </div>
       <div className="w-60 font-extrabold text-xl text-right mt-6 mx-6 pt-6 border-t border-dashed border-slate-500 relative z-10">
         {totalPrice}원
