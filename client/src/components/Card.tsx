@@ -4,6 +4,7 @@ import { Card, CardTitle, CardDescription } from "../../components/ui/card";
 interface CardComponentProps {
   title: string;
   content: number;
+  onAddToCart: (title: string, price: number) => void;
 }
 
 /**
@@ -14,9 +15,13 @@ interface CardComponentProps {
  * @returns { JSXElement }
  */
 
-const CardComponent: FC<CardComponentProps> = ({ title, content }) => {
+const CardComponent: FC<CardComponentProps> = ({
+  title,
+  content,
+  onAddToCart,
+}) => {
   return (
-    <div>
+    <div onClick={() => onAddToCart(title, content)}>
       <Card className="h-56 rounded-xl">
         <div className="bg-slate-500 w-52 h-36 mx-auto my-2"></div>
         <div className="my-2">
