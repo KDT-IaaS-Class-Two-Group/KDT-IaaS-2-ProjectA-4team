@@ -50,20 +50,23 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
         <div id="menu">{menu}</div>
         <div id="price">{price}원</div>
       </div>
-      <div className="flex justify-start">
-        <div
-          onClick={decrementCount}
-          id="minusMenu"
-          className="bg-slate-600 w-6 h-6"
-        ></div>
-        <div id="count" className="mx-3 font-light text-s">
-          {count}
+      <div className="flex justify-between text-gray-500">
+        <div className="flex justify-start">
+          <div
+            onClick={decrementCount}
+            id="minusMenu"
+            className="bg-slate-600 w-6 h-6"
+          ></div>
+          <div id="count" className="mx-3 font-light text-s">
+            {count}
+          </div>
+          <div
+            onClick={incrementCount}
+            id="plusMenu"
+            className="bg-slate-600 w-6 h-6"
+          ></div>
         </div>
-        <div
-          onClick={incrementCount}
-          id="plusMenu"
-          className="bg-slate-600 w-6 h-6"
-        ></div>
+        <div className="hover:text-black cursor-pointer">X</div>
       </div>
     </div>
   );
