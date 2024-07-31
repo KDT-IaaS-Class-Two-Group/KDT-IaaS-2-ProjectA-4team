@@ -11,7 +11,6 @@ import ButtonComponent from "../CustomButton";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
 import UpdateModal from "../modal/UpdateModal";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import { updateProductUpdate } from "src/model/productFetchUpdate";
 
 /**
  * @moonhr 24.07.31
@@ -36,8 +35,8 @@ const ProductTable: React.FC = () => {
 
   const handleSave = async (updatedProduct: ProductDTO) => {
     try {
-      await updateProductUpdate(updatedProduct);
-      refetch();
+      await refetch();
+      closeModal;
     } catch (err) {
       console.error("Failed to fetch updated products:", err);
     }
