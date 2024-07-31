@@ -21,7 +21,7 @@ export const productFetchTableData = async (): Promise<ProductDTO[]> => {
 export const saveProductData = async (
   product: ProductDTO,
 ): Promise<ProductDTO> => {
-  const response = await fetch(`http://localhost:3001/${product.productID}`, {
+  const response = await fetch(`http://localhost:3001/productOrder`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
