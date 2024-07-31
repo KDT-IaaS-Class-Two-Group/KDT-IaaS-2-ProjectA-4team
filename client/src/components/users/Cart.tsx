@@ -1,14 +1,19 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import CartItemComponent from "./CartItem";
+
+interface CartProps {
+  items: { menu: string; unitPrice: number }[];
+}
 
 /**
  * @yuxincxoi 24.07.25
  * * 장바구니 컴포넌트
+ * @param {array} items 선택된 장바구니 메뉴
  * @returns { JSXElement }
  */
 
-const Cart: FC = () => {
-  const [totalPrice, setTotalPrice] = useState(20000);
+const Cart: FC<CartProps> = ({ items }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handlePriceChange = (price: number) => {
     setTotalPrice((prevTotal) => {
@@ -17,36 +22,27 @@ const Cart: FC = () => {
     });
   };
 
+  useEffect(() => {
+    const initialTotalPrice = items.reduce(
+      (acc, item) => acc + item.unitPrice,
+      0,
+    );
+    setTotalPrice(initialTotalPrice);
+  }, [items]);
+
   return (
-    <div className="w-72">
+    <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
-      <div>
-        <CartItemComponent
-          menu="게살 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="징징이다리 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="집게사장 손 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="치킨 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
-        <CartItemComponent
-          menu="불고기 패티"
-          unitPrice={4000}
-          onPriceChange={(price) => handlePriceChange(price)}
-        />
+      <div className="h-96 overflow-scroll">
+        {items.map((item, index) => (
+          <CartItemComponent
+            key={index}
+            menu={item.menu}
+            unitPrice={item.unitPrice}
+            onPriceChange={handlePriceChange}
+          />
+        ))}
       </div>
       <div className="w-60 font-extrabold text-xl text-right mt-6 mx-6 pt-6 border-t border-dashed border-slate-500 relative z-10">
         {totalPrice}원
