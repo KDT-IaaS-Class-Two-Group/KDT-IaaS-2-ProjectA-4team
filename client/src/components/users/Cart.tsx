@@ -17,7 +17,8 @@ const Cart: FC<CartProps> = ({ items }) => {
   const [cartItems, setCartItems] = useState(items);
 
   const handleRemoveItem = (menu: string) => {
-    console.log(menu);
+    const itemIndex = items.findIndex((item) => item.menu === menu);
+    console.log(itemIndex);
   };
 
   const handlePriceChange = (price: number) => {
