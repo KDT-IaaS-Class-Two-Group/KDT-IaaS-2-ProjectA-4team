@@ -1,19 +1,20 @@
+import { ObjectId } from "mongoose";
 /**
  * @crystal23733 24.07.22
  * 기본 추상 클래스
  */
 
 export abstract class BaseDTO {
-  protected productID: number;
-  protected productCategory: string;
-  protected productName: string;
-  protected unitPrice: number;
-  protected quantity: number;
-  protected restockDate?: Date;
-  protected expirationDate: Date;
+  public _id: ObjectId;
+  public productCategory: string;
+  public productName: string;
+  public unitPrice: number;
+  public quantity: number;
+  public restockDate?: Date;
+  public expirationDate: Date;
 
   constructor(
-    productID: number,
+    _id: ObjectId,
     productCategory: string,
     productName: string,
     unitPrice: number,
@@ -21,7 +22,7 @@ export abstract class BaseDTO {
     restockDate: Date | undefined,
     expirationDate: Date
   ) {
-    this.productID = productID;
+    this._id = _id;
     this.productCategory = productCategory;
     this.productName = productName;
     this.unitPrice = unitPrice;
@@ -32,7 +33,7 @@ export abstract class BaseDTO {
 
   public toJSON(): object {
     return {
-      productID: this.productID,
+      _id: this._id,
       productCategory: this.productCategory,
       productName: this.productName,
       unitPrice: this.unitPrice,
