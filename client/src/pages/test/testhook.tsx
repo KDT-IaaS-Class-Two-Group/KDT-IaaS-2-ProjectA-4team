@@ -9,7 +9,7 @@ export interface ProductDTO {
   expirationDate: Date;
 }
 
-export const TestExpirationDateHook = () => {
+export const TestHook = () => {
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
