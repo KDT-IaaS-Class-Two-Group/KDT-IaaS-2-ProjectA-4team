@@ -28,14 +28,11 @@ const UserPage: FC = () => {
 
   const handleAddToCart = (menu: string, unitPrice: number) => {
     setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
-    console.log(cartItems);
   };
 
   const handleRemoveItem = (menu: string) => {
-    const itemIndex = cartItems.findIndex((item) => item.menu === menu);
-    cartItems.splice(itemIndex, 1);
-    setCartItems(cartItems);
-    console.log(cartItems);
+    const updatedItems = cartItems.filter((item) => item.menu !== menu);
+    setCartItems(updatedItems);
   };
 
   return (
