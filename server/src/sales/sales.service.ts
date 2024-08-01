@@ -16,7 +16,7 @@ export class SaleService {
     return this.saleModel.findById(id).exec();
   }
 
-  async findByMemberID(memberID:string):Promise<ISale[]> {
-    return this.saleModel.find({memberID}).exec();
+  async findByMemberID(memberID: string): Promise<ISale[]> {
+    return this.saleModel.find({ memberID }).exec();
   }
 }
