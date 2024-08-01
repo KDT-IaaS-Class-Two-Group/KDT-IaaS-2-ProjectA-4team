@@ -3,6 +3,9 @@ import CartItemComponent from "./CartItem";
 
 interface CartProps {
   items: { menu: string; unitPrice: number }[];
+  setItems: React.Dispatch<
+    React.SetStateAction<{ menu: string; unitPrice: number }[]>
+  >;
 }
 
 /**
@@ -12,14 +15,14 @@ interface CartProps {
  * @returns { JSXElement }
  */
 
-const Cart: FC<CartProps> = ({ items }) => {
+const Cart: FC<CartProps> = ({ items, setItems }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [cartItems, setCartItems] = useState(items);
 
   const handleRemoveItem = (menu: string) => {
     const itemIndex = items.findIndex((item) => item.menu === menu);
     items.splice(itemIndex, 1);
     console.log(items);
+    setItems(items);
   };
 
   const handlePriceChange = (price: number) => {
@@ -30,12 +33,16 @@ const Cart: FC<CartProps> = ({ items }) => {
   };
 
   useEffect(() => {
-    const initialTotalPrice = cartItems.reduce(
+    const initialTotalPrice = items.reduce(
       (acc, item) => acc + item.unitPrice,
       0,
     );
     setTotalPrice(initialTotalPrice);
-  }, [cartItems]);
+  }, [items]);
+
+  useEffect(() => {
+    setItems(items);
+  }, [items]);
 
   return (
     <div>
