@@ -1,10 +1,19 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, createContext } from "react";
 import { useRouter } from "next/router";
 import UserMenu from "src/components/users/UserMenu";
 import MenuItems from "src/components/users/MenuItems";
 import LoginInfoComponent from "src/components/LoginInfo";
 import Cart from "src/components/users/Cart";
 import FooterLinks from "src/components/footerComponent";
+
+interface ItemsContextType {
+  items: string;
+  setItems: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface ItemsProviderProps {
+  children: ReactNode;
+}
 
 /**
  * @yuxincxoi 24.07.25
@@ -18,6 +27,18 @@ const UserPage: FC = () => {
   const [cartItems, setCartItems] = useState<
     { menu: string; unitPrice: number }[]
   >([]);
+
+  const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
+
+  const ItemsProvider: React.FC<ItemsProviderProps> = ({ children }) => {
+    const [items, setItems] = useState("");
+
+    return (
+      <ItemsContext.Provider value={{ items, setItems }}>
+        {children}
+      </ItemsContext.Provider>
+    );
+  };
 
   useEffect(() => {
     const category = router.query.category as string;
