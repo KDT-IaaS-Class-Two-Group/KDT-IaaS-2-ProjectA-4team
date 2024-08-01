@@ -7,7 +7,7 @@
  * @returns responseData 응답 값
  */
 export default async (password: string, changePassword: string) => {
-  const name = ''; // MongoDB에 있는 유저의 name 값을 사용합니다.
+  const name = ""; // MongoDB에 있는 유저의 name 값을 사용합니다.
   try {
     const response = await fetch("http://localhost:3001/changePassword", {
       method: "POST",
