@@ -5,11 +5,9 @@
 
 
 import allread from "./read/Allread";
-import mongoserver from "./schema/mongoserver";
 
 const AllReaduse = async () => {
   try {
-    await mongoserver();
     const a = await allread();
   } catch (err) {
     console.log("오류 발생:", err);
