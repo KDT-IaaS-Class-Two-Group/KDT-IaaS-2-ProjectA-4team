@@ -21,13 +21,6 @@ interface CartProps {
 const Cart: FC<CartProps> = ({ items, setItems, removedItem }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const handleRemoveItem = (menu: string) => {
-    const itemIndex = items.findIndex((item) => item.menu === menu);
-    items.splice(itemIndex, 1);
-    console.log(items);
-    setItems(items);
-  };
-
   const handlePriceChange = (price: number) => {
     setTotalPrice((prevTotal) => {
       const updatedTotal = prevTotal + price;
