@@ -37,7 +37,7 @@ const Cart: FC<CartProps> = ({ items, removedItem }) => {
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
       {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
-      <div className="h-96 overflow-scroll">
+      <div className="h-64 overflow-scroll">
         {items.map((item, index) => (
           <CartItemComponent
             key={index}

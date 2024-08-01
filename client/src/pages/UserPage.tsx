@@ -5,15 +5,16 @@ import MenuItems from "src/components/users/MenuItems";
 import LoginInfoComponent from "src/components/LoginInfo";
 import Cart from "src/components/users/Cart";
 import FooterLinks from "src/components/footerComponent";
+import ButtonComponent from "src/components/CustomButton";
 
-interface ItemsContextType {
-  items: string;
-  setItems: React.Dispatch<React.SetStateAction<string>>;
-}
+// interface ItemsContextType {
+//   items: string;
+//   setItems: React.Dispatch<React.SetStateAction<string>>;
+// }
 
-interface ItemsProviderProps {
-  children: ReactNode;
-}
+// interface ItemsProviderProps {
+//   children: ReactNode;
+// }
 
 /**
  * @yuxincxoi 24.07.25
@@ -28,17 +29,17 @@ const UserPage: FC = () => {
     { menu: string; unitPrice: number }[]
   >([]);
 
-  const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
+  // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
 
-  const ItemsProvider: React.FC<ItemsProviderProps> = ({ children }) => {
-    const [items, setItems] = useState("");
+  // const ItemsProvider: React.FC<ItemsProviderProps> = ({ children }) => {
+  //   const [items, setItems] = useState("");
 
-    return (
-      <ItemsContext.Provider value={{ items, setItems }}>
-        {children}
-      </ItemsContext.Provider>
-    );
-  };
+  //   return (
+  //     <ItemsContext.Provider value={{ items, setItems }}>
+  //       {children}
+  //     </ItemsContext.Provider>
+  //   );
+  // };
 
   useEffect(() => {
     const category = router.query.category as string;
@@ -70,6 +71,13 @@ const UserPage: FC = () => {
           email="rockcoders@kdt.com"
         />
         <Cart items={cartItems} removedItem={handleRemoveItem} />
+        <ButtonComponent
+          type="submit"
+          className="w-60 bg-yellow-400 text-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          onClick={() => console.log("buy!")}
+        >
+          Buy !
+        </ButtonComponent>
         <FooterLinks className="w-72 mt-20 mx-6" />
       </div>
     </div>
