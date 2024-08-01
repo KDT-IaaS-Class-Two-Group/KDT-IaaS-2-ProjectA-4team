@@ -1,24 +1,24 @@
 import { useState } from "react";
-import { updateProductUpdate } from "src/model/productFetchUpdate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import { saveProductData } from "src/model/productFetchTableData";
 
-interface productUpdateHook {
-  updateProduct: (product: ProductDTO) => Promise<ProductDTO>;
+interface UseOrderProductHook {
+  orderProductData: (product: ProductDTO) => Promise<ProductDTO>;
   loading: boolean;
   error: string | null;
 }
 
-const ProductUpdateHook = (): productUpdateHook => {
+const ProductOrderModalHook = (): UseOrderProductHook => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const updateProduct = async (product: ProductDTO): Promise<ProductDTO> => {
+  const orderProductData = async (product: ProductDTO): Promise<ProductDTO> => {
     setLoading(true);
     setError(null);
 
     try {
-      const updatedProduct = await updateProductUpdate(product);
-      return updatedProduct;
+      const savedProduct = await saveProductData(product);
+      return savedProduct;
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -31,7 +31,7 @@ const ProductUpdateHook = (): productUpdateHook => {
     }
   };
 
-  return { updateProduct, loading, error };
+  return { orderProductData, loading, error };
 };
 
-export default ProductUpdateHook;
+export default ProductOrderModalHook;
