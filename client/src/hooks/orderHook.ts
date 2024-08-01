@@ -4,7 +4,7 @@ import orderFetch from "src/model/orderFetch";
 /**
  * @crystal23733 24.08.01
  * @param {string} name 더미데이터
- * @returns {object} 
+ * @returns {object}
  * - orderDetails : 주문 데이터
  * - error : 에러 메세지
  */

@@ -7,11 +7,11 @@ import useOrderHook from "src/hooks/orderHook";
 
 /**
  * @crystal23733 24.08.01
- * @returns {JSXElement} 
+ * @returns {JSXElement}
  */
 const MyPage: React.FC = () => {
   const memberName = "유호영";
-  const {orderDetails, error} = useOrderHook(memberName);
+  const { orderDetails, error } = useOrderHook(memberName);
 
   return (
     <div
