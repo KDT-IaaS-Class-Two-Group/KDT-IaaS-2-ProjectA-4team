@@ -4,7 +4,7 @@ interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
   onPriceChange: (price: number) => void;
-  eventHandle: (data: string) => void;
+  removedItem: (data: string) => void;
 }
 
 /**
@@ -20,7 +20,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   menu,
   unitPrice,
   onPriceChange,
-  eventHandle,
+  removedItem,
 }) => {
   const initialCount = 1;
   const [count, setCount] = useState(initialCount);
@@ -46,14 +46,8 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
     }
   };
 
-  const handleRemoveItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const currentElement = event.currentTarget;
-    const parentElement = currentElement.parentElement;
-    const grandparentElement = parentElement.parentElement;
-    const grandparentFirstChild = grandparentElement?.firstChild;
-    const grandparentFirstfirstChild = grandparentFirstChild?.firstChild;
-
-    eventHandle(grandparentFirstfirstChild?.textContent);
+  const findItemName = () => {
+    removedItem(menu);
   };
 
   return (
@@ -78,10 +72,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
             className="bg-slate-600 w-6 h-6"
           ></div>
         </div>
-        <div
-          onClick={handleRemoveItem}
-          className="hover:text-black cursor-pointer"
-        >
+        <div onClick={findItemName} className="hover:text-black cursor-pointer">
           X
         </div>
       </div>

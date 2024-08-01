@@ -6,6 +6,7 @@ interface CartProps {
   setItems: React.Dispatch<
     React.SetStateAction<{ menu: string; unitPrice: number }[]>
   >;
+  removedItem: (data: string) => void;
 }
 
 /**
@@ -15,7 +16,7 @@ interface CartProps {
  * @returns { JSXElement }
  */
 
-const Cart: FC<CartProps> = ({ items, setItems }) => {
+const Cart: FC<CartProps> = ({ items, setItems, removedItem }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const handleRemoveItem = (menu: string) => {
@@ -40,10 +41,6 @@ const Cart: FC<CartProps> = ({ items, setItems }) => {
     setTotalPrice(initialTotalPrice);
   }, [items]);
 
-  useEffect(() => {
-    setItems(items);
-  }, [items]);
-
   return (
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
@@ -55,7 +52,7 @@ const Cart: FC<CartProps> = ({ items, setItems }) => {
             menu={item.menu}
             unitPrice={item.unitPrice}
             onPriceChange={handlePriceChange}
-            eventHandle={handleRemoveItem}
+            removedItem={removedItem}
           />
         ))}
       </div>
