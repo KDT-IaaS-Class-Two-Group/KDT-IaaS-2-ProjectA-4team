@@ -3,9 +3,6 @@ import CartItemComponent from "./CartItem";
 
 interface CartProps {
   items: { menu: string; unitPrice: number }[];
-  setItems: React.Dispatch<
-    React.SetStateAction<{ menu: string; unitPrice: number }[]>
-  >;
   removedItem: (data: string) => void;
 }
 
@@ -18,7 +15,7 @@ interface CartProps {
  * @returns { JSX.Element }
  */
 
-const Cart: FC<CartProps> = ({ items, setItems, removedItem }) => {
+const Cart: FC<CartProps> = ({ items, removedItem }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const handlePriceChange = (price: number) => {
