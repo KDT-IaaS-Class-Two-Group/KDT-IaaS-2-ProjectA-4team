@@ -10,6 +10,7 @@ import {
 import ButtonComponent from "../CustomButton"; 
 import { ExpirationDateHook } from 'src/hooks/ExpirationDateHook'; 
 
+
 export const ExpirationDataTable: React.FC = () => {
   const { data, loading, error, deleteProduct } = ExpirationDateHook();  //구조 분해 할당 
   if (loading) {
@@ -31,10 +32,10 @@ export const ExpirationDataTable: React.FC = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>재고명</TableHead>
-          <TableHead>수량</TableHead>
-          <TableHead>유통기한</TableHead>
-          <TableHead className="text-right">폐기</TableHead>
+          <TableHead >재고명</TableHead>
+          <TableHead className='pr-10%'>수량</TableHead>
+          <TableHead className=''>유통기한</TableHead>
+          <TableHead className="text-right pr-10" >폐기</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
