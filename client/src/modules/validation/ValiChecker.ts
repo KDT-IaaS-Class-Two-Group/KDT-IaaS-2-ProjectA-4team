@@ -1,10 +1,17 @@
 import IValiChecker from "./ValiChecker.interface";
 import ValidationUtils from "./ValidationUtils";
 
+interface PWValidationResult {
+  valid: boolean;
+  message?: string;
+}
+
 abstract class AbstractedValiChecker implements IValiChecker {
   public abstract checkName(value: string): boolean;
 
-  public abstract checkPW(value: string): object;
+  public abstract checkEmail(value: string): boolean;
+
+  public abstract checkPW(value: string): PWValidationResult;
 
   public abstract isEqualTo(
     targetValue: string | number,
@@ -15,7 +22,12 @@ abstract class AbstractedValiChecker implements IValiChecker {
 class ValiCheckerForStatic extends AbstractedValiChecker {
   public checkName = (value: string): boolean => false;
 
-  public checkPW = (value: string): object => Object;
+  public checkEmail = (value: string): boolean => false;
+
+  public checkPW = (value: string): PWValidationResult => ({
+    valid: false,
+    message: "",
+  }); // Updated
 
   public isEqualTo = (
     value: string | number,
@@ -25,16 +37,29 @@ class ValiCheckerForStatic extends AbstractedValiChecker {
 
 class implementedValiChecker extends ValiCheckerForStatic {
   public static checkName(value: string): boolean {
-    return (
-      !ValidationUtils.hasWhitespace(value) &&
-      (ValidationUtils.isKorean(value)
-        ? ValidationUtils.isValidKoreanLength(value, 2, 8)
-        : !ValidationUtils.isEnglish(value) ||
-          ValidationUtils.isValidEnglishLength(value, 3))
-    );
+    if (ValidationUtils.hasWhitespace(value)) {
+      return false;
+    }
+
+    if (ValidationUtils.isKorean(value)) {
+      return ValidationUtils.isValidKoreanLength(value, 2, 8);
+    } else if (ValidationUtils.isEnglish(value)) {
+      return ValidationUtils.isValidEnglishLength(value, 3);
+    }
+
+    return false;
   }
 
-  public static checkPW(value: string): object {
+  public static checkEmail(value: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public static checkPW(value: string): PWValidationResult {
     const noSpacesRegex = /^\S*$/;
     const validCharactersRegex = /[a-zA-Z0-9]*$/;
     const validLengthRegex = /^.{8,25}$/;
