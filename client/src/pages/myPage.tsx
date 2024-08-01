@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor } from "react";
+import React from "react";
 import LinkButtonComponent from "src/components/linkButtonComponent";
 import LoginInfoComponent from "src/components/LoginInfo";
 import MyPageFormComponent from "src/components/myPageFormComponent";
