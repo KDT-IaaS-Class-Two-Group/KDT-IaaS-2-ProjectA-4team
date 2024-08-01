@@ -3,6 +3,10 @@ import React from "react";
 import NavListBox from "src/components/admin/navListBox";
 import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
 
+
+//사이드 바랑 메인 테이블 부분만 존재
+//로그 빠져있음
+
 const AdminstockDate: React.FC = () => {
   return (
     <div id="root">
