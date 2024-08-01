@@ -6,12 +6,10 @@
 
 
 import fieldread from "./read/Fieldread";
-import mongoserver from "./schema/mongoserver";
 
 
 const fieldReaduse = async (selectname: string):Promise<void> => {
   try {
-    await mongoserver();
     const a = await fieldread(selectname);
   } catch (err) {
     console.log("오류 발생:", err);
