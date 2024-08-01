@@ -38,13 +38,6 @@ const UserPage: FC = () => {
     console.log(cartItems);
   };
 
-  // const [dataFromChild, setDataFromChild] = useState<string>("parent");
-
-  // const handleDataFromChild = (data: string) => {
-  //   setDataFromChild(data);
-  //   console.log(dataFromChild);
-  // };
-
   return (
     <div>
       <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
