@@ -7,12 +7,10 @@
 
 
 import oneread from "./read/oneread";
-import mongoserver from "./schema/mongoserver";
 
 
 const OneReaduse = async (menu: string, select: string): Promise<void> => {
   try {
-    await mongoserver();
     const a = await oneread(menu, select);
   } catch (err) {
     console.log("오류 발생:", err);
