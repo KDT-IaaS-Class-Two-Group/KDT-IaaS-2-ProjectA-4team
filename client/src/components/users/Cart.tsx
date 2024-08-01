@@ -12,8 +12,10 @@ interface CartProps {
 /**
  * @yuxincxoi 24.07.25
  * * 장바구니 컴포넌트
- * @param {array} items 선택된 장바구니 메뉴
- * @returns { JSXElement }
+ * @param {array} items 장바구니 메뉴
+ * @param {function} setItems 장바구니 메뉴를 업데이트 시켜주는 함수
+ * @param {function} removedItem 삭제될 제품 데이터를 전달해주는 콜백함수
+ * @returns { JSX.Element }
  */
 
 const Cart: FC<CartProps> = ({ items, setItems, removedItem }) => {

@@ -12,6 +12,7 @@ interface CardComponentProps {
  * * 사용자페이지 메뉴에서 사용될 카드 컴포넌트
  * @param { string } title 메뉴명
  * @param { string } content 가격
+ * @param { function } onAddToCart 카드의 데이터를 전달해주는 콜백함수
  * @returns { JSXElement }
  */
 
