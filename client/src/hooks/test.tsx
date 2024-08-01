@@ -17,7 +17,7 @@ export const TestExpirationDateHook = () => {
   const mockProducts: ProductDTO[] = [
     {
       productID: 1,
-      productName: '상추',
+      productName: '징징이',
       unitPrice: 25.0,
       quantity: 100,
       restockDate: new Date('2024-08-01'),
@@ -25,7 +25,7 @@ export const TestExpirationDateHook = () => {
     },
     {
       productID: 2,
-      productName: '바나나',
+      productName: '퐁퐁부인',
       unitPrice: 15.5,
       quantity: 200,
       restockDate: new Date('2024-07-15'),
@@ -33,49 +33,49 @@ export const TestExpirationDateHook = () => {
     },
     {
       productID: 3,
-      productName: '슈퍼배드',
+      productName: '진주',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-10-15')
     },
     {
       productID: 4,
-      productName: '슈퍼배드',
+      productName: '조개맨',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-09-15')
     },
     {
       productID: 5,
-      productName: '슈퍼배드',
+      productName: '핑핑이',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-10-15')
     },
     {
       productID: 6,
-      productName: '슈퍼배드 ',
+      productName: '해파리',
       unitPrice: 55.0,
       quantity: 60,
       expirationDate: new Date('2024-01-12')
     },
     {
       productID: 7,
-      productName: 'Product C',
+      productName: '스펀지밥',
       unitPrice: 55.0,
       quantity: 50,
       expirationDate: new Date('2024-01-15')
     },
     {
       productID: 8,
-      productName: 'Product C',
+      productName: '뚱이',
       unitPrice: 55.0,
       quantity: 40,
       expirationDate: new Date('2024-12-15')
     },
     {
       productID: 9,
-      productName: 'Product C',
+      productName: '집게사장 발',
       unitPrice: 42.0,
       quantity: 54,
       expirationDate: new Date('2024-05-15')
@@ -109,7 +109,7 @@ export const TestExpirationDateHook = () => {
       //   method: 'DELETE'                                               // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
       // });
       // fetchData(); // 삭제 후 데이터 갱신 훅 
-      setData(prevData => prevData.filter(product => product.productID !== productID));
+      setData(prevData => prevData.filter(product => product.productID !== productID));//현재와 다른 데이터를 가져왔을 때 업데이트 역할 
     } catch (err) {
       setError('데이터를 삭제하는 데 실패했습니다.');
     }
