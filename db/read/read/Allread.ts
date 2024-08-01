@@ -1,19 +1,21 @@
 /** @jojayeon 20.07.23
  * * 전체 조회
  */
+import mongoose from "mongoose";
+import productSchema from "../../products/schema/product.schema";
+import IProduct from "../../products/product.interface";
 
-import member from "../schema/Schema";
-import { IMember } from "../schema/Schemainterface";
+const ProductModel = mongoose.model<IProduct>("Product", productSchema);
 
-const allread = async (): Promise<IMember[]> => {
+const allread = async (): Promise<IProduct[]> => {
   try {
-    const user = await member.find({}).exec();
-    console.log("성공");
-    return user;
+    const products = await ProductModel.find({}).exec();
+    console.log("모든 제품 데이터 조회성공.");
+    return products;
   } catch (err) {
-    console.log(err);
+    console.error("제품 데이터를 조회하는 동안 오류:", err);
     throw err;
   }
 };
-export default allread;
 
+export default allread;
