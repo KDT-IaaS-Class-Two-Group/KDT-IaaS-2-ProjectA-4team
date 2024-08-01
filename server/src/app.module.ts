@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SaleModule } from './sales/sales.module';
-import { PasswordModule } from './myPage/myPage.module';
+import { PasswordModule } from './changePassword/changePassword.module';
 
 @Module({
   imports: [
