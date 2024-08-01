@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { productFetchTableData } from "src/model/productFetchTableData";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
 /**
@@ -17,46 +18,8 @@ export const ProductUseTableHook = () => {
   // loadData를 useCallback으로 메모이제이션
   const loadData = useCallback(async () => {
     try {
-      // 더미 데이터 생성
-      const dummyData: ProductDTO[] = [
-        new ProductDTO({
-          productID: 1,
-          productCategory: "빵",
-          productName: "식빵",
-          unitPrice: 2000,
-          quantity: 10,
-          restockDate: new Date(), // 예시 날짜
-          expirationDate: new Date(
-            new Date().setFullYear(new Date().getFullYear() + 1),
-          ), // 1년 후
-        }),
-        new ProductDTO({
-          productID: 2,
-          productCategory: "패티",
-          productName: "버거 패티",
-          unitPrice: 1500,
-          quantity: 25,
-          restockDate: new Date(), // 예시 날짜
-          expirationDate: new Date(
-            new Date().setFullYear(new Date().getFullYear() + 0.5),
-          ), // 6개월 후
-        }),
-        new ProductDTO({
-          productID: 3,
-          productCategory: "음료",
-          productName: "콜라",
-          unitPrice: 1000,
-          quantity: 50,
-          restockDate: new Date(), // 예시 날짜
-          expirationDate: new Date(
-            new Date().setFullYear(new Date().getFullYear() + 0.2),
-          ), // 2개월 후
-        }),
-      ];
-
-      // 비동기 호출처럼 지연
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1초 지연
-      setData(dummyData);
+      const products = await productFetchTableData();
+      setData(products);
     } catch (error) {
       setError((error as Error).message);
     } finally {
