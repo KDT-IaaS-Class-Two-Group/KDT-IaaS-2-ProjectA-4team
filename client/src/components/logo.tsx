@@ -1,7 +1,7 @@
 import Image, { ImageProps } from "next/image";
 import React from "react";
 
-interface LogoProps extends Omit<ImageProps, 'src'> {
+interface LogoProps extends Omit<ImageProps, "src"> {
   // 'src'를 제외한 나머지 ImageProps를 확장합니다.
 }
 
