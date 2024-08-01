@@ -47,10 +47,6 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
     }
   };
 
-  const findItemName = () => {
-    removedItem(menu);
-  };
-
   return (
     <div className="px-10 py-3 w-72">
       <div className="flex justify-between text-base">
@@ -73,7 +69,10 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
             className="bg-slate-600 w-6 h-6"
           ></div>
         </div>
-        <div onClick={findItemName} className="hover:text-black cursor-pointer">
+        <div
+          onClick={() => removedItem(menu)}
+          className="hover:text-black cursor-pointer"
+        >
           X
         </div>
       </div>
