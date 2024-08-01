@@ -6,7 +6,7 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
  * @returns json
  */
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
-  const response = await fetch("$http://localhost:3001/productTable");
+  const response = await fetch("http://localhost:3001/productTable");
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
