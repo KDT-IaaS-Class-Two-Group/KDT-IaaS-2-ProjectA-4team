@@ -28,7 +28,7 @@ const LoginPage = () => {
       {/* 콘텐츠 */}
       <div className="relative z-10 flex items-center justify-center w-full h-full">
         <div className="flex flex-col items-center justify-center mb-20 h-96 w-96">
-          <Logo className="w-64" />
+          <Logo width={300} height={100} alt="logo" />
           <TitleComponent titletext="Login" />
           <LoginForm to="" onSuccessRedirect="" />
         </div>
