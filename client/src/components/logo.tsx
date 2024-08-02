@@ -6,7 +6,7 @@ interface LogoProps extends Omit<ImageProps, "src"> {
 }
 
 const Logo: React.FC<LogoProps> = ({ ...props }) => {
-  return <Image src="/clclLogo.png" {...props} />;
+  return <Image src="/clclLogo.png" {...props} alt="logo" />;
 };
 
 export default Logo;

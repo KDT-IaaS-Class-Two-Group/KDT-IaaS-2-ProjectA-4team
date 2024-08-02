@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { SaleService } from './sales.service';
 import ISale from '@db/sale/Sale.interface';
 

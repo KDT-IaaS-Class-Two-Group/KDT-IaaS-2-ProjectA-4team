@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import InputComponent from "./Input";
 import CustomButton from "./CustomButton";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
-interface LoginFormProps {
-  to: string;
-  onSuccessRedirect: string;
+interface RoldJwtPayload extends JwtPayload {
+  roleID?: number;
 }
 
 /**
@@ -15,10 +15,7 @@ interface LoginFormProps {
  * @param onSuccessRedirect 이동할 페이지
  * @returns 로그인 폼
  */
-export const LoginForm: React.FC<LoginFormProps> = ({
-  to,
-  onSuccessRedirect,
-}) => {
+export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -31,9 +28,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       formData.append("password", password);
 
       try {
-        const response = await fetch(to, {
+        const response = await fetch(`http://localhost:3001/login`, {
           method: "POST",
           body: formData,
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -41,10 +39,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         }
 
         const result = await response.json();
+        const token = result.token;
         console.log("서버 응답:", result);
 
-        // 서버 응답이 성공적이면 지정된 경로로 라우터 이동
-        router.push(onSuccessRedirect);
+        const decodedToken = jwtDecode<RoldJwtPayload>(token);
+        const roleId = decodedToken.roleID;
+
+        // roleId에 따라 라우팅
+        if (roleId === 0) {
+          router.push("/UserPage");
+        } else if (roleId === 1) {
+          router.push("/stockInfo");
+        }
       } catch (error) {
         console.error("서버로 데이터 전송 실패:", error);
       }
