@@ -31,6 +31,7 @@ export const LoginForm = () => {
         const response = await fetch(`http://localhost:3001/login`, {
           method: "POST",
           body: formData,
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -40,9 +41,6 @@ export const LoginForm = () => {
         const result = await response.json();
         const token = result.token;
         console.log("서버 응답:", result);
-
-        //만료시간 1시간 뒤로 설정
-        document.cookie = `token=${token};path=/;max-age=3600;`;
 
         const decodedToken = jwtDecode<RoldJwtPayload>(token);
         const roleId = decodedToken.roleID;
