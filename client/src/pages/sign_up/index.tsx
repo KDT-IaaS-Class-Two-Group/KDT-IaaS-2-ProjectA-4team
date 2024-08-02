@@ -16,24 +16,15 @@ const SignUpPage: React.FC = () => {
       inputRefs.forEach((inputRef) => {
         if (inputRef?.id === "user-name") {
           ValiArray[0] = ValiChecker.checkName(inputRef.value);
-          console.log(`이름 유효성: ${ValiChecker.checkName(inputRef.value)}`);
         } else if (inputRef?.id === "sign-up-email") {
           ValiArray[1] = ValiChecker.checkEmail(inputRef.value);
-          console.log(
-            `이메일 유효성: ${ValiChecker.checkEmail(inputRef.value)}`,
-          );
         } else if (inputRef?.id === "sign-up-pw") {
           const pwValidation = ValiChecker.checkPW(inputRef.value);
           ValiArray[2] = pwValidation.valid;
-          console.log(`비밀번호 유효성`, pwValidation);
           pwForCheck = inputRef!.value;
         } else if (inputRef?.id === "sign-up-sec-pw") {
           ValiArray[3] = ValiChecker.isEqualTo(inputRef.value, pwForCheck);
-          console.log(
-            `비밀번호 둘이 같은지: ${ValiChecker.isEqualTo(inputRef.value, pwForCheck)}`,
-          );
         }
-        console.log(ValiArray);
       });
 
       if (ValiArray.every((isValid) => isValid)) {
@@ -56,16 +47,15 @@ const SignUpPage: React.FC = () => {
             throw new Error("서버 오류 발생");
           }
 
-          const result = await response.json();
-          console.log("회원 가입 성공:", result);
+          window.location.href = "http://localhost:3000";
 
-          setResponseMessage(`회원 가입 성공: ${JSON.stringify(result)}`);
+          setResponseMessage(`회원 가입 성공`);
         } catch (error) {
           console.error("회원 가입 오류:", error);
           setResponseMessage("회원 가입 중 오류가 발생했습니다.");
         }
       } else {
-        setResponseMessage("입력한 정보가 유효하지 않습니다.");
+        setResponseMessage("입력한 정보가 유효 X");
       }
     }
   };
