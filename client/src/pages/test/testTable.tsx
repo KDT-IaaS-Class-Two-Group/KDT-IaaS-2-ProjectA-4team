@@ -11,7 +11,7 @@ import ButtonComponent from 'src/components/CustomButton';
 import { TestHook } from './testhook';
 
 
-export const TestTable: React.FC = () => {
+export const TestExpirationDataTable: React.FC = () => {
   const { data, loading, error, deleteProduct } = TestHook();  //구조 분해 할당 
   if (loading) {
     return <div>Loading...</div>;
@@ -24,14 +24,15 @@ export const TestTable: React.FC = () => {
     return new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime();  //오름차순 으로 정렬한 것
   });
 
-  const handleDelete = (productID: number) => {
-    deleteProduct(productID); //이건 왜지 왜 숫자인 것을 스트링으로 변경하지 
+  const handleDelete = (_id:string) => {
+    deleteProduct(_id);
   };
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
+          <TableHead >분류</TableHead>
           <TableHead >재고명</TableHead>
           <TableHead className='pr-10%'>수량</TableHead>
           <TableHead className=''>유통기한</TableHead>
@@ -40,13 +41,13 @@ export const TestTable: React.FC = () => {
       </TableHeader>
       <TableBody>
         {sortedProducts.map((product) => (
-          <TableRow key={product.productID}>
+          <TableRow key={product._id.toString()}>
+            <TableCell>{product.productCategory}</TableCell>
             <TableCell>{product.productName}</TableCell>
-            {/* <TableCell>{product.productingredient}</TableCell> //혹시 몰라서 요리들 재료 들어오는 거 생각해서 만들어준 것 이름은 변경해야함  */}
             <TableCell>{product.quantity}</TableCell>
             <TableCell>{new Date(product.expirationDate).toDateString()}</TableCell>
             <TableCell className="text-right">
-              <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product.productID)}>폐기하기</ButtonComponent>{/* handleDelete 데이터 가져오기*/}
+              <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id.toString())}>폐기하기</ButtonComponent>{/* handleDelete 데이터 가져오기*/}
             </TableCell>
           </TableRow>
         ))}
@@ -54,3 +55,4 @@ export const TestTable: React.FC = () => {
     </Table>
   );
 };
+

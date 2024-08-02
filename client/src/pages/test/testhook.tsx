@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export interface ProductDTO {
-  productID: number;
+  _id: Object;
+  productCategory: string;
   productName: string;
   unitPrice: number;
   quantity: number;
@@ -16,7 +17,8 @@ export const TestHook = () => {
 
   const mockProducts: ProductDTO[] = [
     {
-      productID: 1,
+      _id: "11111111",
+      productCategory : "패티",
       productName: '징징이',
       unitPrice: 25.0,
       quantity: 100,
@@ -24,7 +26,8 @@ export const TestHook = () => {
       expirationDate: new Date('2024-12-31')
     },
     {
-      productID: 2,
+      _id: "2222222222",
+      productCategory : "패티",
       productName: '퐁퐁부인',
       unitPrice: 15.5,
       quantity: 200,
@@ -32,49 +35,56 @@ export const TestHook = () => {
       expirationDate: new Date('2024-11-30')
     },
     {
-      productID: 3,
+      _id: "333333333333",
+      productCategory : "패티",
       productName: '진주',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-10-15')
     },
     {
-      productID: 4,
+      _id: "4444444444",
+      productCategory : "패티",
       productName: '조개맨',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-09-15')
     },
     {
-      productID: 5,
+      _id: "55555555",
+      productCategory : "패티",
       productName: '핑핑이',
       unitPrice: 45.0,
       quantity: 50,
       expirationDate: new Date('2024-10-15')
     },
     {
-      productID: 6,
+      _id: "6666666666",
+      productCategory : "패티",
       productName: '해파리',
       unitPrice: 55.0,
       quantity: 60,
       expirationDate: new Date('2024-01-12')
     },
     {
-      productID: 7,
+      _id: "7777777777777",
+      productCategory : "패티",
       productName: '스펀지밥',
       unitPrice: 55.0,
       quantity: 50,
       expirationDate: new Date('2024-01-15')
     },
     {
-      productID: 8,
+      _id: "8888888888",
+      productCategory : "패티",
       productName: '뚱이',
       unitPrice: 55.0,
       quantity: 40,
       expirationDate: new Date('2024-12-15')
     },
     {
-      productID: 9,
+      _id: "9999999",
+      productCategory : "패티",
       productName: '집게사장 발',
       unitPrice: 42.0,
       quantity: 54,
@@ -103,13 +113,13 @@ export const TestHook = () => {
     fetchData();
   }, []);
 
-  const deleteProduct = async (productID: number) => {
+  const deleteProduct = async (_id: string) => {
     try {
       // await fetch(`http://localhost:3001/products/${productID}`, {     //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
       //   method: 'DELETE'                                               // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
       // });
       // fetchData(); // 삭제 후 데이터 갱신 훅 
-      setData(prevData => prevData.filter(product => product.productID !== productID));//현재와 다른 데이터를 가져왔을 때 업데이트 역할 
+      setData(prevData => prevData.filter(product => product._id !== _id));//현재와 다른 데이터를 가져왔을 때 업데이트 역할 
     } catch (err) {
       setError('데이터를 삭제하는 데 실패했습니다.');
     }
