@@ -28,14 +28,21 @@ export class AuthController {
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
     // 사용자 검증 및 로그인 처리
     try {
-      const { token, cookieOptions } = await this.authService.generateToken(
-        data.email,
-        data.roleID,
-      );
-
-      if (!token) {
-        throw new Error('Invalid credentials');
+      const user = await this.authService.validateUser(data.email);
+      if (!user) {
+        // 사용자가 존재하지 않으면 에러 반환
+        res
+          .status(HttpStatus.UNAUTHORIZED)
+          .json({ success: false, message: 'Invalid credentials' });
+        return;
       }
+
+      const roleID = user.roleID;
+
+      const { token, cookieOptions } = await this.authService.generateToken(
+        user.email,
+        roleID,
+      );
 
       res.cookie('token', token, cookieOptions);
       res.status(HttpStatus.OK).json({ success: true, token });
