@@ -16,10 +16,9 @@
     "incremental": true,
     "paths": {
       "@db/*": ["../db/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
-  "include": [
-    "src",
-  ],
+  "include": ["src"],
   "exclude": ["node_modules", "dist", "../shared/**/*.ts", "../db/**/*.ts"]
 }

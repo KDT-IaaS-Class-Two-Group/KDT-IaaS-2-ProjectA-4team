@@ -12,6 +12,7 @@ interface CardComponentProps {
  * * 사용자페이지 메뉴에서 사용될 카드 컴포넌트
  * @param { string } title 메뉴명
  * @param { string } content 가격
+ * @param { function } onAddToCart 카드의 데이터를 전달해주는 콜백함수
  * @returns { JSXElement }
  */
 
@@ -22,7 +23,7 @@ const CardComponent: FC<CardComponentProps> = ({
 }) => {
   return (
     <div onClick={() => onAddToCart(title, content)}>
-      <Card className="h-56 rounded-xl">
+      <Card className="h-56 rounded-xl hover:cursor-pointer">
         <div className="bg-slate-500 w-52 h-36 mx-auto my-2"></div>
         <div className="my-2">
           <CardTitle className="text-center text-xl">{title}</CardTitle>

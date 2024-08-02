@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { PasswordService } from './myPage.service';
+import { PasswordService } from './changePassword.service';
 
 @Controller()
 export class PasswordController {
