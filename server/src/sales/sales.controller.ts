@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { SaleService } from './sales.service';
 import ISale from '@db/sale/Sale.interface';
 
@@ -14,5 +14,10 @@ export class SaleController {
   @Get(':id')
   async findById(@Param('id') id: string): Promise<ISale | null> {
     return this.saleService.findById(id);
+  }
+
+  @Get('orders/:name')
+  async findByMemberID(@Param('name') name: string): Promise<ISale[]> {
+    return this.saleService.findByMemberID(name);
   }
 }

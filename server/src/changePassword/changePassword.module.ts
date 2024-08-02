@@ -5,7 +5,9 @@ import { PasswordService } from './changePassword.service';
 import { PasswordController } from './changePassword.controller';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Member', schema: memberSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Member', schema: memberSchema }]),
+  ],
   providers: [PasswordService],
   controllers: [PasswordController],
 })
