@@ -15,8 +15,11 @@ const AdminstockDate: React.FC = () => {
           <NavListBox/>
         </div>
         <div>
-        <Logo className="border-2"
-          width={150}
+        <Logo 
+          width={200} 
+          height={200} 
+          alt="Custom Logo" // 추가적인 속성
+          className="rounded-lg shadow-lg" // Tailwind CSS 클래스 추가
         />
         </div>
         <section>
