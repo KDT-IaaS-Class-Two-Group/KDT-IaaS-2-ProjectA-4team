@@ -1,28 +1,44 @@
-import React from "react";
+import React, { forwardRef, useRef, useImperativeHandle, Ref } from "react";
 import InputComponent from "src/components/Input";
 import SignUpInputs from "../../../static/sign-up/SignUpInputs";
 
-const SignUpForm: React.FC = () => {
+interface SignUpFormProps {}
+
+export interface SignUpFormRef {
+  getInputRefs: () => (HTMLInputElement | null)[];
+}
+
+const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useImperativeHandle(ref, () => ({
+    getInputRefs: () => inputRefs.current,
+  }));
+
   return (
     <form id="sign-up-form" method="post">
       <div>
-        {SignUpInputs.map((itemArray, key) => {
+        {SignUpInputs.map((item, index) => {
+          const { type, name, placeholder, label } = item;
+
           return (
-            <>
-              <p>{itemArray[3]}</p>
+            <React.Fragment key={index}>
+              <p>{label}</p>
               <InputComponent
-                id={itemArray[1]}
-                name={itemArray[1]}
-                key={key}
-                placeholder={itemArray[2]}
-                type={itemArray[0]}
+                ref={(el: HTMLInputElement | null) => {
+                  inputRefs.current[index] = el;
+                }}
+                id={name}
+                name={name}
+                placeholder={placeholder}
+                type={type}
               />
-            </>
+            </React.Fragment>
           );
         })}
       </div>
     </form>
   );
-};
+});
 
 export default SignUpForm;

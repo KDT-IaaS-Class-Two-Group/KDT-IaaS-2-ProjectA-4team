@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
+import { CartItemHook } from "src/hooks/cartItemHook";
 
 interface CartItemComponentProps {
   menu: string;
@@ -23,29 +24,12 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   onPriceChange,
   removedItem,
 }) => {
-  const initialCount = 1;
-  const [count, setCount] = useState(initialCount);
-  const [price, setPrice] = useState(unitPrice);
+  const { count, price, incrementCount, decrementCount, error } = CartItemHook(
+    unitPrice,
+    onPriceChange,
+  );
 
-  const updatePrice = (newCount: number) => {
-    const newPrice = newCount * unitPrice;
-    setPrice(newPrice);
-    onPriceChange(newPrice - price);
-  };
-
-  const incrementCount = () => {
-    const newCount = count + 1;
-    setCount(newCount);
-    updatePrice(newCount);
-  };
-
-  const decrementCount = () => {
-    if (count > 1) {
-      const newCount = count - 1;
-      setCount(newCount);
-      updatePrice(newCount);
-    }
-  };
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="px-10 py-3 w-72">
