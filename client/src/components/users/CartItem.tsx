@@ -4,6 +4,7 @@ interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
   onPriceChange: (price: number) => void;
+  removedItem: (data: string) => void;
 }
 
 /**
@@ -12,13 +13,15 @@ interface CartItemComponentProps {
  * @param {string} menu 메뉴명
  * @param {number} unitPrice 가격
  * @param {function} onPriceChange 총액을 업데이트해주는 함수
- * @returns { JSXElement }
+ * @param {function} removedItem 삭제될 제품 데이터를 전달해주는 콜백함수
+ * @returns { JSX.Element }
  */
 
 const CartItemComponent: FC<CartItemComponentProps> = ({
   menu,
   unitPrice,
   onPriceChange,
+  removedItem,
 }) => {
   const initialCount = 1;
   const [count, setCount] = useState(initialCount);
@@ -27,20 +30,20 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   const updatePrice = (newCount: number) => {
     const newPrice = newCount * unitPrice;
     setPrice(newPrice);
-    onPriceChange(newPrice - price); // 변경된 금액만큼 차액을 부모에게 전달
+    onPriceChange(newPrice - price);
   };
 
   const incrementCount = () => {
     const newCount = count + 1;
     setCount(newCount);
-    updatePrice(newCount); // 상태를 업데이트하고 새로운 가격을 설정
+    updatePrice(newCount);
   };
 
   const decrementCount = () => {
     if (count > 1) {
       const newCount = count - 1;
       setCount(newCount);
-      updatePrice(newCount); // 상태를 업데이트하고 새로운 가격을 설정
+      updatePrice(newCount);
     }
   };
 
@@ -50,20 +53,28 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
         <div id="menu">{menu}</div>
         <div id="price">{price}원</div>
       </div>
-      <div className="flex justify-start">
-        <div
-          onClick={decrementCount}
-          id="minusMenu"
-          className="bg-slate-600 w-6 h-6"
-        ></div>
-        <div id="count" className="mx-3 font-light text-s">
-          {count}
+      <div className="flex justify-between text-gray-500">
+        <div className="flex justify-start">
+          <div
+            onClick={decrementCount}
+            id="minusMenu"
+            className="bg-slate-600 w-6 h-6"
+          ></div>
+          <div id="count" className="mx-3 font-light text-s">
+            {count}
+          </div>
+          <div
+            onClick={incrementCount}
+            id="plusMenu"
+            className="bg-slate-600 w-6 h-6"
+          ></div>
         </div>
         <div
-          onClick={incrementCount}
-          id="plusMenu"
-          className="bg-slate-600 w-6 h-6"
-        ></div>
+          onClick={() => removedItem(menu)}
+          className="hover:text-black cursor-pointer"
+        >
+          X
+        </div>
       </div>
     </div>
   );
