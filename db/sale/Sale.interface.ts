@@ -8,6 +8,7 @@ import ITotalPrice from "../../shared/DTO/sale/interface/TotalPrice.interface";
  * @crystal23733 24.07.22
  * * sale interface
  */
-export default interface ISale extends IMemberID, ISaleDate, ISaleID, ITotalPrice{
+export default interface ISale extends IMemberID, ISaleDate, ISaleID, ITotalPrice, Document{
+  toObject(): any;
   products : ISaleProducts;
 }

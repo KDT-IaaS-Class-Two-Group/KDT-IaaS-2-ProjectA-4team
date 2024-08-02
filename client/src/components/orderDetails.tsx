@@ -23,7 +23,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
             >
               <p>{order.products.productName}</p>
               <p>{order.products.unitPrice} 원</p>
-              <p>{new Date(order.saleDate).toLocaleDateString()}</p>
+              <p>{order.saleData}</p>
             </div>
           ))
         ) : (

@@ -7,9 +7,9 @@ import { PasswordModule } from './changePassword/changePassword.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost:27017/rockcodersERP"),
+    MongooseModule.forRoot('mongodb://localhost:27017/rockcodersERP'),
     SaleModule,
-    PasswordModule
+    PasswordModule,
   ],
   controllers: [AppController],
   providers: [AppService],
