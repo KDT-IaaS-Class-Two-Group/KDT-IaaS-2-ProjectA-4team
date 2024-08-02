@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardComponent from "src/components/Card";
+import productFetchMenu from "src/model/productFetchMenu";
 
 interface MenuItemsProps {
   selectCategory: string;
@@ -18,6 +19,19 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   selectCategory,
   onAddToCart,
 }) => {
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const productData = await productFetchMenu();
+        return productData;
+      } catch (error) {
+        console.error("데이터 로드 실패");
+      }
+    };
+
+    loadData();
+  });
+
   const renderMenuItems = () => {
     switch (selectCategory) {
       case "bread":
