@@ -1,7 +1,8 @@
-/** @jojayeon 20.07.29
+/** @jojayeon 20.08.02
  * * 사용 하는 부분 예시
  * * 필드 조회
  * * @param selectname - 원하는 필드 조회
+ * * 사용하실때 내보내기한 fieldReaduse 사용해도 되고 이 함수를 가져다 사용해 됨
  */
 
 

@@ -1,4 +1,4 @@
-/** @jojayeon 20.07.29
+/** @jojayeon 20.08.02
  * * 필드 조회
  * * @param selectname : 필드 이름 
  */

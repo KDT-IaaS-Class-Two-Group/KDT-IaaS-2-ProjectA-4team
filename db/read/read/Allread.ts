@@ -1,4 +1,4 @@
-/** @jojayeon 20.07.23
+/** @jojayeon 20.08.02
  * * 전체 조회
  */
 import mongoose from "mongoose";
