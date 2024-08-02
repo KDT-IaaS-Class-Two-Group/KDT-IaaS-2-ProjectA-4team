@@ -59,7 +59,6 @@ const SignUpPage: React.FC = () => {
           const result = await response.json();
           console.log("회원 가입 성공:", result);
 
-          // 서버로부터 받은 응답을 화면에 표시
           setResponseMessage(`회원 가입 성공: ${JSON.stringify(result)}`);
         } catch (error) {
           console.error("회원 가입 오류:", error);

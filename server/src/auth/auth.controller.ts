@@ -1,26 +1,21 @@
+// src/auth/auth.controller.ts
 import { Body, Controller, Post } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './user.entity'; // 데이터베이스 엔티티
+import { AuthService } from './auth.service';
+import IMember from '@db/members/member.interface';
 
 @Controller('signup')
 export class AuthController {
-  constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post()
   async signUp(
     @Body() body: { username: string; email: string; password: string },
   ) {
     try {
-      const newUser = this.userRepository.create(body);
-      await this.userRepository.save(newUser);
-
+      const newUser = await this.authService.createUser(body);
       return {
         message: '회원 가입이 완료되었습니다.',
-        data: body,
+        data: newUser,
       };
     } catch (error) {
       console.error('회원 가입 오류:', error);
