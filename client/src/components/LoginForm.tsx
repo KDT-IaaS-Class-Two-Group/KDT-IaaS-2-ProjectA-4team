@@ -43,13 +43,15 @@ export const LoginForm = () => {
         console.log("서버 응답:", result);
 
         const decodedToken = jwtDecode<RoldJwtPayload>(token);
+        console.log(decodedToken);
         const roleId = decodedToken.roleID;
+        console.log(decodedToken.roleID);
 
         // roleId에 따라 라우팅
         if (roleId === 0) {
           router.push("/UserPage");
         } else if (roleId === 1) {
-          router.push("/stockInfo");
+          router.push("/admin");
         }
       } catch (error) {
         console.error("서버로 데이터 전송 실패:", error);
