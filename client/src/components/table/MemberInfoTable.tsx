@@ -42,8 +42,8 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
           <CheckCircle
             className={`${row.role == 1 ? "text-green-400" : "text-gray-400"} cursor-pointer`}
             onClick={() => {
-              if (row.role == 1) 0;
-              else if (row.role == 0) 1;
+              if (row.role == 1) console.log(1);
+              else if (row.role == 0) console.log(0);
             }}
           />
         </TableCell>

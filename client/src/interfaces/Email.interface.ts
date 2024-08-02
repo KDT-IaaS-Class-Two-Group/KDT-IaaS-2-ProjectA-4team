@@ -1,5 +1,5 @@
 interface IEmail {
-  password: string;
+  email: string;
 }
 
 export default IEmail;
