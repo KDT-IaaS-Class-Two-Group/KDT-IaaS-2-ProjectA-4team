@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,34 +8,47 @@ import {
 } from "../../../components/ui/dialog";
 import InputComponent from "../Input";
 import ButtonComponent from "../CustomButton";
+import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import ProductOrderModalHook from "src/hooks/ProductOrderModalHook";
 
 interface OrderModalProps {
   isOpen: boolean;
-  product: ProductDTO | null;
-  quantity: number;
-  setQuantity: (quantity: number) => void;
-  onSave: () => void;
+  product: ProductDTO;
   onClose: () => void;
+  onSave: (product: ProductDTO) => void;
 }
 
 const OrderModal: React.FC<OrderModalProps> = ({
+  isOpen,
   product,
-  quantity,
-  setQuantity,
-  onSave,
   onClose,
+  onSave,
 }) => {
-  // 수량 상태를 관리
-  const handleOrderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    setQuantity(value);
-  };
+  const [quantity, setQuantity] = useState<number>(1);
+  const { orderProductData, loading, error } = ProductOrderModalHook();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSave(); // 저장 함수 호출
-    setQuantity(0);
+    try {
+      const newProduct = new ProductDTO({
+        productID: product.productID,
+        productCategory: product.productCategory,
+        productName: product.productName,
+        unitPrice: product.unitPrice,
+        quantity: quantity,
+        restockDate: new Date(),
+        expirationDate: new Date(
+          new Date().setMonth(new Date().getMonth() + 1),
+        ),
+      });
+
+      const saveProduct = await orderProductData(newProduct);
+      onSave(saveProduct);
+      onClose();
+    } catch (err) {
+      console.error("Order failed:", err);
+    }
   };
 
   const OrderModalHeader: React.FC<{ product: ProductDTO | null }> = ({
@@ -50,27 +63,35 @@ const OrderModal: React.FC<OrderModalProps> = ({
   );
 
   return (
-    <Dialog open={true} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-slate-100">
         <OrderModalHeader product={product} />
         <form onSubmit={handleSubmit}>
-          <label>
+          <Label htmlFor="quantity">
             수량:
             <InputComponent
-              value={quantity === 0 ? "" : quantity}
               type="number"
-              onChange={handleOrderChange}
-              min="0"
+              value={quantity === 0 ? "" : quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              min="1"
               placeholder="주문수량"
               className="mb-3"
             />
-          </label>
-          <ButtonComponent variant="outline" type="submit">
-            주문하기
-          </ButtonComponent>
-          <ButtonComponent variant="default" onClick={onClose}>
-            닫기
-          </ButtonComponent>
+          </Label>
+          <div className="flex flex-row items-center justify-center gap-10">
+            <ButtonComponent
+              variant="outline"
+              className="bg-red-200"
+              type="submit"
+            >
+              주문하기
+            </ButtonComponent>
+            <ButtonComponent variant="outline" onClick={onClose}>
+              닫기
+            </ButtonComponent>
+          </div>
+          {loading && <p>주문 중...</p>}
+          {error && <p>Error: {error}</p>}
         </form>
       </DialogContent>
     </Dialog>

@@ -45,8 +45,8 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
         expirationDate: product.expirationDate,
       });
 
-      await updateProduct(updatedProductDTO);
-      onSave(updatedProductDTO);
+      const updatedProduct = await updateProduct(updatedProductDTO);
+      onSave(updatedProduct);
       onClose();
     } catch (err) {
       console.error("Update failed:", err);

@@ -30,6 +30,11 @@ const UserPage: FC = () => {
     setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
   };
 
+  const handleRemoveItem = (menu: string) => {
+    const updatedItems = cartItems.filter((item) => item.menu !== menu);
+    setCartItems(updatedItems);
+  };
+
   return (
     <div>
       <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
@@ -43,7 +48,7 @@ const UserPage: FC = () => {
           className="w-72 ml-6 mt-6 mb-20"
           email="rockcoders@kdt.com"
         />
-        <Cart items={cartItems} />
+        <Cart items={cartItems} removedItem={handleRemoveItem} />
         <FooterLinks className="w-72 mt-20 mx-6" />
       </div>
     </div>
