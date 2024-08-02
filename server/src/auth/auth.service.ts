@@ -11,6 +11,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  async validateUser(email: string): Promise<IMember | null> {
+    const user = await this.memberModel.findOne({ email }).exec();
+    return user;
+  }
+
   async createUser(createUserDto: {
     username: string;
     email: string;
@@ -36,10 +41,9 @@ export class AuthService {
    */
   async generateToken(
     email: string,
-    roleId: number,
+    roleID: number,
   ): Promise<{ token: string; cookieOptions: any }> {
-    console.log('토큰생서하러옴');
-    const payload = { email, roleId };
+    const payload = { email, roleID };
     const token = this.jwtService.sign(payload);
 
     const cookieOptions = {
