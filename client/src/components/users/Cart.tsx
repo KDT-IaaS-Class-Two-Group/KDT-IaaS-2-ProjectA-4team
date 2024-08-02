@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 import CartItemComponent from "./CartItem";
+import { CartHook } from "src/hooks/cartHook";
 
 interface CartProps {
   items: { menu: string; unitPrice: number }[];
@@ -16,22 +17,7 @@ interface CartProps {
  */
 
 const Cart: FC<CartProps> = ({ items, removedItem }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const handlePriceChange = (price: number) => {
-    setTotalPrice((prevTotal) => {
-      const updatedTotal = prevTotal + price;
-      return updatedTotal;
-    });
-  };
-
-  useEffect(() => {
-    const initialTotalPrice = items.reduce(
-      (acc, item) => acc + item.unitPrice,
-      0,
-    );
-    setTotalPrice(initialTotalPrice);
-  }, [items]);
+  const { totalPrice, handlePriceChange } = CartHook(items);
 
   return (
     <div>
