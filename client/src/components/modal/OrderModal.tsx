@@ -32,7 +32,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
     e.preventDefault();
     try {
       const newProduct = new ProductDTO({
-        productID: product.productID,
+        _id: product._id,
         productCategory: product.productCategory,
         productName: product.productName,
         unitPrice: product.unitPrice,
@@ -55,7 +55,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
     product,
   }) => (
     <DialogHeader>
-      <DialogTitle>주문하기</DialogTitle>
+      <DialogTitle>발주하기</DialogTitle>
       <DialogDescription>
         {product ? `제품명: ${product.productName}` : "선택된 제품이 없습니다."}
       </DialogDescription>

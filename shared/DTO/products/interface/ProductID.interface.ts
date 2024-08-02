@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose";
 export default interface IProductID {
-  productID : number;
+  _id: ObjectId;
 }

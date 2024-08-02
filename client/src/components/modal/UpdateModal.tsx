@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Dialog, DialogContent } from "../../../components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../../../components/ui/dialog";
 import { Label } from "components/ui/label";
 import { Textarea } from "components/ui/textarea";
 import ButtonComponent from "../CustomButton";
@@ -36,7 +42,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
     try {
       // ProductDTO 생성
       const updatedProductDTO = new ProductDTO({
-        productID: product.productID,
+        _id: product._id,
         productCategory: product.productCategory,
         productName: newProductName,
         unitPrice: newUnitPrice,
@@ -56,6 +62,12 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className=" bg-slate-100">
+        <DialogHeader>
+          <DialogTitle>수정하기</DialogTitle>
+          <DialogDescription>
+            제품명과, 판매가를 수정할 수 있습니다.
+          </DialogDescription>
+        </DialogHeader>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center"
