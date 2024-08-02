@@ -1,7 +1,6 @@
 // src/auth/auth.controller.ts
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import IMember from '@db/members/member.interface';
 
 @Controller('signup')
 export class AuthController {
