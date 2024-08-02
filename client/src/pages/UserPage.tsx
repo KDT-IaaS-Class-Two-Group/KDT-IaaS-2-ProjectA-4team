@@ -27,9 +27,14 @@ const UserPage: FC = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
+    error,
     handleAddToCart,
     handleRemoveItem,
   } = UserpageHook();
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>

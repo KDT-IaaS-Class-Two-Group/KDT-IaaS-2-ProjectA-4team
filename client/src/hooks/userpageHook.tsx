@@ -7,6 +7,7 @@ export const UserpageHook = () => {
   const [cartItems, setCartItems] = useState<
     { menu: string; unitPrice: number }[]
   >([]);
+  const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
 
@@ -21,25 +22,41 @@ export const UserpageHook = () => {
   // };
 
   useEffect(() => {
-    const category = router.query.category as string;
-    if (category) {
-      setSelectCategory(category);
+    try {
+      const category = router.query.category as string;
+      if (category) {
+        setSelectCategory(category);
+      }
+    } catch (error) {
+      console.error("Failed to set selectCategory: ", error);
+      setError("카테고리를 불러오지 못했습니다.");
     }
   }, [router.query.category]);
 
   const handleAddToCart = (menu: string, unitPrice: number) => {
-    setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
+    try {
+      setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
+    } catch (error) {
+      console.error("Failed to add item to cart: ", error);
+      setError("장바구니에 아이템을 추가하지 못했습니다.");
+    }
   };
 
   const handleRemoveItem = (menu: string) => {
-    const updatedItems = cartItems.filter((item) => item.menu !== menu);
-    setCartItems(updatedItems);
+    try {
+      const updatedItems = cartItems.filter((item) => item.menu !== menu);
+      setCartItems(updatedItems);
+    } catch (error) {
+      console.error("Failed to remove item from cart: ", error);
+      setError("장바구니의 아이템을 삭제하지 못했습니다.");
+    }
   };
 
   return {
     selectCategory,
     setSelectCategory,
     cartItems,
+    error,
     handleAddToCart,
     handleRemoveItem,
   };
