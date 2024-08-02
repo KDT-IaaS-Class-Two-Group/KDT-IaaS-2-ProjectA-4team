@@ -3,6 +3,7 @@ import { LoginForm } from "src/components/LoginForm";
 import TitleComponent from "src/components/titleComponent";
 import Logo from "src/components/logo";
 import Image from "next/image";
+import LinkButtonComponent from "src/components/linkButtonComponent";
 
 const LoginPage = () => {
   return (
@@ -30,7 +31,8 @@ const LoginPage = () => {
         <div className="flex flex-col items-center justify-center mb-20 h-96 w-96">
           <Logo width={300} height={100} alt="logo" />
           <TitleComponent titletext="Login" />
-          <LoginForm to="" onSuccessRedirect="" />
+          <LoginForm />
+          <LinkButtonComponent href="/sign_up">회원가입</LinkButtonComponent>
         </div>
       </div>
     </div>
