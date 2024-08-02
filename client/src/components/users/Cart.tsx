@@ -17,7 +17,11 @@ interface CartProps {
  */
 
 const Cart: FC<CartProps> = ({ items, removedItem }) => {
-  const { totalPrice, handlePriceChange } = CartHook(items);
+  const { totalPrice, handlePriceChange, error } = CartHook(items);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>
