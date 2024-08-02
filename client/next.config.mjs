@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+export default {
+  reactStrictMode: true,
 
-export default nextConfig;
+  // 아래 항목 추가
+  experimental: {
+    externalDir: true
+  },
+}

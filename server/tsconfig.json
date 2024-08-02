@@ -6,7 +6,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "noImplicitAny": false,
     "strictPropertyInitialization": false,
@@ -14,8 +13,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@db/*": ["../db/*"],
+      "@shared/*": ["../shared/*"]
+    }
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "../shared/**/*.ts", "../db/**/*.ts"]
 }
