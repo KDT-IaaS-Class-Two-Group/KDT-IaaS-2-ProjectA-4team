@@ -16,7 +16,7 @@ export class SaleController {
     return this.saleService.findById(id);
   }
 
-  @Post('order/:name')
+  @Get('orders/:name')
   async findByMemberID(@Param('name') name: string): Promise<ISale[]> {
     return this.saleService.findByMemberID(name);
   }
