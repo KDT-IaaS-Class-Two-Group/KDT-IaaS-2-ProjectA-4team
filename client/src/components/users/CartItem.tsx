@@ -24,10 +24,12 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   onPriceChange,
   removedItem,
 }) => {
-  const { count, price, incrementCount, decrementCount } = CartItemHook(
+  const { count, price, incrementCount, decrementCount, error } = CartItemHook(
     unitPrice,
     onPriceChange,
   );
+
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="px-10 py-3 w-72">
