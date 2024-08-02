@@ -23,14 +23,14 @@ export const LoginForm = () => {
   const handleAction = async (event: React.MouseEvent<HTMLButtonElement>) => {
     if (event.currentTarget.type === "submit") {
       event.preventDefault();
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
 
       try {
         const response = await fetch(`http://localhost:3001/login`, {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
           credentials: "include",
         });
 
