@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SaleModule } from './sales/sales.module';
 import { StockModule } from './stock/stock.module';
 import { PasswordModule } from './changePassword/changePassword.module';
+import { MembersModule } from './member/members.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { PasswordModule } from './changePassword/changePassword.module';
     SaleModule,
     StockModule,
     PasswordModule,
+    MembersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
