@@ -11,7 +11,7 @@ const productSchema: Schema<IProduct> = new Schema({
   productName: { type: String, required: true, unique: true },
   unitPrice: { type: Number, required: true },
   quantity: { type: Number, required: true },
-  restockData: { type: Date },
+  restockDate: { type: Date },
   expirationDate: { type: Date, required: true },
 });
 
