@@ -6,6 +6,7 @@ import { SaleModule } from './sales/sales.module';
 import { AuthModule } from './auth/auth.module';
 import { StockModule } from './stock/stock.module';
 import { PasswordModule } from './changePassword/changePassword.module';
+import { MembersModule } from './member/members.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PasswordModule } from './changePassword/changePassword.module';
     AuthModule,
     StockModule,
     PasswordModule,
+    MembersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
