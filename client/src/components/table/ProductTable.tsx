@@ -81,7 +81,7 @@ const ProductTable: React.FC = () => {
           <TableBody>
             {/* 데이터 수만큼 열 생성 */}
             {data.map((row) => (
-              <TableRow key={row.productID}>
+              <TableRow key={row._id.toString()}>
                 <TableCell className="font-medium">
                   {row!.productCategory}
                 </TableCell>

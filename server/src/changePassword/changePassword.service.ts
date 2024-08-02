@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 
 @Injectable()
@@ -10,10 +10,16 @@ import IMember from '@db/members/member.interface';
  */
 @Injectable()
 export class PasswordService {
-  constructor(@InjectModel('Member') private readonly memberModel: Model<IMember>) {}
+  constructor(
+    @InjectModel('Member') private readonly memberModel: Model<IMember>,
+  ) {}
 
-  async changePassword(name: string, oldPassword: string, newPassword: string): Promise<any> {
-    const member = await this.memberModel.findOne({name});
+  async changePassword(
+    name: string,
+    oldPassword: string,
+    newPassword: string,
+  ): Promise<any> {
+    const member = await this.memberModel.findOne({ name });
     if (!member) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }

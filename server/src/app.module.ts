@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SaleModule } from './sales/sales.module';
 import { AuthModule } from './auth/auth.module';
+import { StockModule } from './stock/stock.module';
 import { PasswordModule } from './changePassword/changePassword.module';
 
 @Module({
@@ -11,6 +12,7 @@ import { PasswordModule } from './changePassword/changePassword.module';
     MongooseModule.forRoot('mongodb://localhost:27017/rockcodersERP'),
     SaleModule,
     AuthModule,
+    StockModule,
     PasswordModule,
   ],
   controllers: [AppController],

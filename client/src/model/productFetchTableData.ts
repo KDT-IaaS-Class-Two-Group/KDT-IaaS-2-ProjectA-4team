@@ -5,7 +5,7 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
  * @returns json 배열
  */
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
-  const response = await fetch("$http://localhost:3001/productTable");
+  const response = await fetch("http://localhost:3001/product");
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -21,7 +21,7 @@ export const productFetchTableData = async (): Promise<ProductDTO[]> => {
 export const saveProductData = async (
   product: ProductDTO,
 ): Promise<ProductDTO> => {
-  const response = await fetch(`http://localhost:3001/productOrder`, {
+  const response = await fetch(`http://localhost:3001/product/order`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,3 +1,3 @@
 export default interface IRestockDate {
-  restockDate : Date;
+  restockDate?: Date;
 }
