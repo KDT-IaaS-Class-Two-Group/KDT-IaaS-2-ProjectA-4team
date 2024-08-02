@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect, createContext } from "react";
-import { useRouter } from "next/router";
+import React, { FC } from "react";
+import { UserpageHook } from "src/hooks/userpageHook";
 import UserMenu from "src/components/users/UserMenu";
 import MenuItems from "src/components/users/MenuItems";
 import LoginInfoComponent from "src/components/LoginInfo";
@@ -23,39 +23,13 @@ import ButtonComponent from "src/components/CustomButton";
  */
 
 const UserPage: FC = () => {
-  const router = useRouter();
-  const [selectCategory, setSelectCategory] = useState("bread");
-  const [cartItems, setCartItems] = useState<
-    { menu: string; unitPrice: number }[]
-  >([]);
-
-  // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
-
-  // const ItemsProvider: React.FC<ItemsProviderProps> = ({ children }) => {
-  //   const [items, setItems] = useState("");
-
-  //   return (
-  //     <ItemsContext.Provider value={{ items, setItems }}>
-  //       {children}
-  //     </ItemsContext.Provider>
-  //   );
-  // };
-
-  useEffect(() => {
-    const category = router.query.category as string;
-    if (category) {
-      setSelectCategory(category);
-    }
-  }, [router.query.category]);
-
-  const handleAddToCart = (menu: string, unitPrice: number) => {
-    setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
-  };
-
-  const handleRemoveItem = (menu: string) => {
-    const updatedItems = cartItems.filter((item) => item.menu !== menu);
-    setCartItems(updatedItems);
-  };
+  const {
+    selectCategory,
+    setSelectCategory,
+    cartItems,
+    handleAddToCart,
+    handleRemoveItem,
+  } = UserpageHook();
 
   return (
     <div>
