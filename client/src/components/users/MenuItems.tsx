@@ -29,27 +29,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   selectCategory,
   onAddToCart,
 }) => {
-  // const { productList } = MenuItemHook();
-  const productList: Product[] = [
-    {
-      id: "1",
-      name: "플랫 브레드",
-      category: "bread",
-      unitPrice: 2000,
-      quantity: 5,
-      restockDate: new Date(2024, 8, 5),
-      expirationDate: new Date(2024, 10, 11),
-    },
-    {
-      id: "2",
-      name: "치킨 패티",
-      category: "patty",
-      unitPrice: 4000,
-      quantity: 15,
-      restockDate: new Date(2024, 8, 5),
-      expirationDate: new Date(2024, 10, 11),
-    },
-  ];
+  const { productList } = MenuItemHook();
 
   const renderMenuItems = () => {
     const productBread: Product[] = [];
