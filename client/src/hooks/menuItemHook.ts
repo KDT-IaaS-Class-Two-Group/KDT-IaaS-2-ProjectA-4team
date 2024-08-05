@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 import productFetchMenu from "src/model/productFetchMenu";
 
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  unitPrice: number;
+  quantity: number;
+  restockDate: string;
+  expirationDate: string;
+}
+
 export const MenuItemHook = () => {
-  const [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState<Product[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
