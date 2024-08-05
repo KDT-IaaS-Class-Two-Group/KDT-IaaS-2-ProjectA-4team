@@ -17,7 +17,7 @@ const useOrderHook = (name: string) => {
     const fetchOrderDetails = async () => {
       try {
         const orders = await orderFetch(name);
-        const transformedOrders = orders.map(order => {
+        const transformedOrders = orders.map((order) => {
           console.log(order.saleData);
           const date = new Date(order.saleData);
           const year = date.getFullYear();
@@ -27,7 +27,7 @@ const useOrderHook = (name: string) => {
             ...order,
             saleData: `${year}-${month}-${day}`,
           };
-        })
+        });
         console.log(transformedOrders);
         setOrderDetails(transformedOrders);
       } catch (error) {

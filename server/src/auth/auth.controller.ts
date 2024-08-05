@@ -1,8 +1,8 @@
 // src/auth/auth.controller.ts
-import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller()
 export class AuthController {
@@ -50,6 +50,25 @@ export class AuthController {
       res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ success: false, message: 'Invalid credentials' });
+    }
+  }
+  @Get('user-info')
+  async getUserInfo(@Req() req:Request, @Res() res:Response){
+    const token = req.cookies['token'];
+    if(!token){
+      res.status(HttpStatus.UNAUTHORIZED).json({success:false, message: '승인 되지 않음'});
+      return;
+    }
+    try{
+      const decoded = this.authService.verifyToken(token);
+      const user = await this.authService.getUserInfo(decoded.email);
+      if(!user){
+        res.status(HttpStatus.UNAUTHORIZED).json({success: false, message: '승인 되지 않음'})
+        return;
+      }
+      res.status(HttpStatus.OK).json(user);
+    } catch(error){
+      res.status(HttpStatus.UNAUTHORIZED).json({ success: false, message: 'Invalid token' });
     }
   }
 }

@@ -54,4 +54,17 @@ export class AuthService {
     console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
+
+  /**
+   * @crystal23733 24.08.05
+   * @param email 
+   * @returns 이메일 확인
+   */
+  async getUserInfo(email:string): Promise<IMember | null> {
+    return this.memberModel.findOne({email}).exec();
+  }
+
+  public verifyToken(token: string): any {
+    return this.jwtService.verify(token);
+  }
 }
