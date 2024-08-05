@@ -4,8 +4,10 @@ import NavListBox from "src/components/admin/navListBox";
 import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
 import Logo from "src/components/logo";
 
-//사이드 바랑 메인 테이블 부분만 존재
-//로그 빠져있음
+/**
+ * @jojayeon 24.08.05
+ * @returns 유통관리 페이지
+ */
 
 const AdminstockDate: React.FC = () => {
   return (
@@ -18,8 +20,8 @@ const AdminstockDate: React.FC = () => {
         <Logo 
           width={200} 
           height={200} 
-          alt="Custom Logo" // 추가적인 속성
-          className="rounded-lg shadow-lg" // Tailwind CSS 클래스 추가
+          alt="Custom Logo"
+          className="rounded-lg shadow-lg"
         />
         </div>
         <section>

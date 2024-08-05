@@ -10,9 +10,13 @@ import {
 import ButtonComponent from "../CustomButton"; 
 import { ExpirationDateHook } from 'src/hooks/ExpirationDateHook'; 
 
+/**
+ * @jojayeon 24.08.05
+ * @returns 유통기한 관리 테이블 
+ */
 
 export const ExpirationDataTable: React.FC = () => {
-  const { data, loading, error, deleteProduct } = ExpirationDateHook();  //구조 분해 할당 
+  const { data, loading, error, deleteProduct } = ExpirationDateHook();
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -21,11 +25,11 @@ export const ExpirationDataTable: React.FC = () => {
   }
 
   const sortedProducts = data.sort((a, b) => {
-    return new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime();  //오름차순 으로 정렬한 것
+    return new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime();
   });
 
   const handleDelete = (_id:string) => {
-    deleteProduct(_id.toString());
+    deleteProduct(_id);
   };
 
   return (
@@ -40,13 +44,13 @@ export const ExpirationDataTable: React.FC = () => {
       </TableHeader>
       <TableBody>
         {sortedProducts.map((product) => (
-          <TableRow key={product._id.toString()}>
+          <TableRow key={product._id}>
           <TableCell>{product.productCategory}</TableCell>
           <TableCell>{product.productName}</TableCell>
           <TableCell>{product.quantity}</TableCell>
           <TableCell>{new Date(product.expirationDate).toDateString()}</TableCell>
           <TableCell className="text-right">
-            <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id.toString())}>폐기하기</ButtonComponent>{/* handleDelete 데이터 가져오기*/}
+            <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id.toString())}>폐기하기</ButtonComponent>
           </TableCell>
         </TableRow>
         ))}
