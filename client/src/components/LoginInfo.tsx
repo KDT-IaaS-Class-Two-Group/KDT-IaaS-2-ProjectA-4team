@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import Image from "next/image";
 
 interface LoginInfoComponentProps {
   email: string;
@@ -26,7 +27,13 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({
 
   return (
     <div className={`flex ${className}`}>
-      <div id="userIcon" className="w-10 h-10 bg-slate-600"></div>
+      <Image
+        id="userIcon"
+        width={40}
+        height={40}
+        src="/userIcon.png"
+        alt="userIcon"
+      />
       <div className="font-light text-sm ml-3">
         <div>안녕하세요 !</div>
         <div>{localEmail} 님</div>
