@@ -6,7 +6,7 @@ import TitleComponent from "src/components/titleComponent";
 const StockInfo = () => {
   return (
     <>
-      <div className="grid w-screen gap-4 p-3 overflow-hidden grid-cols-custom-30-70">
+      <div className="grid w-screen gap-4 p-3 overflow-hidden grid-cols-custom-20-80">
         <div className="ml-5">
           <AdminNav />
         </div>

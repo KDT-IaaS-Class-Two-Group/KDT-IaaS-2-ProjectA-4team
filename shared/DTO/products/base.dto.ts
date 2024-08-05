@@ -1,11 +1,10 @@
-import { ObjectId } from "mongoose";
 /**
  * @crystal23733 24.07.22
  * 기본 추상 클래스
  */
 
 export abstract class BaseDTO {
-  public _id: ObjectId;
+  public _id: string;
   public productCategory: string;
   public productName: string;
   public unitPrice: number;
@@ -14,7 +13,7 @@ export abstract class BaseDTO {
   public expirationDate: Date;
 
   constructor(
-    _id: ObjectId,
+    _id: string,
     productCategory: string,
     productName: string,
     unitPrice: number,

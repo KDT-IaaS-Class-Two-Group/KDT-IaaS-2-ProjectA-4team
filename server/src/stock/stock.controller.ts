@@ -14,7 +14,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 // import { ObjectId } from 'mongoose';
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('product')
 export class StockController {
   constructor(private readonly stockService: StockService) {}

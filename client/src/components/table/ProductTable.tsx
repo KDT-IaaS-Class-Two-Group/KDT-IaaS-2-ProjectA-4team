@@ -63,6 +63,14 @@ const ProductTable: React.FC = () => {
     return <div>{error}</div>;
   }
 
+  // 데이터가 있을 때 첫 번째 항목에서 키를 추출
+  const allHeaders = data.length > 0 ? Object.keys(data[0]) : [];
+
+  // 제외할 헤더들을 Set으로 정의
+  const excludedHeaders = new Set(["_id", "restockDate", "expirationDate"]);
+
+  // Set을 사용하여 헤더 필터링
+  const headers = allHeaders.filter((header) => !excludedHeaders.has(header));
   return (
     <>
       <div className="flex flex-col items-end justify-center gap-4">
@@ -70,10 +78,15 @@ const ProductTable: React.FC = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">카테고리</TableHead>
-              <TableHead>재품명</TableHead>
-              <TableHead>수량</TableHead>
-              <TableHead>판매가</TableHead>
+              {/* 헤더를 동적으로 생성 */}
+              {headers.map((header) => (
+                <TableHead
+                  key={header}
+                  className={header === "productCategory" ? "w-[100px]" : ""}
+                >
+                  {header}
+                </TableHead>
+              ))}
               <TableHead className="text-center">발주</TableHead>
               <TableHead className="text-center">수정</TableHead>
             </TableRow>
@@ -81,13 +94,18 @@ const ProductTable: React.FC = () => {
           <TableBody>
             {/* 데이터 수만큼 열 생성 */}
             {data.map((row) => (
-              <TableRow key={row._id.toString()}>
-                <TableCell className="font-medium">
-                  {row!.productCategory}
-                </TableCell>
-                <TableCell>{row!.productName}</TableCell>
-                <TableCell>{row!.quantity}</TableCell>
-                <TableCell>{row!.unitPrice}</TableCell>
+              <TableRow key={row._id}>
+                {/* 행의 각 셀을 동적으로 생성 */}
+                {headers.map((header) => (
+                  <TableCell
+                    key={header}
+                    className={
+                      header === "productCategory" ? "font-medium" : ""
+                    }
+                  >
+                    {(row as never)[header]}
+                  </TableCell>
+                ))}
                 <TableCell className="text-center">
                   <ButtonComponent
                     variant="default"
