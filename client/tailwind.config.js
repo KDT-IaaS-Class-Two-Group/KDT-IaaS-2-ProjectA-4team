@@ -20,7 +20,7 @@ const commonConfig = {
     },
     extend: {
       gridTemplateColumns: {
-        "custom-30-70": "30% 70%",
+        "custom-20-80": "20% 80%",
       },
       width: {
         "15vw": "15vw",
