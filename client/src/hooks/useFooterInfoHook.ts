@@ -1,5 +1,3 @@
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 interface CustomJwtPayload {
@@ -8,19 +6,31 @@ interface CustomJwtPayload {
 
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      try {
-        const decodedToken = jwtDecode<CustomJwtPayload>(token);
-        setUserName(decodedToken.name || null);
-      } catch (error) {
-        console.error("디코딩 실패", error);
+    const fetchUserInfo = async() => {
+      try { 
+        const response = await fetch("http://localhost:3001/user-info", {
+          method: "GET",
+          credentials : "include"
+        });
+        const result = await response.json();
+        if (response.ok) {
+          setUserName(result.email); // 이메일로 사용자 이름 설정
+        } else {
+          console.error("Error fetching user info:", result.message); // 에러 메시지 로그
+          setUserName(null);
+        }
+      } catch(error) {
+        setUserName(null);
+      } finally {
+        setLoading(false);
       }
     }
+    fetchUserInfo();
   }, []);
-  return { userName };
+  return { userName, loading };
 };
 
 export default useFooterInfoHook;

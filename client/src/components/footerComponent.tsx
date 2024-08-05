@@ -9,11 +9,15 @@ interface FooterLinksProps {
 
 const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
   const router = useRouter();
-  const { userName } = useFooterInfoHook();
-
+  const { userName, loading } = useFooterInfoHook();
+  console.log(userName);
   const handleNavigation = (path: string) => {
     router.push(path);
   };
+
+  if (loading) {
+    return <p>Loading...</p>; // 로딩 중 표시
+  }
 
   return (
     <div
