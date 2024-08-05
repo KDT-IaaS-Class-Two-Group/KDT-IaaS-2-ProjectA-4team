@@ -5,10 +5,9 @@ import IProduct from "../product.interface";
  * * product schema 정의
  */
 
-
 const productSchema: Schema<IProduct> = new Schema({
-  productID: { type: Number, required: true, unique: true },
-  productName: { type: String, required: true, unique: true },
+  productCategory: { type: String, required: true },
+  productName: { type: String, required: true },
   unitPrice: { type: Number, required: true },
   quantity: { type: Number, required: true },
   restockDate: { type: Date },
