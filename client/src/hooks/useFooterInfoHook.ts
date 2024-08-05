@@ -10,17 +10,17 @@ const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = Cookies.get('token');
-    if(token){
+    const token = Cookies.get("token");
+    if (token) {
       try {
         const decodedToken = jwtDecode<CustomJwtPayload>(token);
         setUserName(decodedToken.name || null);
-      } catch(error) {
+      } catch (error) {
         console.error("디코딩 실패", error);
       }
     }
   }, []);
-  return {userName};
-}
+  return { userName };
+};
 
 export default useFooterInfoHook;

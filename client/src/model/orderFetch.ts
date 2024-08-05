@@ -5,7 +5,7 @@ import TOrders from "src/types/Order.type";
  * todo 유저의 정보는 추후 토큰으로 대체 필요
  * @param {string} name 유저 더미데이터
  */
-export default async (name: string):Promise<TOrders[]> => {
+export default async (name: string): Promise<TOrders[]> => {
   try {
     const response = await fetch(`http://localhost:3001/sales/orders/${name}`);
     const responseData = await response.json();
