@@ -66,7 +66,7 @@ export class AuthController {
         res.status(HttpStatus.UNAUTHORIZED).json({success: false, message: '승인 되지 않음'})
         return;
       }
-      res.status(HttpStatus.OK).json({ success: true, user});
+      res.status(HttpStatus.OK).json(user);
     } catch(error){
       res.status(HttpStatus.UNAUTHORIZED).json({ success: false, message: 'Invalid token' });
     }
