@@ -20,7 +20,7 @@ const useFooterInfoHook = () => {
       }
     }
   }, []);
-  return userName;
+  return {userName};
 }
 
 export default useFooterInfoHook;

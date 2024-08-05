@@ -1,6 +1,7 @@
 // components/FooterLinks.tsx
 import React from "react";
 import { useRouter } from "next/router";
+import useFooterInfoHook from "src/hooks/useFooterInfoHook";
 
 interface FooterLinksProps {
   className?: string;
@@ -8,6 +9,7 @@ interface FooterLinksProps {
 
 const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
   const router = useRouter();
+  const { userName } = useFooterInfoHook();
 
   const handleNavigation = (path: string) => {
     router.push(path);
@@ -18,7 +20,7 @@ const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
       className={`text-gray-500 underline text-sm leading-loose ${className}`}
     >
       <p
-        onClick={() => handleNavigation("/myPage")}
+        onClick={() => handleNavigation(`/myPage/${userName}`)}
         className="cursor-pointer hover:text-black"
       >
         마이페이지
