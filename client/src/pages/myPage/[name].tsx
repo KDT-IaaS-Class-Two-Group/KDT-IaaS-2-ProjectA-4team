@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import LinkButtonComponent from "src/components/linkButtonComponent";
 import LoginInfoComponent from "src/components/LoginInfo";
@@ -10,8 +11,14 @@ import useOrderHook from "src/hooks/orderHook";
  * @returns {JSXElement}
  */
 const MyPage: React.FC = () => {
-  const memberName = "유호영";
-  const { orderDetails, error } = useOrderHook(memberName);
+  const router = useRouter();
+  const { name } = router.query; // URL 파라미터에서 사용자 이름 읽기
+
+  if (typeof name !== 'string') {
+    return <p>Invalid name</p>; // 오류 처리
+  }
+
+  const { orderDetails, error } = useOrderHook(name);
 
   return (
     <div

@@ -54,4 +54,8 @@ export class AuthService {
     console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
+
+  async getUserInfo(email:string): Promise<IMember | null> {
+    return this.memberModel.findOne({email}).exec();
+  }
 }
