@@ -9,7 +9,7 @@ export abstract class BaseDTO {
   public productName: string;
   public unitPrice: number;
   public quantity: number;
-  public restockDate?: Date;
+  public restockDate: Date;
   public expirationDate: Date;
 
   constructor(
@@ -18,7 +18,7 @@ export abstract class BaseDTO {
     productName: string,
     unitPrice: number,
     quantity: number,
-    restockDate: Date | undefined,
+    restockDate: Date,
     expirationDate: Date
   ) {
     this._id = _id;
