@@ -1,5 +1,6 @@
 import React from "react";
 import LinkButtonComponent from "../linkButtonComponent";
+import FooterLinks from "../footerComponent";
 
 /**
  * @crystal23733 24.07.29
@@ -42,10 +43,7 @@ const NavListBox: React.FC = () => {
           </LinkButtonComponent>
         </li>
       </ul>
-      <div className="flex flex-col gap-3 mt-10 text-sm">
-        <LinkButtonComponent href="/myPage">마이페이지</LinkButtonComponent>
-        <LinkButtonComponent href="/logout">로그아웃</LinkButtonComponent>
-      </div>
+      <FooterLinks />
     </nav>
   );
 };
