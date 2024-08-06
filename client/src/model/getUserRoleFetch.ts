@@ -1,6 +1,6 @@
-export default async (): Promise<string> => {
+export default async (): Promise<number> => {
   try {
-    const response = await fetch("http://localhost:3001/api/user-role", {
+    const response = await fetch("http://localhost:3001/user-info", {
       method: "GET",
       credentials: "include",
     });
