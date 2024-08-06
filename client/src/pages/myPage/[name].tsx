@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
-import LinkButtonComponent from "src/components/linkButtonComponent";
 import LoginInfoComponent from "src/components/LoginInfo";
 import MyPageFormComponent from "src/components/myPageFormComponent";
 import OrderDetails from "src/components/orderDetails";
 import useOrderHook from "src/hooks/orderHook";
+import useRedirect from "src/hooks/useRedirect";
 
 /**
  * @crystal23733 24.08.01
@@ -16,6 +16,10 @@ const MyPage: React.FC = () => {
 
   const { orderDetails, error, loading } = useOrderHook(name);
 
+  const { redirect, error: redirectError } = useRedirect();
+  if (redirectError) {
+    return <p>{redirectError}</p>;
+  }
   return (
     <div
       id="root"
@@ -24,9 +28,9 @@ const MyPage: React.FC = () => {
       <LoginInfoComponent email="rockCoders" />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
-          <LinkButtonComponent href="/UserPage">
+          <button onClick={redirect}>
             &larr; 돌아가기
-          </LinkButtonComponent>
+          </button>
         </div>
         <MyPageFormComponent />
         {loading ? (
