@@ -25,7 +25,13 @@ export const ExpirationDataTable: React.FC = () => {
   }
 
   const sortedProducts = data.sort((a, b) => {
-    return new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime();
+    const expirationDateComparison = new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime();
+  
+  if (expirationDateComparison !== 0) {
+    return expirationDateComparison;
+  }
+  
+  return a.productName.localeCompare(b.productName);
   });
 
   const handleDelete = (_id:string) => {
@@ -47,7 +53,6 @@ export const ExpirationDataTable: React.FC = () => {
           <TableRow key={product._id}>
           <TableCell>{product.productCategory}</TableCell>
           <TableCell>{product.productName}</TableCell>
-          <TableCell>{product.quantity}</TableCell>
           <TableCell>{new Date(product.expirationDate).toDateString()}</TableCell>
           <TableCell className="text-right">
             <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id)}>폐기하기</ButtonComponent>
