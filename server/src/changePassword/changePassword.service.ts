@@ -16,7 +16,7 @@ export class PasswordService {
     private readonly jwtService: JwtService,
   ) {}
 
-  verifyToken(token:string) {
+  verifyToken(token: string) {
     return this.jwtService.verify(token);
   }
 

@@ -57,11 +57,11 @@ export class AuthService {
 
   /**
    * @crystal23733 24.08.05
-   * @param email 
+   * @param email
    * @returns 이메일 확인
    */
-  async getUserInfo(email:string): Promise<IMember | null> {
-    return this.memberModel.findOne({email}).exec();
+  async getUserInfo(email: string): Promise<IMember | null> {
+    return this.memberModel.findOne({ email }).exec();
   }
 
   public verifyToken(token: string): any {
