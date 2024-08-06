@@ -1,35 +1,38 @@
 import React from "react";
-
-import NavListBox from "src/components/admin/navListBox";
+import AdminNav from "src/components/admin/adminNav";
 import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
 import Logo from "src/components/logo";
-
+import TitleComponent from "src/components/titleComponent";
+import Modal from "src/components/modal/Modal";
 /**
  * @jojayeon 24.08.05
  * @returns 유통관리 페이지
  */
 
+const a = () => {
+  "aaaaa"
+}
+
 const AdminstockDate: React.FC = () => {
   return (
     <div id="root">
-      <main>
-        <div className="grid w-screen h-screen gap-4 p-3 grid-cols-custom-30-70">
-          <NavListBox/>
+      <div className="grid w-screen gap-4 p-3 overflow-hidden grid-cols-custom-20-80">
+        <div className="ml-5">
+          <AdminNav/>
         </div>
-        <div>
-        <Logo 
-          width={200} 
-          height={200} 
-          alt="Custom Logo"
-          className="rounded-lg shadow-lg"
-        />
-        </div>
-        <section>
+        <div className="flex flex-col gap-8 mr-5">
           <div className="flex items-center justify-start w-50 h-auto p-3 border border-black border-solid">
-            <ExpirationDataTable/>
+            <Logo 
+          width={200} 
+          height={100} 
+          alt="Custom Logo"
+          className=""
+        />
+        <TitleComponent titletext="유통기한 관리" />
           </div>
-        </section>
-      </main>
+          <ExpirationDataTable/>
+        </div>
+      </div>
     </div>
   );
 };
