@@ -10,13 +10,13 @@ import IProduct from '@db/products/product.interface';
 @Injectable()
 export class productsServiceDate {
   constructor(
-    @InjectModel("Products") private readonly productModel: Model<IProduct>,
+    @InjectModel("Product") private readonly productModel: Model<IProduct>,
   ) {}
 
   async findAll(): Promise<IProduct[]> {
-    const products = await this.productModel.find().exec();
+    const product = await this.productModel.find().exec();
     console.log("찾을게유")
-    return products
+    return product
   }
 
   async remove(id: string): Promise<void> {
