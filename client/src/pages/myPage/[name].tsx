@@ -14,7 +14,15 @@ const MyPage: React.FC = () => {
   const router = useRouter();
   const name = typeof router.query.name === "string" ? router.query.name : "";
 
-  const { orderDetails, error, loading } = useOrderHook(name);
+  // 기본값 설정
+  const safeName = typeof name === "string" ? name : "";
+
+  // 훅 호출은 조건문 밖에서 수행
+  const { orderDetails, error, loading } = useOrderHook(safeName);
+
+  if (typeof name !== "string") {
+    return <p>Invalid name</p>; // 오류 처리
+  }
 
   return (
     <div

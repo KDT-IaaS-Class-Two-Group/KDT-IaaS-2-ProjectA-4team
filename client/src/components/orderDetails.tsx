@@ -1,7 +1,16 @@
 import React from "react";
 
+interface Order {
+  saleID: string;
+  products: {
+    productName: string;
+    unitPrice: number;
+  };
+  saleDate: string;
+}
+
 interface OrderDetailsProps {
-  orderDetails: any[];
+  orderDetails: Order[];
   error: string | null;
 }
 
@@ -23,7 +32,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
             >
               <p>{order.products.productName}</p>
               <p>{order.products.unitPrice} 원</p>
-              <p>{order.saleData}</p>
+              <p>{order.saleDate}</p>
             </div>
           ))
         ) : (

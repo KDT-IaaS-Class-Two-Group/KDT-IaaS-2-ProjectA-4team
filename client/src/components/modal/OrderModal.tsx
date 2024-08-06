@@ -11,10 +11,11 @@ import ButtonComponent from "../CustomButton";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import ProductOrderModalHook from "src/hooks/ProductOrderModalHook";
+import IProduct from "../../../../db/products/product.interface";
 
 interface OrderModalProps {
   isOpen: boolean;
-  product: ProductDTO;
+  product: IProduct; // IProduct로 수정
   onClose: () => void;
   onSave: (product: ProductDTO) => void;
 }
@@ -37,7 +38,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
         productName: product.productName,
         unitPrice: product.unitPrice,
         quantity: quantity,
-        restockDate: new Date(),
+        restockDate: new Date(), // 새로운 restockDate
         expirationDate: new Date(
           new Date().setMonth(new Date().getMonth() + 1),
         ),
@@ -47,11 +48,11 @@ const OrderModal: React.FC<OrderModalProps> = ({
       onSave(saveProduct);
       onClose();
     } catch (err) {
-      console.error("Order failed:", err);
+      console.error("주문 실패:", err);
     }
   };
 
-  const OrderModalHeader: React.FC<{ product: ProductDTO | null }> = ({
+  const OrderModalHeader: React.FC<{ product: IProduct | null }> = ({
     product,
   }) => (
     <DialogHeader>

@@ -45,7 +45,8 @@ const ProductTable: React.FC = () => {
     setSelectedProduct(null);
   };
 
-  const handleSave = async (updatedProduct: ProductDTO) => {
+  // updatedProduct: ProductDTO 매개 변수 이용 X => 삭제
+  const handleSave = async () => {
     try {
       await refetch();
       closeUpdateModal();

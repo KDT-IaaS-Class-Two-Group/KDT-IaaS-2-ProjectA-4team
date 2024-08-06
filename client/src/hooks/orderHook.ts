@@ -1,6 +1,7 @@
+// src/hooks/orderHook.ts
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/orderFetch";
-import TOrders from "src/types/Order.type";
+import TOrder from "src/types/Order.type";
 
 /**
  * @crystal23733 24.08.01
@@ -10,14 +11,14 @@ import TOrders from "src/types/Order.type";
  * - error : 에러 메세지
  */
 const useOrderHook = (name: string) => {
-  const [orderDetails, setOrderDetails] = useState<TOrders[]>([]);
+  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]); // `TOrder` 타입으로 설정
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const orders = await orderFetch(name);
+        const orders: TOrder[] = await orderFetch(name);
         const transformedOrders = orders.map((order) => {
           console.log(order.saleDate);
           const date = new Date(order.saleDate);
@@ -38,6 +39,7 @@ const useOrderHook = (name: string) => {
         setLoading(false);
       }
     };
+
     fetchOrderDetails();
   }, [name]);
   return { orderDetails, error, loading };

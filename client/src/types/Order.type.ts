@@ -1,5 +1,10 @@
-type TOrders = {
-  saleDate: string | number | Date;
-};
+interface TOrder {
+  saleID: string;
+  products: {
+    productName: string;
+    unitPrice: number;
+  };
+  saleDate: string;
+}
 
-export default TOrders;
+export default TOrder;

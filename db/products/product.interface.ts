@@ -18,4 +18,6 @@ export default interface IProduct
     IQuantity,
     IRestockDate,
     IExpirationDate,
-    IProductCategory {}
+    IProductCategory {
+  _id: string;
+}
