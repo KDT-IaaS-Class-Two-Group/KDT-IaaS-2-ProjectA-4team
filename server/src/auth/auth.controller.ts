@@ -85,4 +85,36 @@ export class AuthController {
         .json({ success: false, message: 'Invalid token' });
     }
   }
+
+  @Post('changePassword')
+  async changePassword(
+    @Req() req: Request,
+    @Body('password') oldPassword: string,
+    @Body('changePassword') newPassword: string,
+    @Res() res: Response,
+  ): Promise<any> {
+    const token = req.cookies['token'];
+    if (!token) {
+      res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ message: '인증되지 않았습니다.' });
+      return;
+    }
+    try {
+      const decoded = this.authService.verifyToken(token);
+      const userEmail = decoded.email;
+      await this.authService.changePassword(
+        userEmail,
+        oldPassword,
+        newPassword,
+      );
+      res
+        .status(HttpStatus.OK)
+        .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
+      }
+    }
+  }
 }

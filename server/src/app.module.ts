@@ -12,7 +12,6 @@ import { MembersModule } from './member/members.module';
     SaleModule,
     AuthModule,
     StockModule,
-    PasswordModule,
     MembersModule,
   ],
   controllers: [],
