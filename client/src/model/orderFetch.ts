@@ -8,7 +8,7 @@ export default async (name: string): Promise<TOrders[]> => {
   try {
     const response = await fetch(`http://localhost:3001/sales/orders/${name}`, {
       method: "GET",
-      credentials: "include"
+      credentials: "include",
     });
     const responseData = await response.json();
     if (!response.ok) {

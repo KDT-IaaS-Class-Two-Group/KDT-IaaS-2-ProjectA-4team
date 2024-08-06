@@ -5,7 +5,8 @@ import ValiChecker from "src/modules/validation/ValiChecker";
 const useChangePasswordHook = () => {
   const [password, setPassword] = useState<string>("");
   const [changePassword, setChangePassword] = useState<string>("");
-  const [changePasswordConfirm, setChangePasswordConfirm] = useState<string>("");
+  const [changePasswordConfirm, setChangePasswordConfirm] =
+    useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 

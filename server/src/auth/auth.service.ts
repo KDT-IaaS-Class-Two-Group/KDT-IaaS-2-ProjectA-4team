@@ -71,9 +71,9 @@ export class AuthService {
   /**
    * * 비밀번호 변경
    * @crystal23733 24.08.06
-   * @param email 
-   * @param oldPassword 
-   * @param newPassword 
+   * @param email
+   * @param oldPassword
+   * @param newPassword
    * @returns 상태
    */
   async changePassword(
