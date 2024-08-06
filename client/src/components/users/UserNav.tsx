@@ -16,7 +16,7 @@ const UserNav = () => {
         className="w-72 ml-6 mt-6 mb-20"
         email="rockcoders@kdt.com"
       />
-      <Cart />
+      {/* <Cart /> */}
       <FooterLinks className="w-72 mt-24 mx-6" />
     </div>
   );
