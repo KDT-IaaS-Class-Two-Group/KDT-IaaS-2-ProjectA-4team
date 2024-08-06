@@ -1,4 +1,4 @@
-// ! member 인터페이스 겹침
+// ! member 인터페이스 중복됨 모듈화 필요
 interface MemberData {
   id: string;
   member: string;
