@@ -1,20 +1,33 @@
 import { useRouter } from "next/router";
-import useRoleIdHook from "./useRoleIdHook";
-import { useEffect } from "react";
+import { useState } from "react";
+import getUserRoleFetch from "src/model/getUserRoleFetch";
 
 const useRedirect = () => {
   const router = useRouter();
-  const { role, loading } = useRoleIdHook();
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!loading) {
-      if (role === "admin") {
-        router.push("/admin");
-      } else if (role === "user") {
-        router.push("/userPage");
+  const redirect = async () => {
+    try {
+      const userRole = await getUserRoleFetch();
+      console.log('User role:', userRole); // 디버깅용 로그
+
+      if (userRole === 1) {
+        console.log('Redirecting to /admin'); // 디버깅용 로그
+        router.push('/admin/salesInquiry');
+      } else if (userRole === 0) {
+        console.log('Redirecting to /userPage'); // 디버깅용 로그
+        router.push('/userPage');
+      } else {
+        console.error('Invalid user role');
+        setError('잘못된 사용자 역할입니다.');
       }
+    } catch (err) {
+      console.error('Error fetching user role:', err);
+      setError('사용자 역할 정보를 가져오는 데 실패했습니다.');
     }
-  }, [role, loading, router]);
+  };
+
+  return { redirect, error };
 };
 
 export default useRedirect;
