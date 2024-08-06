@@ -3,7 +3,7 @@
 import { GetServerSideProps } from "next";
 import AdminNav from "src/components/admin/adminNav";
 import MemberInfoTable from "src/components/table/MemberInfoTable";
-import IMemberInfo from "./memberInfo.interface";
+import IMemberInfo from "./MemberInfo.interface";
 
 interface Props {
   members: IMemberInfo[];
