@@ -3,6 +3,7 @@
 import ISaleProducts from "./interface/SaleProducts.interface";
 
 export class SaleProductDTO implements ISaleProducts {
+  public _id: string;
   public productID: number;
   public productName: string;
   public unitPrice: number;
@@ -10,6 +11,7 @@ export class SaleProductDTO implements ISaleProducts {
   public totalPrice: number;
 
   constructor(product: ISaleProducts) {
+    this._id = product._id;
     this.productID = product.productID;
     this.productName = product.productName;
     this.unitPrice = product.unitPrice;
