@@ -15,7 +15,7 @@ const a = () => {
 
 const AdminstockDate: React.FC = () => {
   return (
-    <div id="root">
+    <>
       <div className="grid w-screen gap-4 p-3 overflow-hidden grid-cols-custom-20-80">
         <div className="ml-5">
           <AdminNav/>
@@ -23,17 +23,17 @@ const AdminstockDate: React.FC = () => {
         <div className="flex flex-col gap-8 mr-5">
           <div className="flex items-center justify-start w-50 h-auto p-3 border border-black border-solid">
             <Logo 
-          width={200} 
+          width={100} 
           height={100} 
           alt="Custom Logo"
-          className=""
+          className="pr-5"
         />
         <TitleComponent titletext="유통기한 관리" />
           </div>
           <ExpirationDataTable/>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
