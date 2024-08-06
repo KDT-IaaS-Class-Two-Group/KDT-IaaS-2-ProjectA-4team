@@ -1,5 +1,5 @@
 type TOrders = {
-  saleData: string | number | Date;
+  saleDate: string | number | Date;
 };
 
 export default TOrders;
