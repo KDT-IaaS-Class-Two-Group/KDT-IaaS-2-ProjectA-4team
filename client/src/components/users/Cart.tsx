@@ -3,8 +3,8 @@ import CartItemComponent from "./CartItem";
 import { CartHook } from "src/hooks/cartHook";
 
 interface CartProps {
-  items: { menu: string; unitPrice: number }[];
-  removedItem: (data: string) => void;
+  items?: { menu: string; unitPrice: number }[];
+  removedItem?: (data: string) => void;
 }
 
 /**
@@ -16,11 +16,15 @@ interface CartProps {
  * @returns { JSX.Element }
  */
 
-const Cart: FC<CartProps> = ({ items, removedItem }) => {
+const Cart: FC<CartProps> = ({ items = [], removedItem = () => {} }) => {
   const { totalPrice, handlePriceChange, error } = CartHook(items);
 
   if (error) {
     return <div>{error}</div>;
+  }
+
+  if (!items.length) {
+    return <div>Your cart is empty.</div>;
   }
 
   return (
