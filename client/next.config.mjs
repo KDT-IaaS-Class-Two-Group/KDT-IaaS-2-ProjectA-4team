@@ -4,6 +4,6 @@ export default {
 
   // 아래 항목 추가
   experimental: {
-    externalDir: true
+    externalDir: true,
   },
-}
+};

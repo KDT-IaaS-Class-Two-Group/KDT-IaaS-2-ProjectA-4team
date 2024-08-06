@@ -14,7 +14,7 @@ const MyPage: React.FC = () => {
   const router = useRouter();
   const { name } = router.query; // URL 파라미터에서 사용자 이름 읽기
 
-  if (typeof name !== 'string') {
+  if (typeof name !== "string") {
     return <p>Invalid name</p>; // 오류 처리
   }
 

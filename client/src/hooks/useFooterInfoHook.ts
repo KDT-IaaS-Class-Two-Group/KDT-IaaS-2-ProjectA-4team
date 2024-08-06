@@ -9,11 +9,11 @@ const useFooterInfoHook = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserInfo = async() => {
-      try { 
+    const fetchUserInfo = async () => {
+      try {
         const response = await fetch("http://localhost:3001/user-info", {
           method: "GET",
-          credentials : "include"
+          credentials: "include",
         });
         const result = await response.json();
         if (response.ok) {
@@ -22,12 +22,12 @@ const useFooterInfoHook = () => {
           console.error("Error fetching user info:", result.message); // 에러 메시지 로그
           setUserName(null);
         }
-      } catch(error) {
+      } catch (error) {
         setUserName(null);
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchUserInfo();
   }, []);
   return { userName, loading };
