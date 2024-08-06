@@ -3,8 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import IProduct from '@db/products/product.interface';
-import { Console } from 'console';
-
+/**
+ * @jojayeon 24.08.06
+ * * 유통기한 관리 페이지 서버 서비스
+ */
 @Injectable()
 export class productsServiceDate {
   constructor(
