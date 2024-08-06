@@ -35,7 +35,13 @@ export const UserpageHook = () => {
 
   const handleAddToCart = (menu: string, unitPrice: number) => {
     try {
-      setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
+      setCartItems((prevItems) => {
+        const itemIndex = prevItems.findIndex((item) => item.menu === menu);
+        if (itemIndex === -1) {
+          return [...prevItems, { menu, unitPrice }];
+        }
+        return prevItems;
+      });
     } catch (error) {
       console.error("Failed to add item to cart: ", error);
       setError("장바구니에 아이템을 추가하지 못했습니다.");
