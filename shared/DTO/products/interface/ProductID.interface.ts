@@ -1,3 +1,3 @@
 export default interface IProductID {
-  productID: number;
+  productID?: number;
 }

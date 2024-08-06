@@ -4,7 +4,7 @@ import ISaleProducts from "./interface/SaleProducts.interface";
 
 export class SaleProductDTO implements ISaleProducts {
   public _id: string;
-  public productID: number;
+  public productID: number | undefined;
   public productName: string;
   public unitPrice: number;
   public quantity: number;
