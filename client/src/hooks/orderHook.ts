@@ -4,7 +4,7 @@ import TOrders from "src/types/Order.type";
 
 /**
  * @crystal23733 24.08.01
- * @param {string} name 더미데이터
+ * @param {string} name
  * @returns {object}
  * - orderDetails : 주문 데이터
  * - error : 에러 메세지
