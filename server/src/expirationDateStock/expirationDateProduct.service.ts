@@ -3,11 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import IProduct from '@db/products/product.interface';
+import { Console } from 'console';
 
 @Injectable()
 export class productsServiceDate {
   constructor(
-    @InjectModel("Product") private readonly productModel: Model<IProduct>,
+    @InjectModel("Products") private readonly productModel: Model<IProduct>,
   ) {}
 
   async findAll(): Promise<IProduct[]> {
@@ -18,6 +19,6 @@ export class productsServiceDate {
 
   async remove(id: string): Promise<void> {
     await this.productModel.deleteOne({ _id: id }).exec();
-  console.log("삭제할게유")
+  console.log("폐기해유")
   }
 }

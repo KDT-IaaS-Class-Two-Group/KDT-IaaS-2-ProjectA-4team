@@ -19,7 +19,7 @@ const [error, setError] = useState<string | null>(null);
 const fetchData = async () => { 
   setLoading(true);
   try {
-    const response = await fetch('http://localhost:3001/productsDate'); //endpoint - productsDate
+    const response = await fetch('http://localhost:3001/productsDate'); 
     if (!response.ok) {
       throw new Error('네트워크 응답이 올바르지 않습니다.');
     }

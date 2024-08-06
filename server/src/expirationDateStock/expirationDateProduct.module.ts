@@ -6,9 +6,9 @@ import productSchema from '@db/products/schema/product.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Product', schema: productSchema }]),
+    MongooseModule.forFeature([{ name: 'Products', schema: productSchema }]),
   ],
-  controllers: [ProductsController],//컨트롤러
-  providers: [productsServiceDate],//서비스
+  controllers: [ProductsController],
+  providers: [productsServiceDate],
 })
 export class expirationDateStockModule {}
