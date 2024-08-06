@@ -1,6 +1,7 @@
+// src/hooks/orderHook.ts
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/orderFetch";
-import TOrders from "src/types/Order.type";
+import TOrder from "src/types/Order.type";
 
 /**
  * @crystal23733 24.08.01
@@ -10,32 +11,24 @@ import TOrders from "src/types/Order.type";
  * - error : 에러 메세지
  */
 const useOrderHook = (name: string) => {
-  const [orderDetails, setOrderDetails] = useState<TOrders[]>([]);
+  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]); // `TOrder` 타입으로 설정
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const orders = await orderFetch(name);
-        const transformedOrders = orders.map((order) => {
-          console.log(order.saleData);
-          const date = new Date(order.saleData);
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, "0");
-          const day = String(date.getDate()).padStart(2, "0");
-          return {
-            ...order,
-            saleData: `${year}-${month}-${day}`,
-          };
-        });
-        console.log(transformedOrders);
-        setOrderDetails(transformedOrders);
+        const orders: TOrder[] = await orderFetch(name);
+
+        // `TOrder` 타입의 데이터를 그대로 사용합니다
+        setOrderDetails(orders);
       } catch (error) {
         setError("주문내역을 가지고오는 중 에러가 발생하였습니다.");
       }
     };
+
     fetchOrderDetails();
   }, [name]);
+
   return { orderDetails, error };
 };
 
