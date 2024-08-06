@@ -11,6 +11,7 @@ const MyPageFormComponent: React.FC = () => {
     changePasswordConfirm,
     setChangePasswordConfirm,
     error,
+    successMessage,
     handleSubmit,
   } = useChangePasswordHook();
   return (
@@ -47,6 +48,7 @@ const MyPageFormComponent: React.FC = () => {
       />
       <Input type="submit" value="변경하기" />
       {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
     </form>
   );
 };
