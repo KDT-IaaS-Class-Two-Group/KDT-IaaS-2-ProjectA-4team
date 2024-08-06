@@ -1,10 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CardComponent from "src/components/Card";
-import productFetchMenu from "src/model/productFetchMenu";
+import { MenuItemHook } from "src/hooks/menuItemHook";
 
 interface MenuItemsProps {
   selectCategory: string;
   onAddToCart: (title: string, price: number) => void;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  unitPrice: number;
+  quantity: number;
+  restockDate: string;
+  expirationDate: string;
 }
 
 /**
@@ -19,121 +29,54 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   selectCategory,
   onAddToCart,
 }) => {
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const productData = await productFetchMenu();
-        return productData;
-      } catch (error) {
-        console.error("데이터 로드 실패");
-      }
-    };
-
-    loadData();
-  });
+  const { productList } = MenuItemHook();
 
   const renderMenuItems = () => {
+    const productBread: Product[] = [];
+    const productPatty: Product[] = [];
+    const productSource: Product[] = [];
+    const productSide: Product[] = [];
+    const productDrink: Product[] = [];
+
+    productList.forEach((product) => {
+      if (product.category === "bread") {
+        productBread.push(product);
+      } else if (product.category === "patty") {
+        productPatty.push(product);
+      } else if (product.category === "source") {
+        productSource.push(product);
+      } else if (product.category === "side") {
+        productSide.push(product);
+      } else if (product.category === "drink") {
+        productDrink.push(product);
+      }
+    });
+
+    // 카테고리에 따라 제품을 렌더링합니다.
+    const renderCategory = (products: Product[]) => (
+      <>
+        {products.map((product) => (
+          <CardComponent
+            key={product.id}
+            title={product.name}
+            content={product.unitPrice}
+            onAddToCart={() => onAddToCart(product.name, product.unitPrice)}
+          />
+        ))}
+      </>
+    );
+
     switch (selectCategory) {
       case "bread":
-        return (
-          <>
-            <CardComponent
-              title="화이트"
-              content={4000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="허니오트"
-              content={4000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="플랫 브레드"
-              content={4000}
-              onAddToCart={onAddToCart}
-            />
-          </>
-        );
+        return renderCategory(productBread);
       case "patty":
-        return (
-          <>
-            <CardComponent
-              title="게살 패티"
-              content={5000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="징징이다리 패티"
-              content={5000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="집게사장 손 패티"
-              content={5000}
-              onAddToCart={onAddToCart}
-            />
-          </>
-        );
+        return renderCategory(productPatty);
       case "source":
-        return (
-          <>
-            <CardComponent
-              title="랜치 소스"
-              content={2000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="칠리 소스"
-              content={2500}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="스위트어니언 소스"
-              content={1800}
-              onAddToCart={onAddToCart}
-            />
-          </>
-        );
+        return renderCategory(productSource);
       case "side":
-        return (
-          <>
-            <CardComponent
-              title="감자튀김"
-              content={1500}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="치킨 너겟"
-              content={2000}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="어니언 링"
-              content={1800}
-              onAddToCart={onAddToCart}
-            />
-          </>
-        );
+        return renderCategory(productSide);
       case "drink":
-        return (
-          <>
-            <CardComponent
-              title="콜라"
-              content={1200}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="사이다"
-              content={1200}
-              onAddToCart={onAddToCart}
-            />
-            <CardComponent
-              title="주스"
-              content={1500}
-              onAddToCart={onAddToCart}
-            />
-          </>
-        );
+        return renderCategory(productDrink);
       default:
         return null;
     }
