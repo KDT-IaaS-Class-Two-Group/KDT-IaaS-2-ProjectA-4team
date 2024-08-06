@@ -10,7 +10,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "@typescript-eslint/no-unused-vars": "warn", // 혹은 'off'
+    "@typescript-eslint/no-unused-vars": "off", // 혹은 'off'
     "prefer-const": "warn", // 혹은 'off'
     "import/no-anonymous-default-export": "off", // 익명 함수 사용 허용
   },
