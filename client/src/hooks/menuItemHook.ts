@@ -7,8 +7,8 @@ interface Product {
   category: string;
   unitPrice: number;
   quantity: number;
-  restockDate: string;
-  expirationDate: string;
+  restockDate: Date;
+  expirationDate: Date;
 }
 
 export const MenuItemHook = () => {
