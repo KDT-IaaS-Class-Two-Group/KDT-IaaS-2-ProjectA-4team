@@ -50,7 +50,7 @@ export const ExpirationDataTable: React.FC = () => {
           <TableCell>{product.quantity}</TableCell>
           <TableCell>{new Date(product.expirationDate).toDateString()}</TableCell>
           <TableCell className="text-right">
-            <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id.toString())}>폐기하기</ButtonComponent>
+            <ButtonComponent variant="default" type="button" onClick={() => handleDelete(product._id)}>폐기하기</ButtonComponent>
           </TableCell>
         </TableRow>
         ))}
