@@ -5,17 +5,16 @@ import TOrders from "src/types/Order.type";
 /**
  * @crystal23733 24.08.01
  * @param {string} name
- * @returns 
+ * @returns
  * - orderDetails : 주문 데이터
  * - error : 에러 메세지
  */
-const useOrderHook = (name: string)=> {
+const useOrderHook = (name: string) => {
   const [orderDetails, setOrderDetails] = useState<TOrders[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-
     const fetchOrderDetails = async () => {
       try {
         const orders = await orderFetch(name);

@@ -12,7 +12,7 @@ import useOrderHook from "src/hooks/orderHook";
  */
 const MyPage: React.FC = () => {
   const router = useRouter();
-  const name = typeof router.query.name === 'string' ? router.query.name : '';
+  const name = typeof router.query.name === "string" ? router.query.name : "";
 
   const { orderDetails, error, loading } = useOrderHook(name);
 
@@ -29,7 +29,11 @@ const MyPage: React.FC = () => {
           </LinkButtonComponent>
         </div>
         <MyPageFormComponent />
-        {loading ? (<p>...로딩중</p>) : <OrderDetails orderDetails={orderDetails} error={error} />}
+        {loading ? (
+          <p>...로딩중</p>
+        ) : (
+          <OrderDetails orderDetails={orderDetails} error={error} />
+        )}
       </div>
     </div>
   );
