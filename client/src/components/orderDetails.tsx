@@ -1,7 +1,16 @@
 import React from "react";
 
+interface Order {
+  saleID: string;
+  products: {
+    productName: string;
+    unitPrice: number;
+  };
+  saleData: string;
+}
+
 interface OrderDetailsProps {
-  orderDetails: any[];
+  orderDetails: Order[];
   error: string | null;
 }
 
