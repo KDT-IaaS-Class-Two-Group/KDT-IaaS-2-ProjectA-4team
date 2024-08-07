@@ -11,7 +11,7 @@ import TOrder from "src/types/Order.type";
  * - error : 에러 메세지
  */
 const useOrderHook = (name: string) => {
-  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]); // `TOrder` 타입으로 설정
+  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -20,7 +20,6 @@ const useOrderHook = (name: string) => {
       try {
         const orders: TOrder[] = await orderFetch(name);
         const transformedOrders = orders.map((order) => {
-          console.log(order.saleDate);
           const date = new Date(order.saleDate);
           const year = date.getFullYear();
           const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -30,7 +29,6 @@ const useOrderHook = (name: string) => {
             saleData: `${year}-${month}-${day}`,
           };
         });
-        console.log(transformedOrders);
         setError(null);
         setOrderDetails(transformedOrders);
       } catch (error) {
