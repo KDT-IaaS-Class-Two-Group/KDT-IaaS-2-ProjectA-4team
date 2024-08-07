@@ -1,6 +1,6 @@
 import React from "react";
-import LinkButtonComponent from "../linkButtonComponent";
-import FooterLinks from "../footerComponent";
+import LinkButtonComponent from "../../linkButtonComponent";
+import FooterLinks from "../../footerComponent";
 
 /**
  * @crystal23733 24.07.29

@@ -1,7 +1,7 @@
 // pages/memberInfo.tsx
 
 import { GetServerSideProps } from "next";
-import AdminNav from "src/components/admin/adminNav";
+import AdminNav from "src/components/admin/nav/adminNav";
 import MemberInfoTable from "src/components/table/MemberInfo/MemberInfoTable";
 import IMemberInfo from "../../interfaces/MemberInfo.interface";
 

@@ -1,6 +1,6 @@
 // * 재고 조회
 import ProductTable from "src/components/table/Product/ProductTable";
-import AdminNav from "src/components/admin/adminNav";
+import AdminNav from "src/components/admin/nav/adminNav";
 import TitleComponent from "src/components/titleComponent";
 
 const StockInfo = () => {
