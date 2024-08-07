@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import CartItemComponent from "./CartItem";
+import CartItemComponent from "../users/CartItem";
 import { CartHook } from "src/hooks/cartHook";
 
 interface CartProps {
