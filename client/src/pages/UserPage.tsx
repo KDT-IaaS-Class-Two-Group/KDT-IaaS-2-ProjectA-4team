@@ -59,7 +59,7 @@ const UserPage: FC = () => {
         <Cart items={cartItems} removedItem={handleRemoveItem} />
         <ButtonComponent
           type="submit"
-          className="w-60 bg-yellow-400 text-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
           onClick={() => console.log("buy!")}
         >
           Buy !
