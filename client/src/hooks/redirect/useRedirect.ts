@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import getUserRoleFetch from "src/model/getUserRoleFetch";
+import getUserRoleFetch from "src/model/user/role/getUserRoleFetch";
 
 const useRedirect = () => {
   const router = useRouter();

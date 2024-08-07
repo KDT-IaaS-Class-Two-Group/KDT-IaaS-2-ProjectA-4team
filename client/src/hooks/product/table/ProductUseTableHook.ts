@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { productFetchTableData } from "src/model/productFetchTableData";
+import { productFetchTableData } from "src/model/product/table/productFetchTableData";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
 /**

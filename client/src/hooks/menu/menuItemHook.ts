@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import productFetchMenu from "src/model/productFetchMenu";
+import productFetchMenu from "src/model/product/menu/productFetchMenu";
 
 interface Product {
   id: string;

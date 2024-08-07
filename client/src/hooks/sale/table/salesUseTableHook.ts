@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
-import salesFetchTableData from "src/model/salesFetchTableData";
+import salesFetchTableData from "src/model/sale/table/salesFetchTableData";
 
 /**
  * @crystal23733 24.07.30

@@ -1,4 +1,4 @@
-import { ProductDTO } from "../../../shared/DTO/products/product.dto";
+import { ProductDTO } from "../../../../../shared/DTO/products/product.dto";
 
 /**
  * @moonhr 24.07.28

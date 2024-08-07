@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import { saveProductData } from "src/model/productFetchTableData";
+import { saveProductData } from "src/model/product/table/productFetchTableData";
 
 interface UseOrderProductHook {
   orderProductData: (product: ProductDTO) => Promise<ProductDTO>;

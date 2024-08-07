@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { updateProductUpdate } from "src/model/productFetchUpdate";
+import { updateProductUpdate } from "src/model/product/update/productFetchUpdate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
 interface productUpdateHook {

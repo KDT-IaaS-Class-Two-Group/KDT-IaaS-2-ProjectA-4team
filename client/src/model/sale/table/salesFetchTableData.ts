@@ -1,4 +1,4 @@
-import { SaleDTO } from "../../../shared/DTO/sale/sale.dto";
+import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 
 /**
  * @crystal23733 24.07.30

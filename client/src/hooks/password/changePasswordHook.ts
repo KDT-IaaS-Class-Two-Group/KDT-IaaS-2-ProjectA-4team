@@ -1,5 +1,5 @@
 import { useState } from "react";
-import changePasswordFetch from "src/model/changePasswordFetch";
+import changePasswordFetch from "src/model/password/change/changePasswordFetch";
 import ValiChecker from "src/modules/validation/ValiChecker";
 
 const useChangePasswordHook = () => {
