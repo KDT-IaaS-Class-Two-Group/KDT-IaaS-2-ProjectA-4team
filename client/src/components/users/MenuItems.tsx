@@ -29,7 +29,27 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   selectCategory,
   onAddToCart,
 }) => {
-  const { productList } = MenuItemHook();
+  // const { productList } = MenuItemHook();
+  const productList: Product[] = [
+    {
+      id: "1",
+      name: "플랫 브레드",
+      category: "bread",
+      unitPrice: 2000,
+      quantity: 5,
+      restockDate: new Date(2024, 8, 5),
+      expirationDate: new Date(2024, 10, 11),
+    },
+    {
+      id: "2",
+      name: "치킨 패티",
+      category: "patty",
+      unitPrice: 4000,
+      quantity: 15,
+      restockDate: new Date(2024, 8, 5),
+      expirationDate: new Date(2024, 10, 11),
+    },
+  ];
 
   const renderMenuItems = () => {
     const productBread: Product[] = [];
@@ -53,7 +73,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
     });
 
     // 카테고리에 따라 제품을 렌더링합니다.
-    const renderCategory = (products: Product[]) => (
+    const renderMenu = (products: Product[]) => (
       <>
         {products.map((product) => (
           <CardComponent
@@ -68,15 +88,15 @@ const MenuItems: React.FC<MenuItemsProps> = ({
 
     switch (selectCategory) {
       case "bread":
-        return renderCategory(productBread);
+        return renderMenu(productBread);
       case "patty":
-        return renderCategory(productPatty);
+        return renderMenu(productPatty);
       case "source":
-        return renderCategory(productSource);
+        return renderMenu(productSource);
       case "side":
-        return renderCategory(productSide);
+        return renderMenu(productSide);
       case "drink":
-        return renderCategory(productDrink);
+        return renderMenu(productDrink);
       default:
         return null;
     }
