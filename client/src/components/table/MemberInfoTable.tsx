@@ -30,9 +30,9 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
 
     try {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
-      const EP_members = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
-      const url = url3001Generator(EP_API, EP_members, id);
-      const res = await fetch(url, {
+      const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
+
+      const res = await fetch(url3001Generator(EP_API, EP_MEMBERS, id), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
