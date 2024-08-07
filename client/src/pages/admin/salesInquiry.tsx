@@ -1,5 +1,6 @@
 import React from "react";
 import AdminNav from "src/components/admin/adminNav";
+import SearchForm from "src/components/SearchForm";
 import SalesInquiryTable from "src/components/table/SalesInquiryTable";
 import TitleComponent from "src/components/titleComponent";
 
@@ -14,6 +15,7 @@ const SalesInquiry: React.FC = () => {
           <div className="flex items-center justify-end w-auto h-16 p-3 border border-black border-solid">
             <TitleComponent titletext="매출 조회" />
           </div>
+          <SearchForm />
           {/* 각 페이지에 맞는 테이블 배치 */}
           <SalesInquiryTable />
         </div>
