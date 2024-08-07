@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -8,22 +8,9 @@ import {
   TableRow,
 } from "@../../components/ui/table";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-
-import { Button } from "@../../components/ui/button";
-
 interface DynamicTableProps<T extends object> {
   data: T[];
-  // columns: ColumnDef<T, any>[];
-  fetchMoreData: () => void;
   renderActions?: (row: T) => React.ReactNode;
-  hasMoreData: boolean;
 }
 
 /**
@@ -34,89 +21,57 @@ interface DynamicTableProps<T extends object> {
  */
 const DynamicTable = <T extends object>({
   data,
-  // columns,
-  fetchMoreData,
-  hasMoreData,
   renderActions,
 }: DynamicTableProps<T>) => {
-  const columns = useMemo(() => {
-    if (data.length === 0) return [];
-
-    const keys = Object.keys(data[0]) as (keyof T)[];
-    const columnDefs: ColumnDef<T>[] = keys.map((key) => ({
-      accessorKey: key as string,
-      header: String(key),
-      cell: (info) => info.getValue(),
-    }));
-
-    if (renderActions) {
-      columnDefs.push({
-        id: "actions",
-        header: "Actions",
-        cell: ({ row }) => renderActions(row.original),
-      });
-    }
-
-    return columnDefs;
-  }, [data, renderActions]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
+  // 데이터의 키값을 테이블의 칼럼으로 사용함.
+  const columns = data.length > 0 ? (Object.keys(data[0]) as (keyof T)[]) : [];
 
   return (
     <>
       <div>
         <Table className="min-w-full bg-white">
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="px-4 py-2 border-b border-gray-200"
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
-                ))}
-                {renderActions && (
-                  <TableHead className="px-4 py-2 border-b border-gray-200">
-                    Actions
-                  </TableHead>
-                )}
-              </TableRow>
-            ))}
+            <TableRow>
+              {/* 열 헤더 렌더링 */}
+              {columns.map((column) => (
+                <TableHead
+                  key={column as string} // key 속성의 타입 오류 방지를 위한 강제 변환
+                  className="px-4 py-2 border-b border-gray-200"
+                >
+                  {column as string} {/* 헤더 텍스트 */}
+                </TableHead>
+              ))}
+              {/* renderActions이 제공되면 "Actions" 열 추가 */}
+              {renderActions && (
+                <TableHead className="px-4 py-2 border-b border-gray-200">
+                  Actions
+                </TableHead>
+              )}
+            </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
+            {/* 데이터의 각 항목을 행으로 렌더링 */}
+            {data.map((row, rowIndex) => (
+              <TableRow key={rowIndex}>
+                {/* 각 행의 셀을 렌더링 */}
+                {columns.map((column) => (
                   <TableCell
-                    key={cell.id}
+                    key={column as string} // key 속성의 타입 오류 방지를 위한 강제 변환
                     className="px-4 py-2 border-b border-gray-200"
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {(row as never)[column]} {/* 해당 셀의 데이터 */}
                   </TableCell>
                 ))}
+                {/* renderActions이 제공되면, 각 행의 마지막 열에 액션을 렌더링 */}
+                {renderActions && (
+                  <TableCell className="px-4 py-2 text-center border-b border-gray-200">
+                    {renderActions(row)}
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        {hasMoreData && (
-          <div className="py-4 text-center">
-            <Button variant="outline" size="sm" onClick={fetchMoreData}>
-              Load More
-            </Button>
-          </div>
-        )}
       </div>
     </>
   );
