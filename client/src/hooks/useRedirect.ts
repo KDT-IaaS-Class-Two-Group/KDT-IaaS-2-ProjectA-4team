@@ -12,7 +12,7 @@ const useRedirect = () => {
       console.log("User role:", userRole); // 디버깅용 로그
 
       if (userRole === 1) {
-        await router.push("/admin/salesInquiry");
+        await router.push("/admin/stockInfo");
       } else if (userRole === 0) {
         await router.push("/UserPage");
       } else {
