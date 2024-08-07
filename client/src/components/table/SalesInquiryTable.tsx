@@ -55,7 +55,6 @@ const SalesInquiryTable: React.FC = () => {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <h1>매출 조회</h1>
       <Table>
         <TableHeader>
           <TableRow>

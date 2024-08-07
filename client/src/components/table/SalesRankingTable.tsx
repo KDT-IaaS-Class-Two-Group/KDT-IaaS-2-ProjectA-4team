@@ -64,7 +64,6 @@ const SalesRankingTable: React.FC = () => {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <h1>매출 순위</h1>
       <Table>
         <TableHeader>
           <TableRow>
