@@ -43,7 +43,10 @@ const UserPage: FC = () => {
   return (
     <div>
       <Logo alt="logo" width={150} height={80} className="m-5" />
-      <UserMenu setSelectCategory={setSelectCategory} />
+      <UserMenu
+        selectCategory={selectCategory}
+        setSelectCategory={setSelectCategory}
+      />
       <MenuItems
         selectCategory={selectCategory}
         onAddToCart={handleAddToCart}
