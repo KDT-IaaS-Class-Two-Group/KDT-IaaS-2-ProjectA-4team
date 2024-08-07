@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 import urlJoin from "url-join";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
-const productsApiUrl = process.env.NEXT_PUBLIC_PRODUCTS as string;
+const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
 
 export const ExpirationDateHook = () => {
   const [data, setData] = useState<ProductDTO[]>([]);
@@ -13,7 +14,7 @@ export const ExpirationDateHook = () => {
     // 데이터 가져온 것 훅으로 실행 시킬 코드역할과 업데이트할때 다시 실행될 코드
     setLoading(true);
     try {
-      const response = await fetch(productsApiUrl); //endpoint - products
+      const response = await fetch(url3001Generator(EP_PRODUCTS)); //endpoint - products
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -32,7 +33,7 @@ export const ExpirationDateHook = () => {
   }, []);
 
   const deleteProduct = async (_id: string) => {
-    const deleteUrl = urlJoin(productsApiUrl, _id);
+    const deleteUrl = urlJoin(url3001Generator(EP_PRODUCTS, _id));
     try {
       await fetch(deleteUrl, {
         //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
