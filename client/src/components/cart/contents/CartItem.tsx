@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import Image from "next/image";
-import { CartItemHook } from "src/hooks/cartItemHook";
+import { CartItemHook } from "src/hooks/cart/contents/cartItemHook";
 
 interface CartItemComponentProps {
   menu: string;

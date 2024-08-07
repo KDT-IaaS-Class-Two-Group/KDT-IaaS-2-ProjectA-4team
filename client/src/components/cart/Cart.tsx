@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import CartItemComponent from "./contents/CartItem";
-import { CartHook } from "src/hooks/cartHook";
+import { CartHook } from "src/hooks/cart/cartHook";
 
 interface CartProps {
   items: { menu: string; unitPrice: number }[];

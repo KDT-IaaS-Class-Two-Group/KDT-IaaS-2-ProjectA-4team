@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ButtonComponent from "src/components/button/customized/CustomButton";
-import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
+import { ProductUseTableHook } from "src/hooks/product/table/ProductUseTableHook";
 import UpdateModal from "src/components/modal/update/UpdateModal";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import OrderModal from "src/components/modal/order/OrderModal";

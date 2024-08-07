@@ -1,7 +1,7 @@
 // components/FooterLinks.tsx
 import React from "react";
 import { useRouter } from "next/router";
-import useFooterInfoHook from "src/hooks/useFooterInfoHook";
+import useFooterInfoHook from "src/hooks/footer/info/useFooterInfoHook";
 
 interface FooterLinksProps {
   className?: string;

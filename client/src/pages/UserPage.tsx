@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { UserpageHook } from "src/hooks/userpageHook";
+import { UserpageHook } from "src/hooks/user/userpageHook";
 import UserMenu from "src/components/menu/user/UserMenu";
 import MenuItems from "src/components/menu/MenuItems";
 import LoginInfoComponent from "src/components/info/login/LoginInfo";

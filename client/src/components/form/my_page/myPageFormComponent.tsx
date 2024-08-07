@@ -1,6 +1,6 @@
 import { Input } from "components/ui/input";
 import React from "react";
-import useChangePasswordHook from "src/hooks/changePasswordHook";
+import useChangePasswordHook from "src/hooks/password/changePasswordHook";
 
 /**
  * @crystal23733 24.07.31

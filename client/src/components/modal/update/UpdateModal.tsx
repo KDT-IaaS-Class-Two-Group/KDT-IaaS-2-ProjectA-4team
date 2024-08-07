@@ -9,7 +9,7 @@ import {
 import { Label } from "components/ui/label";
 import { Textarea } from "components/ui/textarea";
 import ButtonComponent from "../../button/customized/CustomButton";
-import ProductUpdateHook from "src/hooks/ProductUpdateHook";
+import ProductUpdateHook from "src/hooks/product/update/ProductUpdateHook";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
 interface UpdateModalProps {

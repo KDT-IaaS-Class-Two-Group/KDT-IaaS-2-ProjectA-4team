@@ -1,6 +1,6 @@
 import React from "react";
 import CardComponent from "src/components/card/Card";
-import { MenuItemHook } from "src/hooks/menuItemHook";
+import { MenuItemHook } from "src/hooks/menu/menuItemHook";
 
 interface MenuItemsProps {
   selectCategory: string;

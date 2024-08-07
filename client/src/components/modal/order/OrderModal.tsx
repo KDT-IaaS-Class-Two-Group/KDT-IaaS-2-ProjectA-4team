@@ -10,7 +10,7 @@ import InputComponent from "../../input/Input";
 import ButtonComponent from "../../button/customized/CustomButton";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import ProductOrderModalHook from "src/hooks/ProductOrderModalHook";
+import ProductOrderModalHook from "src/hooks/product/order/modal/ProductOrderModalHook";
 import IProduct from "../../../../../db/products/product.interface";
 
 interface OrderModalProps {

@@ -3,8 +3,8 @@ import React from "react";
 import LoginInfoComponent from "src/components/info/login/LoginInfo";
 import MyPageFormComponent from "src/components/form/my_page/myPageFormComponent";
 import OrderDetails from "src/components/order/orderDetails";
-import useOrderHook from "src/hooks/orderHook";
-import useRedirect from "src/hooks/useRedirect";
+import useOrderHook from "src/hooks/order/orderHook";
+import useRedirect from "src/hooks/redirect/useRedirect";
 
 /**
  * @crystal23733 24.08.01
