@@ -41,22 +41,22 @@ export const ExpirationDataTable: React.FC = () => {
   // 도달창 띄우고 취소 확인
   //확인
   const handleDelete = () => {
-    if (selectedProductId) { //id있는지 한번 더 확인
-      deleteProduct(selectedProductId);// 폐기 버튼에서 product인 _id로 지우는 역할
-      setOpen(false); //모달창 닫기
+    if (selectedProductId) {
+      deleteProduct(selectedProductId);
+      setOpen(false);
     }
   };
 
   //폐기 버튼
   const openModal = (product: string) => {
-    setSelectedProductId(product); //_id 저장 
-    setOpen(true);// 처음에 상태코드로 false처리 되어있고 그것을 true하면서 모달창이 열리게 
+    setSelectedProductId(product);
+    setOpen(true);
   };
 
   //취소 버튼
   const closeModal = () => {
-    setOpen(false); //모달창 닫기
-    setSelectedProductId(null);// _id 초기화
+    setOpen(false);
+    setSelectedProductId(null);
   };
 
   return (
@@ -85,7 +85,7 @@ export const ExpirationDataTable: React.FC = () => {
       </Table>
       {/* 모달창 */}
       <ConfirmDeleteModal
-        open={open} //모달 창 오픈
+        open={open} 
         onClose={closeModal} 
         onConfirm={handleDelete}
       />
