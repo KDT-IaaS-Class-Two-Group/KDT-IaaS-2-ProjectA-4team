@@ -9,21 +9,19 @@ const useRedirect = () => {
   const redirect = async () => {
     try {
       const userRole = await getUserRoleFetch();
-      console.log('User role:', userRole); // 디버깅용 로그
+      console.log("User role:", userRole); // 디버깅용 로그
 
       if (userRole === 1) {
-        console.log('Redirecting to /admin'); // 디버깅용 로그
-        router.push('/admin/salesInquiry');
+        await router.push("/admin/salesInquiry");
       } else if (userRole === 0) {
-        console.log('Redirecting to /userPage'); // 디버깅용 로그
-        router.push('/userPage');
+        await router.push("/UserPage");
       } else {
-        console.error('Invalid user role');
-        setError('잘못된 사용자 역할입니다.');
+        console.error("Invalid user role");
+        setError("잘못된 사용자 역할입니다.");
       }
     } catch (err) {
-      console.error('Error fetching user role:', err);
-      setError('사용자 역할 정보를 가져오는 데 실패했습니다.');
+      console.error("Error fetching user role:", err);
+      setError("사용자 역할 정보를 가져오는 데 실패했습니다.");
     }
   };
 

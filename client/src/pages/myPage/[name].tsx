@@ -25,6 +25,10 @@ const MyPage: React.FC = () => {
   }
 
   const { redirect, error: redirectError } = useRedirect();
+  const handleRedirect = async () => {
+    await redirect();
+  };
+
   if (redirectError) {
     return <p>{redirectError}</p>;
   }
@@ -36,9 +40,7 @@ const MyPage: React.FC = () => {
       <LoginInfoComponent email="rockCoders" />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
-          <button onClick={redirect}>
-            &larr; 돌아가기
-          </button>
+          <button onClick={handleRedirect}>&larr; 돌아가기</button>
         </div>
         <MyPageFormComponent />
         {loading ? (
