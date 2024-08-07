@@ -7,6 +7,7 @@ export const UserpageHook = () => {
   const [cartItems, setCartItems] = useState<
     { menu: string; unitPrice: number }[]
   >([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -20,6 +21,12 @@ export const UserpageHook = () => {
   //     </ItemsContext.Provider>
   //   );
   // };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    console.log("open");
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     try {
@@ -40,6 +47,7 @@ export const UserpageHook = () => {
         if (itemIndex === -1) {
           return [...prevItems, { menu, unitPrice }];
         }
+        openModal();
         return prevItems;
       });
     } catch (error) {
@@ -62,6 +70,8 @@ export const UserpageHook = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
+    isModalOpen,
+    closeModal,
     error,
     handleAddToCart,
     handleRemoveItem,

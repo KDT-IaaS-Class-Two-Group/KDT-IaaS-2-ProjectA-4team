@@ -7,6 +7,7 @@ import Cart from "src/components/users/Cart";
 import FooterLinks from "src/components/footerComponent";
 import ButtonComponent from "src/components/CustomButton";
 import Logo from "src/components/logo";
+import Modal from "src/components/modal/Modal";
 
 // interface ItemsContextType {
 //   items: string;
@@ -28,6 +29,8 @@ const UserPage: FC = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
+    isModalOpen,
+    closeModal,
     error,
     handleAddToCart,
     handleRemoveItem,
@@ -60,6 +63,13 @@ const UserPage: FC = () => {
         </ButtonComponent>
         <FooterLinks className="w-72 mt-20 mx-6" />
       </div>
+      {isModalOpen && (
+        <Modal
+          onClose={closeModal}
+          title="장바구니에 메뉴가 이미 존재합니다 !"
+          content="수량은 장바구니에서 조정할 수 있습니다."
+        />
+      )}
     </div>
   );
 };
