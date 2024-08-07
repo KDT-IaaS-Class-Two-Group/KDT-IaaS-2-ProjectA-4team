@@ -9,10 +9,6 @@ import Modal from "src/components/modal/Modal";
  * @returns 유통관리 페이지
  */
 
-const a = () => {
-  "aaaaa"
-}
-
 const AdminstockDate: React.FC = () => {
   return (
     <>
