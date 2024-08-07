@@ -7,6 +7,7 @@ interface CartItemComponentProps {
   unitPrice: number;
   onPriceChange: (price: number) => void;
   removedItem: (data: string) => void;
+  repeat: boolean;
 }
 
 /**
@@ -24,10 +25,12 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   unitPrice,
   onPriceChange,
   removedItem,
+  repeat,
 }) => {
   const { count, price, incrementCount, decrementCount, error } = CartItemHook(
     unitPrice,
     onPriceChange,
+    repeat,
   );
 
   if (error) return <div>{error}</div>;
