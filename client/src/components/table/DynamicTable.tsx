@@ -7,8 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@../../components/ui/table";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "components/ui/button";
 
-import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  useReactTable,
+  getCoreRowModel,
+  SortingState,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 
 interface DynamicTableProps<T extends object> {
   data: T[];
@@ -26,20 +35,35 @@ const DynamicTable = <T extends object>({
   renderActions,
 }: DynamicTableProps<T>) => {
   // 데이터의 키값을 테이블의 칼럼으로 사용함.
-  // const columns = data.length > 0 ? (Object.keys(data[0]) as (keyof T)[]) : [];
-
-  const columns =
+  const columns: ColumnDef<T>[] =
     data.length > 0
       ? Object.keys(data[0]).map((key) => ({
           accessorKey: key,
-          header: key.charAt(0).toUpperCase() + key.slice(1), // 첫 글자를 대문자로
+          header: ({ column }) => (
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+              <ArrowUpDown className="w-4 h-4 ml-2" />
+            </Button>
+          ),
         }))
       : [];
+
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
@@ -47,23 +71,28 @@ const DynamicTable = <T extends object>({
       <div>
         <Table className="min-w-full bg-white">
           <TableHeader>
-            <TableRow>
-              {/* 열 헤더 렌더링 */}
-              {columns.map((column) => (
-                <TableHead
-                  key={column as unknown as string} // key 속성의 타입 오류 방지를 위한 강제 변환
-                  className="px-4 py-2 border-b border-gray-200"
-                >
-                  {column.header} {/* 헤더 텍스트 */}
-                </TableHead>
-              ))}
-              {/* renderActions이 제공되면 "Actions" 열 추가 */}
-              {renderActions && (
-                <TableHead className="px-4 py-2 border-b border-gray-200">
-                  Actions
-                </TableHead>
-              )}
-            </TableRow>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className="px-4 py-2 border-b border-gray-200"
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                ))}
+                {renderActions && (
+                  <TableHead className="px-4 py-2 border-b border-gray-200">
+                    Actions
+                  </TableHead>
+                )}
+              </TableRow>
+            ))}
           </TableHeader>
           <TableBody>
             {/* 데이터의 각 항목을 행으로 렌더링 */}
