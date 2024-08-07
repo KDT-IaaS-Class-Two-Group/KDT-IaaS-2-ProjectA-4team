@@ -9,8 +9,8 @@ export abstract class BaseDTO {
   public productName: string;
   public unitPrice: number;
   public quantity: number;
-  public restockDate: Date;
-  public expirationDate: Date;
+  public restockDate: string;
+  public expirationDate: string;
 
   constructor(
     _id: string,
@@ -18,8 +18,8 @@ export abstract class BaseDTO {
     productName: string,
     unitPrice: number,
     quantity: number,
-    restockDate: Date,
-    expirationDate: Date
+    restockDate: string,
+    expirationDate: string
   ) {
     this._id = _id;
     this.productCategory = productCategory;
