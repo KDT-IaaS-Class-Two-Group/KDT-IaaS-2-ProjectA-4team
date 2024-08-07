@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import InputComponent from "./Input";
-import CustomButton from "./CustomButton";
+import CustomButton from "./button/CustomButton";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 interface RoldJwtPayload extends JwtPayload {

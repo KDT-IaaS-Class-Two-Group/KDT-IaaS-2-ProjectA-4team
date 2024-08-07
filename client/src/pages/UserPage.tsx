@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { UserpageHook } from "src/hooks/userpageHook";
-import UserMenu from "src/components/users/UserMenu";
-import MenuItems from "src/components/users/MenuItems";
+import UserMenu from "src/components/menu/user/UserMenu";
+import MenuItems from "src/components/menu/MenuItems";
 import LoginInfoComponent from "src/components/LoginInfo";
 import Cart from "src/components/cart/Cart";
 import FooterLinks from "src/components/footerComponent";
-import ButtonComponent from "src/components/CustomButton";
+import ButtonComponent from "src/components/button/CustomButton";
 import Logo from "src/components/logo";
 import Modal from "src/components/modal/Modal";
 
