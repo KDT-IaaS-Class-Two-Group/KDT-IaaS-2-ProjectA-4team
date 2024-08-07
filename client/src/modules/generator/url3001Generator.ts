@@ -14,4 +14,4 @@ import urlJoin from "url-join";
  * const url = defaultUrlGenerator('api', 'members', '123');
  */
 export default (...paths: string[]): string =>
-  urlJoin(process.env.NEXT_PUBLIC_API_BASE_URL as string, ...paths);
+  urlJoin(process.env.NEXT_PUBLIC_SERVER_URL as string, ...paths);
