@@ -1,15 +1,35 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import InputComponent from "./Input";
 
-const SearchForm: React.FC = () => {
+interface SearchFormProps {
+  onSearch: (query: string) => void;
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+  const [query, setQuery] = React.useState<string>("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    onSearch(query); // 검색어를 부모 컴포넌트로 전달
+  };
+
   return (
     <div className="flex justify-center items-center p-4">
-      <form className="w-full max-w-md flex items-center border border-gray-300 rounded-lg shadow-sm overflow-hidden">
+      <form
+        className="w-full max-w-md flex items-center border border-gray-300 rounded-lg shadow-sm overflow-hidden"
+        onSubmit={handleSubmit}
+      >
         <div className="relative w-full">
           <InputComponent
             type="text"
+            value={query}
+            onChange={handleInputChange}
             placeholder="검색어를 입력하세요..."
             className="w-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
