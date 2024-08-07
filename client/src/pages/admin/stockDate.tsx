@@ -1,7 +1,7 @@
 import React from "react";
 
 import NavListBox from "src/components/admin/navListBox";
-import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
+import { ExpirationDataTable } from "src/components/table/ExpirationData/ExpirationDataTable";
 import Logo from "src/components/logo";
 
 //사이드 바랑 메인 테이블 부분만 존재
@@ -23,7 +23,7 @@ const AdminstockDate: React.FC = () => {
           />
         </div>
         <section>
-          <div className="flex items-center justify-start w-50 h-auto p-3 border border-black border-solid">
+          <div className="flex items-center justify-start h-auto p-3 border border-black border-solid w-50">
             <ExpirationDataTable />
           </div>
         </section>
