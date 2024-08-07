@@ -1,7 +1,7 @@
 // src/hooks/orderHook.ts
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
-import TOrder from "src/types/Order.type";
+import TOrder from "src/types/order/Order.type";
 
 /**
  * @crystal23733 24.08.01

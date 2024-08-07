@@ -1,4 +1,4 @@
-import TOrders from "src/types/Order.type";
+import TOrders from "src/types/order/Order.type";
 
 /**
  * @crystal23733 24.08.01
