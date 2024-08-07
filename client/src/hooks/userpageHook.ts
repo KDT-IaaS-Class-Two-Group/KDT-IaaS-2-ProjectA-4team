@@ -7,6 +7,7 @@ export const UserpageHook = () => {
   const [cartItems, setCartItems] = useState<
     { menu: string; unitPrice: number }[]
   >([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -20,6 +21,12 @@ export const UserpageHook = () => {
   //     </ItemsContext.Provider>
   //   );
   // };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    console.log("open");
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     try {
@@ -35,7 +42,14 @@ export const UserpageHook = () => {
 
   const handleAddToCart = (menu: string, unitPrice: number) => {
     try {
-      setCartItems((prevItems) => [...prevItems, { menu, unitPrice }]);
+      setCartItems((prevItems) => {
+        const itemIndex = prevItems.findIndex((item) => item.menu === menu);
+        if (itemIndex === -1) {
+          return [...prevItems, { menu, unitPrice }];
+        }
+        openModal();
+        return prevItems;
+      });
     } catch (error) {
       console.error("Failed to add item to cart: ", error);
       setError("장바구니에 아이템을 추가하지 못했습니다.");
@@ -56,6 +70,8 @@ export const UserpageHook = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
+    isModalOpen,
+    closeModal,
     error,
     handleAddToCart,
     handleRemoveItem,
