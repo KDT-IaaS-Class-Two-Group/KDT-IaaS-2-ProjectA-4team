@@ -6,6 +6,7 @@ interface LinkButtonComponentProps {
   children: ReactNode;
   href: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  className?: string;
 }
 
 /**
@@ -17,13 +18,12 @@ const LinkButtonComponent: React.FC<LinkButtonComponentProps> = ({
   children,
   href,
   onClick,
+  className,
 }) => {
   return (
     <div className="w-20 text-center">
       <Link href={href} onClick={onClick}>
-        <Button variant="outline" className="text-m">
-          {children}
-        </Button>
+        <Button className={className}>{children}</Button>
       </Link>
     </div>
   );
