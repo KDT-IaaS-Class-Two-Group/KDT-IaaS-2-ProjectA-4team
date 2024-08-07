@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../shared/DTO/products/product.dto";
+import urlJoin from "url-join";
+
+const productsApiUrl = process.env.NEXT_PUBLIC_PRODUCTS as string;
 
 export const ExpirationDateHook = () => {
   const [data, setData] = useState<ProductDTO[]>([]);
@@ -7,11 +10,10 @@ export const ExpirationDateHook = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    const productApiUrl = process.env.NEXT_PUBLIC_PRODUCT as string;
     // 데이터 가져온 것 훅으로 실행 시킬 코드역할과 업데이트할때 다시 실행될 코드
     setLoading(true);
     try {
-      const response = await fetch(productApiUrl); //endpoint - products
+      const response = await fetch(productsApiUrl); //endpoint - products
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -30,8 +32,9 @@ export const ExpirationDateHook = () => {
   }, []);
 
   const deleteProduct = async (_id: string) => {
+    const deleteUrl = urlJoin(productsApiUrl, _id);
     try {
-      await fetch(`http://localhost:3001/products/${_id}`, {
+      await fetch(deleteUrl, {
         //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
         method: "DELETE", // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
       });
