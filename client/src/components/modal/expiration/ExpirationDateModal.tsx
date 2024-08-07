@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@radix-ui/react-dialog";
 import ButtonComponent from "../../button/customized/CustomButton";
-import ConfirmDeleteModalProps from "src/interfaces/validation/ExpirationDateinterface";
+import ConfirmDeleteModalProps from "src/interfaces/validation/expiration/ExpirationDateinterface";
 /**
  * @jojayeon 24.08.07
  * * 유통관리 페이지 폐기버튼 모달창
