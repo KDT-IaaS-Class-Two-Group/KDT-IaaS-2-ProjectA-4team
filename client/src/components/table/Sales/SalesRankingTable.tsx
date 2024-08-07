@@ -1,13 +1,6 @@
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "components/ui/table";
 import React from "react";
 import salesUseTableHook from "src/hooks/salesUseTableHook";
+import DynamicTable from "../DynamicTable";
 
 /**
  * @crystal23733 24.07.29
@@ -32,7 +25,6 @@ const SalesRankingTable: React.FC = () => {
    */
   const aggregatedData = data.reduce(
     (acc, sale) => {
-      // sale.products가 단일 객체로 가정
       const product = sale.products;
 
       if (!acc[product.productName]) {
@@ -62,27 +54,16 @@ const SalesRankingTable: React.FC = () => {
     }))
     .sort((a, b) => b.totalQuantity - a.totalQuantity);
 
+  // DynamicTable에 전달할 데이터의 형태를 정의
+  const tableData = sortedData.map((item) => ({
+    productName: item.productName,
+    totalQuantity: item.totalQuantity,
+    totalPrice: item.totalPrice
+  }));
+
   return (
     <div className="flex flex-col w-full h-full">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[200px]">상품명</TableHead>
-            <TableHead>판매 수량</TableHead>
-            <TableHead>판매 액수</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {/* 정렬된 데이터로 테이블의 각 행을 생성 */}
-          {sortedData.map((item) => (
-            <TableRow key={item.productName}>
-              <TableCell className="font-medium">{item.productName}</TableCell>
-              <TableCell>{item.totalQuantity}</TableCell>
-              <TableCell>{item.totalPrice}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <DynamicTable data={tableData} />
     </div>
   );
 };
