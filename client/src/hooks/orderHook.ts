@@ -11,7 +11,7 @@ import TOrder from "src/types/Order.type";
  * - error : 에러 메세지
  */
 const useOrderHook = (name: string) => {
-  const [orderDetails, setOrderDetails] = useState<TOrders[]>([]);
+  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
