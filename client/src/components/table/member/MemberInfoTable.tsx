@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@../../components/ui/table";
-import TMemberInfoTable from "./MemberInfoTable.type";
+import TMemberInfoTable from "../../../types/member/MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
 
 interface Member {
