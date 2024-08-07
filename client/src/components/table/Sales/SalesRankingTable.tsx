@@ -58,7 +58,7 @@ const SalesRankingTable: React.FC = () => {
   const tableData = sortedData.map((item) => ({
     productName: item.productName,
     totalQuantity: item.totalQuantity,
-    totalPrice: item.totalPrice
+    totalPrice: item.totalPrice,
   }));
 
   return (

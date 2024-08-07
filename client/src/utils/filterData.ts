@@ -9,7 +9,7 @@
 const filterData = <T extends object>(
   data: T[],
   query: string,
-  searchKey: keyof T
+  searchKey: keyof T,
 ): T[] => {
   const lowerCaseQuery = query.toLowerCase();
   return data.filter((item) => {

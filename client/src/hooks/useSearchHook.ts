@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 /**
  * @function useSearch
@@ -6,7 +6,7 @@ import { useState, useCallback } from 'react';
  * @returns [searchQuery, setSearchQuery] 검색어 상태와 설정 함수
  */
 const useSearch = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);

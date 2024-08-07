@@ -55,12 +55,14 @@ const SalesInquiryTable: React.FC = () => {
       productName,
       ...aggregatedData[productName],
     }))
-    .filter((item) => filterData([item], searchQuery, 'productName').length > 0);
+    .filter(
+      (item) => filterData([item], searchQuery, "productName").length > 0,
+    );
 
   return (
     <>
-      <SearchForm onSearch={handleSearch}/>
-      <DynamicTable data={tableData}/>
+      <SearchForm onSearch={handleSearch} />
+      <DynamicTable data={tableData} />
     </>
   );
 };
