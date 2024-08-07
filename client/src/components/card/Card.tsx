@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Card, CardTitle, CardDescription } from "../../components/ui/card";
+import { Card, CardTitle, CardDescription } from "../../../components/ui/card";
 import Image from "next/image";
 
 interface CardComponentProps {

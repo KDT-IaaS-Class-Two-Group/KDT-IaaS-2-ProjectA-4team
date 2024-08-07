@@ -1,5 +1,5 @@
 import React from "react";
-import CardComponent from "src/components/Card";
+import CardComponent from "src/components/card/Card";
 import { MenuItemHook } from "src/hooks/menuItemHook";
 
 interface MenuItemsProps {
