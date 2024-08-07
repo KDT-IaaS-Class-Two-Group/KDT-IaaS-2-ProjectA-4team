@@ -1,12 +1,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import ButtonComponent from '../CustomButton';
-
-interface ConfirmDeleteModalProps {
-  open: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-}
+import ConfirmDeleteModalProps from 'src/interfaces/validation/ExpirationDateinterface';
 
 export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, onClose, onConfirm }) => {
   return (
