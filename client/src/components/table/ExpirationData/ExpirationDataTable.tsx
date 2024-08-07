@@ -7,7 +7,7 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-import ButtonComponent from "../CustomButton";
+import ButtonComponent from "../../CustomButton";
 import { ExpirationDateHook } from "src/hooks/ExpirationDateHook";
 
 export const ExpirationDataTable: React.FC = () => {
@@ -37,7 +37,7 @@ export const ExpirationDataTable: React.FC = () => {
           <TableHead>재고명</TableHead>
           <TableHead className="pr-10%">수량</TableHead>
           <TableHead className="">유통기한</TableHead>
-          <TableHead className="text-right pr-10">폐기</TableHead>
+          <TableHead className="pr-10 text-right">폐기</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

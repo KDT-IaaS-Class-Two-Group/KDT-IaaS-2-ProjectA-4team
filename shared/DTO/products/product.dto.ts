@@ -22,14 +22,8 @@ export class ProductDTO extends BaseDTO {
       productName: this.productName,
       unitPrice: this.unitPrice,
       quantity: this.quantity,
-      restockDate:
-        this.restockDate instanceof Date
-          ? this.restockDate.toISOString()
-          : undefined,
-      expirationDate:
-        this.expirationDate instanceof Date
-          ? this.expirationDate.toISOString()
-          : undefined,
+      restockDate: this.restockDate,
+      expirationDate: this.expirationDate,
     };
   }
 }
