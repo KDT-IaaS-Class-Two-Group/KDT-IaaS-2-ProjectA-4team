@@ -1,7 +1,6 @@
 import ISale from "../../../db/sale/Sale.interface";
 import { SaleProductDTO } from "./saleProduct.dto";
 
-
 export class SaleDTO implements ISale {
   public saleID: number;
   public memberID: string;
@@ -21,9 +20,19 @@ export class SaleDTO implements ISale {
     return {
       saleID: this.saleID,
       memberID: this.memberID,
-      products: this.products.toJSON(), // 단일 객체의 toJSON() 호출
+      products: this.products.toJSON(),
       saleDate: this.saleDate,
-      totalPrice: this.totalPrice
+      totalPrice: this.totalPrice,
+    };
+  }
+
+  public toObject(): object {
+    return {
+      saleID: this.saleID,
+      memberID: this.memberID,
+      products: this.products,
+      saleDate: this.saleDate,
+      totalPrice: this.totalPrice,
     };
   }
 }

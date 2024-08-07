@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export interface ProductDTO {
-  _id: Object;
+  _id: string; // 변경: Object에서 string으로
   productCategory: string;
   productName: string;
   unitPrice: number;
@@ -93,35 +93,33 @@ export const TestHook = () => {
   ];
 
   const fetchData = async () => {
-    // 데이터 가져온 것 훅으로 실행 시킬 코드역할과 업데이트할때 다시 실행될 코드
     setLoading(true);
     try {
-      // const response = await fetch('http://localhost:3001/products'); //endpoint - products
+      // const response = await fetch('http://localhost:3001/products'); // 실제 API 호출
       // if (!response.ok) {
       //   throw new Error('네트워크 응답이 올바르지 않습니다.');
       // }
       // const result = await response.json();
       const result = mockProducts;
-      setData(result); // 가져온 데이터
+      setData(result);
     } catch (err) {
-      setError("데이터를 가져오는 데 실패했습니다."); // 에러
+      setError("데이터를 가져오는 데 실패했습니다.");
     } finally {
-      setLoading(false); //로딩 메시지 제거
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    //마운트 될 때 사용된다.
     fetchData();
   }, []);
 
   const deleteProduct = async (_id: string) => {
     try {
-      // await fetch(`http://localhost:3001/products/${productID}`, {     //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
-      //   method: 'DELETE'                                               // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
+      // await fetch(`http://localhost:3001/products/${_id}`, {     // 실제 API 호출
+      //   method: 'DELETE',
       // });
-      // fetchData(); // 삭제 후 데이터 갱신 훅
-      setData((prevData) => prevData.filter((product) => product._id !== _id)); //현재와 다른 데이터를 가져왔을 때 업데이트 역할
+      // fetchData(); // 삭제 후 데이터 갱신
+      setData((prevData) => prevData.filter((product) => product._id !== _id));
     } catch (err) {
       setError("데이터를 삭제하는 데 실패했습니다.");
     }

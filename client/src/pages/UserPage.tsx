@@ -6,6 +6,7 @@ import LoginInfoComponent from "src/components/LoginInfo";
 import Cart from "src/components/users/Cart";
 import FooterLinks from "src/components/footerComponent";
 import ButtonComponent from "src/components/CustomButton";
+import Logo from "src/components/logo";
 
 // interface ItemsContextType {
 //   items: string;
@@ -38,7 +39,7 @@ const UserPage: FC = () => {
 
   return (
     <div>
-      <div className="m-5 w-32 h-20 bg-slate-500">Logo</div>
+      <Logo alt="logo" width={150} height={80} className="m-5" />
       <UserMenu setSelectCategory={setSelectCategory} />
       <MenuItems
         selectCategory={selectCategory}

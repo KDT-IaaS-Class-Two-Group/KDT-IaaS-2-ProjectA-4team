@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle, Ref } from "react";
+import React, { forwardRef, useRef, useImperativeHandle } from "react";
 import InputComponent from "src/components/Input";
 import SignUpInputs from "../../../static/sign-up/SignUpInputs";
 
@@ -40,5 +40,8 @@ const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
     </form>
   );
 });
+
+// displayName을 명시적으로 설정 (큰따옴표 사용)
+SignUpForm.displayName = "SignUpForm";
 
 export default SignUpForm;

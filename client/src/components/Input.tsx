@@ -15,4 +15,7 @@ const InputComponent = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
+// displayName을 명시적으로 설정
+InputComponent.displayName = "InputComponent";
+
 export default InputComponent;

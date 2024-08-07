@@ -15,6 +15,7 @@ export default async (password: string, changePassword: string) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, password, changePassword }),
+      credentials: "include",
     });
     const responseData = await response.json();
     if (!response.ok) {

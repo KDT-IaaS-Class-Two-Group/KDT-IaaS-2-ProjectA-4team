@@ -23,6 +23,10 @@ const Cart: FC<CartProps> = ({ items, removedItem }) => {
     return <div>{error}</div>;
   }
 
+  if (!items.length) {
+    return <div>Your cart is empty.</div>;
+  }
+
   return (
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
