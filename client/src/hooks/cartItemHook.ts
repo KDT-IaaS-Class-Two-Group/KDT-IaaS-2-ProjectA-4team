@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const CartItemHook = (
   unitPrice: number,
   onPriceChange: (price: number) => void,
+  repeat: boolean,
 ) => {
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(unitPrice);
@@ -42,6 +43,12 @@ export const CartItemHook = (
       setError("개수가 감소하지 않았습니다.");
     }
   };
+  // repeat이 true일 때 incrementCount 호출
+  useEffect(() => {
+    if (repeat) {
+      incrementCount();
+    }
+  }, [repeat]);
 
   return {
     count,
