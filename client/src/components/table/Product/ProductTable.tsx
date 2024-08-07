@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import ButtonComponent from "../CustomButton";
+import ButtonComponent from "src/components/CustomButton";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
-import UpdateModal from "../modal/UpdateModal";
+import UpdateModal from "src/components/modal/UpdateModal";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import OrderModal from "../modal/OrderModal";
+import OrderModal from "src/components/modal/OrderModal";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
-import DynamicTable from "./DynamicTable";
+import DynamicTable from "../DynamicTable";
 
 /**
  * @moonhr 24.07.31
