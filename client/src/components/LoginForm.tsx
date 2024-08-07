@@ -24,8 +24,10 @@ export const LoginForm = () => {
     if (event.currentTarget.type === "submit") {
       event.preventDefault();
 
+      const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL as string;
+
       try {
-        const response = await fetch(`http://localhost:3001/login`, {
+        const response = await fetch(loginUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

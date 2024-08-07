@@ -10,8 +10,9 @@ const useFooterInfoHook = () => {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
+      const userInfoUrl = process.env.NEXT_PUBLIC_USER_INFO as string;
       try {
-        const response = await fetch("http://localhost:3001/user-info", {
+        const response = await fetch(userInfoUrl, {
           method: "GET",
           credentials: "include",
         });
