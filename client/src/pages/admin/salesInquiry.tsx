@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNav from "src/components/admin/nav/adminNav";
+import AdminNav from "src/components/nav/admin/adminNav";
 import SalesInquiryTable from "src/components/table/Sales/SalesInquiryTable";
 
 const SalesInquiry: React.FC = () => {

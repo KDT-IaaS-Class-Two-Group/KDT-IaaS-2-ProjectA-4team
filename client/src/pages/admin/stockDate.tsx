@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNav from "src/components/admin/nav/adminNav";
+import AdminNav from "src/components/nav/admin/adminNav";
 import { ExpirationDataTable } from "src/components/table/ExpirationDataTable";
 import Logo from "src/components/logo";
 import TitleComponent from "src/components/titleComponent";
