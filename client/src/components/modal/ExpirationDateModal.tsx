@@ -2,7 +2,14 @@ import React from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import ButtonComponent from '../CustomButton';
 import ConfirmDeleteModalProps from 'src/interfaces/validation/ExpirationDateinterface';
-
+/**
+ * @jojayeon 24.08.07
+ * * 유통관리 페이지 폐기버튼 모달창
+ * @param {boolean} props.open - 모달이 열려 있는지의 여부
+ * @param {() => void} props.onClose - 모달을 닫는 함수
+ * @param {() => void} props.onConfirm - 삭제 확인을 처리하는 함수
+ * @returns JSX.Element - 폐기 모달창
+ */
 export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, onClose, onConfirm }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>

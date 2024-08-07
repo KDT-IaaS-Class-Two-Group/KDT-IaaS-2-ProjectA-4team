@@ -12,7 +12,7 @@ import { ExpirationDateHook } from 'src/hooks/ExpirationDateHook';
 import { ConfirmDeleteModal } from '../modal/ExpirationDateModal';
 
 /**
- * @jojayeon 24.08.05
+ * @jojayeon 24.08.07
  * @returns 유통기한 관리 테이블 
  */
 
