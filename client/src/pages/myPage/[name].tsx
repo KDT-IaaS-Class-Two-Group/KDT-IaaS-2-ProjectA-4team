@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
-import LoginInfoComponent from "src/components/LoginInfo";
-import MyPageFormComponent from "src/components/myPageFormComponent";
-import OrderDetails from "src/components/orderDetails";
+import LoginInfoComponent from "src/components/info/login/LoginInfo";
+import MyPageFormComponent from "src/components/form/my_page/myPageFormComponent";
+import OrderDetails from "src/components/order/orderDetails";
 import useOrderHook from "src/hooks/orderHook";
 import useRedirect from "src/hooks/useRedirect";
 

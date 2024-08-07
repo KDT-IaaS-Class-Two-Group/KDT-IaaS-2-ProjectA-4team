@@ -7,7 +7,7 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-import ButtonComponent from "src/components/button/CustomButton";
+import ButtonComponent from "src/components/button/customized/CustomButton";
 import { TestHook } from "./testhook";
 
 export const TestExpirationDataTable: React.FC = () => {

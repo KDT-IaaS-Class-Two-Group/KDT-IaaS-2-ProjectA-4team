@@ -1,5 +1,5 @@
 import React from "react";
-import LoginInfoComponent from "../../LoginInfo";
+import LoginInfoComponent from "../../info/login/LoginInfo";
 import NavListBox from "../list/navListBox";
 
 /**

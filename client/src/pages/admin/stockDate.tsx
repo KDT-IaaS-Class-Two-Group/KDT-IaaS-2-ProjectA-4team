@@ -1,8 +1,8 @@
 import React from "react";
 import AdminNav from "src/components/nav/admin/adminNav";
 import { ExpirationDataTable } from "src/components/table/expiration/ExpirationDataTable";
-import Logo from "src/components/logo";
-import TitleComponent from "src/components/titleComponent";
+import Logo from "src/components/logo/logo";
+import TitleComponent from "src/components/title/titleComponent";
 import Modal from "src/components/modal/Modal";
 /**
  * @jojayeon 24.08.05

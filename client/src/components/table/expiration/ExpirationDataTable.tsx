@@ -7,7 +7,7 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-import ButtonComponent from "../../button/CustomButton";
+import ButtonComponent from "../../button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/ExpirationDateHook";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
 

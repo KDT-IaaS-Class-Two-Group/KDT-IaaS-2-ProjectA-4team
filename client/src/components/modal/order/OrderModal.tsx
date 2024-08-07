@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../../components/ui/dialog";
-import InputComponent from "../../Input";
-import ButtonComponent from "../../button/CustomButton";
+import InputComponent from "../../input/Input";
+import ButtonComponent from "../../button/customized/CustomButton";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import ProductOrderModalHook from "src/hooks/ProductOrderModalHook";

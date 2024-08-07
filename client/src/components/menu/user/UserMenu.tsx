@@ -1,5 +1,5 @@
 import React from "react";
-import LinkButtonComponent from "src/components/linkButtonComponent";
+import LinkButtonComponent from "src/components/button/link/linkButtonComponent";
 
 interface UserMenuProps {
   setSelectCategory: (category: string) => void;

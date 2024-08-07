@@ -1,7 +1,7 @@
 import React from "react";
-import LoginInfoComponent from "../../LoginInfo";
+import LoginInfoComponent from "../../info/login/LoginInfo";
 import Cart from "../../cart/Cart";
-import FooterLinks from "../../footerComponent";
+import FooterLinks from "../../footer/footerComponent";
 
 /**
  * @yuxincxoi 24.07.29

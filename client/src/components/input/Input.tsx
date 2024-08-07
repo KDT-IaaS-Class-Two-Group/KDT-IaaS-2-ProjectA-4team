@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Input, InputProps } from "../../components/ui/input";
+import { Input, InputProps } from "../../../components/ui/input";
 
 /**
  * @param props input 태그가 가질 수 있는 속성들
