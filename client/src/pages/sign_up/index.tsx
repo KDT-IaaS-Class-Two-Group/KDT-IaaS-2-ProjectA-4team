@@ -49,7 +49,7 @@ const SignUpPage: React.FC = () => {
             throw new Error("서버 오류 발생");
           }
 
-          window.location.href = `http://localhost:${process.env.NEXT_PUBLIC_PORT}`;
+          window.location.href = process.env.NEXT_PUBLIC_MAIN_URL as string;
 
           setResponseMessage(`회원 가입 성공`);
         } catch (error) {
