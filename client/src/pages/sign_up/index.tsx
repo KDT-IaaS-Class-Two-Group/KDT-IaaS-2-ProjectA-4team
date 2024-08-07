@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import SignUpForm, { SignUpFormRef } from "../../components/sign_up/Form";
 import ValiChecker from "src/modules/validation/ValiChecker";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
+  const EP_SIGN_UP = process.env.NEXT_PUBLIC_EP_SIGN_UP as string;
 
   const handleClick = async () => {
     const ValiArray = [false, false, false, false];
@@ -29,7 +31,7 @@ const SignUpPage: React.FC = () => {
 
       if (ValiArray.every((isValid) => isValid)) {
         try {
-          const response = await fetch("http://localhost:3001/signup", {
+          const response = await fetch(url3001Generator(EP_SIGN_UP), {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -47,7 +49,7 @@ const SignUpPage: React.FC = () => {
             throw new Error("서버 오류 발생");
           }
 
-          window.location.href = "http://localhost:3000";
+          window.location.href = `http://localhost:${process.env.NEXT_PUBLIC_PORT}`;
 
           setResponseMessage(`회원 가입 성공`);
         } catch (error) {
