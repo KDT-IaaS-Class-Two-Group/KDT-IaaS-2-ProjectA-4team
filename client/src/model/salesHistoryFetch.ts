@@ -1,3 +1,5 @@
+import url3001Generator from "src/modules/generator/url3001Generator";
+
 export default async (
   id: number,
   memberID: number,
@@ -7,7 +9,9 @@ export default async (
   quantity: number,
   totalPrice: number,
 ) => {
-  const response = await fetch("http://localhost:3001/salehistory", {
+  const EP_SALE_HISTORY = process.env.NEXT_PUBLIC_EP_SALE_HISTORY as string;
+
+  const response = await fetch(url3001Generator(EP_SALE_HISTORY), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

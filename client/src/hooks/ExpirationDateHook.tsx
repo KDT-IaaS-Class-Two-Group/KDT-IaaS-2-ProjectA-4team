@@ -3,9 +3,9 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 import urlJoin from "url-join";
 import url3001Generator from "src/modules/generator/url3001Generator";
 
-const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
-
 export const ExpirationDateHook = () => {
+  const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
