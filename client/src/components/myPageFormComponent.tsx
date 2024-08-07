@@ -2,6 +2,10 @@ import { Input } from "components/ui/input";
 import React from "react";
 import useChangePasswordHook from "src/hooks/changePasswordHook";
 
+/**
+ * @crystal23733 24.07.31
+ * @returns {JSXElement} 마이페이지 비밀번호 변경 컴포넌트
+ */
 const MyPageFormComponent: React.FC = () => {
   const {
     password,
