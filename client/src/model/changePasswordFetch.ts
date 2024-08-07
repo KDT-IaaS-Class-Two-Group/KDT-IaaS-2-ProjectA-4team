@@ -1,3 +1,5 @@
+import url3001Generator from "src/modules/generator/url3001Generator";
+
 /**
  * @crystal23733 24.08.01
  * @param name 현재 토큰값이 없어 더미데이터로 대체
@@ -7,9 +9,12 @@
  * @returns responseData 응답 값
  */
 export default async (password: string, changePassword: string) => {
+  const EP_CHANGE_PASSWORD = process.env
+    .NEXT_PUBLIC_EP_CHANGE_PASSWORD as string;
+
   const name = ""; // MongoDB에 있는 유저의 name 값을 사용합니다.
   try {
-    const response = await fetch("http://localhost:3001/changePassword", {
+    const response = await fetch(url3001Generator(EP_CHANGE_PASSWORD), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
