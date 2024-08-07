@@ -1,6 +1,9 @@
 import React from "react";
 import salesUseTableHook from "src/hooks/salesUseTableHook";
 import DynamicTable from "../DynamicTable";
+import filterData from "src/utils/filterData";
+import useSearch from "src/hooks/useSearchHook";
+import SearchForm from "src/components/SearchForm";
 
 /**
  * @crystal23733 24.07.29
@@ -8,6 +11,7 @@ import DynamicTable from "../DynamicTable";
  */
 const SalesInquiryTable: React.FC = () => {
   const { data, loading, error } = salesUseTableHook();
+  const [searchQuery, handleSearch] = useSearch();
 
   // 데이터 로딩 중일 때
   if (loading) {
@@ -46,17 +50,18 @@ const SalesInquiryTable: React.FC = () => {
     >,
   );
 
-  // 집계된 데이터로 변환
-  const transformedData = Object.entries(aggregatedData).map(([productName, { totalQuantity, totalPrice }]) => ({
-    productName,
-    totalQuantity,
-    totalPrice
-  }));
+  const tableData = Object.keys(aggregatedData)
+    .map((productName) => ({
+      productName,
+      ...aggregatedData[productName],
+    }))
+    .filter((item) => filterData([item], searchQuery, 'productName').length > 0);
 
   return (
-    <DynamicTable
-      data={transformedData}
-    />
+    <>
+      <SearchForm onSearch={handleSearch}/>
+      <DynamicTable data={tableData}/>
+    </>
   );
 };
 
