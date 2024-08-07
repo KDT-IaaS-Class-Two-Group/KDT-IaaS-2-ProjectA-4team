@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import ButtonComponent from "../CustomButton";
 import { ProductUseTableHook } from "src/hooks/ProductUseTableHook";
 import UpdateModal from "../modal/UpdateModal";
@@ -11,12 +11,6 @@ import DynamicTable from "./DynamicTable";
  * @moonhr 24.07.31
  * @returns 재고 테이블
  */
-
-interface ExtendedProductDTO extends ProductDTO {
-  formattedRestockDate: string;
-  formattedExpirationDate: string;
-}
-
 const ProductTable: React.FC = () => {
   const { data, loading, error, refetch } = ProductUseTableHook();
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -63,27 +57,19 @@ const ProductTable: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  const processedData = useMemo(() => {
-    return data.map((item) => {
-      const productDTO = new ProductDTO(item);
-      return {
-        ...productDTO,
-        formattedRestockDate: productDTO.restockDate
-          ? formatDateToYYYYMMDD(productDTO.restockDate)
-          : "",
-        formattedExpirationDate: formatDateToYYYYMMDD(
-          productDTO.expirationDate,
-        ),
-      } as ExtendedProductDTO;
-    });
-  }, [data]);
-
+  // 데이터 전처리 (예: ProductDTO 인스턴스로 변환)
+  const processedData = data.map((item) => {
+    const formattedItem = {
+      ...item,
+      restockDate: formatDateToYYYYMMDD(new Date(item.restockDate)),
+      expirationDate: formatDateToYYYYMMDD(new Date(item.expirationDate)),
+    };
+    return new ProductDTO(formattedItem);
+  });
   return (
     <>
-      <DynamicTable<ExtendedProductDTO>
+      <DynamicTable<ProductDTO>
         data={processedData}
-        fetchMoreData={fetchMoreData}
-        hasMoreData={hasMoreData}
         renderActions={(row) => (
           <>
             <ButtonComponent
