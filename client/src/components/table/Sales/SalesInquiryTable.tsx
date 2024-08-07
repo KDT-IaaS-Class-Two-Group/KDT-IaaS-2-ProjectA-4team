@@ -7,7 +7,7 @@ import {
   TableCell,
 } from "components/ui/table";
 import React from "react";
-import salesUseTableHook from "src/hooks/salesUseTableHook";
+import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
 
 /**
  * @crystal23733 24.07.29
