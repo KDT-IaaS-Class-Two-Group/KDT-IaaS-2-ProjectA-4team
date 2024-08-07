@@ -37,10 +37,10 @@ const OrderModal: React.FC<OrderModalProps> = ({
         productName: product.productName,
         unitPrice: product.unitPrice,
         quantity: quantity,
-        restockDate: new Date(),
+        restockDate: new Date().toISOString(),
         expirationDate: new Date(
           new Date().setMonth(new Date().getMonth() + 1),
-        ),
+        ).toISOString(),
       });
 
       const saveProduct = await orderProductData(newProduct);
