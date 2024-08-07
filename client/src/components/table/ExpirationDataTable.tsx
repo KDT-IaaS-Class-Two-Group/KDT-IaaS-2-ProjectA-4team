@@ -64,8 +64,9 @@ export const ExpirationDataTable: React.FC = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>재고명</TableHead>
-            <TableHead className='pr-10%'>수량</TableHead>
+            <TableHead>분류</TableHead>
+            <TableHead>제품명</TableHead>
+            <TableHead>수량</TableHead>
             <TableHead className=''>유통기한</TableHead>
             <TableHead className="text-right pr-10">폐기</TableHead>
           </TableRow>
@@ -75,6 +76,7 @@ export const ExpirationDataTable: React.FC = () => {
             <TableRow key={product._id}>
               <TableCell>{product.productCategory}</TableCell>
               <TableCell>{product.productName}</TableCell>
+              <TableCell>{product.quantity}</TableCell>
               <TableCell>{new Date(product.expirationDate).toDateString()}</TableCell>
               <TableCell className="text-right">
                 <ButtonComponent variant="default" type="button" onClick={() => openModal(product._id)}>폐기하기</ButtonComponent>
