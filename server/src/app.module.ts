@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SaleModule } from './sales/sales.module';
 import { AuthModule } from './auth/auth.module';
 import { StockModule } from './stock/stock.module';
-import { PasswordModule } from './changePassword/changePassword.module';
 import { MembersModule } from './member/members.module';
 import { expirationDateStockModule } from './expirationDateStock/expirationDateProduct.module';
 
@@ -13,7 +12,6 @@ import { expirationDateStockModule } from './expirationDateStock/expirationDateP
     SaleModule,
     AuthModule,
     StockModule,
-    PasswordModule,
     MembersModule,
     expirationDateStockModule,
   ],

@@ -1,10 +1,36 @@
 import React from "react";
 
+/**
+ * @crystal23733 24.08.01
+ * @interface Order 매출 상품 객체를 정의하는 인터페이스
+ * @property {saleID} - 매출 번호
+ * @property {products} - 상품 정보 객체
+ * @property {saleDate} - 상품이 판매된 날짜
+ */
+interface Order {
+  saleID: string;
+  products: {
+    productName: string;
+    unitPrice: number;
+  };
+  saleDate: string;
+}
+
+/**
+ * @crystal23733 24.08.01
+ * @interface OrderDetailsProps 컴포넌트를 정의하는 인터페이스
+ * @property {orderDetails} - 위의 Order인터페이스 상속
+ * @property {error} - 에러 타입 정의
+ */
 interface OrderDetailsProps {
-  orderDetails: any[];
+  orderDetails: Order[];
   error: string | null;
 }
 
+/**
+ * @crystal23733 24.08.01
+ * @returns {JSXElement} - 주문내역 컴포넌트
+ */
 const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
   return (
     <div id="order-details" className="h-50% w-full">
@@ -23,7 +49,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
             >
               <p>{order.products.productName}</p>
               <p>{order.products.unitPrice} 원</p>
-              <p>{order.saleData}</p>
+              <p>{order.saleDate}</p>
             </div>
           ))
         ) : (

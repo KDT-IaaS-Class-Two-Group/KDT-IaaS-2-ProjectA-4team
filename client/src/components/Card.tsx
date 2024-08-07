@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Card, CardTitle, CardDescription } from "../../components/ui/card";
+import Image from "next/image";
 
 interface CardComponentProps {
   title: string;
@@ -24,7 +25,14 @@ const CardComponent: FC<CardComponentProps> = ({
   return (
     <div onClick={() => onAddToCart(title, content)}>
       <Card className="h-56 rounded-xl hover:cursor-pointer">
-        <div className="bg-slate-500 w-52 h-36 mx-auto my-2"></div>
+        <Image
+          id="burgerImage"
+          width={200}
+          height={150}
+          className="mx-auto mt-2"
+          src="/burger.jpeg"
+          alt="burgerImage"
+        />
         <div className="my-2">
           <CardTitle className="text-center text-xl">{title}</CardTitle>
           <CardDescription className="text-center text-sm">

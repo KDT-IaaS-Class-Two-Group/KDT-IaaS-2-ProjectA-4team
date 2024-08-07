@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import Image from "next/image";
 import { CartItemHook } from "src/hooks/cartItemHook";
 
 interface CartItemComponentProps {
@@ -39,19 +40,25 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
       </div>
       <div className="flex justify-between text-gray-500">
         <div className="flex justify-start">
-          <div
+          <Image
             onClick={decrementCount}
             id="minusMenu"
-            className="bg-slate-600 w-6 h-6"
-          ></div>
+            width={24}
+            height={24}
+            src="/minus.png"
+            alt="minus"
+          />
           <div id="count" className="mx-3 font-light text-s">
             {count}
           </div>
-          <div
+          <Image
             onClick={incrementCount}
             id="plusMenu"
-            className="bg-slate-600 w-6 h-6"
-          ></div>
+            width={24}
+            height={24}
+            src="/plus.png"
+            alt="plus"
+          />
         </div>
         <div
           onClick={() => removedItem(menu)}

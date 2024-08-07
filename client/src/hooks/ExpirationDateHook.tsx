@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 
 /**
@@ -12,9 +12,9 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 */
 
 export const ExpirationDateHook = () => {
-const [data, setData] = useState<ProductDTO[]>([]);
-const [loading, setLoading] = useState<boolean>(true);
-const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<ProductDTO[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
 const fetchData = async () => { 
   setLoading(true);
@@ -47,5 +47,5 @@ const deleteProduct = async (_id: string) => {
   }
 };
 
-return { data, loading, error, deleteProduct };
+  return { data, loading, error, deleteProduct };
 };
