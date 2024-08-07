@@ -7,10 +7,11 @@ export const ExpirationDateHook = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
+    const productApiUrl = process.env.NEXT_PUBLIC_PRODUCT as string;
     // 데이터 가져온 것 훅으로 실행 시킬 코드역할과 업데이트할때 다시 실행될 코드
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/products"); //endpoint - products
+      const response = await fetch(productApiUrl); //endpoint - products
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
