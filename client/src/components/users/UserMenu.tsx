@@ -2,6 +2,7 @@ import React from "react";
 import LinkButtonComponent from "src/components/linkButtonComponent";
 
 interface UserMenuProps {
+  selectCategory: string;
   setSelectCategory: (category: string) => void;
 }
 
@@ -15,7 +16,10 @@ interface UserMenuProps {
 const categoryEn = ["bread", "patty", "source", "side", "drink"];
 const categoryKo = ["빵", "패티", "소스", "사이드", "음료"];
 
-const UserMenu: React.FC<UserMenuProps> = ({ setSelectCategory }) => {
+const UserMenu: React.FC<UserMenuProps> = ({
+  selectCategory,
+  setSelectCategory,
+}) => {
   return (
     <div className="flex w-[75%] m-5 justify-center">
       <>
@@ -24,6 +28,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ setSelectCategory }) => {
             key={category}
             href="#"
             onClick={() => setSelectCategory(category)}
+            className={
+              selectCategory === category
+                ? "text-lg underline underline-offset-0 decoration-8 decoration-yellow-300 ease-out duration-300 font-semibold"
+                : "text-lg underline underline-offset-0 decoration-8 decoration-white hover:font-bold"
+            }
           >
             {categoryKo[index]}
           </LinkButtonComponent>
