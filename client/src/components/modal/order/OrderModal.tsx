@@ -5,13 +5,13 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "../../../components/ui/dialog";
-import InputComponent from "../Input";
-import ButtonComponent from "../CustomButton";
+} from "../../../../components/ui/dialog";
+import InputComponent from "../../Input";
+import ButtonComponent from "../../CustomButton";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import ProductOrderModalHook from "src/hooks/ProductOrderModalHook";
-import IProduct from "../../../../db/products/product.interface";
+import IProduct from "../../../../../db/products/product.interface";
 
 interface OrderModalProps {
   isOpen: boolean;

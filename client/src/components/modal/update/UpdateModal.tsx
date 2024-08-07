@@ -5,10 +5,10 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "../../../components/ui/dialog";
+} from "../../../../components/ui/dialog";
 import { Label } from "components/ui/label";
 import { Textarea } from "components/ui/textarea";
-import ButtonComponent from "../CustomButton";
+import ButtonComponent from "../../CustomButton";
 import ProductUpdateHook from "src/hooks/ProductUpdateHook";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
