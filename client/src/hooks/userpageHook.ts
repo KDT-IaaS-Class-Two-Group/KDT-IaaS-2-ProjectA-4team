@@ -7,7 +7,6 @@ export const UserpageHook = () => {
   const [cartItems, setCartItems] = useState<
     { menu: string; unitPrice: number }[]
   >([]);
-  const [repeat, setRepeat] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -39,11 +38,7 @@ export const UserpageHook = () => {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
         if (itemIndex === -1) {
-          console.log(repeat);
           return [...prevItems, { menu, unitPrice }];
-        } else {
-          setRepeat(true);
-          console.log(repeat);
         }
         return prevItems;
       });
@@ -67,7 +62,6 @@ export const UserpageHook = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
-    repeat,
     error,
     handleAddToCart,
     handleRemoveItem,

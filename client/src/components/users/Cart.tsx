@@ -5,7 +5,6 @@ import { CartHook } from "src/hooks/cartHook";
 interface CartProps {
   items: { menu: string; unitPrice: number }[];
   removedItem: (data: string) => void;
-  repeat: boolean;
 }
 
 /**
@@ -17,7 +16,7 @@ interface CartProps {
  * @returns { JSX.Element }
  */
 
-const Cart: FC<CartProps> = ({ items, removedItem, repeat }) => {
+const Cart: FC<CartProps> = ({ items, removedItem }) => {
   const { totalPrice, handlePriceChange, error } = CartHook(items);
 
   if (error) {
@@ -36,7 +35,6 @@ const Cart: FC<CartProps> = ({ items, removedItem, repeat }) => {
             unitPrice={item.unitPrice}
             onPriceChange={handlePriceChange}
             removedItem={removedItem}
-            repeat={repeat}
           />
         ))}
       </div>
