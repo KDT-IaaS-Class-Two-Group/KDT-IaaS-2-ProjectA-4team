@@ -25,6 +25,7 @@ export default async (
       quantity,
       totalPrice,
     }),
+    credentials: "include",
   });
 
   if (!response.ok) {

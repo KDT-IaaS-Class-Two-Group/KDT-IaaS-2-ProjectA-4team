@@ -8,7 +8,9 @@ import url3001Generator from "src/modules/generator/url3001Generator";
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
 
-  const response = await fetch(url3001Generator(EP_PRODUCT));
+  const response = await fetch(url3001Generator(EP_PRODUCT), {
+    credentials: "include",
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -32,6 +34,7 @@ export const saveProductData = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify(product),
+    credentials: "include",
   });
 
   if (!response.ok) {
