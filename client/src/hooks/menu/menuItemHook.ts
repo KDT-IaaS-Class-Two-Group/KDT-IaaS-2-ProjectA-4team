@@ -3,8 +3,8 @@ import productFetchMenu from "src/model/product/menu/productFetchMenu";
 
 interface Product {
   id: string;
-  name: string;
-  category: string;
+  productName: string;
+  productCategory: string;
   unitPrice: number;
   quantity: number;
   restockDate: Date;
@@ -25,6 +25,6 @@ export const MenuItemHook = () => {
     };
 
     loadData();
-  });
+  }, []);
   return { productList };
 };

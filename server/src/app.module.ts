@@ -4,6 +4,7 @@ import { SaleModule } from './sales/sales.module';
 import { AuthModule } from './auth/auth.module';
 import { StockModule } from './stock/stock.module';
 import { MembersModule } from './member/members.module';
+import { productModule } from './product/produdct.module';
 import { expirationDateStockModule } from './expirationDateStock/expirationDateProduct.module';
 
 @Module({
@@ -13,6 +14,7 @@ import { expirationDateStockModule } from './expirationDateStock/expirationDateP
     AuthModule,
     StockModule,
     MembersModule,
+    productModule,
     expirationDateStockModule,
   ],
   controllers: [],
