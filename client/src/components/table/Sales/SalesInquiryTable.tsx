@@ -1,5 +1,5 @@
 import React from "react";
-import salesUseTableHook from "src/hooks/salesUseTableHook";
+import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
 import DynamicTable from "../DynamicTable";
 import filterData from "src/utils/filterData";
 import useSearch from "src/hooks/useSearchHook";

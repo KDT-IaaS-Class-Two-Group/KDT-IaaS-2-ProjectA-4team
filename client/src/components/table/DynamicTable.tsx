@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import {
   Table,
   TableBody,
@@ -76,7 +77,7 @@ const DynamicTable = <T extends object>({
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className="px-4 py-2 border-b border-gray-200"
+                    className={`px-4 py-2 border-b border-gray-200 ${header.column.id === "_id" ? "hidden" : ""}`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -102,7 +103,7 @@ const DynamicTable = <T extends object>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className="px-4 py-2 border-b border-gray-200"
+                    className={`px-4 py-2 border-b border-gray-200 ${cell.column.id === "_id" ? "hidden" : ""}`}
                   >
                     {typeof cell.renderValue() === "undefined"
                       ? ""
