@@ -1,6 +1,6 @@
-import IEmail from "src/interfaces/Email.interface";
-import IName from "src/interfaces/Name.interface";
-import IPassword from "src/interfaces/Password.interface";
+import IEmail from "src/interfaces/email/Email.interface";
+import IName from "src/interfaces/name/Name.interface";
+import IPassword from "src/interfaces/password/Password.interface";
 
 interface IValiChecker {
   checkName(value: string): boolean;

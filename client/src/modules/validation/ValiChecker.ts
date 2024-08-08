@@ -1,5 +1,5 @@
 import IValiChecker from "./ValiChecker.interface";
-import ValidationUtils from "./ValidationUtils";
+import ValidationUtils from "./utils/ValidationUtils";
 
 interface PWValidationResult {
   valid: boolean;

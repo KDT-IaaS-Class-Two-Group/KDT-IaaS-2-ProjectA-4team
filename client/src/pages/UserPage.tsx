@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import { UserpageHook } from "src/hooks/userpageHook";
-import UserMenu from "src/components/users/UserMenu";
-import MenuItems from "src/components/users/MenuItems";
-import LoginInfoComponent from "src/components/LoginInfo";
-import Cart from "src/components/users/Cart";
-import FooterLinks from "src/components/footerComponent";
-import ButtonComponent from "src/components/CustomButton";
-import Logo from "src/components/logo";
+import { UserpageHook } from "src/hooks/user/userpageHook";
+import UserMenu from "src/components/menu/user/UserMenu";
+import MenuItems from "src/components/menu/MenuItems";
+import LoginInfoComponent from "src/components/info/login/LoginInfo";
+import Cart from "src/components/cart/Cart";
+import FooterLinks from "src/components/footer/footerComponent";
+import ButtonComponent from "src/components/button/customized/CustomButton";
+import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
 
 // interface ItemsContextType {
