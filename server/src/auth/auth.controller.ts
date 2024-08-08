@@ -11,7 +11,10 @@ import {
 import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -48,12 +51,12 @@ export class AuthController {
       const roleID = user.roleID;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.email,
+        user.name,
         roleID,
       );
 
       res.cookie('token', token, cookieOptions);
-      res.status(HttpStatus.OK).json({ success: true, token });
+      res.status(HttpStatus.OK).json({ success: true, roleID });
     } catch (error) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -116,5 +119,12 @@ export class AuthController {
         res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
       }
     }
+  }
+
+  @Get('login-info')
+  async getLoginInfo(@Req() request: Request) {
+    console.log('login-info 요청받움');
+    const userName = await this.authService.findUserNameToToken(request);
+    return userName;
   }
 }
