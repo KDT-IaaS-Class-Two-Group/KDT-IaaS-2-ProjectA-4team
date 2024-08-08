@@ -7,7 +7,6 @@ import IProduct from '@db/products/product.interface';
  * * 유통기한 관리 페이지 서버 컨트롤러
  */
 
-
 @Controller('productsDate')
 export class ProductsController {
   constructor(private readonly productsServiceDate: productsServiceDate) {}
