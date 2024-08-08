@@ -11,6 +11,7 @@ import {
 import TMemberInfoTable from "../../../types/member/MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 interface Member {
   id: string;
@@ -32,13 +33,12 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
       const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-      const res = await fetch(serverUrlGenerator(EP_API, EP_MEMBERS, id), {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ roleID: newRole }),
-      });
+      console.log(serverUrlGenerator(EP_API, EP_MEMBERS, id));
+      const res = await fetcher(
+        serverUrlGenerator(EP_API, EP_MEMBERS, id),
+        "put",
+        { roleID: newRole },
+      );
 
       if (!res.ok) {
         throw new Error("Network response was not ok");
