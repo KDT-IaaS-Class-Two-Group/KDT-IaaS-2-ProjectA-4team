@@ -43,15 +43,15 @@ export const LoginForm = () => {
 
         const data = await response.json();
         console.log("사용자의 권한:", data.roleID);
-        return data.roleID;
 
-        //roleId에 따라 라우팅
+        // roleId에 따라 라우팅
         if (data.roleID === 0) {
           router.push("/UserPage");
         } else if (data.roleID === 1) {
           router.push("/admin/stockInfo");
+        } else {
+          console.error("Unknown roleID:", data.roleID);
         }
-        
       } catch (error) {
         console.error("서버로 데이터 전송 실패:", error);
       }
