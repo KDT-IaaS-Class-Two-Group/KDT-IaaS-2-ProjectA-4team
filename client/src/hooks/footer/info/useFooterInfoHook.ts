@@ -12,6 +12,7 @@ const useFooterInfoHook = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const EP_USER_INFO = process.env.NEXT_PUBLIC_EP_U_INFO as string;
+      console.log(url3001Generator(EP_USER_INFO));
       try {
         const response = await fetch(url3001Generator(EP_USER_INFO), {
           method: "GET",
