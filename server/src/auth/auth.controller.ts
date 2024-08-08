@@ -73,7 +73,6 @@ export class AuthController {
     try {
       const decoded = this.authService.verifyToken(token);
       const user = await this.authService.getUserInfo(decoded.name);
-      console.log(user);
       if (!user) {
         res
           .status(HttpStatus.UNAUTHORIZED)
