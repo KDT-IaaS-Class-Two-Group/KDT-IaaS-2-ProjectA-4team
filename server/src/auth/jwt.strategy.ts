@@ -1,14 +1,19 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+// import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
+    console.log('JwtStrategy initialized');
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (req) => req.cookies?.token, // 쿠키에서 JWT 추출
+      ]),
       ignoreExpiration: false,
-      secretOrKey: 'your_jwt_secret_key', // 비밀 키
+      secretOrKey: configService.get<string>('JWT_SECRET'), // 비밀 키
     });
   }
 
