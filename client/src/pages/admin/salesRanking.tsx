@@ -1,7 +1,7 @@
 import React from "react";
 import AdminNav from "src/components/nav/admin/adminNav";
 import SalesRankingTable from "src/components/table/Sales/SalesRankingTable";
-import TitleComponent from "src/components/titleComponent";
+import TitleComponent from "src/components/title/titleComponent";
 
 const SalesInquiry: React.FC = () => {
   return (
