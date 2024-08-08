@@ -7,15 +7,9 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-<<<<<<< HEAD:client/src/components/table/expiration/ExpirationDataTable.tsx
 import ButtonComponent from "../../button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
-=======
-import ButtonComponent from "../CustomButton";
-import { ExpirationDateHook } from "src/hooks/ExpirationDateHook";
-import { ConfirmDeleteModal } from "../modal/ExpirationDateModal";
->>>>>>> develop:client/src/components/table/ExpirationDataTable.tsx
 
 /**
  * @jojayeon 24.08.07

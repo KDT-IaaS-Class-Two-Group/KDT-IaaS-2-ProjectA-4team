@@ -2,8 +2,7 @@ import url3001Generator from "src/modules/generator/url3001Generator";
 
 /**
  * @crystal23733 24.08.01
- * @param name 현재 토큰값이 없어 더미데이터로 대체
- * todo 추후 name -> 토큰으로 변경 필요
+ * @param name 
  * @param password 기존 비밀번호
  * @param changePassword 변경할 비밀번호
  * @returns responseData 응답 값
