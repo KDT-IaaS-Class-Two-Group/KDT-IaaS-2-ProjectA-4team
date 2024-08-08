@@ -20,7 +20,7 @@ const useFooterInfoHook = () => {
         });
         const result = await response.json();
         if (response.ok) {
-          setUserName(result.email); // 이메일로 사용자 이름 설정
+          setUserName(result.name); 
         } else {
           console.error("Error fetching user info:", result.message); // 에러 메시지 로그
           setUserName(null);

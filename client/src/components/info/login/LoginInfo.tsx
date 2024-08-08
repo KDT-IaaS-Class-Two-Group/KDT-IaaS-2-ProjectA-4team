@@ -14,8 +14,6 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
     const fetchUserName = async () => {
       const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
       try {
-        console.log("logininfo 보냄");
-
         const response = await fetch(url3001Generator(EP_LOGININFO), {
           credentials: "include",
         });

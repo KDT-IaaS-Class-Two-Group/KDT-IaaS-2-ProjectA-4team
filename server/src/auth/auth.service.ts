@@ -59,11 +59,11 @@ export class AuthService {
 
   /**
    * @crystal23733 24.08.05
-   * @param email
+   * @param name
    * @returns 이메일 확인
    */
-  async getUserInfo(email: string): Promise<IMember | null> {
-    return this.memberModel.findOne({ email }).exec();
+  async getUserInfo(name: string): Promise<IMember | null> {
+    return this.memberModel.findOne({ name }).exec();
   }
 
   public verifyToken(token: string): any {
@@ -73,17 +73,17 @@ export class AuthService {
   /**
    * * 비밀번호 변경
    * @crystal23733 24.08.06
-   * @param email
+   * @param name
    * @param oldPassword
    * @param newPassword
    * @returns 상태
    */
   async changePassword(
-    email: string,
+    name: string,
     oldPassword: string,
     newPassword: string,
   ): Promise<any> {
-    const member = await this.memberModel.findOne({ email });
+    const member = await this.memberModel.findOne({ name });
     if (!member) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }
@@ -104,7 +104,6 @@ export class AuthService {
   async findUserNameToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];
-      console.log(token);
       if (!token) {
         return null;
       }
