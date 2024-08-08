@@ -10,7 +10,7 @@ import {
 } from "@../../components/ui/table";
 import TMemberInfoTable from "../../../types/member/MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 interface Member {
   id: string;
@@ -32,7 +32,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
       const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-      const res = await fetch(url3001Generator(EP_API, EP_MEMBERS, id), {
+      const res = await fetch(serverUrlGenerator(EP_API, EP_MEMBERS, id), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

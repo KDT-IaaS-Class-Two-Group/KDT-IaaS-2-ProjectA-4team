@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import InputComponent from "../../input/Input";
 import CustomButton from "../../button/customized/CustomButton";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 interface RoldJwtPayload extends JwtPayload {
   roleID?: number;
@@ -28,7 +28,7 @@ export const LoginForm = () => {
       const EP_LOGIN = process.env.NEXT_PUBLIC_EP_LOGIN as string;
 
       try {
-        const response = await fetch(url3001Generator(EP_LOGIN), {
+        const response = await fetch(serverUrlGenerator(EP_LOGIN), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

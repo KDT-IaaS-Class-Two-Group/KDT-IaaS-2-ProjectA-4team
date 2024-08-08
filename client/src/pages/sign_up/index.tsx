@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import SignUpForm, { SignUpFormRef } from "../../components/sign_up/Form";
 import ValiChecker from "src/modules/validation/ValiChecker";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);
@@ -31,7 +31,7 @@ const SignUpPage: React.FC = () => {
 
       if (ValiArray.every((isValid) => isValid)) {
         try {
-          const response = await fetch(url3001Generator(EP_SIGN_UP), {
+          const response = await fetch(serverUrlGenerator(EP_SIGN_UP), {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

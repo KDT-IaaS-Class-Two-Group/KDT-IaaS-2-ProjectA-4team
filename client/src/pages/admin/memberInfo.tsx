@@ -4,7 +4,7 @@ import { GetServerSideProps } from "next";
 import AdminNav from "src/components/nav/admin/adminNav";
 import MemberInfoTable from "src/components/table/member/MemberInfoTable";
 import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 interface Props {
   members: IMemberInfo[];
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
   const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-  const res = await fetch(url3001Generator(EP_API, EP_MEMBERS));
+  const res = await fetch(serverUrlGenerator(EP_API, EP_MEMBERS));
 
   if (!res.ok) {
     return {

@@ -1,5 +1,5 @@
 import TOrders from "src/types/order/Order.type";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 /**
  * @crystal23733 24.08.01
@@ -10,10 +10,13 @@ export default async (name: string): Promise<TOrders[]> => {
   const EP_ORDERS = process.env.NEXT_PUBLIC_EP_ORDERS as string;
 
   try {
-    const response = await fetch(url3001Generator(EP_SALES, EP_ORDERS, name), {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await fetch(
+      serverUrlGenerator(EP_SALES, EP_ORDERS, name),
+      {
+        method: "GET",
+        credentials: "include",
+      },
+    );
     const responseData = await response.json();
     if (!response.ok) {
       throw new Error(responseData.message || "주문내역 조회 실패");

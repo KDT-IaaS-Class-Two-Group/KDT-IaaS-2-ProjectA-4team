@@ -1,4 +1,4 @@
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 export default async (
   id: number,
@@ -11,7 +11,7 @@ export default async (
 ) => {
   const EP_SALE_HISTORY = process.env.NEXT_PUBLIC_EP_SALE_HISTORY as string;
 
-  const response = await fetch(url3001Generator(EP_SALE_HISTORY), {
+  const response = await fetch(serverUrlGenerator(EP_SALE_HISTORY), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 /**
  * @crystal23733 24.08.01
@@ -13,7 +13,7 @@ export default async (password: string, changePassword: string) => {
 
   const name = ""; // MongoDB에 있는 유저의 name 값을 사용합니다.
   try {
-    const response = await fetch(url3001Generator(EP_CHANGE_PASSWORD), {
+    const response = await fetch(serverUrlGenerator(EP_CHANGE_PASSWORD), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
