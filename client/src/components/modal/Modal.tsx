@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../components/ui/dialog";
-import TModal from "./Modal.type";
+import TModal from "../../types/modal/Modal.type";
 
 /**
  * @eonduck2 24.07.24
