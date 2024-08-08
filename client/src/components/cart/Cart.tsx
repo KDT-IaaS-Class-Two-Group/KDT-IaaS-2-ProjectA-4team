@@ -23,24 +23,25 @@ const Cart: FC<CartProps> = ({ items, removedItem }) => {
     return <div>{error}</div>;
   }
 
-  if (!items.length) {
-    return <div>Your cart is empty.</div>;
-  }
-
   return (
     <div>
       <div className="font-extrabold text-xl mx-8 my-5 relative z-10">Cart</div>
-      {/* <div className="w-12 h-2 bg-yellow-200 left-4 top-9 absolute z-0"></div> */}
       <div className="h-64 overflow-scroll">
-        {items.map((item, index) => (
-          <CartItemComponent
-            key={index}
-            menu={item.menu}
-            unitPrice={item.unitPrice}
-            onPriceChange={handlePriceChange}
-            removedItem={removedItem}
-          />
-        ))}
+        {!items.length ? (
+          <div className="w-44 h-64 content-center mx-auto text-gray-400">
+            장바구니가 비어있습니다.
+          </div>
+        ) : (
+          items.map((item, index) => (
+            <CartItemComponent
+              key={index}
+              menu={item.menu}
+              unitPrice={item.unitPrice}
+              onPriceChange={handlePriceChange}
+              removedItem={removedItem}
+            />
+          ))
+        )}
       </div>
       <div className="w-60 font-extrabold text-xl text-right mt-6 mx-6 pt-6 border-t border-dashed border-slate-500 relative z-10">
         {totalPrice}원

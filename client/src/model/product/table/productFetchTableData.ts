@@ -7,7 +7,6 @@ import url3001Generator from "src/modules/generator/url3001Generator";
  */
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
-  const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
 
   const response = await fetch(url3001Generator(EP_PRODUCT));
   if (!response.ok) {
