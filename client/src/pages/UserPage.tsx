@@ -8,6 +8,7 @@ import FooterLinks from "src/components/footer/footerComponent";
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
+import { ConfirmDeleteModal } from "src/components/modal/expiration/ExpirationDateModal";
 
 // interface ItemsContextType {
 //   items: string;
@@ -30,10 +31,14 @@ const UserPage: FC = () => {
     setSelectCategory,
     cartItems,
     isModalOpen,
+    isPurchaseModalOpen,
     closeModal,
+    closePurchaseModal,
+    confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,
+    purchase,
   } = UserpageHook();
 
   if (error) {
@@ -56,8 +61,8 @@ const UserPage: FC = () => {
         <Cart items={cartItems} removedItem={handleRemoveItem} />
         <ButtonComponent
           type="submit"
-          className="mx-6 my-8 text-lg font-bold text-white bg-yellow-400 w-60 hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border rounded-3xl"
-          onClick={() => console.log("buy!")}
+          className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          onClick={purchase}
         >
           Buy !
         </ButtonComponent>
@@ -68,6 +73,15 @@ const UserPage: FC = () => {
           onClose={closeModal}
           title="장바구니에 메뉴가 이미 존재합니다 !"
           content="수량은 장바구니에서 조정할 수 있습니다."
+        />
+      )}
+      {isPurchaseModalOpen && (
+        <ConfirmDeleteModal
+          open={isPurchaseModalOpen}
+          onClose={closePurchaseModal}
+          onConfirm={confirmPurchase}
+          title="구매하시겠습니까 ?"
+          content=""
         />
       )}
     </div>

@@ -19,6 +19,8 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
   open,
   onClose,
   onConfirm,
+  title,
+  content,
 }) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -30,10 +32,8 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
         />
       )}
       <DialogContent className="fixed inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-lg z-50 w-full max-w-md h-1/5">
-        <DialogTitle className="text-xl font-bold mb-4">폐기 확인</DialogTitle>
-        <DialogTrigger className="mb-4">
-          정말로 이 제품을 폐기하시겠습니까?
-        </DialogTrigger>
+        <DialogTitle className="text-xl font-bold mb-4">{title}</DialogTitle>
+        <DialogTrigger className="mb-4">{content}</DialogTrigger>
         <div className="flex justify-end gap-4">
           <ButtonComponent onClick={onClose} variant="outline">
             취소

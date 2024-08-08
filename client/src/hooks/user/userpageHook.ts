@@ -5,9 +5,11 @@ export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
   const [cartItems, setCartItems] = useState<
-    { menu: string; unitPrice: number }[]
+    [] | { menu: string; unitPrice: number }[]
   >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
+    useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -22,11 +24,27 @@ export const UserpageHook = () => {
   //   );
   // };
 
+  const purchase = async () => {
+    try {
+      // const purchaseData = await salesHistoryFetch();
+      // return purchaseData;
+      setIsPurchaseModalOpen(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const confirmPurchase = () => {
+    setCartItems([]);
+    setIsPurchaseModalOpen(false);
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
     console.log("open");
   };
   const closeModal = () => setIsModalOpen(false);
+  const closePurchaseModal = () => setIsPurchaseModalOpen(false);
 
   useEffect(() => {
     try {
@@ -71,9 +89,13 @@ export const UserpageHook = () => {
     setSelectCategory,
     cartItems,
     isModalOpen,
+    isPurchaseModalOpen,
     closeModal,
+    closePurchaseModal,
+    confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,
+    purchase,
   };
 };
