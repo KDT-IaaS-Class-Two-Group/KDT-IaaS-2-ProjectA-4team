@@ -54,7 +54,7 @@ export const LoginForm = () => {
         if (roleId === 0) {
           router.push("/UserPage");
         } else if (roleId === 1) {
-          router.push("/admin");
+          router.push("/admin/stockInfo");
         }
       } catch (error) {
         console.error("서버로 데이터 전송 실패:", error);
