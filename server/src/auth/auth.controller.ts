@@ -11,10 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
-import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from './jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -37,6 +34,7 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
+    console.log('로그인요청들어옴');
     // 사용자 검증 및 로그인 처리
     try {
       const user = await this.authService.validateUser(data.email);
@@ -122,9 +120,8 @@ export class AuthController {
   }
 
   @Get('login-info')
-  async getLoginInfo(@Req() request: Request) {
-    console.log('login-info 요청받움');
+  async getLoginInfo(@Req() request: Request, @Res() res: Response) {
     const userName = await this.authService.findUserNameToToken(request);
-    return userName;
+    res.status(HttpStatus.OK).json(userName);
   }
 }
