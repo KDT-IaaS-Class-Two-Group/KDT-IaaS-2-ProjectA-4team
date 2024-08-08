@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 interface CustomJwtPayload {
   name: string;
@@ -10,8 +11,9 @@ const useFooterInfoHook = () => {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
+      const EP_USER_INFO = process.env.NEXT_PUBLIC_U_INFO as string;
       try {
-        const response = await fetch("http://localhost:3001/user-info", {
+        const response = await fetch(url3001Generator(EP_USER_INFO), {
           method: "GET",
           credentials: "include",
         });

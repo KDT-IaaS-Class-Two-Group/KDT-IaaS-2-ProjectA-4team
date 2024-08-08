@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../shared/DTO/products/product.dto";
+import urlJoin from "url-join";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 /**
  * @jojayeon 24.08.05
@@ -12,6 +14,8 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
  */
 
 export const ExpirationDateHook = () => {
+  const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +23,7 @@ export const ExpirationDateHook = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/productsDate");
+      const response = await fetch(url3001Generator(EP_PRODUCTS)); //endpoint - products
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -37,9 +41,11 @@ export const ExpirationDateHook = () => {
   }, []);
 
   const deleteProduct = async (_id: string) => {
+    const deleteUrl = urlJoin(url3001Generator(EP_PRODUCTS, _id));
     try {
-      await fetch(`http://localhost:3001/productsDate/${_id}`, {
-        method: "DELETE",
+      await fetch(deleteUrl, {
+        //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
+        method: "DELETE", // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
       });
       fetchData();
     } catch (err) {
