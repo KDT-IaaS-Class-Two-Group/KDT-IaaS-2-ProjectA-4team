@@ -6,16 +6,25 @@ import { AuthService } from './auth.service';
 import { Member, MemberSchema } from '../schemas/member.schema';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forFeature([{ name: Member.name, schema: MemberSchema }]),
-    JwtModule.register({
-      secret: 'your_jwt_secret_key', // 비밀 키를 적절히 설정하세요
-      signOptions: { expiresIn: '10m' }, // 토큰 만료 시간
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'), // 환경 변수에서 비밀 키 가져옴
+        signOptions: { expiresIn: '1h' },
+      }),
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}
