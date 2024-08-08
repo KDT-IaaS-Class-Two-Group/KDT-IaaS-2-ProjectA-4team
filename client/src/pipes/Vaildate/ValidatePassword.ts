@@ -1,10 +1,12 @@
+import ValidationResult from "src/types/Validate.type";
+
 /**
  * @moonhr 24.07.18
  * * password 검사
  * @param {*} password
  * @returns boolean
  */
-export default (password: string): boolean | object => {
+export default (password: string): ValidationResult => {
   const noSpacesRegex = /^\S*$/; // 띄어쓰기가 없는지 확인
   const validCharactersRegex = /^[a-zA-Z0-9]*$/; // 영어 소문자, 대문자, 숫자만 포함하는지 확인
   const validLengthRegex = /^.{8,25}$/; // 길이가 8자 이상 25자 이하인지 확인
