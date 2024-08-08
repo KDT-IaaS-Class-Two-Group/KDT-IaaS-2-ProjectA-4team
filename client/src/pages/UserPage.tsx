@@ -51,20 +51,17 @@ const UserPage: FC = () => {
         selectCategory={selectCategory}
         onAddToCart={handleAddToCart}
       />
-      <div className="w-72 shadow-xl h-screen fixed top-0 right-0">
-        <LoginInfoComponent
-          className="w-72 ml-6 mt-6 mb-20"
-          email="rockcoders@kdt.com"
-        />
+      <div className="fixed top-0 right-0 h-screen shadow-xl w-72">
+        <LoginInfoComponent className="mt-6 mb-20 ml-6 w-72" />
         <Cart items={cartItems} removedItem={handleRemoveItem} />
         <ButtonComponent
           type="submit"
-          className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          className="mx-6 my-8 text-lg font-bold text-white bg-yellow-400 w-60 hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border rounded-3xl"
           onClick={() => console.log("buy!")}
         >
           Buy !
         </ButtonComponent>
-        <FooterLinks className="w-72 mt-20 mx-6" />
+        <FooterLinks className="mx-6 mt-20 w-72" />
       </div>
       {isModalOpen && (
         <Modal

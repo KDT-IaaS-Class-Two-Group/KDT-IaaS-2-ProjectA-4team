@@ -29,9 +29,9 @@ const MyPage: React.FC = () => {
   return (
     <div
       id="root"
-      className="w-screen h-screen flex flex-col justify-center items-center"
+      className="flex flex-col items-center justify-center w-screen h-screen"
     >
-      <LoginInfoComponent email="rockCoders" />
+      <LoginInfoComponent />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
           <button onClick={redirect}>&larr; 돌아가기</button>

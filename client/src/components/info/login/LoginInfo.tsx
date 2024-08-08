@@ -1,29 +1,42 @@
 import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 interface LoginInfoComponentProps {
-  email: string;
   className?: string;
 }
 
-/**
- * @yuxincxoi 24.07.25
- * * 사이드바의 로그인 정보를 나타내는 컴포넌트
- * * "안녕하세요 ! [이메일]님"
- * @param {string} email 로그인한 이메일 데이터
- * @param {string} className 컴포넌트 스타일
- * @returns { JSXElement }
- */
-
-const LoginInfoComponent: FC<LoginInfoComponentProps> = ({
-  email,
-  className,
-}) => {
-  const [localEmail, setLocalEmail] = useState(email);
+const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
+  const [userName, setUserName] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLocalEmail(email);
-  }, [email]);
+    const fetchUserName = async () => {
+      const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
+      try {
+        console.log("logininfo 보냄");
+
+        const response = await fetch(url3001Generator(EP_LOGININFO), {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+
+        const data = await response.json();
+        setUserName(data);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+        setError("사용자 정보를 불러오는데 실패했습니다.");
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
+  if (error) {
+    return <div className={className}>{error}</div>;
+  }
 
   return (
     <div className={`flex ${className}`}>
@@ -34,9 +47,9 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({
         src="/userIcon.png"
         alt="userIcon"
       />
-      <div className="font-light text-sm ml-3">
+      <div className="ml-3 text-sm font-light">
         <div>안녕하세요 !</div>
-        <div>{localEmail} 님</div>
+        <div>{userName ? `${userName} 님` : "로딩 중..."}</div>
       </div>
     </div>
   );

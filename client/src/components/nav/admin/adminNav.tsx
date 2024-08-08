@@ -8,9 +8,9 @@ import NavListBox from "../list/navListBox";
  */
 const AdminNav: React.FC = () => {
   return (
-    <div id="aside" className="w-72 h-screen">
+    <div id="aside" className="h-screen w-72">
       <div className="w-full h-10%">
-        <LoginInfoComponent email="rockCoders" />
+        <LoginInfoComponent />
       </div>
       <NavListBox />
     </div>

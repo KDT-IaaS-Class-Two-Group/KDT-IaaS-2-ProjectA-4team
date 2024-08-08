@@ -34,6 +34,7 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
+    console.log('로그인요청들어옴');
     // 사용자 검증 및 로그인 처리
     try {
       const user = await this.authService.validateUser(data.email);
@@ -48,12 +49,12 @@ export class AuthController {
       const roleID = user.roleID;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.email,
+        user.name,
         roleID,
       );
 
       res.cookie('token', token, cookieOptions);
-      res.status(HttpStatus.OK).json({ success: true, token });
+      res.status(HttpStatus.OK).json({ success: true, roleID });
     } catch (error) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -116,5 +117,11 @@ export class AuthController {
         res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
       }
     }
+  }
+
+  @Get('login-info')
+  async getLoginInfo(@Req() request: Request, @Res() res: Response) {
+    const userName = await this.authService.findUserNameToToken(request);
+    res.status(HttpStatus.OK).json(userName);
   }
 }
