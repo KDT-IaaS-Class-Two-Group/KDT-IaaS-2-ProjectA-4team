@@ -8,7 +8,7 @@ import IProduct from '@db/products/product.interface';
  */
 
 
-@Controller('productsDate')
+@Controller('products')
 export class ProductsController {
   constructor(private readonly productsServiceDate: productsServiceDate) {}
 
