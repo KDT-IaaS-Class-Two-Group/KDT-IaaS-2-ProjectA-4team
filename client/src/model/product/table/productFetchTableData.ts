@@ -1,11 +1,15 @@
 import { ProductDTO } from "../../../../../shared/DTO/products/product.dto";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 /**
  * @moonhr 24.07.28
  * @returns json 배열
  */
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
-  const response = await fetch("http://localhost:3001/product");
+  const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
+  const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
+
+  const response = await fetch(url3001Generator(EP_PRODUCT));
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -21,7 +25,9 @@ export const productFetchTableData = async (): Promise<ProductDTO[]> => {
 export const saveProductData = async (
   product: ProductDTO,
 ): Promise<ProductDTO> => {
-  const response = await fetch(`http://localhost:3001/product/order`, {
+  const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
+  const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
+  const response = await fetch(url3001Generator(EP_PRODUCT, EP_ORDER), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -2,6 +2,7 @@ import React from "react";
 import LinkButtonComponent from "src/components/button/link/linkButtonComponent";
 
 interface UserMenuProps {
+  selectCategory: string;
   setSelectCategory: (category: string) => void;
 }
 
@@ -12,24 +13,31 @@ interface UserMenuProps {
  * @returns {JSXElement}
  */
 
-const UserMenu: React.FC<UserMenuProps> = ({ setSelectCategory }) => {
+const categoryEn = ["bread", "patty", "source", "side", "drink"];
+const categoryKo = ["빵", "패티", "소스", "사이드", "음료"];
+
+const UserMenu: React.FC<UserMenuProps> = ({
+  selectCategory,
+  setSelectCategory,
+}) => {
   return (
     <div className="flex w-[75%] m-5 justify-center">
-      <LinkButtonComponent href="#" onClick={() => setSelectCategory("bread")}>
-        빵
-      </LinkButtonComponent>
-      <LinkButtonComponent href="#" onClick={() => setSelectCategory("patty")}>
-        패티
-      </LinkButtonComponent>
-      <LinkButtonComponent href="#" onClick={() => setSelectCategory("source")}>
-        소스
-      </LinkButtonComponent>
-      <LinkButtonComponent href="#" onClick={() => setSelectCategory("side")}>
-        사이드
-      </LinkButtonComponent>
-      <LinkButtonComponent href="#" onClick={() => setSelectCategory("drink")}>
-        음료
-      </LinkButtonComponent>
+      <>
+        {categoryEn.map((category, index) => (
+          <LinkButtonComponent
+            key={category}
+            href="#"
+            onClick={() => setSelectCategory(category)}
+            className={
+              selectCategory === category
+                ? "text-lg underline underline-offset-0 decoration-8 decoration-yellow-300 ease-out duration-300 font-semibold"
+                : "text-lg underline underline-offset-0 decoration-8 decoration-white hover:font-bold"
+            }
+          >
+            {categoryKo[index]}
+          </LinkButtonComponent>
+        ))}
+      </>
     </div>
   );
 };

@@ -7,6 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@../../components/ui/table";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "components/ui/button";
+
+import {
+  ColumnDef,
+  useReactTable,
+  getCoreRowModel,
+  SortingState,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 
 interface DynamicTableProps<T extends object> {
   data: T[];
@@ -24,48 +35,85 @@ const DynamicTable = <T extends object>({
   renderActions,
 }: DynamicTableProps<T>) => {
   // 데이터의 키값을 테이블의 칼럼으로 사용함.
-  const columns = data.length > 0 ? (Object.keys(data[0]) as (keyof T)[]) : [];
+  const columns: ColumnDef<T>[] =
+    data.length > 0
+      ? Object.keys(data[0]).map((key) => ({
+          accessorKey: key,
+          header: ({ column }) => (
+            <Button
+              variant="ghost"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+              <ArrowUpDown className="w-4 h-4 ml-2" />
+            </Button>
+          ),
+        }))
+      : [];
+
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+  });
 
   return (
     <>
       <div>
         <Table className="min-w-full bg-white">
           <TableHeader>
-            <TableRow>
-              {/* 열 헤더 렌더링 */}
-              {columns.map((column) => (
-                <TableHead
-                  key={column as string} // key 속성의 타입 오류 방지를 위한 강제 변환
-                  className="px-4 py-2 border-b border-gray-200"
-                >
-                  {column as string} {/* 헤더 텍스트 */}
-                </TableHead>
-              ))}
-              {/* renderActions이 제공되면 "Actions" 열 추가 */}
-              {renderActions && (
-                <TableHead className="px-4 py-2 border-b border-gray-200">
-                  Actions
-                </TableHead>
-              )}
-            </TableRow>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className="px-4 py-2 border-b border-gray-200"
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                ))}
+                {renderActions && (
+                  <TableHead className="px-4 py-2 border-b border-gray-200">
+                    Actions
+                  </TableHead>
+                )}
+              </TableRow>
+            ))}
           </TableHeader>
           <TableBody>
             {/* 데이터의 각 항목을 행으로 렌더링 */}
-            {data.map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id}>
                 {/* 각 행의 셀을 렌더링 */}
-                {columns.map((column) => (
+                {row.getVisibleCells().map((cell) => (
                   <TableCell
-                    key={column as string} // key 속성의 타입 오류 방지를 위한 강제 변환
+                    key={cell.id}
                     className="px-4 py-2 border-b border-gray-200"
                   >
-                    {(row as never)[column]} {/* 해당 셀의 데이터 */}
+                    {typeof cell.renderValue() === "undefined"
+                      ? ""
+                      : (cell.renderValue() as React.ReactNode)}{" "}
+                    {/* 해당 셀의 데이터 */}
                   </TableCell>
                 ))}
                 {/* renderActions이 제공되면, 각 행의 마지막 열에 액션을 렌더링 */}
                 {renderActions && (
                   <TableCell className="px-4 py-2 text-center border-b border-gray-200">
-                    {renderActions(row)}
+                    {renderActions(row.original)}
                   </TableCell>
                 )}
               </TableRow>

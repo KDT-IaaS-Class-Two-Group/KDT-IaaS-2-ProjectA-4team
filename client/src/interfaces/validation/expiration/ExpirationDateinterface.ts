@@ -3,4 +3,4 @@ interface ConfirmDeleteModalProps {
   onClose: () => void;
   onConfirm: () => void;
 }
-export default ConfirmDeleteModalProps
+export default ConfirmDeleteModalProps;

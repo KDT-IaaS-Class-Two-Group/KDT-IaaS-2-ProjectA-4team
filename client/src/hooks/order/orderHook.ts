@@ -20,14 +20,9 @@ const useOrderHook = (name: string) => {
       try {
         const orders: TOrder[] = await orderFetch(name);
         const transformedOrders = orders.map((order) => {
-          const date = new Date(order.saleDate);
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, "0");
-          const day = String(date.getDate()).padStart(2, "0");
-          return {
-            ...order,
-            saleData: `${year}-${month}-${day}`,
-          };
+          const orderDate = new Date(order.saleDate);
+          const orderDateFormat = orderDate.toISOString().split("T")[0];
+          return { ...order, saleDate: orderDateFormat };
         });
         setError(null);
         setOrderDetails(transformedOrders);

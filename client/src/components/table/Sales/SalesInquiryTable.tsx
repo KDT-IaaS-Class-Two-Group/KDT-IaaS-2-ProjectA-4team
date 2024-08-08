@@ -1,13 +1,9 @@
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "components/ui/table";
 import React from "react";
 import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
+import DynamicTable from "../DynamicTable";
+import filterData from "src/utils/filterData";
+import useSearch from "src/hooks/useSearchHook";
+import SearchForm from "src/components/SearchForm";
 
 /**
  * @crystal23733 24.07.29
@@ -15,6 +11,7 @@ import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
  */
 const SalesInquiryTable: React.FC = () => {
   const { data, loading, error } = salesUseTableHook();
+  const [searchQuery, handleSearch] = useSearch();
 
   // 데이터 로딩 중일 때
   if (loading) {
@@ -25,13 +22,13 @@ const SalesInquiryTable: React.FC = () => {
   if (error) {
     return <div>{error}</div>;
   }
+
   /**
    * @crystal23733 24.07.30
    * * 상품명, 매출 수량, 매출 금액 집계 함수
    */
   const aggregatedData = data.reduce(
     (acc, sale) => {
-      // sale.products가 단일 객체로 가정
       const product = sale.products;
 
       if (!acc[product.productName]) {
@@ -53,32 +50,20 @@ const SalesInquiryTable: React.FC = () => {
     >,
   );
 
+  const tableData = Object.keys(aggregatedData)
+    .map((productName) => ({
+      productName,
+      ...aggregatedData[productName],
+    }))
+    .filter(
+      (item) => filterData([item], searchQuery, "productName").length > 0,
+    );
+
   return (
-    <div className="flex flex-col w-full h-full">
-      <h1>매출 조회</h1>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[200px]">상품명</TableHead>
-            <TableHead>판매 수량</TableHead>
-            <TableHead>판매 액수</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {/* 집계된 데이터로 테이블의 각 행을 생성 */}
-          {Object.keys(aggregatedData).map((productName) => {
-            const { totalQuantity, totalPrice } = aggregatedData[productName];
-            return (
-              <TableRow key={productName}>
-                <TableCell className="font-medium">{productName}</TableCell>
-                <TableCell>{totalQuantity}</TableCell>
-                <TableCell>{totalPrice}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+    <>
+      <SearchForm onSearch={handleSearch} />
+      <DynamicTable data={tableData} />
+    </>
   );
 };
 
