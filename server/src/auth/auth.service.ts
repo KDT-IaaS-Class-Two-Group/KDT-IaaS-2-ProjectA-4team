@@ -35,15 +35,15 @@ export class AuthService {
 
   /**
    * @moonhr 24.08.02
-   * @param email
+   * @param name
    * @param roleId
    * @returns jwt토큰, 쿠키설정
    */
   async generateToken(
-    email: string,
+    name: string,
     roleID: number,
   ): Promise<{ token: string; cookieOptions: any }> {
-    const payload = { email, roleID };
+    const payload = { name: name, roleID };
     const token = this.jwtService.sign(payload);
 
     const cookieOptions = {
