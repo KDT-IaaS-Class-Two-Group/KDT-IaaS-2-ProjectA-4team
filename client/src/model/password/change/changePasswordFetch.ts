@@ -2,7 +2,7 @@ import url3001Generator from "src/modules/generator/url3001Generator";
 
 /**
  * @crystal23733 24.08.01
- * @param name 
+ * @param name
  * @param password 기존 비밀번호
  * @param changePassword 변경할 비밀번호
  * @returns responseData 응답 값
