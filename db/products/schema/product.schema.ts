@@ -10,8 +10,8 @@ const productSchema: Schema<IProduct> = new Schema({
   productName: { type: String, required: true },
   unitPrice: { type: Number, required: true },
   quantity: { type: Number, required: true },
-  restockDate: { type: Date },
-  expirationDate: { type: Date, required: true },
+  restockDate: { type: String },
+  expirationDate: { type: String, required: true },
 });
 
 export default productSchema;

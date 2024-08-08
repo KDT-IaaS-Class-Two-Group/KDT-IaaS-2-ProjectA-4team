@@ -6,11 +6,10 @@ import {
   Put,
   Param,
   NotFoundException,
-  UseGuards,
 } from '@nestjs/common';
 import { StockService } from './stock.service';
 import IProduct from '@db/products/product.interface';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+// import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 // import { ObjectId } from 'mongoose';
 

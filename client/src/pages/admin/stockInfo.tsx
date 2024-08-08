@@ -1,5 +1,5 @@
 // * 재고 조회
-import ProductTable from "src/components/table/ProductTable";
+import ProductTable from "src/components/table/Product/ProductTable";
 import AdminNav from "src/components/admin/adminNav";
 import TitleComponent from "src/components/titleComponent";
 

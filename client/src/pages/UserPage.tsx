@@ -7,6 +7,7 @@ import Cart from "src/components/users/Cart";
 import FooterLinks from "src/components/footerComponent";
 import ButtonComponent from "src/components/CustomButton";
 import Logo from "src/components/logo";
+import Modal from "src/components/modal/Modal";
 
 // interface ItemsContextType {
 //   items: string;
@@ -28,6 +29,8 @@ const UserPage: FC = () => {
     selectCategory,
     setSelectCategory,
     cartItems,
+    isModalOpen,
+    closeModal,
     error,
     handleAddToCart,
     handleRemoveItem,
@@ -40,7 +43,10 @@ const UserPage: FC = () => {
   return (
     <div>
       <Logo alt="logo" width={150} height={80} className="m-5" />
-      <UserMenu setSelectCategory={setSelectCategory} />
+      <UserMenu
+        selectCategory={selectCategory}
+        setSelectCategory={setSelectCategory}
+      />
       <MenuItems
         selectCategory={selectCategory}
         onAddToCart={handleAddToCart}
@@ -53,13 +59,20 @@ const UserPage: FC = () => {
         <Cart items={cartItems} removedItem={handleRemoveItem} />
         <ButtonComponent
           type="submit"
-          className="w-60 bg-yellow-400 text-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
           onClick={() => console.log("buy!")}
         >
           Buy !
         </ButtonComponent>
         <FooterLinks className="w-72 mt-20 mx-6" />
       </div>
+      {isModalOpen && (
+        <Modal
+          onClose={closeModal}
+          title="장바구니에 메뉴가 이미 존재합니다 !"
+          content="수량은 장바구니에서 조정할 수 있습니다."
+        />
+      )}
     </div>
   );
 };

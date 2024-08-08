@@ -3,6 +3,16 @@ import { ProductDTO } from "../../../shared/DTO/products/product.dto";
 import urlJoin from "url-join";
 import url3001Generator from "src/modules/generator/url3001Generator";
 
+/**
+ * @jojayeon 24.08.05
+ * @returns {{
+ *  data : ProductDTO[] 제품정보 ,
+ *  loading : boolean 로딩 ,
+ *  error : string | null 에러 ,
+ *  deleteProduct: (id: string) => void 제품 정보 삭제
+ * }}
+ */
+
 export const ExpirationDateHook = () => {
   const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
 
@@ -11,7 +21,6 @@ export const ExpirationDateHook = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    // 데이터 가져온 것 훅으로 실행 시킬 코드역할과 업데이트할때 다시 실행될 코드
     setLoading(true);
     try {
       const response = await fetch(url3001Generator(EP_PRODUCTS)); //endpoint - products
@@ -19,16 +28,15 @@ export const ExpirationDateHook = () => {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
       const result = await response.json();
-      setData(result); // 가져온 데이터
+      setData(result);
     } catch (err) {
-      setError("데이터를 가져오는 데 실패했습니다."); // 에러
+      setError("데이터를 가져오는 데 실패했습니다.");
     } finally {
-      setLoading(false); //로딩 메시지 제거
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    //마운트 될 때 사용된다.
     fetchData();
   }, []);
 
@@ -39,7 +47,7 @@ export const ExpirationDateHook = () => {
         //엔드 포인트 products/${productID}` - 받는 부분은 어떻게 설정하지 변경해야하나?
         method: "DELETE", // 이거 때문에 문제가 없는 것 처럼 이야기 하는데 맞는지 모르겠음
       });
-      fetchData(); // 삭제 후 데이터 갱신 훅
+      fetchData();
     } catch (err) {
       setError("데이터를 삭제하는 데 실패했습니다.");
     }
