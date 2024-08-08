@@ -1,16 +1,20 @@
 // pages/memberInfo.tsx
 
 import { GetServerSideProps } from "next";
-import AdminNav from "src/components/admin/adminNav";
-import MemberInfoTable from "src/components/table/MemberInfo/MemberInfoTable";
-import IMemberInfo from "../../interfaces/MemberInfo.interface";
+import AdminNav from "src/components/nav/admin/adminNav";
+import MemberInfoTable from "src/components/table/member/MemberInfoTable";
+import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
+import url3001Generator from "src/modules/generator/url3001Generator";
 
 interface Props {
   members: IMemberInfo[];
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const res = await fetch("http://localhost:3001/api/members");
+  const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
+  const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
+
+  const res = await fetch(url3001Generator(EP_API, EP_MEMBERS));
 
   if (!res.ok) {
     return {

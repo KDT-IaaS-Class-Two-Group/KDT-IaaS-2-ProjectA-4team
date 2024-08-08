@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNav from "src/components/admin/adminNav";
+import AdminNav from "src/components/nav/admin/adminNav";
 
 const Admin: React.FC = () => {
   return (
