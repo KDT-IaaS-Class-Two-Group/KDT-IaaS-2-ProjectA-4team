@@ -13,6 +13,5 @@ export default async (): Promise<SaleDTO[]> => {
     throw new Error("Failed to fetch data");
   }
   const data = await response.json();
-  console.log(data); // 데이터를 확인합니다.
   return data;
 };
