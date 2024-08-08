@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
 
 export const UserpageHook = () => {
   const router = useRouter();
@@ -9,6 +8,8 @@ export const UserpageHook = () => {
     [] | { menu: string; unitPrice: number }[]
   >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
+    useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -27,10 +28,15 @@ export const UserpageHook = () => {
     try {
       // const purchaseData = await salesHistoryFetch();
       // return purchaseData;
-      setCartItems([]);
+      setIsPurchaseModalOpen(true);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const confirmPurchase = () => {
+    setCartItems([]);
+    setIsPurchaseModalOpen(false);
   };
 
   const openModal = () => {
@@ -38,6 +44,7 @@ export const UserpageHook = () => {
     console.log("open");
   };
   const closeModal = () => setIsModalOpen(false);
+  const closePurchaseModal = () => setIsPurchaseModalOpen(false);
 
   useEffect(() => {
     try {
@@ -82,7 +89,10 @@ export const UserpageHook = () => {
     setSelectCategory,
     cartItems,
     isModalOpen,
+    isPurchaseModalOpen,
     closeModal,
+    closePurchaseModal,
+    confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,

@@ -8,6 +8,7 @@ import FooterLinks from "src/components/footer/footerComponent";
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
+import { ConfirmDeleteModal } from "src/components/modal/expiration/ExpirationDateModal";
 
 // interface ItemsContextType {
 //   items: string;
@@ -30,7 +31,10 @@ const UserPage: FC = () => {
     setSelectCategory,
     cartItems,
     isModalOpen,
+    isPurchaseModalOpen,
     closeModal,
+    closePurchaseModal,
+    confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,
@@ -72,6 +76,15 @@ const UserPage: FC = () => {
           onClose={closeModal}
           title="장바구니에 메뉴가 이미 존재합니다 !"
           content="수량은 장바구니에서 조정할 수 있습니다."
+        />
+      )}
+      {isPurchaseModalOpen && (
+        <ConfirmDeleteModal
+          open={isPurchaseModalOpen}
+          onClose={closePurchaseModal}
+          onConfirm={confirmPurchase}
+          title="구매하시겠습니까 ?"
+          content=""
         />
       )}
     </div>
