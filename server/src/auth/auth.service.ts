@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -51,6 +52,7 @@ export class AuthService {
       secure: process.env.NODE_ENV === 'production' || false,
       maxAge: 3600000,
     };
+
     console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
@@ -91,5 +93,27 @@ export class AuthService {
     member.password = newPassword;
     await member.save();
     return { message: '비밀번호가 성공적으로 변경되었습니다.' };
+  }
+
+  /**
+   * @moonhr 24.08.08
+   * * 토큰에서 사용자의 이름을 찾아 리턴한다.
+   * @param cookie
+   * @returns username
+   */
+  async findUserNameToToken(request: Request): Promise<string | null> {
+    try {
+      const token = request.cookies['token'];
+      console.log(token);
+      if (!token) {
+        return null;
+      }
+
+      const decoded = this.jwtService.verify(token);
+      return decoded.name;
+    } catch (error) {
+      console.error('Token decoding failed:', error);
+      return null;
+    }
   }
 }
