@@ -6,7 +6,7 @@ import ValidationResult from "src/types/Validate.type";
  * @param {*} name
  * @returns boolean
  */
-export default (name: string):ValidationResult => {
+export default (name: string): ValidationResult => {
   // 띄어쓰기 금지
   if (/\s/.test(name)) {
     return { valid: false, message: "띄어쓰기는 사용할 수 없습니다." };

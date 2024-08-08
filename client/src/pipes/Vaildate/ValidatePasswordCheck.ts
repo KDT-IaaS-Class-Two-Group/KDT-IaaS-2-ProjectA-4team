@@ -7,7 +7,7 @@ import ValidationResult from "src/types/Validate.type";
  * @param {*} passwordCheck
  * @returns boolean
  */
-export default (password: string, passwordCheck: string): ValidationResult=> {
+export default (password: string, passwordCheck: string): ValidationResult => {
   if (password === passwordCheck) {
     return true;
   } else {

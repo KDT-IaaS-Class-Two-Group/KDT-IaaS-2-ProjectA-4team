@@ -21,8 +21,10 @@ const SignUpPage: React.FC = () => {
             },
             body: JSON.stringify({
               username: inputRefs.find((ref) => ref?.id === "user-name")?.value,
-              email: inputRefs.find((ref) => ref?.id === "sign-up-email")?.value,
-              password: inputRefs.find((ref) => ref?.id === "sign-up-pw")?.value,
+              email: inputRefs.find((ref) => ref?.id === "sign-up-email")
+                ?.value,
+              password: inputRefs.find((ref) => ref?.id === "sign-up-pw")
+                ?.value,
             }),
           });
 

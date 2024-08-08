@@ -1,7 +1,12 @@
-import React, { forwardRef, useRef, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  useState,
+} from "react";
 import InputComponent from "src/components/input/Input";
 import SignUpInputs from "../../../static/sign-up/SignUpInputs";
-import ValidateName from 'src/pipes/Vaildate/ValidateName'
+import ValidateName from "src/pipes/Vaildate/ValidateName";
 import ValidateEmail from "src/pipes/Vaildate/ValidateEmail";
 import ValidatePassword from "src/pipes/Vaildate/ValidatePassword";
 import ValidatePasswordCheck from "src/pipes/Vaildate/ValidatePasswordCheck";
@@ -25,11 +30,11 @@ const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
 
   const validateFields = () => {
     const newErrors: { [key: string]: string } = {};
-  
+
     inputRefs.current.forEach((inputRef) => {
       if (inputRef) {
         let validationResult: ValidationResult = true; // 초기값 설정
-  
+
         switch (inputRef.id) {
           case "user-name":
             validationResult = ValidateName(inputRef.value);
@@ -41,19 +46,24 @@ const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
             validationResult = ValidatePassword(inputRef.value);
             break;
           case "sign-up-sec-pw":
-            const pwInput = inputRefs.current.find((ref) => ref?.id === "sign-up-pw");
-            validationResult = ValidatePasswordCheck(inputRef.value, pwInput?.value || "");
+            const pwInput = inputRefs.current.find(
+              (ref) => ref?.id === "sign-up-pw",
+            );
+            validationResult = ValidatePasswordCheck(
+              inputRef.value,
+              pwInput?.value || "",
+            );
             break;
           default:
             break;
         }
-  
+
         if (typeof validationResult === "object" && !validationResult.valid) {
           newErrors[inputRef.id] = validationResult.message;
         }
       }
     });
-  
+
     setErrors(newErrors);
     return newErrors;
   };
