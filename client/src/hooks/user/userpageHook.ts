@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
 
 export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
   const [cartItems, setCartItems] = useState<
-    { menu: string; unitPrice: number }[]
+    [] | { menu: string; unitPrice: number }[]
   >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,6 +22,16 @@ export const UserpageHook = () => {
   //     </ItemsContext.Provider>
   //   );
   // };
+
+  const purchase = async () => {
+    try {
+      // const purchaseData = await salesHistoryFetch();
+      // return purchaseData;
+      setCartItems([]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -75,5 +86,6 @@ export const UserpageHook = () => {
     error,
     handleAddToCart,
     handleRemoveItem,
+    purchase,
   };
 };
