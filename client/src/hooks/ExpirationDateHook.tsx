@@ -51,6 +51,25 @@ export const ExpirationDateHook = () => {
       setError("데이터를 삭제하는 데 실패했습니다.");
     }
   };
+  const addProduct = async (product: ProductDTO) => {
+    const postUrl = url3001Generator(EP_PRODUCTS, "a");
+    try {
+      const response = await fetch(postUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
+      if (!response.ok) {
+        throw new Error("POST 요청 오류");
+      }
+      console.log("오나유!")
+      await fetchData(); // 제품 추가 후 데이터 갱신
+    } catch (err) {
+      setError("데이터를 추가하는 데 실패했습니다.");
+    }
+  };
 
-  return { data, loading, error, deleteProduct };
+  return { data, loading, error, deleteProduct, addProduct };
 };
