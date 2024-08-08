@@ -9,8 +9,8 @@ interface MenuItemsProps {
 
 interface Product {
   id: string;
-  name: string;
-  category: string;
+  productName: string;
+  productCategory: string;
   unitPrice: number;
   quantity: number;
   restockDate: Date;
@@ -29,27 +29,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   selectCategory,
   onAddToCart,
 }) => {
-  // const { productList } = MenuItemHook();
-  const productList: Product[] = [
-    {
-      id: "1",
-      name: "플랫 브레드",
-      category: "bread",
-      unitPrice: 2000,
-      quantity: 5,
-      restockDate: new Date(2024, 8, 5),
-      expirationDate: new Date(2024, 10, 11),
-    },
-    {
-      id: "2",
-      name: "치킨 패티",
-      category: "patty",
-      unitPrice: 4000,
-      quantity: 15,
-      restockDate: new Date(2024, 8, 5),
-      expirationDate: new Date(2024, 10, 11),
-    },
-  ];
+  const { productList } = MenuItemHook();
 
   const renderMenuItems = () => {
     const productBread: Product[] = [];
@@ -59,15 +39,16 @@ const MenuItems: React.FC<MenuItemsProps> = ({
     const productDrink: Product[] = [];
 
     productList.forEach((product) => {
-      if (product.category === "bread") {
+      if (product.productCategory === "bread") {
         productBread.push(product);
-      } else if (product.category === "patty") {
+        console.log(productBread);
+      } else if (product.productCategory === "patty") {
         productPatty.push(product);
-      } else if (product.category === "source") {
+      } else if (product.productCategory === "source") {
         productSource.push(product);
-      } else if (product.category === "side") {
+      } else if (product.productCategory === "side") {
         productSide.push(product);
-      } else if (product.category === "drink") {
+      } else if (product.productCategory === "drink") {
         productDrink.push(product);
       }
     });
@@ -78,9 +59,11 @@ const MenuItems: React.FC<MenuItemsProps> = ({
         {products.map((product) => (
           <CardComponent
             key={product.id}
-            title={product.name}
+            title={product.productName}
             content={product.unitPrice}
-            onAddToCart={() => onAddToCart(product.name, product.unitPrice)}
+            onAddToCart={() =>
+              onAddToCart(product.productName, product.unitPrice)
+            }
           />
         ))}
       </>
