@@ -18,9 +18,9 @@ const useFooterInfoHook = () => {
           { credentials: "include" },
         );
         const result = await response.json();
-        console.log(result);
+        console.log(result.email);
         if (response.ok) {
-          setUserName(result.name);
+          setUserName(result.email);
         } else {
           thrower(`${failFetchedUserInfoMessage}: ${result.message}`); // 에러 메시지 로그
           setUserName(null);
