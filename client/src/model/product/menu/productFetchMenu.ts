@@ -6,10 +6,6 @@ export default async () => {
 
   const response = await fetcher(serverUrlGenerator(EP_PRODUCT));
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
   const data = await response.json();
 
   return data;
