@@ -3,7 +3,7 @@ import AdminNav from "src/components/nav/admin/adminNav";
 import { ExpirationDataTable } from "src/components/table/expiration/ExpirationDataTable";
 import Logo from "src/components/logo/logo";
 import TitleComponent from "src/components/title/titleComponent";
-import ProductPage from "src/components/table/ExpirationData/button/savedatabutton";
+import ProductPage from "src/components/table/expiration/button/savedatabutton";
 /**
  * @jojayeon 24.08.05
  * @returns 유통관리 페이지

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddProductModal } from "../../../modal/AddProductModal";
+import { AddProductModal } from "../../../modal/addmodal/AddProductModal";
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook"; 
 import { ProductDTO } from "@shared/DTO/products/product.dto";

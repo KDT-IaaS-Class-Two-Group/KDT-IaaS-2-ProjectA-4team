@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
-import ButtonComponent from "../button/customized/CustomButton";
-import InputComponent from "../input/Input";
+import ButtonComponent from "../../button/customized/CustomButton";
+import InputComponent from "../../input/Input";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
