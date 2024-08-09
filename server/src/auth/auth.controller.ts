@@ -121,4 +121,16 @@ export class AuthController {
     const userName = await this.authService.findUserNameToToken(request);
     res.status(HttpStatus.OK).json(userName);
   }
+
+  @Post('logout')
+  logout(@Res() res: Response) {
+    console.log('로그아웃 요청');
+    // 쿠키를 만료시키고 응답
+    res.cookie('token', '', {
+      expires: new Date(0),
+      httpOnly: true,
+      path: '/',
+    });
+    res.status(200).send('Logged out');
+  }
 }
