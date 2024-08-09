@@ -33,6 +33,6 @@
     "**/*.ts",
     "**/*.tsx",
     "../static/client/**/*.ts",
-    "static/sign-up/SignUpInputs.ts"
+    "static/sign-up/SignUpInputs.static.ts"
   ]
 }

@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from "react";
 import InputComponent from "src/components/input/Input";
-import SignUpInputs from "../../../static/sign-up/SignUpInputs";
+import SignUpInputs from "../../../static/sign-up/SignUpInputs.static";
 
 interface SignUpFormProps {}
 
