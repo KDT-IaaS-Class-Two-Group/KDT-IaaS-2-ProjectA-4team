@@ -41,7 +41,6 @@ const MenuItems: React.FC<MenuItemsProps> = ({
     productList.forEach((product) => {
       if (product.productCategory === "bread") {
         productBread.push(product);
-        console.log(productBread);
       } else if (product.productCategory === "patty") {
         productPatty.push(product);
       } else if (product.productCategory === "source") {
