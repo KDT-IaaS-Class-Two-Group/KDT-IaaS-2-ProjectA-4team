@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import useFooterInfoHook from "src/hooks/footer/info/useFooterInfoHook";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 interface FooterLinksProps {
   className?: string;
@@ -12,12 +13,11 @@ async function logout(): Promise<void> {
   try {
     const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
     // 서버에 로그아웃 요청 보내기
-    const response = await fetch(serverUrlGenerator(LOGOUT), {
-      method: "POST",
+    const response = await fetcher(serverUrlGenerator(LOGOUT), "post",{
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      credentials:"include"
     });
 
     if (!response.ok) {
