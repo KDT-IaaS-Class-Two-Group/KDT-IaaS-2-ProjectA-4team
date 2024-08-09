@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 interface LoginInfoComponentProps {
   className?: string;
@@ -14,7 +15,7 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
     const fetchUserName = async () => {
       const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
       try {
-        const response = await fetch(url3001Generator(EP_LOGININFO), {
+        const response = await fetcher(serverUrlGenerator(EP_LOGININFO), "get",{
           credentials: "include",
         });
         if (!response.ok) {
