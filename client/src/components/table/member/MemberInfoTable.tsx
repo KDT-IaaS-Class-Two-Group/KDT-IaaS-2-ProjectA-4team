@@ -12,13 +12,7 @@ import TMemberInfoTable from "../../../types/member/MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
-
-interface Member {
-  id: string;
-  member: string;
-  email: string;
-  role: string;
-}
+import Member from "src/interfaces/components/table/member/MemberInfoTable.interface";
 
 const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
   const { caption, head, data } = props;

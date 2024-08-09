@@ -11,13 +11,10 @@ import ValidateEmail from "src/pipes/Vaildate/ValidateEmail";
 import ValidatePassword from "src/pipes/Vaildate/ValidatePassword";
 import ValidatePasswordCheck from "src/pipes/Vaildate/ValidatePasswordCheck";
 import ValidationResult from "src/types/Validate.type";
-
-interface SignUpFormProps {}
-
-export interface SignUpFormRef {
-  getInputRefs: () => (HTMLInputElement | null)[];
-  validateFields: () => { [key: string]: string }; // validateFields 함수를 추가
-}
+import {
+  SignUpFormProps,
+  SignUpFormRef,
+} from "src/interfaces/components/sign_up/Form.interface";
 
 const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);

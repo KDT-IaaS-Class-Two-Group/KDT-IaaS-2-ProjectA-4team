@@ -2,10 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
-
-interface LoginInfoComponentProps {
-  className?: string;
-}
+import LoginInfoComponentProps from "src/interfaces/components/info/login/LoginInfo.interface";
+import { failedGetUserInfoMessage } from "static/components/info/login/loginInfo.static";
 
 const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
   const [userName, setUserName] = useState<string | null>(null);
@@ -15,18 +13,18 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
     const fetchUserName = async () => {
       const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
       try {
-        const response = await fetcher(serverUrlGenerator(EP_LOGININFO), "get",{
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
+        const response = await fetcher(
+          serverUrlGenerator(EP_LOGININFO),
+          "get",
+          {
+            credentials: "include",
+          },
+        );
 
         const data = await response.json();
         setUserName(data);
       } catch (error) {
-        console.error("Error fetching user info:", error);
-        setError("사용자 정보를 불러오는데 실패했습니다.");
+        setError(failedGetUserInfoMessage);
       }
     };
 

@@ -1,15 +1,5 @@
 import React, { createContext, useContext, ReactNode } from "react";
-
-interface MemberInfoTableContextType {
-  caption: string;
-  head: string[];
-  data: Array<{ [key: string]: string }>;
-  buttonValue: string;
-  setCaption: (caption: string) => void;
-  setHead: (head: string[]) => void;
-  setData: (data: Array<{ [key: string]: string }>) => void;
-  setButtonValue: (buttonValue: string) => void;
-}
+import MemberInfoTableContextType from "src/interfaces/contexts/member/MemberInfoContext.interface";
 
 const MemberInfoTableContext = createContext<
   MemberInfoTableContextType | undefined

@@ -1,13 +1,7 @@
 import { Button } from "components/ui/button";
 import React, { ReactNode, MouseEventHandler } from "react";
 import Link from "next/link";
-
-interface LinkButtonComponentProps {
-  children: ReactNode;
-  href: string;
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
-  className?: string;
-}
+import LinkButtonComponentProps from "src/interfaces/components/button/link/LinkButtonComponent.interface";
 
 /**
  * @crystal23733
