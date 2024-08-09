@@ -2,12 +2,7 @@ import { useState } from "react";
 import { updateProductUpdate } from "src/model/product/update/productFetchUpdate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import { unknownErrMessage } from "static/error/unknown/unknownErr.static";
-
-interface productUpdateHook {
-  updateProduct: (product: ProductDTO) => Promise<ProductDTO>;
-  loading: boolean;
-  error: string | null;
-}
+import productUpdateHook from "src/interfaces/hooks/product/update/ProductUpdateHook.interface";
 
 const ProductUpdateHook = (): productUpdateHook => {
   const [loading, setLoading] = useState(false);
