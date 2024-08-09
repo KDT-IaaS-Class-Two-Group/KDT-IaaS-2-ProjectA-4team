@@ -1,0 +1,3 @@
+interface FooterLinksProps {
+  className?: string;
+}
