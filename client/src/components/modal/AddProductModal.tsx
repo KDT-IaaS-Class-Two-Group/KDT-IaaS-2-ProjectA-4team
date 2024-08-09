@@ -5,6 +5,10 @@ import InputComponent from "src/components/Input";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 
+/**
+ * @jojayeon 20.083.09
+ * 추가 제품 구매하는 모달창
+ */
 interface AddProductModalProps {
   open: boolean;
   onClose: () => void;
@@ -58,7 +62,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="fixed inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-lg z-50 w-full max-w-md h-1/3">
-        <DialogTitle className="text-xl font-bold mb-4">제품 추가</DialogTitle>
+        <DialogTitle className="text-xl font-bold mb-4">제품 구매</DialogTitle>
         <div className="grid grid-cols-4 items-center gap-4 mb-4">
         <Label htmlFor="category" className="text-right border-r-black">
               분류

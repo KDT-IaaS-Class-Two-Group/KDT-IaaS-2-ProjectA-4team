@@ -10,6 +10,7 @@ import url3001Generator from "src/modules/generator/url3001Generator";
  *  loading : boolean 로딩 ,
  *  error : string | null 에러 ,
  *  deleteProduct: (id: string) => void 제품 정보 삭제
+ *  addProduct: (product: ProductDTO) => 제품 추가
  * }}
  */
 
