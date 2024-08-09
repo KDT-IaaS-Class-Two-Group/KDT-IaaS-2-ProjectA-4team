@@ -4,10 +4,6 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import thrower from "src/modules/throw/thrower";
 import { failFetchedUserInfoMessage } from "static/error/hooks/footer/info/useFooterInfoHook";
 
-interface CustomJwtPayload {
-  name: string;
-}
-
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
