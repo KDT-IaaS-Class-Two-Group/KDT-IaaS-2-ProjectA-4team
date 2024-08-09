@@ -13,7 +13,6 @@ import useRedirect from "src/hooks/redirect/useRedirect";
 const MyPage: React.FC = () => {
   const router = useRouter();
   const name = typeof router.query.name === "string" ? router.query.name : "";
-  console.log("query", name);
 
   // 훅 호출은 조건문 밖에서 수행
   const { orderDetails, error, loading } = useOrderHook(name);

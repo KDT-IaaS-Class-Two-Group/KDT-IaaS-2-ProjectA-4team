@@ -9,7 +9,6 @@ const useRedirect = () => {
   const redirect = async () => {
     try {
       const userRole = await getUserRoleFetch();
-      console.log("User role:", userRole); // 디버깅용 로그
 
       if (userRole === 1) {
         await router.push("/admin/stockInfo");
