@@ -125,7 +125,7 @@ export class AuthService {
       }
 
       const decoded = this.jwtService.verify(token);
-      return decoded.userEmail;
+      return decoded.email;
     } catch (error) {
       console.error(error);
       return null;
