@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@radix-ui/react-dialog";
-import ButtonComponent from "../../button/customized/CustomButton";
+import ButtonComponent from "src/components/button/customized/CustomButton";
 import ConfirmDeleteModalProps from "src/interfaces/validation/expiration/ExpirationDateinterface";
 
 /**

@@ -18,6 +18,8 @@ import {
  */
 
 export const ExpirationDateHook = () => {
+  const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,6 +30,9 @@ export const ExpirationDateHook = () => {
 
     try {
       const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE));
+      if (!response.ok) {
+        throw new Error("네트워크 응답이 올바르지 않습니다.");
+      }
       const result = await response.json();
       setData(result);
     } catch (err) {
@@ -49,6 +54,24 @@ export const ExpirationDateHook = () => {
       setError(`${deleteDataErrMessage}`);
     }
   };
-
-  return { data, loading, error, deleteProduct };
+  const addProduct = async (product: ProductDTO) => {
+    const postUrl = serverUrlGenerator(EP_PRODUCTS, "orderproduct");
+    try {
+      const response = await fetch(postUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
+      if (!response.ok) {
+        throw new Error("POST 요청 오류");
+      }
+      console.log("오나유!");
+      await fetchData(); // 제품 추가 후 데이터 갱신
+    } catch (err) {
+      setError("데이터를 추가하는 데 실패했습니다.");
+    }
+  };
+  return { data, loading, error, deleteProduct, addProduct };
 };
