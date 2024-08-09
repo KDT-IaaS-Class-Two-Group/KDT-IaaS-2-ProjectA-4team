@@ -26,10 +26,7 @@ export default async (password: string, changePassword: string) => {
       },
     );
     const responseData = await response.json();
-    if (!response.ok) {
-      throw new Error(responseData.message || "비밀번호 변경요청 실패");
-    }
-    console.log(responseData);
+
     return responseData;
   } catch (error) {
     throw error;

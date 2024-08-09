@@ -18,14 +18,10 @@ export default async (name: string): Promise<TOrders[]> => {
         credentials: "include",
       },
     );
-    
-    if (!response.ok) {
-      const responseData = await response.json();
-      throw new Error(responseData.message || "주문내역 조회 실패");
-    }
-    return await response.json();
+    const responseData = await response.json();
+
+    return responseData;
   } catch (error) {
-    console.error("주문내역 조회 중 클라이언트 오류", error);
     throw error;
   }
 };
