@@ -11,6 +11,9 @@ interface FooterLinksProps {
 async function logout(): Promise<void> {
   try {
     const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
+
+    const device = navigator.userAgent;
+
     // 서버에 로그아웃 요청 보내기
     const response = await fetch(url3001Generator(LOGOUT), {
       method: "POST",
@@ -18,6 +21,10 @@ async function logout(): Promise<void> {
         "Content-Type": "application/json",
       },
       credentials: "include",
+      body: JSON.stringify({
+        device: device,
+        // ipAddress는 서버에서 처리할 수 있도록 생략
+      }),
     });
 
     if (!response.ok) {
