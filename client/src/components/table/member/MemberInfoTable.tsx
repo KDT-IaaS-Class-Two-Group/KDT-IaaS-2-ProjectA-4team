@@ -33,7 +33,6 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
       const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-      console.log(serverUrlGenerator(EP_API, EP_MEMBERS, id));
       const res = await fetcher(
         serverUrlGenerator(EP_API, EP_MEMBERS, id),
         "put",

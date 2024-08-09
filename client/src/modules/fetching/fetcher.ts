@@ -1,8 +1,7 @@
-export default async (
-  url: string,
-  method: "get" | "post" | "put" | "delete",
-  data?: unknown,
-) => {
+import { TFetcher } from "./fetcher.interface";
+import { TRequestData } from "./fetcher.interface";
+
+export default async (url: string, method: TFetcher, data?: TRequestData) => {
   try {
     const { default: ky } = await import("@toss/ky");
     const casedMethod = method.toLowerCase();
