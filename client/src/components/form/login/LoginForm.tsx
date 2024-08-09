@@ -27,20 +27,22 @@ export const LoginForm = () => {
 
       const EP_LOGIN = process.env.NEXT_PUBLIC_EP_LOGIN as string;
 
+      const device = navigator.userAgent;
+
       try {
         const response = await fetch(url3001Generator(EP_LOGIN), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password, device }),
           credentials: "include",
         });
 
         if (!response.ok) {
           throw new Error("Network response was not ok.");
         }
-
+        console.log(response);
         const data = await response.json();
         console.log("사용자의 권한:", data.roleID);
 
