@@ -4,6 +4,15 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import thrower from "src/modules/throw/thrower";
 import { failFetchedUserInfoMessage } from "static/hooks/footer/info/useFooterInfoHook.static";
 
+/**
+ * @crystal23733 24.08.09
+ * * `useFooterInfoHook` 훅은 사용자 정보를 가져와서 상태를 관리합니다.
+ *
+ * @returns {{
+ *   userName: string | null,  // 사용자 이름 (정보를 성공적으로 가져온 경우) 또는 null (가져오는 도중 오류가 발생한 경우)
+ *   loading: boolean          // 데이터 로딩 상태 (true: 로딩 중, false: 로딩 완료)
+ * }}
+ */
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
