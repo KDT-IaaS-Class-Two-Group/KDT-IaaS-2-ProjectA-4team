@@ -12,18 +12,6 @@ export const UserpageHook = () => {
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
-
-  // const ItemsProvider: React.FC<ItemsProviderProps> = ({ children }) => {
-  //   const [items, setItems] = useState("");
-
-  //   return (
-  //     <ItemsContext.Provider value={{ items, setItems }}>
-  //       {children}
-  //     </ItemsContext.Provider>
-  //   );
-  // };
-
   const purchase = async () => {
     try {
       // const purchaseData = await salesHistoryFetch();
