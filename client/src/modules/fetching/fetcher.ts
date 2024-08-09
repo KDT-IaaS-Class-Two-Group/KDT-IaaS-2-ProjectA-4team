@@ -1,3 +1,8 @@
+import {
+  HttpErr,
+  methodDefaultThrower,
+} from "static/throw/modules/fetching/fetcher";
+import thrower from "../throw/thrower";
 import { TFetcher } from "./fetcher.interface";
 import { TRequestData } from "./fetcher.interface";
 
@@ -12,7 +17,11 @@ import { TRequestData } from "./fetcher.interface";
  * @returns {Promise<Response>} Response 객체로 해결되는 Promise
  * @throws {Error} 요청 실패 시 또는 지원되지 않는 메서드 사용 시 오류 발생
  */
-export default async (url: string, method: TFetcher, data?: TRequestData) => {
+export default async (
+  url: string,
+  method: TFetcher,
+  data?: TRequestData,
+): Promise<Response> => {
   try {
     const { default: ky } = await import("@toss/ky");
 
@@ -31,16 +40,15 @@ export default async (url: string, method: TFetcher, data?: TRequestData) => {
         response = await ky.delete(url);
         break;
       default:
-        throw new Error(`Unsupported method: ${method}`);
+        return thrower(methodDefaultThrower);
     }
 
     if (!response.ok) {
-      throw new Error(`HTTP error ${response.status}`);
+      return thrower(`${HttpErr}: ${response.status}`);
     }
 
     return response;
   } catch (error) {
-    console.error("Failed to fetch data:", error);
     throw error;
   }
 };

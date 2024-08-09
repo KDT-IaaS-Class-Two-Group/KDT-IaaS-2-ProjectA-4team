@@ -6,6 +6,6 @@
  * @throws {Error} 주어진 메시지를 포함한 Error 객체
  */
 
-export default (errMessage: string) => {
+export default (errMessage: string | Error) => {
   throw new Error(errMessage);
 };
