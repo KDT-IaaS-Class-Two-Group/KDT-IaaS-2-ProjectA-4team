@@ -104,7 +104,6 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      console.log(decoded);
       const userName = decoded.name;
       await this.authService.changePassword(
         userName,
