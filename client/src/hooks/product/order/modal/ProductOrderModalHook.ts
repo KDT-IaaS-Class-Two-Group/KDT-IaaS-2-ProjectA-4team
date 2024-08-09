@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import { saveProductData } from "src/model/product/table/productFetchTableData";
+import { orderModalErrMessage } from "static/product/order/modal/ProductOrderModalHook.static";
 
 interface UseOrderProductHook {
   orderProductData: (product: ProductDTO) => Promise<ProductDTO>;
@@ -23,7 +24,7 @@ const ProductOrderModalHook = (): UseOrderProductHook => {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("An unknown error occurred");
+        setError(orderModalErrMessage);
       }
       throw err;
     } finally {

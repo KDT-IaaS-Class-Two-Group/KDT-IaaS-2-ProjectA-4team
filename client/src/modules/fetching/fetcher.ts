@@ -1,7 +1,7 @@
 import {
   HttpErr,
   methodDefaultThrower,
-} from "static/throw/modules/fetching/fetcher";
+} from "static/throw/modules/fetching/fetcher.static";
 import thrower from "../throw/thrower";
 import { TRequestData } from "./fetcher.interface";
 import type { HttpMethod } from "ky/distribution/types/options";

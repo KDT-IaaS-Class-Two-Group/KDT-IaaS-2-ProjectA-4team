@@ -1,6 +1,11 @@
 import { useState } from "react";
 import changePasswordFetch from "src/model/password/change/changePasswordFetch";
 import ValiChecker from "src/modules/validation/ValiChecker";
+import {
+  failedChangePwMessage,
+  isEqualPwErrMessage,
+  succeedChangePwMessage,
+} from "static/hooks/password/changePasswordHook.static";
 
 const useChangePasswordHook = () => {
   const [password, setPassword] = useState<string>("");
@@ -21,7 +26,7 @@ const useChangePasswordHook = () => {
     }
 
     if (!ValiChecker.isEqualTo(changePassword, changePasswordConfirm)) {
-      setError("비밀번호가 일치하지 않습니다.");
+      setError(isEqualPwErrMessage);
       return;
     }
 
@@ -29,16 +34,15 @@ const useChangePasswordHook = () => {
       const result = await changePasswordFetch(password, changePassword);
       console.log(result);
       setError(null);
-      setSuccessMessage("비밀번호가 성공적으로 변경되었습니다.");
+      setSuccessMessage(succeedChangePwMessage);
       // 변경 성공 시 새로고침
       window.location.reload();
     } catch (error) {
-      console.log("변경 실패");
       setSuccessMessage(null);
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError("비밀번호 변경에 실패하였습니다.");
+        setError(failedChangePwMessage);
       }
     }
   };
