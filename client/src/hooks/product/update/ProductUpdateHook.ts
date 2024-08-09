@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateProductUpdate } from "src/model/product/update/productFetchUpdate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import { unknownErrMessage } from "static/error/unknown/unknownErr.static";
 
 interface productUpdateHook {
   updateProduct: (product: ProductDTO) => Promise<ProductDTO>;
@@ -23,7 +24,7 @@ const ProductUpdateHook = (): productUpdateHook => {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("An unknown error occurred");
+        setError(unknownErrMessage);
       }
       throw err;
     } finally {

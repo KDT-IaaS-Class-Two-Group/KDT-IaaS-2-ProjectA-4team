@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import SignUpForm, { SignUpFormRef } from "../../components/sign_up/Form";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import ValiChecker from "src/modules/validation/ValiChecker";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);
@@ -14,19 +16,23 @@ const SignUpPage: React.FC = () => {
 
       if (Object.keys(errors).length === 0) {
         try {
-          const response = await fetch(url3001Generator(EP_SIGN_UP), {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const response = await fetcher(
+            serverUrlGenerator(EP_SIGN_UP),
+            "post",
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: inputRefs.find((ref) => ref?.id === "user-name")
+                  ?.value,
+                email: inputRefs.find((ref) => ref?.id === "sign-up-email")
+                  ?.value,
+                password: inputRefs.find((ref) => ref?.id === "sign-up-pw")
+                  ?.value,
+              }),
             },
-            body: JSON.stringify({
-              username: inputRefs.find((ref) => ref?.id === "user-name")?.value,
-              email: inputRefs.find((ref) => ref?.id === "sign-up-email")
-                ?.value,
-              password: inputRefs.find((ref) => ref?.id === "sign-up-pw")
-                ?.value,
-            }),
-          });
+          );
 
           if (!response.ok) {
             throw new Error("서버 오류 발생");
@@ -36,7 +42,6 @@ const SignUpPage: React.FC = () => {
 
           setResponseMessage(`회원 가입 성공`);
         } catch (error) {
-          console.error("회원 가입 오류:", error);
           setResponseMessage("회원 가입 중 오류가 발생했습니다.");
         }
       } else {

@@ -10,7 +10,8 @@ import {
 } from "@../../components/ui/table";
 import TMemberInfoTable from "../../../types/member/MemberInfoTable.type";
 import { CheckCircle } from "lucide-react";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 interface Member {
   id: string;
@@ -22,7 +23,6 @@ interface Member {
 const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
   const { caption, head, data } = props;
 
-  // 상태로 데이터 관리
   const [members, setMembers] = useState<Member[]>(data as Member[]);
 
   const handleRoleToggle = async (id: string, currentRole: number) => {
@@ -32,28 +32,17 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
       const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-      const res = await fetch(url3001Generator(EP_API, EP_MEMBERS, id), {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ roleID: newRole }),
+      await fetcher(serverUrlGenerator(EP_API, EP_MEMBERS, id), "put", {
+        roleID: newRole,
       });
 
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // 서버에서 업데이트된 데이터를 가져와서 상태를 업데이트
       setMembers(
         members.map((member) =>
           member.id === id ? { ...member, role: newRole.toString() } : member,
         ),
       );
-
-      console.log("Role updated successfully");
     } catch (error) {
-      console.error("Error updating role:", error);
+      throw error;
     }
   };
 

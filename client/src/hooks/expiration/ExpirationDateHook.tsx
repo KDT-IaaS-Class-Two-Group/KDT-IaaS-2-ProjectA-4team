@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import { ProductDTO } from "@shared/DTO/products/product.dto";
-import urlJoin from "url-join";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import {
+  deleteDataErrMessage,
+  getDataErrMessage,
+} from "static/hooks/expiration/ExpirationDateHook.static";
 
 /**
  * @jojayeon 24.08.05
@@ -19,18 +23,20 @@ export const ExpirationDateHook = () => {
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
 
   const fetchData = async () => {
     setLoading(true);
+
     try {
-      const response = await fetch(url3001Generator(EP_PRODUCTS));
+      const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE));
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError("데이터를 가져오는 데 실패했습니다.");
+      setError(`${getDataErrMessage}`);
     } finally {
       setLoading(false);
     }
@@ -41,18 +47,15 @@ export const ExpirationDateHook = () => {
   }, []);
 
   const deleteProduct = async (_id: string) => {
-    const deleteUrl = urlJoin(url3001Generator(EP_PRODUCTS, _id));
     try {
-      await fetch(deleteUrl, {
-        method: "DELETE", 
-      });
+      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete");
       fetchData();
     } catch (err) {
-      setError("데이터를 삭제하는 데 실패했습니다.");
+      setError(`${deleteDataErrMessage}`);
     }
   };
   const addProduct = async (product: ProductDTO) => {
-    const postUrl = url3001Generator(EP_PRODUCTS, "orderproduct");
+    const postUrl = serverUrlGenerator(EP_PRODUCTS, "orderproduct");
     try {
       const response = await fetch(postUrl, {
         method: "POST",
@@ -64,12 +67,11 @@ export const ExpirationDateHook = () => {
       if (!response.ok) {
         throw new Error("POST 요청 오류");
       }
-      console.log("오나유!")
+      console.log("오나유!");
       await fetchData(); // 제품 추가 후 데이터 갱신
     } catch (err) {
       setError("데이터를 추가하는 데 실패했습니다.");
     }
   };
-
   return { data, loading, error, deleteProduct, addProduct };
 };
