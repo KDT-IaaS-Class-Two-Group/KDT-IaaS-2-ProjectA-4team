@@ -10,7 +10,7 @@ import { MembersModule } from '../member/members.module';
   imports: [
     MongooseModule.forFeature([{ name: Sale.name, schema: SaleSchema }]),
     AuthModule,
-    MembersModule
+    MembersModule,
   ],
   providers: [SaleService],
   controllers: [SaleController],

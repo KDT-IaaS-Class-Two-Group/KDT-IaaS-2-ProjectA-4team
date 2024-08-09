@@ -95,7 +95,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<any> {
     const token = req.cookies['token'];
-    console.log("TOKEN:", token);
+    console.log('TOKEN:', token);
     if (!token) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -105,11 +105,7 @@ export class AuthController {
     try {
       const decoded = this.authService.verifyToken(token);
       const userName = decoded.name;
-      await this.authService.changePassword(
-        userName,
-        oldPassword,
-        newPassword,
-      );
+      await this.authService.changePassword(userName, oldPassword, newPassword);
       res
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
