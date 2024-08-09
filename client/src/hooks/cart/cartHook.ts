@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { failedPriceMessages } from "static/hooks/cart/cartHook.static";
 
 export const CartHook = (items: { menu: string; unitPrice: number }[]) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -11,8 +12,7 @@ export const CartHook = (items: { menu: string; unitPrice: number }[]) => {
         return updatedTotal;
       });
     } catch (error) {
-      console.error("Failed to change price: ", error);
-      setError("가격 계산에 실패하였습니다.");
+      setError(failedPriceMessages.failedCalcPriceMessage);
     }
   };
 
@@ -24,8 +24,7 @@ export const CartHook = (items: { menu: string; unitPrice: number }[]) => {
       );
       setTotalPrice(initialTotalPrice);
     } catch (error) {
-      console.error("Failed to set initial total price: ", error);
-      setError("총액 계산에 실패하였습니다.");
+      setError(failedPriceMessages.failedCalcTotalPriceMessage);
     }
   }, [items]);
 

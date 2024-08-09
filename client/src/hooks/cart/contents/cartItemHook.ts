@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { failedMessages } from "static/hooks/cart/cartHook.static";
+import { failedMessages } from "static/hooks/cart/contents/cartItemHook.static";
 
 export const CartItemHook = (
   unitPrice: number,
