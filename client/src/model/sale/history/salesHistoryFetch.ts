@@ -1,13 +1,11 @@
 import url3001Generator from "src/modules/generator/url3001Generator";
 
 export default async (
-  id: number,
-  memberID: number,
-  productID: number,
-  productName: string,
-  unitPrice: number,
+  memberID: string,
+  productID: string,
   quantity: number,
   totalPrice: number,
+  saleDate: string,
 ) => {
   const EP_SALE_HISTORY = process.env.NEXT_PUBLIC_EP_SALE_HISTORY as string;
 
@@ -17,13 +15,11 @@ export default async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id,
       memberID,
       productID,
-      productName,
-      unitPrice,
       quantity,
       totalPrice,
+      saleDate,
     }),
     credentials: "include",
   });
