@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import thrower from "src/modules/throw/thrower";
-import { failFetchedUserInfoMessage } from "static/error/hooks/footer/info/useFooterInfoHook";
+import { failFetchedUserInfoMessage } from "static/error/hooks/footer/info/useFooterInfoHook.static";
 
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);

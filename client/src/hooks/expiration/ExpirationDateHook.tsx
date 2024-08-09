@@ -5,7 +5,7 @@ import fetcher from "src/modules/fetching/fetcher";
 import {
   deleteDataErrMessage,
   getDataErrMessage,
-} from "static/error/hooks/expiration/ExpirationDateHook";
+} from "static/error/hooks/expiration/ExpirationDateHook.static";
 
 /**
  * @jojayeon 24.08.05
