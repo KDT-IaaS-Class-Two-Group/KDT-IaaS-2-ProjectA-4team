@@ -1,7 +1,7 @@
 import React from "react";
 import AdminNav from "src/components/nav/admin/adminNav";
 import SalesInquiryTable from "src/components/table/Sales/SalesInquiryTable";
-import SearchForm from "src/components/SearchForm";
+import SearchForm from "src/components/form/search/SearchForm";
 import TitleComponent from "src/components/title/titleComponent";
 
 const SalesInquiry: React.FC = () => {

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import InputComponent from "./input/Input";
-import SearchFormProps from "src/interfaces/components/SearchForm.interface";
+import InputComponent from "../../input/Input";
+import SearchFormProps from "src/interfaces/components/form/search/SearchForm.interface";
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   const [query, setQuery] = React.useState<string>("");

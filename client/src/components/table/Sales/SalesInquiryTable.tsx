@@ -3,7 +3,7 @@ import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
 import DynamicTable from "../DynamicTable";
 import filterData from "src/utils/filterData";
 import useSearch from "src/hooks/useSearchHook";
-import SearchForm from "src/components/SearchForm";
+import SearchForm from "src/components/form/search/SearchForm";
 import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 
 const SalesInquiryTable: React.FC = () => {
