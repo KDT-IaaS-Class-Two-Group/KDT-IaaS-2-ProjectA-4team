@@ -7,6 +7,7 @@ import { MembersModule } from './member/members.module';
 import { productModule } from './product/produdct.module';
 import { expirationDateStockModule } from './expirationDateStock/expirationDateProduct.module';
 import { ConfigModule } from '@nestjs/config';
+import { LogsModule } from './log/logs.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     MembersModule,
     productModule,
     expirationDateStockModule,
+    LogsModule,
   ],
   controllers: [],
   providers: [],
