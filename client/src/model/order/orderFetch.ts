@@ -19,12 +19,9 @@ export default async (name: string): Promise<TOrders[]> => {
       },
     );
     const responseData = await response.json();
-    if (!response.ok) {
-      throw new Error(responseData.message || "주문내역 조회 실패");
-    }
+
     return responseData;
   } catch (error) {
-    console.error("주문내역 조회 중 클라이언트 오류", error);
     throw error;
   }
 };
