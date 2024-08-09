@@ -6,6 +6,13 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import FooterLinksProps from "src/interfaces/components/footer/FooterComponent.interface";
 
+/**
+ * @moonhr 24.08.09
+ * * 서버에 로그아웃 요청을 보내고, 로그아웃 후 사용자를 리다이렉트합니다.
+ *
+ * @returns {Promise<void>}
+ * @throws {Error} 로그아웃 요청 중 발생한 에러를 던집니다.
+ */
 async function logout(): Promise<void> {
   try {
     const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
