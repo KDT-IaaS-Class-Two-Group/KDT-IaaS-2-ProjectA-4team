@@ -31,7 +31,7 @@ export const ExpirationDateHook = () => {
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError(`${getDataErrMessage}: ${err}`);
+      setError(`${getDataErrMessage}`);
     } finally {
       setLoading(false);
     }
@@ -46,7 +46,7 @@ export const ExpirationDateHook = () => {
       await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete");
       fetchData();
     } catch (err) {
-      setError(`${deleteDataErrMessage}: ${err}`);
+      setError(`${deleteDataErrMessage}`);
     }
   };
 

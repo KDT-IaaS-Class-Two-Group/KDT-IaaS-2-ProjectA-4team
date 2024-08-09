@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
 import TOrder from "src/types/order/Order.type";
+import { getOrderListErrMessage } from "static/error/hooks/order/orderHook";
 
 /**
  * @crystal23733 24.08.01
@@ -27,7 +28,7 @@ const useOrderHook = (name: string) => {
         setError(null);
         setOrderDetails(transformedOrders);
       } catch (error) {
-        setError("주문내역을 가지고오는 중 에러가 발생하였습니다.");
+        setError(getOrderListErrMessage);
       } finally {
         setLoading(false);
       }
