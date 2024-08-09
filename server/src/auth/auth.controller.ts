@@ -125,4 +125,11 @@ export class AuthController {
     console.log(userName);
     res.status(HttpStatus.OK).json(userName);
   }
+
+  @Get('getUserEmail')
+  async getUserEmail(@Req() request: Request, @Res() res: Response) {
+    const userEmail = await this.authService.findUserEmailToToken(request);
+    console.log(userEmail);
+    res.status(HttpStatus.OK).json(userEmail);
+  }
 }
