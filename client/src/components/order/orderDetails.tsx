@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderDetailsProps } from "src/interfaces/components/order/OrderDetails.interface";
+import OrderDetailsProps from "src/interfaces/components/order/OrderDetails.interface";
 
 /**
  * @crystal23733 24.08.01
