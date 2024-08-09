@@ -116,4 +116,19 @@ export class AuthService {
       return null;
     }
   }
+
+  async findUserEmailToToken(request: Request): Promise<string | null> {
+    try {
+      const token = request.cookies['token'];
+      if (!token) {
+        return null;
+      }
+
+      const decoded = this.jwtService.verify(token);
+      return decoded.userEmail;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }
