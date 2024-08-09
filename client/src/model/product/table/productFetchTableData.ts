@@ -9,9 +9,10 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
 
-  const response = await fetcher(serverUrlGenerator(EP_PRODUCT));
-
-  return response.json();
+  const response = await fetcher(serverUrlGenerator(EP_PRODUCT), "get", {
+    credentials: "include"
+  });
+  return await response.json();
 };
 
 /**

@@ -9,8 +9,8 @@ export default async (): Promise<number> => {
       credentials: "include",
     });
 
-    const data = await response.json();
-    return data.roleID; // 예: 'admin' 또는 'user'
+    const responseData = await response.json();
+    return responseData.roleID; // 예: 'admin' 또는 'user'
   } catch (error) {
     throw error;
   }

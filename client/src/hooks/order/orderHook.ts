@@ -20,6 +20,7 @@ const useOrderHook = (name: string) => {
     const fetchOrderDetails = async () => {
       try {
         const orders: TOrder[] = await orderFetch(name);
+        console.log(orders);
         const transformedOrders = orders.map((order) => {
           const orderDate = new Date(order.saleDate);
           const orderDateFormat = orderDate.toISOString().split("T")[0];
