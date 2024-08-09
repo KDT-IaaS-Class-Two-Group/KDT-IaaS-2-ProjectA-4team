@@ -10,15 +10,6 @@ import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
 import { ConfirmDeleteModal } from "src/components/modal/expiration/ExpirationDateModal";
 
-// interface ItemsContextType {
-//   items: string;
-//   setItems: React.Dispatch<React.SetStateAction<string>>;
-// }
-
-// interface ItemsProviderProps {
-//   children: ReactNode;
-// }
-
 /**
  * @yuxincxoi 24.07.25
  * * 물건을 구입할 수 있는 사용자 페이지
