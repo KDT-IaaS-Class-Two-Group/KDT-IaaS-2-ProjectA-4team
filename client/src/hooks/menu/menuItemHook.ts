@@ -3,6 +3,7 @@ import productFetchMenu from "src/model/product/menu/productFetchMenu";
 
 interface Product {
   id: string;
+  productID: string;
   productName: string;
   productCategory: string;
   unitPrice: number;

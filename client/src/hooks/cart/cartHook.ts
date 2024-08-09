@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-export const CartHook = (items: { menu: string; unitPrice: number }[]) => {
+export const CartHook = (
+  items: { menu: string; unitPrice: number; id: string }[],
+) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState<string | null>(null);
 

@@ -5,7 +5,8 @@ import Image from "next/image";
 interface CardComponentProps {
   title: string;
   content: number;
-  onAddToCart: (title: string, price: number) => void;
+  id: string;
+  onAddToCart: (title: string, price: number, id: string) => void;
 }
 
 /**
@@ -20,10 +21,11 @@ interface CardComponentProps {
 const CardComponent: FC<CardComponentProps> = ({
   title,
   content,
+  id,
   onAddToCart,
 }) => {
   return (
-    <div onClick={() => onAddToCart(title, content)}>
+    <div onClick={() => onAddToCart(title, content, id)}>
       <Card className="h-56 rounded-xl hover:cursor-pointer">
         <Image
           id="burgerImage"

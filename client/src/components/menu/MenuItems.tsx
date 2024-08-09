@@ -4,11 +4,12 @@ import { MenuItemHook } from "src/hooks/menu/menuItemHook";
 
 interface MenuItemsProps {
   selectCategory: string;
-  onAddToCart: (title: string, price: number) => void;
+  onAddToCart: (title: string, price: number, id: string) => void;
 }
 
 interface Product {
   id: string;
+  productID: string;
   productName: string;
   productCategory: string;
   unitPrice: number;
@@ -52,16 +53,20 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       }
     });
 
-    // 카테고리에 따라 제품을 렌더링합니다.
     const renderMenu = (products: Product[]) => (
       <>
         {products.map((product) => (
           <CardComponent
             key={product.id}
+            id={product.productID}
             title={product.productName}
             content={product.unitPrice}
             onAddToCart={() =>
-              onAddToCart(product.productName, product.unitPrice)
+              onAddToCart(
+                product.productName,
+                product.unitPrice,
+                product.productID,
+              )
             }
           />
         ))}
