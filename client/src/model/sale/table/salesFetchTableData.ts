@@ -9,7 +9,9 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 export default async (): Promise<SaleDTO[]> => {
   const EP_SALES = process.env.NEXT_PUBLIC_EP_SALES as string;
 
-  const response = await fetcher(serverUrlGenerator(EP_SALES));
+  const response = await fetcher(serverUrlGenerator(EP_SALES), "get", {
+    credentials: "include",
+  });
 
   const data = await response.json();
   return data;

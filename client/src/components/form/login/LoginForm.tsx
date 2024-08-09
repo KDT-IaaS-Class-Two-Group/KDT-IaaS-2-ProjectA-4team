@@ -6,9 +6,9 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 
-interface RoldJwtPayload extends JwtPayload {
-  roleID?: number;
-}
+// interface RoldJwtPayload extends JwtPayload {
+//   roleID?: number;
+// }
 
 /**
  * @moonhr 24.07.25
@@ -46,20 +46,20 @@ export const LoginForm = () => {
           credentials: "include",
         });
 
-        const result = await response.json();
-        const token = result.token;
-        console.log("서버 응답:", result);
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
 
-        const decodedToken = jwtDecode<RoldJwtPayload>(token);
-        console.log(decodedToken);
-        const roleId = decodedToken.roleID;
-        console.log(decodedToken.roleID);
+        const data = await response.json();
+        console.log("사용자의 권한:", data.roleID);
 
         // roleId에 따라 라우팅
-        if (roleId === 0) {
+        if (data.roleID === 0) {
           router.push("/UserPage");
-        } else if (roleId === 1) {
-          router.push("/admin");
+        } else if (data.roleID === 1) {
+          router.push("/admin/stockInfo");
+        } else {
+          console.error("Unknown roleID:", data.roleID);
         }
       } catch (error) {
         console.error("서버로 데이터 전송 실패:", error);

@@ -8,6 +8,7 @@ import FooterLinks from "src/components/footer/footerComponent";
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
+import { ConfirmDeleteModal } from "src/components/modal/expiration/ExpirationDateModal";
 
 // interface ItemsContextType {
 //   items: string;
@@ -30,10 +31,14 @@ const UserPage: FC = () => {
     setSelectCategory,
     cartItems,
     isModalOpen,
+    isPurchaseModalOpen,
     closeModal,
+    closePurchaseModal,
+    confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,
+    purchase,
   } = UserpageHook();
 
   if (error) {
@@ -51,26 +56,32 @@ const UserPage: FC = () => {
         selectCategory={selectCategory}
         onAddToCart={handleAddToCart}
       />
-      <div className="w-72 shadow-xl h-screen fixed top-0 right-0">
-        <LoginInfoComponent
-          className="w-72 ml-6 mt-6 mb-20"
-          email="rockcoders@kdt.com"
-        />
+      <div className="fixed top-0 right-0 h-screen shadow-xl w-72">
+        <LoginInfoComponent className="mt-6 mb-20 ml-6 w-72" />
         <Cart items={cartItems} removedItem={handleRemoveItem} />
         <ButtonComponent
           type="submit"
           className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
-          onClick={() => console.log("buy!")}
+          onClick={purchase}
         >
           Buy !
         </ButtonComponent>
-        <FooterLinks className="w-72 mt-20 mx-6" />
+        <FooterLinks className="mx-6 mt-20 w-72" />
       </div>
       {isModalOpen && (
         <Modal
           onClose={closeModal}
           title="장바구니에 메뉴가 이미 존재합니다 !"
           content="수량은 장바구니에서 조정할 수 있습니다."
+        />
+      )}
+      {isPurchaseModalOpen && (
+        <ConfirmDeleteModal
+          open={isPurchaseModalOpen}
+          onClose={closePurchaseModal}
+          onConfirm={confirmPurchase}
+          title="구매하시겠습니까 ?"
+          content=""
         />
       )}
     </div>

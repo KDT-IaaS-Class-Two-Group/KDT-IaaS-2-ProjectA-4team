@@ -19,7 +19,6 @@ export class StockService {
       const product = await this.productModel.find().exec();
 
       if (product.length > 0) {
-        console.log('Products found:', product);
       } else {
         console.log('No products found.');
       }

@@ -4,44 +4,37 @@ import DynamicTable from "../DynamicTable";
 import filterData from "src/utils/filterData";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/SearchForm";
+import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 
-/**
- * @crystal23733 24.07.29
- * @returns 매출조회 컴포넌트
- */
 const SalesInquiryTable: React.FC = () => {
   const { data, loading, error } = salesUseTableHook();
   const [searchQuery, handleSearch] = useSearch();
 
-  // 데이터 로딩 중일 때
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // 데이터 로딩 중 오류 발생 시
   if (error) {
     return <div>{error}</div>;
   }
 
-  /**
-   * @crystal23733 24.07.30
-   * * 상품명, 매출 수량, 매출 금액 집계 함수
-   */
-  const aggregatedData = data.reduce(
+  // 제품별 집계 처리
+  const aggregatedData = (data as SaleDTO[]).reduce(
     (acc, sale) => {
-      const product = sale.products;
+      sale.products.forEach((product) => {
+        const productName = product.productName;
 
-      if (!acc[product.productName]) {
-        acc[product.productName] = {
-          totalQuantity: 0,
-          totalPrice: 0,
-          unitPrice: product.unitPrice,
-        };
-      }
+        if (!acc[productName]) {
+          acc[productName] = {
+            totalQuantity: 0,
+            totalPrice: 0,
+            unitPrice: product.unitPrice,
+          };
+        }
 
-      acc[product.productName].totalQuantity += product.quantity;
-      acc[product.productName].totalPrice += product.totalPrice;
-
+        acc[productName].totalQuantity += product.quantity;
+        acc[productName].totalPrice += product.unitPrice * product.quantity; // 각 제품의 총액 계산
+      });
       return acc;
     },
     {} as Record<

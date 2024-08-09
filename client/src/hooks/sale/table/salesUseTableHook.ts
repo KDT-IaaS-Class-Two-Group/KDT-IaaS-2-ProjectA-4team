@@ -23,7 +23,6 @@ export default () => {
         setLoading(false);
       }
     };
-
     loadData();
   }, []);
 

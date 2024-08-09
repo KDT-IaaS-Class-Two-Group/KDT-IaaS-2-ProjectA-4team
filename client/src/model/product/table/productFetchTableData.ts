@@ -33,6 +33,7 @@ export const saveProductData = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify(product),
+      credentials: "include",
     },
   );
 

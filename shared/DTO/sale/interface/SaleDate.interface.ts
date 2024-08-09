@@ -1,3 +1,3 @@
 export default interface ISaleDate {
-  saleDate : Date;
+  saleDate : string;
 }
