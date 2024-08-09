@@ -1,3 +1,4 @@
+import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 export default async (
@@ -11,8 +12,7 @@ export default async (
 ) => {
   const EP_SALE_HISTORY = process.env.NEXT_PUBLIC_EP_SALE_HISTORY as string;
 
-  const response = await fetch(serverUrlGenerator(EP_SALE_HISTORY), {
-    method: "POST",
+  const response = await fetcher(serverUrlGenerator(EP_SALE_HISTORY), "post", {
     headers: {
       "Content-Type": "application/json",
     },
@@ -26,10 +26,6 @@ export default async (
       totalPrice,
     }),
   });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
 
   const data = await response.json();
 

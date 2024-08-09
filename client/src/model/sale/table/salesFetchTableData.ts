@@ -1,3 +1,4 @@
+import fetcher from "src/modules/fetching/fetcher";
 import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
@@ -8,10 +9,8 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 export default async (): Promise<SaleDTO[]> => {
   const EP_SALES = process.env.NEXT_PUBLIC_EP_SALES as string;
 
-  const response = await fetch(serverUrlGenerator(EP_SALES));
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  const response = await fetcher(serverUrlGenerator(EP_SALES));
+
   const data = await response.json();
   return data;
 };
