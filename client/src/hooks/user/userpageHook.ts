@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
+import getUserEmailFetch from "src/model/user/email/getUserEmailFetch";
 
 export const UserpageHook = () => {
   const router = useRouter();
@@ -12,19 +14,43 @@ export const UserpageHook = () => {
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const purchase = async () => {
+  const purchase = () => {
     try {
-      // const purchaseData = await salesHistoryFetch();
-      // return purchaseData;
       setIsPurchaseModalOpen(true);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const confirmPurchase = () => {
+  const loadData = async () => {
+    try {
+      const userEmail = await getUserEmailFetch();
+      return userEmail;
+    } catch (error) {
+      console.error("사용자 이메일을 가져오지 못했습니다.");
+      return null;
+    }
+  };
+
+  const confirmPurchase = async () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    const userEmail = await loadData();
+    if (!userEmail) {
+      throw new Error("User email is required but was not found.");
+    }
+    console.log(userEmail);
+
+    // const purchaseData = await salesHistoryFetch(
+    //   userEmail,
+    //   "productID",
+    //   1,
+    //   12000,
+    //   today,
+    // );
     setCartItems([]);
     setIsPurchaseModalOpen(false);
+    // return purchaseData;
   };
 
   const openModal = () => {
