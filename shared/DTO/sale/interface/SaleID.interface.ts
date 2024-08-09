@@ -1,3 +1,3 @@
 export default interface ISaleID {
-  saleID : number;
+  _id : string;
 }
