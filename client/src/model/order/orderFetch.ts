@@ -15,7 +15,6 @@ export default async (name: string): Promise<TOrders[]> => {
       credentials: "include",
     });
     const responseData = await response.json();
-    console.log(responseData);
     if (!response.ok) {
       throw new Error(responseData.message || "주문내역 조회 실패");
     }
