@@ -7,8 +7,8 @@ import url3001Generator from "src/modules/generator/url3001Generator";
  */
 export default async (): Promise<SaleDTO[]> => {
   const EP_SALES = process.env.NEXT_PUBLIC_EP_SALES as string;
-
   const response = await fetch(url3001Generator(EP_SALES), {
+    method: "GET",
     credentials: "include",
   });
   if (!response.ok) {
