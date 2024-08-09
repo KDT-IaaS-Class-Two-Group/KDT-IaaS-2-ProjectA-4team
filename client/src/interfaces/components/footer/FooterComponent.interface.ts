@@ -1,3 +1,3 @@
-interface FooterLinksProps {
+export default interface FooterLinksProps {
   className?: string;
 }

@@ -7,10 +7,6 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import routeUrlGenerator from "src/modules/generator/routeUrlGenerator";
 
-// interface RoldJwtPayload extends JwtPayload {
-//   roleID?: number;
-// }
-
 /**
  * @moonhr 24.07.25
  * * 로그인 폼
