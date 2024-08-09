@@ -19,4 +19,22 @@ export class SaleService {
   async findByMemberID(memberID: string): Promise<ISale[]> {
     return this.saleModel.find({ memberID }).exec();
   }
+
+  async saleHistory(
+    memberID: string,
+    productID: string,
+    quantity: number,
+    totalPrice: number,
+    saleDate: string,
+  ) {
+    const newSale = new this.saleModel({
+      memberID,
+      productID,
+      quantity,
+      totalPrice,
+      saleDate,
+    });
+
+    return await newSale.save();
+  }
 }
