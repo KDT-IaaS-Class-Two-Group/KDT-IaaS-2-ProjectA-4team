@@ -73,7 +73,6 @@ export class AuthController {
     try {
       const decoded = this.authService.verifyToken(token);
       const user = await this.authService.getUserInfo(decoded.name);
-      console.log(user);
       if (!user) {
         res
           .status(HttpStatus.UNAUTHORIZED)
@@ -96,6 +95,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<any> {
     const token = req.cookies['token'];
+    console.log("TOKEN:", token);
     if (!token) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -104,9 +104,10 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      const userEmail = decoded.email;
+      console.log(decoded);
+      const userName = decoded.name;
       await this.authService.changePassword(
-        userEmail,
+        userName,
         oldPassword,
         newPassword,
       );
