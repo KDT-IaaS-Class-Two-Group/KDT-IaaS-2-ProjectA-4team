@@ -4,6 +4,7 @@ import InputComponent from "../../input/Input";
 import CustomButton from "../../button/customized/CustomButton";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
 
 interface RoldJwtPayload extends JwtPayload {
   roleID?: number;
@@ -28,18 +29,22 @@ export const LoginForm = () => {
       const EP_LOGIN = process.env.NEXT_PUBLIC_EP_LOGIN as string;
 
       try {
-        const response = await fetch(serverUrlGenerator(EP_LOGIN), {
-          method: "POST",
+        // const response = await fetcher(serverUrlGenerator(EP_LOGIN), {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({ email, password }),
+        //   credentials: "include",
+        // });
+
+        const response = await fetcher(serverUrlGenerator(EP_LOGIN), "post", {
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email, password }),
           credentials: "include",
         });
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
 
         const result = await response.json();
         const token = result.token;

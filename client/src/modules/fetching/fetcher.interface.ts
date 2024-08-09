@@ -1,4 +1,4 @@
-export type TFetcher = "get" | "post" | "put" | "delete";
+import { Options as KyOptions } from "ky";
 
 export type TRequestData = {
   [key: string]:
@@ -8,4 +8,8 @@ export type TRequestData = {
     | null
     | TRequestData
     | TRequestData[];
+};
+
+export type CustomKyOptions = KyOptions & {
+  roleID?: number;
 };

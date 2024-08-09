@@ -45,7 +45,7 @@ const ProductTable: React.FC = () => {
       closeUpdateModal();
       closeOrderModal();
     } catch (err) {
-      console.error("Failed to fetch updated products:", err);
+      throw err;
     }
   };
 
