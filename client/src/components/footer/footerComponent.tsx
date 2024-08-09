@@ -9,7 +9,7 @@ interface FooterLinksProps {
 
 /**
  * @crystal23733 24.07.29
- * @returns {JSXElement} - 네비게이션 바 footer컴포넌트
+ * @returns {JSX.Element} - 네비게이션 바 footer컴포넌트
  */
 const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
   const router = useRouter();
