@@ -12,13 +12,7 @@ import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import ProductOrderModalHook from "src/hooks/product/order/modal/ProductOrderModalHook";
 import IProduct from "../../../../../db/products/product.interface";
-
-interface OrderModalProps {
-  isOpen: boolean;
-  product: IProduct; // IProduct로 수정
-  onClose: () => void;
-  onSave: (product: ProductDTO) => void;
-}
+import OrderModalProps from "static/components/modal/order/OrderModal.interface";
 
 const OrderModal: React.FC<OrderModalProps> = ({
   isOpen,
@@ -48,7 +42,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
       onSave(saveProduct);
       onClose();
     } catch (err) {
-      console.error("주문 실패:", err);
+      throw err;
     }
   };
 
