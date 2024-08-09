@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { failedMessages } from "static/hooks/cart/contents/cartItemHook.static";
 
 export const CartItemHook = (
   unitPrice: number,
@@ -14,8 +15,7 @@ export const CartItemHook = (
       setPrice(newPrice);
       onPriceChange(newPrice - price);
     } catch (error) {
-      console.error("Failed to update price: ", error);
-      setError("가격 업데이트에 실패했습니다.");
+      setError(failedMessages.failedUpdatePriceMessage);
     }
   };
 
@@ -25,8 +25,7 @@ export const CartItemHook = (
       setCount(newCount);
       updatePrice(newCount);
     } catch (error) {
-      console.error("Failed to increment count: ", error);
-      setError("개수가 증가하지 않았습니다.");
+      setError(failedMessages.failedIncrementCountMessage);
     }
   };
 
@@ -38,8 +37,7 @@ export const CartItemHook = (
         updatePrice(newCount);
       }
     } catch (error) {
-      console.error("Failed to decrement count: ", error);
-      setError("개수가 감소하지 않았습니다.");
+      setError(failedMessages.failedDecrementCountMessage);
     }
   };
 
