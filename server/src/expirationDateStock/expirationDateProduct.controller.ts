@@ -21,7 +21,7 @@ export class ProductsController {
   async remove(@Param('id') id: string): Promise<void> {
     await this.productsServiceDate.remove(id);
   }
-  @Post('a')
+  @Post('orderproduct')
   async create(@Body() product: IProduct): Promise<IProduct> {
     return this.productsServiceDate.create(product);
   }

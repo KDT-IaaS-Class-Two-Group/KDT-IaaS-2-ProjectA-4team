@@ -52,7 +52,7 @@ export const ExpirationDateHook = () => {
     }
   };
   const addProduct = async (product: ProductDTO) => {
-    const postUrl = url3001Generator(EP_PRODUCTS, "a");
+    const postUrl = url3001Generator(EP_PRODUCTS, "orderproduct");
     try {
       const response = await fetch(postUrl, {
         method: "POST",
