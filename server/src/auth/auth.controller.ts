@@ -34,6 +34,7 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
+    console.log('로그인요청들어옴');
     // 사용자 검증 및 로그인 처리
     try {
       const user = await this.authService.validateUser(data.email);
@@ -48,12 +49,12 @@ export class AuthController {
       const roleID = user.roleID;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.email,
+        user.name,
         roleID,
       );
 
       res.cookie('token', token, cookieOptions);
-      res.status(HttpStatus.OK).json({ success: true, token });
+      res.status(HttpStatus.OK).json({ success: true, roleID });
     } catch (error) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -71,7 +72,7 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      const user = await this.authService.getUserInfo(decoded.email);
+      const user = await this.authService.getUserInfo(decoded.name);
       if (!user) {
         res
           .status(HttpStatus.UNAUTHORIZED)
@@ -94,6 +95,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<any> {
     const token = req.cookies['token'];
+    console.log('TOKEN:', token);
     if (!token) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -102,12 +104,8 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      const userEmail = decoded.email;
-      await this.authService.changePassword(
-        userEmail,
-        oldPassword,
-        newPassword,
-      );
+      const userName = decoded.name;
+      await this.authService.changePassword(userName, oldPassword, newPassword);
       res
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
@@ -116,5 +114,23 @@ export class AuthController {
         res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
       }
     }
+  }
+
+  @Get('login-info')
+  async getLoginInfo(@Req() request: Request, @Res() res: Response) {
+    const userName = await this.authService.findUserNameToToken(request);
+    res.status(HttpStatus.OK).json(userName);
+  }
+
+  @Post('logout')
+  logout(@Res() res: Response) {
+    console.log('로그아웃 요청');
+    // 쿠키를 만료시키고 응답
+    res.cookie('token', '', {
+      expires: new Date(0),
+      httpOnly: true,
+      path: '/',
+    });
+    res.status(200).send('Logged out');
   }
 }

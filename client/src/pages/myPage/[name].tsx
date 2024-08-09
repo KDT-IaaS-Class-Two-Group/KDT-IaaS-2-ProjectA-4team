@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
-import LoginInfoComponent from "src/components/LoginInfo";
-import MyPageFormComponent from "src/components/myPageFormComponent";
-import OrderDetails from "src/components/orderDetails";
-import useOrderHook from "src/hooks/orderHook";
-import useRedirect from "src/hooks/useRedirect";
+import LoginInfoComponent from "src/components/info/login/LoginInfo";
+import MyPageFormComponent from "src/components/form/my_page/myPageFormComponent";
+import OrderDetails from "src/components/order/orderDetails";
+import useOrderHook from "src/hooks/order/orderHook";
+import useRedirect from "src/hooks/redirect/useRedirect";
 
 /**
  * @crystal23733 24.08.01
@@ -14,11 +14,8 @@ const MyPage: React.FC = () => {
   const router = useRouter();
   const name = typeof router.query.name === "string" ? router.query.name : "";
 
-  // 기본값 설정
-  const safeName = typeof name === "string" ? name : "";
-
   // 훅 호출은 조건문 밖에서 수행
-  const { orderDetails, error, loading } = useOrderHook(safeName);
+  const { orderDetails, error, loading } = useOrderHook(name);
 
   const { redirect, error: redirectError } = useRedirect();
 
@@ -29,9 +26,9 @@ const MyPage: React.FC = () => {
   return (
     <div
       id="root"
-      className="w-screen h-screen flex flex-col justify-center items-center"
+      className="flex flex-col items-center justify-center w-screen h-screen"
     >
-      <LoginInfoComponent email="rockCoders" />
+      <LoginInfoComponent />
       <div className="h-90% w-80% flex flex-col justify-center items-center">
         <div id="content-header" className="w-full h-10% flex">
           <button onClick={redirect}>&larr; 돌아가기</button>

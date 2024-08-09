@@ -14,6 +14,6 @@ export default interface ISale
     ISaleID,
     ITotalPrice {
   toObject(): any;
-  products: ISaleProducts;
+  products: ISaleProducts[];
   totalPrice: number;
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { LoginForm } from "src/components/LoginForm";
-import TitleComponent from "src/components/titleComponent";
-import Logo from "src/components/logo";
+import { LoginForm } from "src/components/form/login/LoginForm";
+import TitleComponent from "src/components/title/titleComponent";
+import Logo from "src/components/logo/logo";
 import Image from "next/image";
-import LinkButtonComponent from "src/components/linkButtonComponent";
+import LinkButtonComponent from "src/components/button/link/linkButtonComponent";
 
 const LoginPage = () => {
   return (

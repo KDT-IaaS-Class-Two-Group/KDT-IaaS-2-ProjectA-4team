@@ -1,9 +1,9 @@
 // pages/memberInfo.tsx
 
 import { GetServerSideProps } from "next";
-import AdminNav from "src/components/admin/adminNav";
-import MemberInfoTable from "src/components/table/MemberInfo/MemberInfoTable";
-import IMemberInfo from "../../interfaces/MemberInfo.interface";
+import AdminNav from "src/components/nav/admin/adminNav";
+import MemberInfoTable from "src/components/table/member/MemberInfoTable";
+import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
 import url3001Generator from "src/modules/generator/url3001Generator";
 
 interface Props {

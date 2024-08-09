@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AddProductModal } from "../../../modal/AddProductModal";
-import ButtonComponent from "src/components/CustomButton";
-import { ExpirationDateHook } from "src/hooks/ExpirationDateHook";
+import ButtonComponent from "src/components/button/customized/CustomButton";
+import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook"; 
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 /**
  * @jojayeon 24.08.09
