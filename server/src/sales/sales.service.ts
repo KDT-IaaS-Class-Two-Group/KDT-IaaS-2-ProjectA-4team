@@ -27,6 +27,9 @@ export class SaleService {
     if (!member) {
       throw new Error('Member not found');
     }
-    return this.saleModel.find({ memberID: member._id }).populate('memberID').exec();
+    return this.saleModel
+      .find({ memberID: member._id })
+      .populate('memberID')
+      .exec();
   }
 }

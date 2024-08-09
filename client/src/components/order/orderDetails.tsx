@@ -51,9 +51,14 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
             >
               <h2 className="font-semibold text-md">매출 번호: {order._id}</h2>
               {order.products.map((product, index) => (
-                <div key={index} className="flex justify-between items-center mt-2">
+                <div
+                  key={index}
+                  className="flex justify-between items-center mt-2"
+                >
                   <p>{product.productName}</p>
-                  <p>{product.unitPrice.toFixed(2)} 원 x {product.quantity}</p>
+                  <p>
+                    {product.unitPrice.toFixed(2)} 원 x {product.quantity}
+                  </p>
                   <p>{(product.unitPrice * product.quantity).toFixed(2)} 원</p>
                 </div>
               ))}
