@@ -35,7 +35,6 @@ export class SaleController {
   ) {
     try {
       const { memberID, productID, quantity, totalPrice, saleDate } = body;
-      console.log(body);
       await this.saleService.saleHistory(
         memberID,
         productID,
