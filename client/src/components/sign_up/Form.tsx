@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 import InputComponent from "src/components/input/Input";
-import SignUpInputs from "../../../static/sign-up/SignUpInputs";
+import SignUpInputs from "../../../static/sign-up/SignUpInputs.static";
 import ValidateName from "src/pipes/Vaildate/ValidateName";
 import ValidateEmail from "src/pipes/Vaildate/ValidateEmail";
 import ValidatePassword from "src/pipes/Vaildate/ValidatePassword";

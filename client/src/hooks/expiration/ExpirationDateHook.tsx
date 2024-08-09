@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import {
+  deleteDataErrMessage,
+  getDataErrMessage,
+} from "static/hooks/expiration/ExpirationDateHook.static";
 
 /**
  * @jojayeon 24.08.05
@@ -15,20 +21,17 @@ export const ExpirationDateHook = () => {
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
 
   const fetchData = async () => {
     setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:3001/productsDate", {
-        credentials: "include",
-      });
-      if (!response.ok) {
-        throw new Error("네트워크 응답이 올바르지 않습니다.");
-      }
+      const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE));
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError("데이터를 가져오는 데 실패했습니다.");
+      setError(`${getDataErrMessage}`);
     } finally {
       setLoading(false);
     }
@@ -40,13 +43,10 @@ export const ExpirationDateHook = () => {
 
   const deleteProduct = async (_id: string) => {
     try {
-      await fetch(`http://localhost:3001/productsDate/${_id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete");
       fetchData();
     } catch (err) {
-      setError("데이터를 삭제하는 데 실패했습니다.");
+      setError(`${deleteDataErrMessage}`);
     }
   };
 

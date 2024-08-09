@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import url3001Generator from "src/modules/generator/url3001Generator";
-
-interface CustomJwtPayload {
-  name: string;
-}
+import fetcher from "src/modules/fetching/fetcher";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import thrower from "src/modules/throw/thrower";
+import { failFetchedUserInfoMessage } from "static/hooks/footer/info/useFooterInfoHook.static";
 
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
@@ -14,15 +13,16 @@ const useFooterInfoHook = () => {
       const EP_USER_INFO = process.env.NEXT_PUBLIC_EP_U_INFO as string;
       console.log(url3001Generator(EP_USER_INFO));
       try {
-        const response = await fetch(url3001Generator(EP_USER_INFO), {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetcher(
+          serverUrlGenerator(EP_USER_INFO),
+          "get",
+          { credentials: "include" },
+        );
         const result = await response.json();
         if (response.ok) {
           setUserName(result.name);
         } else {
-          console.error("Error fetching user info:", result.message); // 에러 메시지 로그
+          thrower(`${failFetchedUserInfoMessage}: ${result.message}`); // 에러 메시지 로그
           setUserName(null);
         }
       } catch (error) {
