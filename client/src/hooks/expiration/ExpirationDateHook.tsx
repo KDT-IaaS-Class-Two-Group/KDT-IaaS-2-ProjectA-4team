@@ -19,7 +19,9 @@ export const ExpirationDateHook = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/productsDate");
+      const response = await fetch("http://localhost:3001/productsDate", {
+        credentials: "include",
+      });
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -40,6 +42,7 @@ export const ExpirationDateHook = () => {
     try {
       await fetch(`http://localhost:3001/productsDate/${_id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       fetchData();
     } catch (err) {
