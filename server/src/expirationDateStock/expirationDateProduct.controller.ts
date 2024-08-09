@@ -21,9 +21,8 @@ export class ProductsController {
   async remove(@Param('id') id: string): Promise<void> {
     await this.productsServiceDate.remove(id);
   }
-  @Post("a")
+  @Post('a')
   async create(@Body() product: IProduct): Promise<IProduct> {
-    console.log('Received product data:', product); // 데이터 확인용 콘솔 로그
-    return this.productsServiceDate.create(product); // Service에서 실제 저장 처리
+    return this.productsServiceDate.create(product);
   }
 }
