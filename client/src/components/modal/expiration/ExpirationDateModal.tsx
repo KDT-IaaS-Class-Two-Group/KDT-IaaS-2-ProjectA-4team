@@ -20,9 +20,15 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
   open,
   onClose,
   onConfirm,
+  onsave,
   title,
   content,
 }) => {
+  const handleConfirm = () => {
+    onConfirm(); // 삭제 확인 처리
+    onsave(); // 저장 후 refetch 처리
+  };
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       {open && (
@@ -39,7 +45,7 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
           <ButtonComponent onClick={onClose} variant="outline">
             취소
           </ButtonComponent>
-          <ButtonComponent onClick={onConfirm} variant="default">
+          <ButtonComponent onClick={handleConfirm} variant="default">
             확인
           </ButtonComponent>
         </div>
