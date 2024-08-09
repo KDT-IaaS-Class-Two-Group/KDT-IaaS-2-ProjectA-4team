@@ -2,11 +2,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { decodeToken } from "./utils/decodeToken";
 
+/**
+ * @moonhr 24.08.09
+ * @param req
+ * @returns 사용자 접근 제어할 미들웨어
+ */
 export function middleware(req: NextRequest) {
   // 요청의 URL
   const url = req.nextUrl.clone();
 
-  // 로그인 페이지와 회원가입 페이지는 미들웨어를 통과
+  // 미들웨어 거치지 않고 통과될 페이지
   if (url.pathname.startsWith("/_next") || url.pathname.startsWith("/api")) {
     return NextResponse.next();
   }
@@ -35,33 +40,13 @@ export function middleware(req: NextRequest) {
   }
 
   let decodedToken;
+  // 토큰이 있는 경우의 처리
   try {
     decodedToken = decodeToken(token);
   } catch (error) {
     // 토큰이 유효하지 않으면 로그인 페이지로 리다이렉트
     url.pathname = "/";
     return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  // 로그인된 사용자가 /sign_up에 접근하려고 하는 경우 처리
-  if (url.pathname.startsWith("/sign_up")) {
-    // 토큰이 있는 경우, /sign_up에 접근하지 못하도록 리다이렉트
-    url.pathname = decodedToken.roleID === 1 ? "/admin/stockInfo" : "/UserPage";
-    return NextResponse.redirect(url);
-  }
-
-  console.log("url패스", url.pathname);
-  // 로그인된 사용자가 /sign_up에 접근하려고 하는 경우 처리
-  if (url.pathname.startsWith("/sign_up")) {
-    if (decodedToken.roleID === 1) {
-      // roleID가 1인 사용자는 /admin/stockInfo로 리다이렉트
-      url.pathname = "/admin/stockInfo";
-      return NextResponse.redirect(url);
-    } else if (decodedToken.roleID === 0) {
-      // roleID가 0인 사용자는 /UserPage로 리다이렉트
-      url.pathname = "/UserPage";
-      return NextResponse.redirect(url);
-    }
   }
 
   // 토큰이 있는 사용자가 "/"로 접근하는 경우 처리
@@ -78,13 +63,17 @@ export function middleware(req: NextRequest) {
   }
 
   // 관리자 권한이 필요한 경로에 대한 처리
-  if (url.pathname.startsWith("/admin")) {
-    if (decodedToken.roleID !== 1) {
-      // 관리자가 아닌 경우, 홈 페이지로 리다이렉트
-      url.pathname = "/UserPage";
-      return NextResponse.redirect(url);
-    }
+  if (url.pathname.startsWith("/admin") && decodedToken.roleID !== 1) {
+    return NextResponse.redirect(new URL("/UserPage", req.url));
   }
+
+  /**
+   * @moonhr 24.08.09
+   * * /sign_up에 접근하는 요청을 처리할 함수
+   * @param token
+   * @param req
+   * @returns 역할에 맞는 페이지로 리다이렉트
+   */
   function redirectBasedOnRole(token: string, req: NextRequest) {
     try {
       const decodedToken = decodeToken(token);
