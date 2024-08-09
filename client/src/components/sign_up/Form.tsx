@@ -16,6 +16,19 @@ import {
   SignUpFormRef,
 } from "src/interfaces/components/sign_up/Form.interface";
 
+/**
+ * @eonduck2 24.08.02
+ * * `SignUpForm` 컴포넌트는 사용자 등록 폼을 구현합니다.
+ * * 각 입력 필드는 유효성 검사 기능을 지원하며, 부모 컴포넌트에 의해 참조될 수 있습니다.
+ *
+ * @component
+ *
+ * @param {SignUpFormProps} props - `SignUpForm`에 전달되는 속성입니다.
+ * @param {React.RefObject<SignUpFormRef>} ref - 컴포넌트의 참조를 부모 컴포넌트에 전달합니다.
+ *
+ * @returns {JSX.Element} - 사용자 등록 폼을 포함하는 JSX 요소를 반환합니다.
+ */
+
 const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});

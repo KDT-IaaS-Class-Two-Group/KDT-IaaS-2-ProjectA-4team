@@ -4,6 +4,17 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import InputComponent from "../../input/Input";
 import SearchFormProps from "src/interfaces/components/form/search/SearchForm.interface";
 
+/**
+ * @crystal23733 24.08.07
+ * * `SearchForm` 컴포넌트는 사용자로부터 검색어를 입력받아 검색을 수행하는 폼을 렌더링합니다.
+ *
+ * @component
+ *
+ * @param {SearchFormProps} props - `SearchForm` 컴포넌트에 전달되는 속성입니다.
+ * @param {function} props.onSearch - 검색어를 부모 컴포넌트로 전달하는 콜백 함수입니다.
+ *
+ * @returns {JSX.Element} - 검색 폼을 렌더링하는 JSX 요소를 반환합니다.
+ */
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   const [query, setQuery] = React.useState<string>("");
 

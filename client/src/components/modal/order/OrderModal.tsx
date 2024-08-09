@@ -14,6 +14,21 @@ import ProductOrderModalHook from "src/hooks/product/order/modal/ProductOrderMod
 import IProduct from "../../../../../db/products/product.interface";
 import OrderModalProps from "static/components/modal/order/OrderModal.interface";
 
+/**
+ * @moonhr 24.08.02
+ * * `OrderModal` 컴포넌트는 제품 발주를 위한 모달 창을 제공합니다.
+ * * 사용자가 제품의 수량을 입력하고 주문을 제출할 수 있는 폼을 포함합니다.
+ *
+ * @component
+ *
+ * @param {OrderModalProps} props - `OrderModal`에 전달되는 속성입니다.
+ * @param {boolean} props.isOpen - 모달이 열려 있는지 여부를 나타내는 불리언 값입니다.
+ * @param {IProduct | null} props.product - 발주할 제품 정보를 담고 있는 객체입니다. 제품이 선택되지 않은 경우 `null`일 수 있습니다.
+ * @param {() => void} props.onClose - 모달을 닫는 콜백 함수입니다.
+ * @param {(savedProduct: ProductDTO) => void} props.onSave - 주문이 성공적으로 저장된 후 호출되는 콜백 함수입니다.
+ *
+ * @returns {JSX.Element} - 제품 발주 모달을 포함하는 JSX 요소를 반환합니다.
+ */
 const OrderModal: React.FC<OrderModalProps> = ({
   isOpen,
   product,

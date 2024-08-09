@@ -11,13 +11,8 @@ import { Textarea } from "components/ui/textarea";
 import ButtonComponent from "../../button/customized/CustomButton";
 import ProductUpdateHook from "src/hooks/product/update/ProductUpdateHook";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import UpdateModalProps from "src/interfaces/components/modal/update/UpdateModal.interface";
 
-interface UpdateModalProps {
-  isOpen: boolean;
-  product: ProductDTO;
-  onClose: () => void;
-  onSave: (product: ProductDTO) => void;
-}
 /**
  * @moonhr 24.07.31
  * 제품 수정 모달창

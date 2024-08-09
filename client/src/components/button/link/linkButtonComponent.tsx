@@ -1,7 +1,7 @@
 import { Button } from "components/ui/button";
 import React, { ReactNode, MouseEventHandler } from "react";
 import Link from "next/link";
-import LinkButtonComponentProps from "src/interfaces/components/button/link/LinkButtonComponent.interface";
+import LinkButtonComponentProps from "src/interfaces/components/button/link/linkButtonComponent.interface";
 
 /**
  * @crystal23733
