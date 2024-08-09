@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
@@ -25,7 +25,7 @@ export const ExpirationDateHook = () => {
   const [error, setError] = useState<string | null>(null);
   const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -40,11 +40,11 @@ export const ExpirationDateHook = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const deleteProduct = async (_id: string) => {
     try {
@@ -73,5 +73,12 @@ export const ExpirationDateHook = () => {
       setError("데이터를 추가하는 데 실패했습니다.");
     }
   };
-  return { data, loading, error, deleteProduct, addProduct };
+  return {
+    data,
+    loading,
+    error,
+    deleteProduct,
+    addProduct,
+    refetch: fetchData,
+  };
 };
