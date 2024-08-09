@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
 import TOrder from "src/types/order/Order.type";
-import { getOrderListErrMessage } from "static/error/hooks/order/orderHook.static";
+import { getOrderListErrMessage } from "static/hooks/order/orderHook.static";
 
 /**
  * @crystal23733 24.08.01
