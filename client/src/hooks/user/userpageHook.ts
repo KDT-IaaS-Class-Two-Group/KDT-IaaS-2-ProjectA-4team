@@ -39,18 +39,19 @@ export const UserpageHook = () => {
     if (!userEmail) {
       throw new Error("User email is required but was not found.");
     }
-    console.log(userEmail);
 
-    // const purchaseData = await salesHistoryFetch(
-    //   userEmail,
-    //   "productID",
-    //   1,
-    //   12000,
-    //   today,
-    // );
+    const purchaseData = await salesHistoryFetch(
+      userEmail,
+      "productID",
+      1,
+      12000,
+      today,
+    );
+
     setCartItems([]);
     setIsPurchaseModalOpen(false);
-    // return purchaseData;
+
+    return purchaseData;
   };
 
   const openModal = () => {
