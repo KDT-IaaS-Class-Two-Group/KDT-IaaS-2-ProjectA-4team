@@ -5,10 +5,11 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Member, MemberSchema } from '../schemas/member.schema';
 import { JwtStrategy } from './jwt.strategy';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { LogsModule } from '../log/logs.module';
+import { TokenUtils } from '../utils/token.utils';
 
 @Module({
   imports: [
@@ -26,7 +27,15 @@ import { LogsModule } from '../log/logs.module';
     LogsModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [
+    JwtStrategy,
+    AuthService,
+    {
+      provide: TokenUtils,
+      useFactory: (jwtService: JwtService) => new TokenUtils(jwtService),
+      inject: [JwtService],
+    },
+  ],
   exports: [MongooseModule],
 })
 export class AuthModule {}
