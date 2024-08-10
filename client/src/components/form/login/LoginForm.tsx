@@ -27,22 +27,22 @@ export const LoginForm = () => {
       const EP_ADMIN = process.env.NEXT_PUBLIC_EP_ADMIN as string;
       const EP_STOCK_INFO = process.env.NEXT_PUBLIC_EP_STOCK_INFO as string;
       const EP_U_PAGE = process.env.NEXT_PUBLIC_EP_U_PAGE as string;
-
-      const device = navigator.userAgent;
+      const LOG = process.env.NEXT_PUBLIC_LOG as string;
+      const LOG_LOGIN = process.env.NEXT_PUBLIC_LOG_LOGIN as string;
 
       try {
         const response = await fetcher(serverUrlGenerator(EP_LOGIN), "post", {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password, device }),
+          body: JSON.stringify({ email, password }),
           credentials: "include",
         });
 
         if (!response.ok) {
           throw new Error("Network response was not ok.");
         }
-        console.log(response);
+
         const data = await response.json();
 
         // roleId에 따라 라우팅
@@ -51,6 +51,10 @@ export const LoginForm = () => {
         } else if (data.roleID === 1) {
           router.push(routeUrlGenerator(EP_ADMIN, EP_STOCK_INFO));
         }
+
+        await fetcher(serverUrlGenerator(LOG, LOG_LOGIN), "post", {
+          credentials: "include",
+        });
       } catch (error) {
         throw error;
       }
