@@ -2,8 +2,7 @@ import url3001Generator from "src/modules/generator/url3001Generator";
 
 export default async (
   memberID: string,
-  productID: string,
-  quantity: number,
+  products: Array<{ productID: string; quantity: number }>,
   totalPrice: number,
   saleDate: string,
 ) => {
@@ -16,8 +15,7 @@ export default async (
     },
     body: JSON.stringify({
       memberID,
-      productID,
-      quantity,
+      products,
       totalPrice,
       saleDate,
     }),
