@@ -13,7 +13,7 @@ const SignUpPage: React.FC = () => {
     if (formRef.current) {
       const inputRefs = formRef.current.getInputRefs();
       const errors = formRef.current.validateFields();
-
+      console.log(serverUrlGenerator(EP_SIGN_UP));
       if (Object.keys(errors).length === 0) {
         try {
           const response = await fetcher(
@@ -33,6 +33,7 @@ const SignUpPage: React.FC = () => {
               }),
             },
           );
+          await response.json();
 
           if (!response.ok) {
             throw new Error("서버 오류 발생");
