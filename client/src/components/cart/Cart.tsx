@@ -5,6 +5,7 @@ import { CartHook } from "src/hooks/cart/cartHook";
 interface CartProps {
   items: { menu: string; unitPrice: number; id: string }[];
   removedItem: (data: string) => void;
+  onCount: (count: number) => void;
 }
 
 /**
@@ -16,8 +17,8 @@ interface CartProps {
  * @returns { JSX.Element }
  */
 
-const Cart: FC<CartProps> = ({ items, removedItem }) => {
-  const { totalPrice, handlePriceChange, error } = CartHook(items);
+const Cart: FC<CartProps> = ({ items, removedItem, onCount }) => {
+  const { totalPrice, handlePriceChange, error } = CartHook(items, onCount);
 
   if (error) {
     return <div>{error}</div>;

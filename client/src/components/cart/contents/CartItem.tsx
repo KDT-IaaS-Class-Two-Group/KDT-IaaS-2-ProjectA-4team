@@ -5,7 +5,7 @@ import { CartItemHook } from "src/hooks/cart/contents/cartItemHook";
 interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
-  onPriceChange: (price: number) => void;
+  onPriceChange: (price: number, count: number) => void;
   removedItem: (data: string) => void;
 }
 

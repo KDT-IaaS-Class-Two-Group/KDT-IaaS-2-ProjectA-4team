@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const CartItemHook = (
   unitPrice: number,
-  onPriceChange: (price: number) => void,
+  onPriceChange: (price: number, count: number) => void,
 ) => {
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(unitPrice);
@@ -12,7 +12,7 @@ export const CartItemHook = (
     try {
       const newPrice = newCount * unitPrice;
       setPrice(newPrice);
-      onPriceChange(newPrice - price);
+      onPriceChange(newPrice - price, newCount);
     } catch (error) {
       console.error("Failed to update price: ", error);
       setError("가격 업데이트에 실패했습니다.");
