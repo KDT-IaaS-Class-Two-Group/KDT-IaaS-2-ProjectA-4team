@@ -5,12 +5,14 @@ import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Types } from 'mongoose';
+import { TokenUtils } from '../utils/token.utils';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
     private readonly jwtService: JwtService,
+    private readonly tokenUtils: TokenUtils,
   ) {}
 
   async validateUser(
@@ -116,12 +118,7 @@ export class AuthService {
   async findUserNameToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];
-      if (!token) {
-        return null;
-      }
-
-      const decoded = this.jwtService.verify(token);
-      return decoded.name;
+      return await this.tokenUtils.findNameByToken(token, this.memberModel);
     } catch (error) {
       console.error('Token decoding failed:', error);
       return null;
@@ -132,17 +129,7 @@ export class AuthService {
   async findMemberIdByToken(request: Request): Promise<Types.ObjectId | null> {
     try {
       const token = request.cookies['token'];
-      const decoded = this.jwtService.verify(token);
-      const email = decoded.email;
-      console.log(email);
-
-      const user = await this.memberModel.findOne({ email }).exec();
-      console.log(user);
-      if (!user) {
-        return null;
-      } else {
-        return user._id;
-      }
+      return await this.tokenUtils.findMemberIdByToken(token, this.memberModel);
     } catch (error) {
       console.error('Error in findMemberIdByToken:', error);
       throw new Error('Invalid token or user not found');
