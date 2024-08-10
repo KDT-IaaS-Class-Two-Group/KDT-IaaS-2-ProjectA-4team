@@ -13,6 +13,9 @@ export const UserpageHook = () => {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [cartProductCount, setCartProductCount] = useState<number[]>([]);
+  // const [cartProductID, setCartProductID] = useState<string[]>([]);
+  const cartProductID: string[] = [];
 
   const purchase = () => {
     try {
@@ -93,6 +96,17 @@ export const UserpageHook = () => {
     }
   };
 
+  const onCount = (count: number) => {
+    setCartProductCount((prevCounts) => [...prevCounts, count]);
+    console.log(cartProductCount);
+    return count;
+  };
+
+  cartItems.map((product) => {
+    cartProductID.push(product.id);
+    console.log(cartProductID);
+  });
+
   const handleRemoveItem = (menu: string) => {
     try {
       const updatedItems = cartItems.filter((item) => item.menu !== menu);
@@ -114,6 +128,7 @@ export const UserpageHook = () => {
     confirmPurchase,
     error,
     handleAddToCart,
+    onCount,
     handleRemoveItem,
     purchase,
   };
