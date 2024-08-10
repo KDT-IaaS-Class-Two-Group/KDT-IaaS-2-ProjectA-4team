@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import SignUpForm, { SignUpFormRef } from "../../components/sign_up/Form";
-import ValiChecker from "src/modules/validation/ValiChecker";
+import SignUpForm from "../../components/sign_up/Form";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
+import { SignUpFormRef } from "src/interfaces/components/sign_up/Form.interface";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);

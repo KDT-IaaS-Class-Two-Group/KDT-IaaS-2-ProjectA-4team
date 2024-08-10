@@ -20,7 +20,7 @@ const AdminstockDate: React.FC = () => {
           <div className="flex items-center justify-start w-50 h-auto p-3 border border-black border-solid">
             <Logo width={100} height={100} alt="Custom Logo" className="pr-5" />
             <TitleComponent titletext="유통기한 관리" />
-            <ProductPage/>
+            <ProductPage />
           </div>
           <ExpirationDataTable />
         </div>
