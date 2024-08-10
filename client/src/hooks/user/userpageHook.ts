@@ -7,7 +7,7 @@ export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
   const [cartItems, setCartItems] = useState<
-    [] | { menu: string; unitPrice: number }[]
+    [] | { menu: string; unitPrice: number; id: string }[]
   >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
@@ -40,10 +40,14 @@ export const UserpageHook = () => {
       throw new Error("User email is required but was not found.");
     }
 
+    const products = [
+      { productID: "productID1", quantity: 10 },
+      { productID: "productID2", quantity: 20 },
+    ];
+
     const purchaseData = await salesHistoryFetch(
       userEmail,
-      "productID",
-      1,
+      products,
       12000,
       today,
     );
@@ -73,12 +77,12 @@ export const UserpageHook = () => {
     }
   }, [router.query.category]);
 
-  const handleAddToCart = (menu: string, unitPrice: number) => {
+  const handleAddToCart = (menu: string, unitPrice: number, id: string) => {
     try {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
         if (itemIndex === -1) {
-          return [...prevItems, { menu, unitPrice }];
+          return [...prevItems, { menu, unitPrice, id }];
         }
         openModal();
         return prevItems;
