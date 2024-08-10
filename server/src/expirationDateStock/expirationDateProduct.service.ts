@@ -26,7 +26,7 @@ export class productsServiceDate {
 
   async create(product: IProduct): Promise<IProduct> {
     const createdProduct = new this.productModel(product);
-    createdProduct._id = createdProduct._id.toString()
+    createdProduct._id = createdProduct._id.toString();
     const savedProduct = await createdProduct.save();
     return savedProduct;
   }

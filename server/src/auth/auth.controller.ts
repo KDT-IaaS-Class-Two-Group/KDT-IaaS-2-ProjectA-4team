@@ -37,7 +37,10 @@ export class AuthController {
     console.log('로그인요청들어옴');
     // 사용자 검증 및 로그인 처리
     try {
-      const user = await this.authService.validateUser(data.email);
+      const user = await this.authService.validateUser(
+        data.email,
+        data.password,
+      );
       if (!user) {
         // 사용자가 존재하지 않으면 에러 반환
         res
