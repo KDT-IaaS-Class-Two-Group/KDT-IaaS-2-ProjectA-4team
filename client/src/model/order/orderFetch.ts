@@ -4,7 +4,7 @@ import fetcher from "src/modules/fetching/fetcher";
 
 /**
  * @crystal23733 24.08.01
- * @param {string} name 유저 더미데이터
+ * @param {string}
  */
 export default async (name: string): Promise<TOrders[]> => {
   const EP_SALES = process.env.NEXT_PUBLIC_EP_SALES as string;
@@ -12,7 +12,7 @@ export default async (name: string): Promise<TOrders[]> => {
 
   try {
     const response = await fetcher(
-      serverUrlGenerator(EP_SALES, EP_ORDERS, name),
+      serverUrlGenerator(EP_SALES, `${EP_ORDERS}/${name}`),
       "get",
       {
         credentials: "include",

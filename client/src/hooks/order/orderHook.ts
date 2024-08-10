@@ -18,6 +18,7 @@ const useOrderHook = (name: string) => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
+      if (!name) return;
       try {
         const orders: TOrder[] = await orderFetch(name);
         console.log(orders);
