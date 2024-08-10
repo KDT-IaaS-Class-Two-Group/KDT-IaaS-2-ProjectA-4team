@@ -42,7 +42,6 @@ export class AuthController {
   @Post('login')
   async login(
     @Body() data: LoginLogoutRequest,
-    @Req() req: Request,
     @Res() res: Response,
   ): Promise<void> {
     try {
