@@ -43,8 +43,9 @@ export class AuthService {
   async generateToken(
     name: string,
     roleID: number,
+    email: string,
   ): Promise<{ token: string; cookieOptions: any }> {
-    const payload = { name: name, roleID };
+    const payload = { name: name, roleID, email };
     const token = this.jwtService.sign(payload);
 
     const cookieOptions = {
