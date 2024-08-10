@@ -11,7 +11,6 @@ import {
 import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
-import { UserLogService } from '../log/userlog.service';
 
 interface ILoginLogout {
   memberId: string;
@@ -22,10 +21,7 @@ type LoginLogoutRequest = IMember & ILoginLogout;
 
 @Controller()
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userLogService: UserLogService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
   async signUp(
@@ -49,8 +45,6 @@ export class AuthController {
     @Req() req: Request,
     @Res() res: Response,
   ): Promise<void> {
-    const { device } = data;
-    const ipAddress = req.ip;
     try {
       const result = await this.authService.validateUser(data.email);
       if (!result) {
@@ -59,7 +53,7 @@ export class AuthController {
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-      const { user, _id } = result;
+      const { user } = result;
       const { roleID, name, email } = user;
 
       const { token, cookieOptions } = await this.authService.generateToken(
@@ -67,11 +61,6 @@ export class AuthController {
         roleID,
         email,
       );
-
-      await this.userLogService.createLog(_id, 'login', {
-        ipAddress,
-        device,
-      });
 
       res.cookie('token', token, cookieOptions);
       res.status(HttpStatus.OK).json({ success: true, roleID });
@@ -145,27 +134,7 @@ export class AuthController {
   }
 
   @Post('logout')
-  async logout(
-    @Body() data: LoginLogoutRequest,
-    @Req() req: Request,
-    @Res() res: Response,
-  ) {
-    const { device } = data;
-    // IP 주소는 서버에서 요청 객체를 통해 가져옵니다.
-    const ipAddress = req.ip;
-    const memberId = await this.authService.findMemberIdByToken(req);
-    if (!memberId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json({ success: false, message: 'Invalid token or user not found' });
-      return;
-    }
-
-    await this.userLogService.createLog(memberId, 'logout', {
-      ipAddress,
-      device,
-    });
-
+  async logout(@Res() res: Response) {
     // 쿠키를 만료시키고 응답
     res.cookie('token', '', {
       expires: new Date(0),

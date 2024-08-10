@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { Types } from 'mongoose';
 import { TokenUtils } from '../utils/token.utils';
 
 @Injectable()
@@ -15,21 +14,18 @@ export class AuthService {
     private readonly tokenUtils: TokenUtils,
   ) {}
 
-  async validateUser(
-    email: string,
-  ): Promise<{ user: IMember; _id: Types.ObjectId } | null> {
+  async validateUser(email: string): Promise<{ user: IMember } | null> {
     const user = await this.memberModel.findOne({ email }).exec();
 
     if (!user) {
       return null;
     }
 
-    // _id 값을 포함한 객체를 반환
     return {
       user,
-      _id: user._id,
     };
   }
+
   async createUser(createUserDto: {
     username: string;
     email: string;
@@ -122,17 +118,6 @@ export class AuthService {
     } catch (error) {
       console.error('Token decoding failed:', error);
       return null;
-    }
-  }
-
-  //토큰이 들어오면 사용자 고유 id를 리턴
-  async findMemberIdByToken(request: Request): Promise<Types.ObjectId | null> {
-    try {
-      const token = request.cookies['token'];
-      return await this.tokenUtils.findMemberIdByToken(token, this.memberModel);
-    } catch (error) {
-      console.error('Error in findMemberIdByToken:', error);
-      throw new Error('Invalid token or user not found');
     }
   }
 }
