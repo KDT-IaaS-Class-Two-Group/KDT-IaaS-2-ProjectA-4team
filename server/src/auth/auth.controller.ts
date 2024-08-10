@@ -45,12 +45,12 @@ export class AuthController {
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-
-      const roleID = user.roleID;
+      const { roleID, name, email } = user;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.name,
+        name,
         roleID,
+        email,
       );
 
       res.cookie('token', token, cookieOptions);
