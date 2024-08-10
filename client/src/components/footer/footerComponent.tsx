@@ -2,12 +2,17 @@
 import React from "react";
 import { useRouter } from "next/router";
 import useFooterInfoHook from "src/hooks/footer/info/useFooterInfoHook";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import FooterLinksProps from "src/interfaces/components/footer/FooterComponent.interface";
 
-interface FooterLinksProps {
-  className?: string;
-}
-
+/**
+ * @moonhr 24.08.09
+ * * 서버에 로그아웃 요청을 보내고, 로그아웃 후 사용자를 리다이렉트합니다.
+ *
+ * @returns {Promise<void>}
+ * @throws {Error} 로그아웃 요청 중 발생한 에러를 던집니다.
+ */
 async function logout(): Promise<void> {
   try {
     const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
@@ -15,8 +20,7 @@ async function logout(): Promise<void> {
     const device = navigator.userAgent;
 
     // 서버에 로그아웃 요청 보내기
-    const response = await fetch(url3001Generator(LOGOUT), {
-      method: "POST",
+    await fetcher(serverUrlGenerator(LOGOUT), "post", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -27,15 +31,10 @@ async function logout(): Promise<void> {
       }),
     });
 
-    if (!response.ok) {
-      // 서버에서 오류가 발생한 경우
-      throw new Error(`Logout failed with status ${response.status}`);
-    }
     // 로그아웃 후 리다이렉트
-    window.location.href = "/";
+    window.location.href = process.env.NEXT_PUBLIC_BASE_URL as string;
   } catch (error) {
-    console.error("Error during logout:", error);
-    // 로그아웃 오류에 대한 처리, 예를 들어 사용자에게 알림 표시
+    throw error;
   }
 }
 

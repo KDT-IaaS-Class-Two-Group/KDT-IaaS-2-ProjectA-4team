@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 import salesFetchTableData from "src/model/sale/table/salesFetchTableData";
+import { failedLoadDataMessage } from "static/hooks/sale/table/salesUseTableHook.static";
 
 /**
  * @crystal23733 24.07.30
@@ -18,7 +19,7 @@ export default () => {
         const tableData = await salesFetchTableData();
         setData(tableData);
       } catch (error) {
-        setError("데이터 로드 실패");
+        setError(failedLoadDataMessage);
       } finally {
         setLoading(false);
       }

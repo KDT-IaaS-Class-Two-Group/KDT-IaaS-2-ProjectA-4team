@@ -32,7 +32,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../static/client/**/*.ts",
-    "static/sign-up/SignUpInputs.ts"
+    "../static/client/**/*.ts"
   ]
 }

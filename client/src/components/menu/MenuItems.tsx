@@ -1,21 +1,8 @@
 import React from "react";
 import CardComponent from "src/components/card/Card";
 import { MenuItemHook } from "src/hooks/menu/menuItemHook";
-
-interface MenuItemsProps {
-  selectCategory: string;
-  onAddToCart: (title: string, price: number) => void;
-}
-
-interface Product {
-  id: string;
-  productName: string;
-  productCategory: string;
-  unitPrice: number;
-  quantity: number;
-  restockDate: Date;
-  expirationDate: Date;
-}
+import MenuItemsProps from "src/interfaces/components/menu/MenuItems.interface";
+import Product from "src/interfaces/product/Product.interface";
 
 /**
  * @yuxincxoi 24.07.30

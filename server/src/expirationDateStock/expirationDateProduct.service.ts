@@ -23,4 +23,11 @@ export class productsServiceDate {
     await this.productModel.deleteOne({ _id: id }).exec();
     console.log('폐기해유');
   }
+
+  async create(product: IProduct): Promise<IProduct> {
+    const createdProduct = new this.productModel(product);
+    createdProduct._id = createdProduct._id.toString()
+    const savedProduct = await createdProduct.save();
+    return savedProduct;
+  }
 }

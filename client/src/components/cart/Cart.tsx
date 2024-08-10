@@ -1,11 +1,7 @@
 import React, { FC } from "react";
 import CartItemComponent from "./contents/CartItem";
 import { CartHook } from "src/hooks/cart/cartHook";
-
-interface CartProps {
-  items: { menu: string; unitPrice: number }[];
-  removedItem: (data: string) => void;
-}
+import CartProps from "src/interfaces/components/cart/Cart.interface";
 
 /**
  * @yuxincxoi 24.07.25

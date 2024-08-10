@@ -7,7 +7,7 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-import ButtonComponent from "../../button/customized/CustomButton";
+import ButtonComponent from "src/components/button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
 
@@ -102,8 +102,8 @@ export const ExpirationDataTable: React.FC = () => {
         open={open}
         onClose={closeModal}
         onConfirm={handleDelete}
-        title=""
-        content=""
+        title = "폐기 확인"
+        content = "제품을 폐기하시겠습니까?"
       />
     </>
   );

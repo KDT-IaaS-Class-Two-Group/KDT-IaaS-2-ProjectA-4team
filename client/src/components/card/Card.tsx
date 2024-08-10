@@ -1,12 +1,7 @@
 import React, { FC } from "react";
 import { Card, CardTitle, CardDescription } from "../../../components/ui/card";
 import Image from "next/image";
-
-interface CardComponentProps {
-  title: string;
-  content: number;
-  onAddToCart: (title: string, price: number) => void;
-}
+import CardComponentProps from "src/interfaces/components/card/Card.interface";
 
 /**
  * @yuxincxoi 24.07.25
