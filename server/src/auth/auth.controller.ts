@@ -51,35 +51,23 @@ export class AuthController {
   ): Promise<void> {
     const { device } = data;
     const ipAddress = req.ip;
-
-    console.log('로그인요청들어옴');
-    // 사용자 검증 및 로그인 처리
     try {
       const result = await this.authService.validateUser(data.email);
       if (!result) {
-        // 사용자가 존재하지 않으면 에러 반환
         res
           .status(HttpStatus.UNAUTHORIZED)
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-
-      // result에서 user와 _id를 가져옵니다.
       const { user, _id } = result;
+      const { roleID, name, email } = user;
 
-      // roleID와 name은 user 객체에서 가져옵니다.
-      const roleID = user.roleID;
-      const userName = user.name;
-      const email = user.email;
-
-      // JWT 토큰 생성
       const { token, cookieOptions } = await this.authService.generateToken(
-        userName,
+        name,
         roleID,
         email,
       );
 
-      // 로그 생성
       await this.userLogService.createLog(_id, 'login', {
         ipAddress,
         device,
@@ -162,13 +150,9 @@ export class AuthController {
     @Res() res: Response,
   ) {
     const { device } = data;
-
     // IP 주소는 서버에서 요청 객체를 통해 가져옵니다.
     const ipAddress = req.ip;
-
     const memberId = await this.authService.findMemberIdByToken(req);
-    console.log(memberId);
-
     if (!memberId) {
       res
         .status(HttpStatus.UNAUTHORIZED)
