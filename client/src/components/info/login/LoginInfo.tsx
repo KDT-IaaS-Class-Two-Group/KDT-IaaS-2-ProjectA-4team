@@ -1,11 +1,23 @@
 import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import LoginInfoComponentProps from "src/interfaces/components/info/login/LoginInfo.interface";
+import { failedGetUserInfoMessage } from "static/components/info/login/loginInfo.static";
 
-interface LoginInfoComponentProps {
-  className?: string;
-}
-
+/**
+ * @moonhr 24.08.08
+ * *`LoginInfoComponent`는 로그인한 사용자의 정보를 표시하는 컴포넌트입니다.
+ * *서버에서 사용자 이름을 가져오고, 이를 화면에 표시합니다. 사용자 이름을 가져오는 동안에는 "로딩 중..."이라는 메시지를 표시하고,
+ * *오류가 발생할 경우 오류 메시지를 표시합니다.
+ *
+ * @component
+ *
+ * @param {LoginInfoComponentProps} props - `LoginInfoComponent`에 전달되는 속성입니다.
+ * @param {string} [props.className] - 컴포넌트에 추가할 CSS 클래스입니다.
+ *
+ * @returns {JSX.Element} - 로그인 정보를 포함하는 JSX 요소를 반환합니다.
+ */
 const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
   const [userName, setUserName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -14,18 +26,18 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
     const fetchUserName = async () => {
       const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
       try {
-        const response = await fetch(url3001Generator(EP_LOGININFO), {
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
+        const response = await fetcher(
+          serverUrlGenerator(EP_LOGININFO),
+          "get",
+          {
+            credentials: "include",
+          },
+        );
 
         const data = await response.json();
         setUserName(data);
       } catch (error) {
-        console.error("Error fetching user info:", error);
-        setError("사용자 정보를 불러오는데 실패했습니다.");
+        setError(failedGetUserInfoMessage);
       }
     };
 

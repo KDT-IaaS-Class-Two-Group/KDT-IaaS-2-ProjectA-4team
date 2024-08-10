@@ -3,10 +3,7 @@
  * * titletext text 넣어 줘야함
  */
 import React from "react";
-
-interface h1 {
-  titletext: string;
-}
+import h1 from "src/interfaces/components/title/TitleComponent.interface";
 
 const TitleComponent: React.FC<h1> = ({ titletext }) => {
   return (

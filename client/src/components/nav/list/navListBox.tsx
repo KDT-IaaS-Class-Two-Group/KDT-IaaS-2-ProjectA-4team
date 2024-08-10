@@ -29,11 +29,6 @@ const NavListBox: React.FC = () => {
             매출 조회
           </LinkButtonComponent>
         </li>
-        <li className="mb-4">
-          <LinkButtonComponent href="/admin/salesRanking">
-            매출 순위
-          </LinkButtonComponent>
-        </li>
       </ul>
       <div className="text-lg font-semibold">회원 관리</div>
       <ul className="pl-4 space-y-2">

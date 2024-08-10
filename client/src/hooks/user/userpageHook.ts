@@ -2,7 +2,27 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
 import getUserEmailFetch from "src/model/user/email/getUserEmailFetch";
+import { userPageHookErrMessages } from "static/hooks/user/userPageHook.static";
 
+/**
+ * @yuxincxoi 24.08.07
+ * * `UserpageHook` 훅은 사용자 페이지에서 카테고리 선택, 장바구니 관리, 모달 상태 등을 처리합니다.
+ *
+ * @returns {{
+ *   selectCategory: string;              // 현재 선택된 카테고리
+ *   setSelectCategory: React.Dispatch<React.SetStateAction<string>>; // 선택된 카테고리를 설정하는 함수
+ *   cartItems: { menu: string; unitPrice: number }[]; // 장바구니에 담긴 항목들
+ *   isModalOpen: boolean;                // 모달 창의 열림 상태
+ *   isPurchaseModalOpen: boolean;        // 구매 모달 창의 열림 상태
+ *   closeModal: () => void;              // 모달 창을 닫는 함수
+ *   closePurchaseModal: () => void;      // 구매 모달 창을 닫는 함수
+ *   confirmPurchase: () => void;         // 구매를 확인하고 장바구니를 비우는 함수
+ *   error: string | null;                // 발생한 오류 메시지
+ *   handleAddToCart: (menu: string, unitPrice: number) => void; // 장바구니에 항목을 추가하는 함수
+ *   handleRemoveItem: (menu: string) => void; // 장바구니에서 항목을 제거하는 함수
+ *   purchase: () => Promise<void>;       // 구매 모달 창을 열기 위한 함수
+ * }}
+ */
 export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
@@ -21,7 +41,7 @@ export const UserpageHook = () => {
     try {
       setIsPurchaseModalOpen(true);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
@@ -61,11 +81,21 @@ export const UserpageHook = () => {
     return purchaseData;
   };
 
+  /**
+   * 모달 창을 여는 함수입니다.
+   */
   const openModal = () => {
     setIsModalOpen(true);
-    console.log("open");
   };
+
+  /**
+   * 모달 창을 닫는 함수입니다.
+   */
   const closeModal = () => setIsModalOpen(false);
+
+  /**
+   * 구매 모달 창을 닫는 함수입니다.
+   */
   const closePurchaseModal = () => setIsPurchaseModalOpen(false);
 
   useEffect(() => {
@@ -75,8 +105,7 @@ export const UserpageHook = () => {
         setSelectCategory(category);
       }
     } catch (error) {
-      console.error("Failed to set selectCategory: ", error);
-      setError("카테고리를 불러오지 못했습니다.");
+      setError(userPageHookErrMessages.failedGetCategories);
     }
   }, [router.query.category]);
 
@@ -91,8 +120,7 @@ export const UserpageHook = () => {
         return prevItems;
       });
     } catch (error) {
-      console.error("Failed to add item to cart: ", error);
-      setError("장바구니에 아이템을 추가하지 못했습니다.");
+      setError(userPageHookErrMessages.failedAddCategories);
     }
   };
 
@@ -112,8 +140,7 @@ export const UserpageHook = () => {
       const updatedItems = cartItems.filter((item) => item.menu !== menu);
       setCartItems(updatedItems);
     } catch (error) {
-      console.error("Failed to remove item from cart: ", error);
-      setError("장바구니의 아이템을 삭제하지 못했습니다.");
+      setError(userPageHookErrMessages.failedDeleteCategories);
     }
   };
 

@@ -44,13 +44,12 @@ export class AuthController {
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-
-      const roleID = user.roleID;
+      const { roleID, name, email } = user;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.name,
+        name,
         roleID,
-        user.email,
+        email,
       );
 
       res.cookie('token', token, cookieOptions);
@@ -72,7 +71,8 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      const user = await this.authService.getUserInfo(decoded.name);
+      const user = await this.authService.getUserInfo(decoded.email);
+      console.log(user);
       if (!user) {
         res
           .status(HttpStatus.UNAUTHORIZED)
@@ -95,6 +95,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<any> {
     const token = req.cookies['token'];
+    console.log('TOKEN:', token);
     if (!token) {
       res
         .status(HttpStatus.UNAUTHORIZED)
@@ -103,12 +104,8 @@ export class AuthController {
     }
     try {
       const decoded = this.authService.verifyToken(token);
-      const userEmail = decoded.email;
-      await this.authService.changePassword(
-        userEmail,
-        oldPassword,
-        newPassword,
-      );
+      const userName = decoded.name;
+      await this.authService.changePassword(userName, oldPassword, newPassword);
       res
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
@@ -129,5 +126,17 @@ export class AuthController {
   async getUserEmail(@Req() request: Request, @Res() res: Response) {
     const userEmail = await this.authService.findUserEmailToToken(request);
     res.status(HttpStatus.OK).json(userEmail);
+  }
+
+  @Post('logout')
+  logout(@Res() res: Response) {
+    console.log('로그아웃 요청');
+    // 쿠키를 만료시키고 응답
+    res.cookie('token', '', {
+      expires: new Date(0),
+      httpOnly: true,
+      path: '/',
+    });
+    res.status(200).send('Logged out');
   }
 }

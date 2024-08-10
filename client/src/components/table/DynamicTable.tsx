@@ -19,11 +19,7 @@ import {
   getSortedRowModel,
   flexRender,
 } from "@tanstack/react-table";
-
-interface DynamicTableProps<T extends object> {
-  data: T[];
-  renderActions?: (row: T) => React.ReactNode;
-}
+import DynamicTableProps from "src/interfaces/components/table/DynamicTable.interface";
 
 /**
  * @moonhr 24.08.06
