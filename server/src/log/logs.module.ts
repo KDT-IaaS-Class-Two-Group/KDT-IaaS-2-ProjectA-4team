@@ -8,11 +8,15 @@ import { Member, MemberSchema } from '../schemas/member.schema';
 import { JwtStrategy } from '../auth/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { Product, ProductSchema } from '../schemas/product.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: UserLog.name, schema: UserLogSchema }]),
-    MongooseModule.forFeature([{ name: Member.name, schema: MemberSchema }]),
+    MongooseModule.forFeature([
+      { name: UserLog.name, schema: UserLogSchema },
+      { name: Member.name, schema: MemberSchema },
+      { name: Product.name, schema: ProductSchema },
+    ]),
     ConfigModule.forRoot(),
     JwtModule.registerAsync({
       imports: [ConfigModule],
