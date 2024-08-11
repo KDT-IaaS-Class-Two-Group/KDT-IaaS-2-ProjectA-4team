@@ -1,34 +1,132 @@
-import { Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Post, Req, UseGuards, Body } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { UserLogService } from './userlog.service';
 import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { TokenUtils } from '../utils/token.utils';
+import IMember from '@db/members/member.interface';
+import { Model } from 'mongoose';
 
 @UseGuards(JwtAuthGuard)
 @Controller('log')
 export class LogsController {
-  constructor(private readonly userLogService: UserLogService) {}
+  constructor(
+    @InjectModel('Member') private readonly memberModel: Model<IMember>,
+    private readonly userLogService: UserLogService,
+    private readonly tokenUtils: TokenUtils,
+  ) {}
 
   //로그인 로그
   @Post('login')
   async login(@Req() req: Request) {
-    const token = req.cookies['token'];
-    //토큰검사하여 id 추출
-    //로그생성
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      await this.userLogService.createLog(memberId, 'login');
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create login log');
+    }
   }
 
   //로그아웃 로그
   @Post('logout')
-  async logout() {}
+  async logout(@Req() req: Request) {
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      await this.userLogService.createLog(memberId, 'logout');
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create logout log');
+    }
+  }
   //사용자 구매 로그
   @Post('purchase')
-  async purchase() {}
+  async purchase(@Req() req: Request, @Body() data) {
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      const { products, totalPrice } = data;
+      await this.userLogService.createLog(memberId, 'purchase', {
+        products: products,
+        totalPrice: totalPrice,
+      });
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create logout log');
+    }
+  }
   //재고 추가 로그
   @Post('addStock')
-  async addStock() {}
+  async addStock(@Req() req: Request, @Body() data) {
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      const { _id, productCategory, productName, quantity } = data;
+      await this.userLogService.createLog(memberId, 'addStock', {
+        product_id: _id,
+        productCategory: productCategory,
+        productName: productName,
+        quantity: quantity,
+      });
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create logout log');
+    }
+  }
   //재고 폐기 로그
   @Post('delStock')
-  async delStock() {}
+  async delStock(@Req() req: Request, @Body() data) {
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      const { _id, productCategory, productName, quantity } = data;
+      await this.userLogService.createLog(memberId, 'delStock', {
+        product_id: _id,
+        productCategory: productCategory,
+        productName: productName,
+        quantity: quantity,
+      });
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create logout log');
+    }
+  }
   //메뉴 추가 로그
   @Post('addMenu')
-  async addMenu() {}
+  async addMenu(@Req() req: Request, @Body() data) {
+    try {
+      const token = req.cookies['token'];
+      const memberId = this.tokenUtils.findMemberIdByToken(
+        token,
+        this.memberModel,
+      );
+      const { _id, productCategory, productName, quantity } = data;
+      await this.userLogService.createLog(memberId, 'addMenu', {
+        product_id: _id,
+        productCategory: productCategory,
+        productName: productName,
+        quantity: quantity,
+      });
+    } catch (error) {
+      console.error('Error creating log:', error);
+      throw new Error('Failed to create logout log');
+    }
+  }
 }
