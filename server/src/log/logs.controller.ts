@@ -27,7 +27,7 @@ export class LogsController {
         token,
         this.memberModel,
       );
-      await this.userLogService.createLog(memberId, 'login');
+      await this.userLogService.createLog(await memberId, 'login');
     } catch (error) {
       console.error('Error creating log:', error);
       throw new Error('Failed to create login log');
@@ -43,7 +43,7 @@ export class LogsController {
         token,
         this.memberModel,
       );
-      await this.userLogService.createLog(memberId, 'logout');
+      await this.userLogService.createLog(await memberId, 'logout');
     } catch (error) {
       console.error('Error creating log:', error);
       throw new Error('Failed to create logout log');
@@ -60,7 +60,7 @@ export class LogsController {
         this.memberModel,
       );
       const { products, totalPrice } = data;
-      await this.userLogService.createLog(memberId, 'purchase', {
+      await this.userLogService.createLog(await memberId, 'purchase', {
         products: products,
         totalPrice: totalPrice,
       });
@@ -79,7 +79,7 @@ export class LogsController {
         this.memberModel,
       );
       const { _id, productCategory, productName, quantity } = data;
-      await this.userLogService.createLog(memberId, 'addStock', {
+      await this.userLogService.createLog(await memberId, 'addStock', {
         product_id: _id,
         productCategory: productCategory,
         productName: productName,
@@ -102,7 +102,7 @@ export class LogsController {
       const data = await this.productModel.findById(id).exec();
       if (data) {
         const { _id, productCategory, productName, quantity } = data;
-        await this.userLogService.createLog(memberId, 'delStock', {
+        await this.userLogService.createLog(await memberId, 'delStock', {
           product_id: _id,
           productCategory: productCategory,
           productName: productName,
@@ -125,7 +125,7 @@ export class LogsController {
         this.memberModel,
       );
       const { _id, productCategory, productName, quantity } = data;
-      await this.userLogService.createLog(memberId, 'addMenu', {
+      await this.userLogService.createLog(await memberId, 'addMenu', {
         product_id: _id,
         productCategory: productCategory,
         productName: productName,
