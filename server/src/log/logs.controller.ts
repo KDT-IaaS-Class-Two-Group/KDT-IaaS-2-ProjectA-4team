@@ -6,12 +6,14 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TokenUtils } from '../utils/token.utils';
 import IMember from '@db/members/member.interface';
 import { Model } from 'mongoose';
+import IProduct from '@db/products/product.interface';
 
 @UseGuards(JwtAuthGuard)
 @Controller('log')
 export class LogsController {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
+    @InjectModel('Product') private readonly productModel: Model<IProduct>,
     private readonly userLogService: UserLogService,
     private readonly tokenUtils: TokenUtils,
   ) {}
@@ -63,12 +65,12 @@ export class LogsController {
       });
     } catch (error) {
       console.error('Error creating log:', error);
-      throw new Error('Failed to create logout log');
+      throw new Error('Failed to create purchase log');
     }
   }
   //재고 추가 로그
   @Post('addStock')
-  async addStock(@Req() req: Request, @Body() data) {
+  async addStock(@Req() req: Request, @Body() data: IProduct) {
     try {
       const token = req.cookies['token'];
       const memberId = this.tokenUtils.findMemberIdByToken(
@@ -84,28 +86,31 @@ export class LogsController {
       });
     } catch (error) {
       console.error('Error creating log:', error);
-      throw new Error('Failed to create logout log');
+      throw new Error('Failed to create addStock log');
     }
   }
   //재고 폐기 로그
   @Post('delStock')
-  async delStock(@Req() req: Request, @Body() data) {
+  async delStock(@Req() req: Request, @Body() id: object) {
     try {
       const token = req.cookies['token'];
       const memberId = this.tokenUtils.findMemberIdByToken(
         token,
         this.memberModel,
       );
-      const { _id, productCategory, productName, quantity } = data;
-      await this.userLogService.createLog(memberId, 'delStock', {
-        product_id: _id,
-        productCategory: productCategory,
-        productName: productName,
-        quantity: quantity,
-      });
+      const data = await this.productModel.findById(id).exec();
+      if (data) {
+        const { _id, productCategory, productName, quantity } = data;
+        await this.userLogService.createLog(memberId, 'delStock', {
+          product_id: _id,
+          productCategory: productCategory,
+          productName: productName,
+          quantity: quantity,
+        });
+      }
     } catch (error) {
       console.error('Error creating log:', error);
-      throw new Error('Failed to create logout log');
+      throw new Error('Failed to create delStock log');
     }
   }
   //메뉴 추가 로그
@@ -126,7 +131,7 @@ export class LogsController {
       });
     } catch (error) {
       console.error('Error creating log:', error);
-      throw new Error('Failed to create logout log');
+      throw new Error('Failed to create addMenu log');
     }
   }
 }
