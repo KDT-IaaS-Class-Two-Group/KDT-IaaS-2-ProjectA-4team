@@ -49,6 +49,7 @@ export class LogsController {
       throw new Error('Failed to create logout log');
     }
   }
+  //TODO 구매로직 완성되면 추가
   //사용자 구매 로그
   @Post('purchase')
   async purchase(@Req() req: Request, @Body() data) {
@@ -113,6 +114,7 @@ export class LogsController {
       throw new Error('Failed to create delStock log');
     }
   }
+  //TODO 매뉴추가로직 완성되면 추가
   //메뉴 추가 로그
   @Post('addMenu')
   async addMenu(@Req() req: Request, @Body() data) {
