@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import SignUpForm, { SignUpFormRef } from "../../components/sign_up/Form";
-import ValiChecker from "src/modules/validation/ValiChecker";
+import SignUpForm from "../../components/sign_up/Form";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
+import { SignUpFormRef } from "src/interfaces/components/sign_up/Form.interface";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);
@@ -13,7 +13,7 @@ const SignUpPage: React.FC = () => {
     if (formRef.current) {
       const inputRefs = formRef.current.getInputRefs();
       const errors = formRef.current.validateFields();
-
+      console.log(serverUrlGenerator(EP_SIGN_UP));
       if (Object.keys(errors).length === 0) {
         try {
           const response = await fetcher(
@@ -33,6 +33,7 @@ const SignUpPage: React.FC = () => {
               }),
             },
           );
+          await response.json();
 
           if (!response.ok) {
             throw new Error("서버 오류 발생");

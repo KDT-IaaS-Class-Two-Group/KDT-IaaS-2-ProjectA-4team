@@ -10,7 +10,7 @@ export const productFetchTableData = async (): Promise<ProductDTO[]> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
 
   const response = await fetcher(serverUrlGenerator(EP_PRODUCT), "get", {
-    credentials: "include"
+    credentials: "include",
   });
   return await response.json();
 };

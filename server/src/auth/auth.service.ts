@@ -12,9 +12,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string): Promise<IMember | null> {
+  async validateUser(email: string, password: string): Promise<IMember | null> {
     const user = await this.memberModel.findOne({ email }).exec();
-    return user;
+    if (user && user.password === password) {
+      return user;
+    }
+    return null;
   }
 
   async createUser(createUserDto: {

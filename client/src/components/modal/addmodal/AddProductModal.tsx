@@ -26,11 +26,15 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   const [unitPrice, setPrice] = useState<number | "">("");
 
   // 값 들어오는거 변환
-  const handleproductCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => setProductCategory(e.target.value);
-  const handleProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setProductName(e.target.value);
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuantity(Number(e.target.value) || "");
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => setPrice(Number(e.target.value) || "");
-
+  const handleproductCategoryChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => setProductCategory(e.target.value);
+  const handleProductNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setProductName(e.target.value);
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setQuantity(Number(e.target.value) || "");
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPrice(Number(e.target.value) || "");
 
   const handleOrder = () => {
     if (productName && quantity && unitPrice) {
@@ -44,7 +48,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
 
       //데이터 들어갈 부분
       const newProduct = new ProductDTO({
-        _id: "", 
+        _id: "",
         productCategory,
         productName,
         unitPrice,
@@ -64,24 +68,26 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
       <DialogContent className="fixed inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-lg z-50 w-full max-w-md h-1/3">
         <DialogTitle className="text-xl font-bold mb-4">제품 구매</DialogTitle>
         <div className="grid grid-cols-4 items-center gap-4 mb-4">
-        <Label htmlFor="category" className="text-right border-r-black">
-              분류
-            </Label>
-            <select
-              aria-label="Select an option"
-              id="category"
-              value={productCategory}
-              onChange={handleproductCategoryChange}
-              className="col-span-3 border border-gray-300 rounded px-2 py-1 w-62%"
-            >
-              <option value="">선택하세요</option>
-              <option value="음료">음료</option>
-              <option value="사이드">사이드</option>
-              <option value="패티">패티</option>
-              <option value="빵">빵</option>
-              <option value="소스">소스</option>
-            </select>
-          <Label htmlFor="productName" className="text-right border-r-black">제품</Label>
+          <Label htmlFor="category" className="text-right border-r-black">
+            분류
+          </Label>
+          <select
+            aria-label="Select an option"
+            id="category"
+            value={productCategory}
+            onChange={handleproductCategoryChange}
+            className="col-span-3 border border-gray-300 rounded px-2 py-1 w-62%"
+          >
+            <option value="">선택하세요</option>
+            <option value="음료">음료</option>
+            <option value="사이드">사이드</option>
+            <option value="패티">패티</option>
+            <option value="빵">빵</option>
+            <option value="소스">소스</option>
+          </select>
+          <Label htmlFor="productName" className="text-right border-r-black">
+            제품
+          </Label>
           <InputComponent
             id="productName"
             value={productName}
@@ -91,7 +97,9 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
           />
         </div>
         <div className="grid grid-cols-4 items-center gap-4 mb-4">
-          <Label htmlFor="quantity" className="text-right border-r-black">수량</Label>
+          <Label htmlFor="quantity" className="text-right border-r-black">
+            수량
+          </Label>
           <InputComponent
             id="quantity"
             value={quantity}
@@ -103,7 +111,9 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
           />
         </div>
         <div className="grid grid-cols-4 items-center gap-4 mb-4">
-          <Label htmlFor="unitPrice" className="text-right border-r-black">가격</Label>
+          <Label htmlFor="unitPrice" className="text-right border-r-black">
+            가격
+          </Label>
           <InputComponent
             id="unitPrice"
             value={unitPrice}
@@ -115,8 +125,12 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
           />
         </div>
         <div className="flex justify-end gap-4">
-          <ButtonComponent onClick={onClose} variant="outline">취소</ButtonComponent>
-          <ButtonComponent onClick={handleOrder} variant="default">주문</ButtonComponent>
+          <ButtonComponent onClick={onClose} variant="outline">
+            취소
+          </ButtonComponent>
+          <ButtonComponent onClick={handleOrder} variant="default">
+            주문
+          </ButtonComponent>
         </div>
       </DialogContent>
     </Dialog>

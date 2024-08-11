@@ -102,8 +102,8 @@ export const ExpirationDataTable: React.FC = () => {
         open={open}
         onClose={closeModal}
         onConfirm={handleDelete}
-        title = "폐기 확인"
-        content = "제품을 폐기하시겠습니까?"
+        title="폐기 확인"
+        content="제품을 폐기하시겠습니까?"
       />
     </>
   );
