@@ -37,7 +37,6 @@ export const UserpageHook = () => {
     productID: string;
     quantity: number;
   }[] = [];
-  const cartProductID: string[] = [];
 
   const purchase = () => {
     try {
@@ -140,11 +139,6 @@ export const UserpageHook = () => {
     }
     return products;
   };
-
-  cartItems.map((product) => {
-    cartProductID.push(product.id);
-    console.log(cartProductID);
-  });
 
   const handleRemoveItem = (menu: string) => {
     try {
