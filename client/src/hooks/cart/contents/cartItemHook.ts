@@ -19,7 +19,8 @@ import { failedMessages } from "static/hooks/cart/contents/cartItemHook.static";
 
 export const CartItemHook = (
   unitPrice: number,
-  onPriceChange: (price: number, count: number) => void,
+  onPriceChange: (price: number, count: number, menu: string) => void,
+  menu: string,
 ) => {
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(unitPrice);
@@ -29,7 +30,7 @@ export const CartItemHook = (
     try {
       const newPrice = newCount * unitPrice;
       setPrice(newPrice);
-      onPriceChange(newPrice - price, newCount);
+      onPriceChange(newPrice - price, newCount, menu);
     } catch (error) {
       setError(failedMessages.failedUpdatePriceMessage);
     }

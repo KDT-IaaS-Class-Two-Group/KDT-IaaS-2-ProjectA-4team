@@ -5,7 +5,7 @@ import { CartHook } from "src/hooks/cart/cartHook";
 interface CartProps {
   items: { menu: string; unitPrice: number; id: string }[];
   removedItem: (data: string) => void;
-  onCount: (count: number) => void;
+  onCount: (count: number, menu: string) => void;
 }
 
 /**

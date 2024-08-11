@@ -15,18 +15,18 @@ import { failedPriceMessages } from "static/hooks/cart/cartHook.static";
  */
 export const CartHook = (
   items: { menu: string; unitPrice: number }[],
-  onCount: (count: number) => void,
+  onCount: (count: number, menu: string) => void,
 ) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePriceChange = (price: number, count: number) => {
+  const handlePriceChange = (price: number, count: number, menu: string) => {
     try {
       setTotalPrice((prevTotal) => {
         const updatedTotal = prevTotal + price;
         return updatedTotal;
       });
-      onCount(count);
+      onCount(count, menu);
     } catch (error) {
       setError(failedPriceMessages.failedCalcPriceMessage);
     }

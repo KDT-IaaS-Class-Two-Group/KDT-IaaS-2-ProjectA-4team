@@ -5,7 +5,7 @@ import { CartItemHook } from "src/hooks/cart/contents/cartItemHook";
 interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
-  onPriceChange: (price: number, count: number) => void;
+  onPriceChange: (price: number, count: number, menu: string) => void;
   removedItem: (data: string) => void;
 }
 
@@ -28,6 +28,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   const { count, price, incrementCount, decrementCount, error } = CartItemHook(
     unitPrice,
     onPriceChange,
+    menu,
   );
 
   if (error) return <div>{error}</div>;
