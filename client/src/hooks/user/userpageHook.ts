@@ -124,12 +124,9 @@ export const UserpageHook = () => {
     }
   };
 
-  const onCount = (
-    item: { menu: string; unitPrice: number }[],
-    count: number,
-  ) => {
+  const onCount = (count: number) => {
     setCartProductCount((prevCounts) => [...prevCounts, count]);
-    console.log(item, cartProductCount);
+    console.log(cartProductCount);
     return count;
   };
 
