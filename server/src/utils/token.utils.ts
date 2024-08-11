@@ -1,4 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
+import { Injectable } from '@nestjs/common';
 import { Types } from 'mongoose';
 
 interface DecodedToken {
@@ -11,6 +12,7 @@ interface DecodedToken {
  * @moonhr 24.08.10
  * * 토큰을 검증, 디코딩하여 사용자정보를 반환.
  */
+@Injectable()
 export class TokenUtils {
   constructor(private jwtService: JwtService) {}
 
@@ -29,7 +31,7 @@ export class TokenUtils {
   async findMemberIdByToken(
     token: string,
     memberModel: any,
-  ): Promise<Types.ObjectId | null> {
+  ): Promise<Types.ObjectId> {
     const decoded = this.verifyAndDecodeToken(token);
     if (!decoded) {
       throw new Error('Invalid token');
