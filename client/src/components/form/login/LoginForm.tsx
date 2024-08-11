@@ -51,10 +51,13 @@ export const LoginForm = () => {
         } else if (data.roleID === 1) {
           router.push(routeUrlGenerator(EP_ADMIN, EP_STOCK_INFO));
         }
-
-        await fetcher(serverUrlGenerator(LOG, LOG_LOGIN), "post", {
-          credentials: "include",
-        });
+        try {
+          await fetcher(serverUrlGenerator(LOG, LOG_LOGIN), "post", {
+            credentials: "include",
+          });
+        } catch (error) {
+          error;
+        }
       } catch (error) {
         throw error;
       }
