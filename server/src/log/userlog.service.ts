@@ -11,9 +11,9 @@ export class UserLogService {
 
   // 로그 생성
   async createLog(
-    memberID: Types.ObjectId,
+    memberID: Promise<Types.ObjectId>,
     actionType: string,
-    details: Record<string, any>,
+    details?: Record<string, any>,
   ): Promise<UserLog> {
     try {
       const newLog = new this.userLogModel({
