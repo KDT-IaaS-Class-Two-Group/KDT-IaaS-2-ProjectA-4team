@@ -33,8 +33,10 @@ export const UserpageHook = () => {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [cartProductCount, setCartProductCount] = useState<number[]>([]);
-  // const [cartProductID, setCartProductID] = useState<string[]>([]);
+  const products: {
+    productID: string;
+    quantity: number;
+  }[] = [];
   const cartProductID: string[] = [];
 
   const purchase = () => {
@@ -62,11 +64,6 @@ export const UserpageHook = () => {
     if (!userEmail) {
       throw new Error("User email is required but was not found.");
     }
-
-    const products = [
-      { productID: "productID1", quantity: 10 },
-      { productID: "productID2", quantity: 20 },
-    ];
 
     const purchaseData = await salesHistoryFetch(
       userEmail,
@@ -124,10 +121,24 @@ export const UserpageHook = () => {
     }
   };
 
-  const onCount = (count: number) => {
-    setCartProductCount((prevCounts) => [...prevCounts, count]);
-    console.log(cartProductCount);
-    return count;
+  const onCount = (count: number, menu: string) => {
+    if (products.length === 0) {
+      cartItems.map((cartItem) => {
+        const newProduct = { productID: cartItem.menu, quantity: 1 };
+        products.push(newProduct);
+      });
+    }
+    const productIndex = products.findIndex(
+      (product) => product.productID === menu,
+    );
+
+    if (productIndex !== -1) {
+      products[productIndex].quantity = count;
+    } else {
+      const selectedProduct = { productID: menu, quantity: count };
+      products.push(selectedProduct);
+    }
+    return products;
   };
 
   cartItems.map((product) => {
