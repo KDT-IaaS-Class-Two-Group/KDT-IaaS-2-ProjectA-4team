@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
 import getUserEmailFetch from "src/model/user/email/getUserEmailFetch";
 import { userPageHookErrMessages } from "static/hooks/user/userPageHook.static";
+import { CartHook } from "../cart/cartHook";
 
 /**
  * @yuxincxoi 24.08.07
@@ -67,7 +68,7 @@ export const UserpageHook = () => {
     const purchaseData = await salesHistoryFetch(
       userEmail,
       products,
-      12000,
+      totalPrice,
       today,
     );
 
@@ -139,6 +140,8 @@ export const UserpageHook = () => {
     }
     return products;
   };
+
+  const { totalPrice } = CartHook(cartItems, onCount);
 
   const handleRemoveItem = (menu: string) => {
     try {
