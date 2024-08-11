@@ -22,6 +22,7 @@ export const ExpirationDateHook = () => {
   const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
   const LOG = process.env.NEXT_PUBLIC_LOG as string;
   const LOG_DELSTOCK = process.env.NEXT_PUBLIC_LOG_DELSTOCK as string;
+  const LOG_ADDMENU = process.env.NEXT_PUBLIC_LOG_ADDMENU as string;
 
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -53,7 +54,6 @@ export const ExpirationDateHook = () => {
     fetchData();
   }, []);
   const deleteProduct = async (_id: string) => {
-    console.log(_id);
     try {
       await fetcher(serverUrlGenerator(LOG, LOG_DELSTOCK), "post", {
         headers: {
@@ -88,10 +88,20 @@ export const ExpirationDateHook = () => {
       if (!response.ok) {
         throw new Error("POST 요청 오류");
       }
-      console.log("오나유!");
       await fetchData(); // 제품 추가 후 데이터 갱신
     } catch (err) {
       setError("데이터를 추가하는 데 실패했습니다.");
+    }
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_ADDMENU), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("메뉴 추가중 에러 발생", error);
     }
   };
   return { data, loading, error, deleteProduct, addProduct };
