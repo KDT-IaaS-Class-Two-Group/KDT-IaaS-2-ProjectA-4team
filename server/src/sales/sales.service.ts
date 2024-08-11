@@ -12,7 +12,7 @@ export class SaleService {
   constructor(
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
-  ) {}
+  ) { }
 
   async findAll(): Promise<ISale[]> {
     return this.saleModel.find().populate('memberID').exec();
@@ -22,8 +22,8 @@ export class SaleService {
     return this.saleModel.findById(id).populate('memberID').exec();
   }
 
-  async findByMemberName(name: string): Promise<ISale[]> {
-    const member = await this.memberModel.findOne({ name }).exec();
+  async findByMemberName(email: string): Promise<ISale[]> {
+    const member = await this.memberModel.findOne({ email }).exec();
     if (!member) {
       throw new Error('Member not found');
     }

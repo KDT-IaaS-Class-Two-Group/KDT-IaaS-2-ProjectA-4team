@@ -45,14 +45,17 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<void> {
     try {
-      const result = await this.authService.validateUser(data.email);
-      if (!result) {
+      const user = await this.authService.validateUser(
+        data.email,
+        data.password,
+      );
+      if (!user) {
+        // 사용자가 존재하지 않으면 에러 반환
         res
           .status(HttpStatus.UNAUTHORIZED)
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-      const { user } = result;
       const { roleID, name, email } = user;
 
       const { token, cookieOptions } = await this.authService.generateToken(

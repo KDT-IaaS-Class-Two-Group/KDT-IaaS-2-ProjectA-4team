@@ -14,16 +14,12 @@ export class AuthService {
     private readonly tokenUtils: TokenUtils,
   ) {}
 
-  async validateUser(email: string): Promise<{ user: IMember } | null> {
+  async validateUser(email: string, password: string): Promise<IMember | null> {
     const user = await this.memberModel.findOne({ email }).exec();
-
-    if (!user) {
-      return null;
+    if (user && user.password === password) {
+      return user;
     }
-
-    return {
-      user,
-    };
+    return null;
   }
 
   async createUser(createUserDto: {
