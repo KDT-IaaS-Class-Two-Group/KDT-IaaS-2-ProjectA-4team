@@ -11,7 +11,7 @@ export class UserLogService {
 
   // 로그 생성
   async createLog(
-    memberID: Promise<Types.ObjectId>,
+    memberID: Types.ObjectId,
     actionType: string,
     details?: Record<string, any>,
   ): Promise<UserLog> {
