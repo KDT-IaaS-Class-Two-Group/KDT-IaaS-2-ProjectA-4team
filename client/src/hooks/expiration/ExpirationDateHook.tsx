@@ -19,17 +19,24 @@ import {
 
 export const ExpirationDateHook = () => {
   const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
+  const LOG = process.env.NEXT_PUBLIC_LOG as string;
+  const LOG_DELSTOCK = process.env.NEXT_PUBLIC_LOG_DELSTOCK as string;
 
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
 
   const fetchData = async () => {
     setLoading(true);
-
     try {
-      const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE));
+      const response = await fetcher(
+        serverUrlGenerator(EP_PRODUCTS_DATE),
+        "get",
+        {
+          credentials: "include",
+        },
+      );
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -45,10 +52,23 @@ export const ExpirationDateHook = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const deleteProduct = async (_id: string) => {
+    console.log(_id);
     try {
-      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete");
+      await fetcher(serverUrlGenerator(LOG, LOG_DELSTOCK), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("재고삭제 중 에러 발생:", error);
+    }
+    try {
+      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete", {
+        credentials: "include",
+      });
       fetchData();
     } catch (err) {
       setError(`${deleteDataErrMessage}`);
@@ -63,6 +83,7 @@ export const ExpirationDateHook = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(product),
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error("POST 요청 오류");
