@@ -13,6 +13,7 @@ import { CheckCircle } from "lucide-react";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import Member from "src/interfaces/components/table/member/MemberInfoTable.interface";
+import useSearch from "src/hooks/useSearchHook";
 
 /**
  * @eonduck2 24.08.02
@@ -32,6 +33,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
   const { caption, head, data } = props;
 
   const [members, setMembers] = useState<Member[]>(data as Member[]);
+  const [searchQuery, handleSearch] = useSearch();
 
   const handleRoleToggle = async (id: string, currentRole: number) => {
     const newRole = currentRole === 0 ? 1 : 0;
@@ -67,7 +69,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       throw error;
     }
   };
-
+  
   const headers = useMemo(() => {
     return head.map((item, key) => (
       <TableHead className="font-bold text-base bg-gray-100" key={key}>
