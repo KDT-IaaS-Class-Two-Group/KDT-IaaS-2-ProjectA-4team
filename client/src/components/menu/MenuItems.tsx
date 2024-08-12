@@ -2,7 +2,6 @@ import React from "react";
 import CardComponent from "src/components/card/Card";
 import { MenuItemHook } from "src/hooks/menu/menuItemHook";
 import IProduct from "../../../../db/products/product.interface";
-
 interface MenuItemsProps {
   selectCategory: string;
   onAddToCart: (title: string, price: number, id: string) => void;

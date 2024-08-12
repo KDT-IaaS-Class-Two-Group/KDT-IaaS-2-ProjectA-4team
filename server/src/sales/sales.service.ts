@@ -6,11 +6,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Sale } from '../schemas/sale.schema';
 import { Member } from '../schemas/member.schema';
+import { Product } from '../schemas/product.schema';
+import IProduct from '@db/products/product.interface';
 
 @Injectable()
 export class SaleService {
   constructor(
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
+    @InjectModel(Product.name) private readonly productModel: Model<IProduct>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
   ) {}
 
@@ -34,20 +37,46 @@ export class SaleService {
   }
 
   async saleHistory(
-    memberID: string,
-    productID: string,
-    quantity: number,
+    email: string,
+    products: Array<{ productName: string; quantity: number }>,
     totalPrice: number,
     saleDate: string,
   ) {
+    const member = await this.memberModel.findOne({ email }).exec();
+    if (!member) {
+      throw new Error('Member not found');
+    }
+
+    const productSales = await Promise.all(
+      products.map(async (product) => {
+        const productDoc = await this.productModel
+          .findOne({ name: product.productName })
+          .exec();
+        if (!productDoc) {
+          throw new Error(`Product not found: ${product.productName}`);
+        }
+        return {
+          productID: productDoc._id,
+          quantity: product.quantity,
+        };
+      }),
+    );
+
     const newSale = new this.saleModel({
-      memberID,
-      productID,
-      quantity,
+      memberID: member._id,
+      products: productSales,
       totalPrice,
       saleDate,
     });
 
-    return await newSale.save();
+    const savedSale = await newSale.save();
+
+    return this.saleModel
+      .findById(savedSale._id)
+      .populate({
+        path: 'products.productID',
+        select: 'name category price',
+      })
+      .exec();
   }
 }
