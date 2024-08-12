@@ -6,6 +6,8 @@ import { ProductDTO } from "@shared/DTO/products/product.dto";
 import OrderModal from "src/components/modal/order/OrderModal";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import DynamicTable from "../DynamicTable";
+import useSearch from "src/hooks/useSearchHook";
+import SearchForm from "src/components/form/search/SearchForm";
 
 /**
  * @moonhr 24.07.31
@@ -18,6 +20,7 @@ const ProductTable: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductDTO | null>(
     null,
   );
+  const [searchQuery, handleSearch] = useSearch();
 
   const openUpdateModal = (product: ProductDTO) => {
     setSelectedProduct(product);
@@ -66,10 +69,14 @@ const ProductTable: React.FC = () => {
     };
     return new ProductDTO(formattedItem);
   });
+  const filteredData = processedData.filter((item) =>
+    item.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
   return (
     <>
+      <SearchForm onSearch={handleSearch} />
       <DynamicTable<ProductDTO>
-        data={processedData}
+        data={filteredData}
         renderActions={(row) => (
           <>
             <ButtonComponent
