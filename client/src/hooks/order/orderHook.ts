@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
 import TOrder from "src/types/order/Order.type";
+import { getOrderListErrMessage } from "static/hooks/order/orderHook.static";
 
 /**
  * @crystal23733 24.08.01
@@ -17,8 +18,10 @@ const useOrderHook = (name: string) => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
+      if (!name) return;
       try {
         const orders: TOrder[] = await orderFetch(name);
+        console.log(orders);
         const transformedOrders = orders.map((order) => {
           const orderDate = new Date(order.saleDate);
           const orderDateFormat = orderDate.toISOString().split("T")[0];
@@ -27,7 +30,7 @@ const useOrderHook = (name: string) => {
         setError(null);
         setOrderDetails(transformedOrders);
       } catch (error) {
-        setError("주문내역을 가지고오는 중 에러가 발생하였습니다.");
+        setError(getOrderListErrMessage);
       } finally {
         setLoading(false);
       }

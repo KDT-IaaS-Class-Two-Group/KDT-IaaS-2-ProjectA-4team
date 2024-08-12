@@ -36,7 +36,10 @@ export class AuthController {
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
     // 사용자 검증 및 로그인 처리
     try {
-      const user = await this.authService.validateUser(data.email);
+      const user = await this.authService.validateUser(
+        data.email,
+        data.password,
+      );
       if (!user) {
         // 사용자가 존재하지 않으면 에러 반환
         res
@@ -44,22 +47,23 @@ export class AuthController {
           .json({ success: false, message: 'Invalid credentials' });
         return;
       }
-
-      const roleID = user.roleID;
+      const { roleID, name, email } = user;
 
       const { token, cookieOptions } = await this.authService.generateToken(
-        user.email,
+        name,
         roleID,
+        email,
       );
 
       res.cookie('token', token, cookieOptions);
-      res.status(HttpStatus.OK).json({ success: true, token });
+      res.status(HttpStatus.OK).json({ success: true, roleID });
     } catch (error) {
       res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ success: false, message: 'Invalid credentials' });
     }
   }
+
   @Get('user-info')
   async getUserInfo(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['token'];
@@ -72,6 +76,7 @@ export class AuthController {
     try {
       const decoded = this.authService.verifyToken(token);
       const user = await this.authService.getUserInfo(decoded.email);
+      console.log(user);
       if (!user) {
         res
           .status(HttpStatus.UNAUTHORIZED)
@@ -87,34 +92,57 @@ export class AuthController {
   }
 
   @Post('changePassword')
-  async changePassword(
-    @Req() req: Request,
-    @Body('password') oldPassword: string,
-    @Body('changePassword') newPassword: string,
-    @Res() res: Response,
-  ): Promise<any> {
-    const token = req.cookies['token'];
-    if (!token) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json({ message: '인증되지 않았습니다.' });
-      return;
+async changePassword(
+  @Req() req: Request,
+  @Body('password') oldPassword: string,
+  @Body('changePassword') newPassword: string,
+  @Res() res: Response,
+): Promise<any> {
+  const token = req.cookies['token'];
+  if (!token) {
+    return res
+      .status(HttpStatus.UNAUTHORIZED)
+      .json({ message: '인증되지 않았습니다.' });
+  }
+  try {
+    const decoded = this.authService.verifyToken(token);
+    const userName = decoded.name;
+    await this.authService.changePassword(userName, oldPassword, newPassword);
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
+  } catch (error) {
+    console.error('Error in changePassword:', error);
+    if (error instanceof Error) {
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: "기존 비밀번호가 일치하지 않습니다." });
     }
-    try {
-      const decoded = this.authService.verifyToken(token);
-      const userEmail = decoded.email;
-      await this.authService.changePassword(
-        userEmail,
-        oldPassword,
-        newPassword,
-      );
-      res
-        .status(HttpStatus.OK)
-        .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
-    } catch (error) {
-      if (error instanceof Error) {
-        res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
-      }
-    }
+    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: '서버 오류가 발생했습니다.' });
+  }
+}
+
+  @Get('login-info')
+  async getLoginInfo(@Req() request: Request, @Res() res: Response) {
+    const userName = await this.authService.findUserNameToToken(request);
+    res.status(HttpStatus.OK).json(userName);
+  }
+
+  @Get('getUserEmail')
+  async getUserEmail(@Req() request: Request, @Res() res: Response) {
+    const userEmail = await this.authService.findUserEmailToToken(request);
+    res.status(HttpStatus.OK).json(userEmail);
+  }
+
+  @Post('logout')
+  async logout(@Res() res: Response) {
+    // 쿠키를 만료시키고 응답
+    res.cookie('token', '', {
+      expires: new Date(0),
+      httpOnly: true,
+      path: '/',
+    });
+    res.status(200).send('Logged out');
+  }
+  catch(err) {
+    err;
   }
 }

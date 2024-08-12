@@ -5,7 +5,8 @@ import Image from "next/image";
 interface CardComponentProps {
   title: string;
   content: number;
-  onAddToCart: (title: string, price: number) => void;
+  id: string;
+  onAddToCart: (title: string, price: number, id: string) => void;
 }
 
 /**
@@ -20,17 +21,19 @@ interface CardComponentProps {
 const CardComponent: FC<CardComponentProps> = ({
   title,
   content,
+  id,
   onAddToCart,
 }) => {
+  const BURGER_URL = process.env.NEXT_PUBLIC_S3_BURGER_URL as string;
   return (
-    <div onClick={() => onAddToCart(title, content)}>
+    <div onClick={() => onAddToCart(title, content, id)}>
       <Card className="h-56 rounded-xl hover:cursor-pointer">
         <Image
           id="burgerImage"
           width={200}
           height={150}
           className="mx-auto mt-2"
-          src="/burger.jpeg"
+          src={BURGER_URL}
           alt="burgerImage"
         />
         <div className="my-2">

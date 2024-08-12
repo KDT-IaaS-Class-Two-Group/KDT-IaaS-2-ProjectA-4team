@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { MembersService } from './members.service';
 import IMember from '@db/members/member.interface';
-
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+@UseGuards(JwtAuthGuard)
 @Controller('api/members')
 export class MembersController {
   constructor(private readonly membersService: MembersService) {}

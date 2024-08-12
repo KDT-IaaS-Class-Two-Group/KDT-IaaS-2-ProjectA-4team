@@ -1,5 +1,6 @@
+import fetcher from "src/modules/fetching/fetcher";
 import { ProductDTO } from "../../../../../shared/DTO/products/product.dto";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 /**
  * @moonhr 24.07.28
@@ -7,13 +8,11 @@ import url3001Generator from "src/modules/generator/url3001Generator";
  */
 export const productFetchTableData = async (): Promise<ProductDTO[]> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
-  const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
 
-  const response = await fetch(url3001Generator(EP_PRODUCT));
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return response.json();
+  const response = await fetcher(serverUrlGenerator(EP_PRODUCT), "get", {
+    credentials: "include",
+  });
+  return await response.json();
 };
 
 /**
@@ -27,17 +26,33 @@ export const saveProductData = async (
 ): Promise<ProductDTO> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
   const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
-  const response = await fetch(url3001Generator(EP_PRODUCT, EP_ORDER), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(product),
-  });
+  const LOG = process.env.NEXT_PUBLIC_LOG as string;
+  const LOG_ADDSTOCK = process.env.NEXT_PUBLIC_LOG_ADDSTOCK as string;
 
-  if (!response.ok) {
-    throw new Error("데이터저장 실패!");
+  const response = await fetcher(
+    serverUrlGenerator(EP_PRODUCT, EP_ORDER),
+    "post",
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+      credentials: "include",
+    },
+  );
+
+  try {
+    await fetcher(serverUrlGenerator(LOG, LOG_ADDSTOCK), "post", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+      credentials: "include",
+    });
+  } catch (error) {
+    console.log("재고추가 중 에러 발생:", error);
   }
+
   const savedProduct = await response.json();
   return new ProductDTO(savedProduct);
 };

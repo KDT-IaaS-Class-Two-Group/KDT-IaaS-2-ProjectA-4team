@@ -2,25 +2,25 @@ import ISale from "../../../db/sale/Sale.interface";
 import { SaleProductDTO } from "./saleProduct.dto";
 
 export class SaleDTO implements ISale {
-  public saleID: number;
+  public _id: string; // ObjectId를 문자열로 처리
   public memberID: string;
-  public products: SaleProductDTO; // 단일 객체로 변경
-  public saleDate: Date;
+  public products: SaleProductDTO[]; 
+  public saleDate: string; // Date를 string으로 처리
   public totalPrice: number;
 
   constructor(sale: ISale) {
-    this.saleID = sale.saleID;
+    this._id = sale._id.toString(); // ObjectId를 문자열로 변환
     this.memberID = sale.memberID;
-    this.products = new SaleProductDTO(sale.products); // 단일 객체로 처리
+    this.products = sale.products.map((product: any) => new SaleProductDTO(product)); // 배열로 변환
     this.saleDate = sale.saleDate;
     this.totalPrice = sale.totalPrice;
   }
 
   public toJSON(): object {
     return {
-      saleID: this.saleID,
+      _id: this._id,
       memberID: this.memberID,
-      products: this.products.toJSON(),
+      products: this.products.map(product => product.toJSON()), // 배열로 변환
       saleDate: this.saleDate,
       totalPrice: this.totalPrice,
     };
@@ -28,7 +28,7 @@ export class SaleDTO implements ISale {
 
   public toObject(): object {
     return {
-      saleID: this.saleID,
+      _id: this._id,
       memberID: this.memberID,
       products: this.products,
       saleDate: this.saleDate,

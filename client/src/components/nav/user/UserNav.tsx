@@ -11,13 +11,10 @@ import FooterLinks from "../../footer/footerComponent";
 
 const UserNav = () => {
   return (
-    <div className="w-72 shadow-xl h-screen fixed top-0 right-0">
-      <LoginInfoComponent
-        className="w-72 ml-6 mt-6 mb-20"
-        email="rockcoders@kdt.com"
-      />
+    <div className="fixed top-0 right-0 h-screen shadow-xl w-72">
+      <LoginInfoComponent className="mt-6 mb-20 ml-6 w-72" />
       {/* <Cart /> */}
-      <FooterLinks className="w-72 mt-24 mx-6" />
+      <FooterLinks className="mx-6 mt-24 w-72" />
     </div>
   );
 };

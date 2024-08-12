@@ -1,35 +1,26 @@
-import url3001Generator from "src/modules/generator/url3001Generator";
+import fetcher from "src/modules/fetching/fetcher";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 export default async (
-  id: number,
-  memberID: number,
-  productID: number,
-  productName: string,
-  unitPrice: number,
-  quantity: number,
+  email: string,
+  products: Array<{ productID: string; quantity: number }>,
   totalPrice: number,
+  saleDate: string,
 ) => {
   const EP_SALE_HISTORY = process.env.NEXT_PUBLIC_EP_SALE_HISTORY as string;
 
-  const response = await fetch(url3001Generator(EP_SALE_HISTORY), {
-    method: "POST",
+  const response = await fetcher(serverUrlGenerator(EP_SALE_HISTORY), "post", {
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id,
-      memberID,
-      productID,
-      productName,
-      unitPrice,
-      quantity,
+      email,
+      products,
       totalPrice,
+      saleDate,
     }),
+    credentials: "include",
   });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
 
   const data = await response.json();
 

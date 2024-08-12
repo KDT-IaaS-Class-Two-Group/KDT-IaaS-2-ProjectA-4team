@@ -1,5 +1,6 @@
+import fetcher from "src/modules/fetching/fetcher";
 import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
-import url3001Generator from "src/modules/generator/url3001Generator";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 /**
  * @crystal23733 24.07.30
@@ -8,11 +9,10 @@ import url3001Generator from "src/modules/generator/url3001Generator";
 export default async (): Promise<SaleDTO[]> => {
   const EP_SALES = process.env.NEXT_PUBLIC_EP_SALES as string;
 
-  const response = await fetch(url3001Generator(EP_SALES));
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  const response = await fetcher(serverUrlGenerator(EP_SALES), "get", {
+    credentials: "include",
+  });
+
   const data = await response.json();
-  console.log(data); // 데이터를 확인합니다.
   return data;
 };

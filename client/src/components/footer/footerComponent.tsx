@@ -2,19 +2,54 @@
 import React from "react";
 import { useRouter } from "next/router";
 import useFooterInfoHook from "src/hooks/footer/info/useFooterInfoHook";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import FooterLinksProps from "src/interfaces/components/footer/FooterComponent.interface";
 
-interface FooterLinksProps {
-  className?: string;
+/**
+ * @moonhr 24.08.09
+ * * 서버에 로그아웃 요청을 보내고, 로그아웃 후 사용자를 리다이렉트합니다.
+ *
+ * @returns {Promise<void>}
+ * @throws {Error} 로그아웃 요청 중 발생한 에러를 던집니다.
+ */
+async function logout(): Promise<void> {
+  try {
+    const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
+    const LOG = process.env.NEXT_PUBLIC_LOG as string;
+    const LOG_LOGOUT = process.env.NEXT_PUBLIC_LOG_LOGOUT as string;
+    // 서버에 로그아웃 요청 보내기 (로그 기록)
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_LOGOUT), "post", {
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("로그아웃 로그 기록 중 에러 발생:", error);
+    }
+
+    // 실제 로그아웃 처리
+    await fetcher(serverUrlGenerator(LOGOUT), "post", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    // 로그아웃 후 리다이렉트
+    window.location.href = process.env.NEXT_PUBLIC_BASE_URL as string;
+  } catch (error) {
+    console.error("로그아웃 중 에러 발생:", error);
+    throw error;
+  }
 }
 
 /**
  * @crystal23733 24.07.29
- * @returns {JSXElement} - 네비게이션 바 footer컴포넌트
+ * @returns {JSX.Element} - 네비게이션 바 footer컴포넌트
  */
 const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
   const router = useRouter();
   const { userName, loading } = useFooterInfoHook();
-  console.log(userName);
   const handleNavigation = (path: string) => {
     router.push(path);
   };
@@ -33,10 +68,7 @@ const FooterLinks: React.FC<FooterLinksProps> = ({ className }) => {
       >
         마이페이지
       </p>
-      <p
-        onClick={() => handleNavigation("/logout")}
-        className="cursor-pointer hover:text-black"
-      >
+      <p onClick={logout} className="cursor-pointer hover:text-black">
         로그아웃
       </p>
     </div>

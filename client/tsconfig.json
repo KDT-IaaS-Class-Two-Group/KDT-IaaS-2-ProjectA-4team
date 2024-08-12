@@ -17,10 +17,11 @@
       }
     ],
     "strictNullChecks": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "lib/*": ["lib/*"],
-      "@shared/*": ["../shared/*"]
+      "@lib/*": ["lib/*"],
+      "@shared/*": ["../shared/*"],
+      "@components/ui/*": ["components/ui/*"]
     }
   },
   "include": [
@@ -32,7 +33,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../static/client/**/*.ts",
-    "static/sign-up/SignUpInputs.ts"
+    "../static/client/**/*.ts"
   ]
 }

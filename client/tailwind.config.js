@@ -26,6 +26,7 @@ const commonConfig = {
         "15vw": "15vw",
         "20vw": "20vw",
         "80vw": "80vw",
+        "62%": "62%",
       },
       height: {
         "80vh": "80vh",

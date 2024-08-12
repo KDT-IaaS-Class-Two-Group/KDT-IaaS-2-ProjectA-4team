@@ -3,17 +3,23 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
+import { TokenUtils } from '../utils/token.utils';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
     private readonly jwtService: JwtService,
+    private readonly tokenUtils: TokenUtils,
   ) {}
 
-  async validateUser(email: string): Promise<IMember | null> {
+  async validateUser(email: string, password: string): Promise<IMember | null> {
     const user = await this.memberModel.findOne({ email }).exec();
-    return user;
+    if (user && user.password === password) {
+      return user;
+    }
+    return null;
   }
 
   async createUser(createUserDto: {
@@ -35,15 +41,16 @@ export class AuthService {
 
   /**
    * @moonhr 24.08.02
-   * @param email
+   * @param name
    * @param roleId
    * @returns jwt토큰, 쿠키설정
    */
   async generateToken(
-    email: string,
+    name: string,
     roleID: number,
+    email: string,
   ): Promise<{ token: string; cookieOptions: any }> {
-    const payload = { email, roleID };
+    const payload = { name: name, roleID, email };
     const token = this.jwtService.sign(payload);
 
     const cookieOptions = {
@@ -51,6 +58,7 @@ export class AuthService {
       secure: process.env.NODE_ENV === 'production' || false,
       maxAge: 3600000,
     };
+
     console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
@@ -91,5 +99,36 @@ export class AuthService {
     member.password = newPassword;
     await member.save();
     return { message: '비밀번호가 성공적으로 변경되었습니다.' };
+  }
+
+  /**
+   * @moonhr 24.08.08
+   * * 토큰에서 사용자의 이름을 찾아 리턴한다.
+   * @param cookie
+   * @returns username
+   */
+  async findUserNameToToken(request: Request): Promise<string | null> {
+    try {
+      const token = request.cookies['token'];
+      return await this.tokenUtils.findNameByToken(token, this.memberModel);
+    } catch (error) {
+      console.error('Token decoding failed:', error);
+      return null;
+    }
+  }
+
+  async findUserEmailToToken(request: Request): Promise<string | null> {
+    try {
+      const token = request.cookies['token'];
+      if (!token) {
+        return null;
+      }
+
+      const decoded = this.jwtService.verify(token);
+      return decoded.email;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 }

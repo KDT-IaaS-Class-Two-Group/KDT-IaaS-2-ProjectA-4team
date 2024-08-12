@@ -1,4 +1,5 @@
-import url3001Generator from "src/modules/generator/url3001Generator";
+import fetcher from "src/modules/fetching/fetcher";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 /**
  * @crystal23733 24.08.01
@@ -8,26 +9,35 @@ import url3001Generator from "src/modules/generator/url3001Generator";
  * @returns responseData 응답 값
  */
 export default async (password: string, changePassword: string) => {
-  const EP_CHANGE_PASSWORD = process.env
-    .NEXT_PUBLIC_EP_CHANGE_PASSWORD as string;
+  const EP_CHANGE_PASSWORD = process.env.NEXT_PUBLIC_EP_CHANGE_PASSWORD as string;
 
-  const name = ""; // MongoDB에 있는 유저의 name 값을 사용합니다.
   try {
-    const response = await fetch(url3001Generator(EP_CHANGE_PASSWORD), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetcher(
+      serverUrlGenerator(EP_CHANGE_PASSWORD),
+      "post",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password, changePassword }),
+        credentials: "include",
       },
-      body: JSON.stringify({ name, password, changePassword }),
-      credentials: "include",
-    });
+    );
+
     const responseData = await response.json();
-    if (!response.ok) {
-      throw new Error(responseData.message || "비밀번호 변경요청 실패");
-    }
     console.log(responseData);
+    
+    if (!response.ok) {
+      console.log(responseData);
+      throw new Error(responseData.message || '비밀번호 변경 중 오류가 발생했습니다.');
+    }
+
     return responseData;
   } catch (error) {
-    throw error;
+    console.error('Error in changePasswordFetch:', error);
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('알 수 없는 오류가 발생했습니다.');
   }
 };

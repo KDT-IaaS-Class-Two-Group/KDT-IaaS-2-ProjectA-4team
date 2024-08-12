@@ -3,11 +3,9 @@ import { useRouter } from "next/router";
 import InputComponent from "../../input/Input";
 import CustomButton from "../../button/customized/CustomButton";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import url3001Generator from "src/modules/generator/url3001Generator";
-
-interface RoldJwtPayload extends JwtPayload {
-  roleID?: number;
-}
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import routeUrlGenerator from "src/modules/generator/routeUrlGenerator";
 
 /**
  * @moonhr 24.07.25
@@ -26,10 +24,14 @@ export const LoginForm = () => {
       event.preventDefault();
 
       const EP_LOGIN = process.env.NEXT_PUBLIC_EP_LOGIN as string;
+      const EP_ADMIN = process.env.NEXT_PUBLIC_EP_ADMIN as string;
+      const EP_STOCK_INFO = process.env.NEXT_PUBLIC_EP_STOCK_INFO as string;
+      const EP_U_PAGE = process.env.NEXT_PUBLIC_EP_U_PAGE as string;
+      const LOG = process.env.NEXT_PUBLIC_LOG as string;
+      const LOG_LOGIN = process.env.NEXT_PUBLIC_LOG_LOGIN as string;
 
       try {
-        const response = await fetch(url3001Generator(EP_LOGIN), {
-          method: "POST",
+        const response = await fetcher(serverUrlGenerator(EP_LOGIN), "post", {
           headers: {
             "Content-Type": "application/json",
           },
@@ -41,23 +43,23 @@ export const LoginForm = () => {
           throw new Error("Network response was not ok.");
         }
 
-        const result = await response.json();
-        const token = result.token;
-        console.log("서버 응답:", result);
-
-        const decodedToken = jwtDecode<RoldJwtPayload>(token);
-        console.log(decodedToken);
-        const roleId = decodedToken.roleID;
-        console.log(decodedToken.roleID);
+        const data = await response.json();
 
         // roleId에 따라 라우팅
-        if (roleId === 0) {
-          router.push("/UserPage");
-        } else if (roleId === 1) {
-          router.push("/admin");
+        if (data.roleID === 0) {
+          router.push(routeUrlGenerator(EP_U_PAGE));
+        } else if (data.roleID === 1) {
+          router.push(routeUrlGenerator(EP_ADMIN, EP_STOCK_INFO));
+        }
+        try {
+          await fetcher(serverUrlGenerator(LOG, LOG_LOGIN), "post", {
+            credentials: "include",
+          });
+        } catch (error) {
+          error;
         }
       } catch (error) {
-        console.error("서버로 데이터 전송 실패:", error);
+        throw error;
       }
     }
   };

@@ -7,9 +7,11 @@ import {
   TableRow,
   TableCell,
 } from "@../../components/ui/table";
-import ButtonComponent from "../../button/customized/CustomButton";
+import ButtonComponent from "src/components/button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
+import useSearch from "src/hooks/useSearchHook";
+import SearchForm from "src/components/form/search/SearchForm";
 
 /**
  * @jojayeon 24.08.07
@@ -22,6 +24,7 @@ export const ExpirationDataTable: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
+  const [searchQuery, handleSearch] = useSearch();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -41,6 +44,10 @@ export const ExpirationDataTable: React.FC = () => {
 
     return a.productName.localeCompare(b.productName);
   });
+
+  const filteredProducts = sortedProducts.filter((product) =>
+    product.productName.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   // 도달창 띄우고 취소 확인
   //확인
@@ -65,6 +72,7 @@ export const ExpirationDataTable: React.FC = () => {
 
   return (
     <>
+      <SearchForm onSearch={handleSearch} />
       <Table>
         <TableHeader>
           <TableRow>
@@ -76,7 +84,7 @@ export const ExpirationDataTable: React.FC = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedProducts.map((product) => (
+          {filteredProducts.map((product) => (
             <TableRow key={product._id}>
               <TableCell>{product.productCategory}</TableCell>
               <TableCell>{product.productName}</TableCell>
@@ -102,6 +110,8 @@ export const ExpirationDataTable: React.FC = () => {
         open={open}
         onClose={closeModal}
         onConfirm={handleDelete}
+        title="폐기 확인"
+        content="제품을 폐기하시겠습니까?"
       />
     </>
   );

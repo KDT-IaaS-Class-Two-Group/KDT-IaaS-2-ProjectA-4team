@@ -1,14 +1,12 @@
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import React from "react";
+import LogoProps from "src/interfaces/components/logo/Logo.interface";
 
 /**
  * @crystal23733 24.08.02
  *
  * @interface LogoProps
  */
-interface LogoProps extends Omit<ImageProps, "src"> {
-  // 'src'를 제외한 나머지 ImageProps를 확장합니다.
-}
 
 /**
  * @crystal23733 24.08.02
@@ -16,7 +14,8 @@ interface LogoProps extends Omit<ImageProps, "src"> {
  * @returns {JSXElement} - 로고 컴포넌트
  */
 const Logo: React.FC<LogoProps> = ({ ...props }) => {
-  return <Image src="/clclLogo.png" {...props} alt="logo" />;
+  const clcl_logo = process.env.NEXT_PUBLIC_S3_CLCL_LOGO_URL as string;
+  return <Image src={clcl_logo} {...props} alt="logo" />;
 };
 
 export default Logo;

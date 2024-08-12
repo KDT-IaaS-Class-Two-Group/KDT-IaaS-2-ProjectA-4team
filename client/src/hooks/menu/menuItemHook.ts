@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import productFetchMenu from "src/model/product/menu/productFetchMenu";
+import { failedLoadingDataMessage } from "static/hooks/menu/menuItemHook.static";
+import IProduct from "../../../../db/products/product.interface";
 
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  unitPrice: number;
-  quantity: number;
-  restockDate: Date;
-  expirationDate: Date;
-}
-
+/**
+ * @yuxincxoi 24.08.05
+ * * `MenuItemHook` 훅은 메뉴 항목 목록을 가져와서 상태를 관리합니다.
+ *
+ * @returns {{
+ *   productList: Product[]  // 로드된 제품 목록 (Product 인터페이스를 따름)
+ * }}
+ *
+ * @throws {string} - 데이터 로딩 중 오류가 발생하면 에러 메시지를 문자열로 던집니다.
+ *
+ * @example
+ * const { productList } = MenuItemHook();
+ * console.log(productList); // 로드된 제품 목록을 출력
+ */
 export const MenuItemHook = () => {
-  const [productList, setProductList] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<IProduct[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -20,11 +26,11 @@ export const MenuItemHook = () => {
         const productData = await productFetchMenu();
         return setProductList(productData);
       } catch (error) {
-        console.error("데이터 로드 실패");
+        throw `${failedLoadingDataMessage}: ${error}`;
       }
     };
 
     loadData();
-  });
+  }, []);
   return { productList };
 };

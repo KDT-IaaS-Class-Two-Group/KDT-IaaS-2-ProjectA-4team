@@ -5,7 +5,7 @@ import { CartItemHook } from "src/hooks/cart/contents/cartItemHook";
 interface CartItemComponentProps {
   menu: string;
   unitPrice: number;
-  onPriceChange: (price: number) => void;
+  onPriceChange: (price: number, count: number, menu: string) => void;
   removedItem: (data: string) => void;
 }
 
@@ -28,7 +28,11 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   const { count, price, incrementCount, decrementCount, error } = CartItemHook(
     unitPrice,
     onPriceChange,
+    menu,
   );
+
+  const minus_sign = process.env.NEXT_PUBLIC_S3_MINUS_SIGN_URL as string;
+  const plus_sign = process.env.NEXT_PUBLIC_S3_PLUS_SIGN_URL as string;
 
   if (error) return <div>{error}</div>;
 
@@ -45,7 +49,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
             id="minusMenu"
             width={24}
             height={24}
-            src="/minus.png"
+            src={minus_sign}
             alt="minus"
           />
           <div id="count" className="mx-3 font-light text-s">
@@ -56,7 +60,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
             id="plusMenu"
             width={24}
             height={24}
-            src="/plus.png"
+            src={plus_sign}
             alt="plus"
           />
         </div>

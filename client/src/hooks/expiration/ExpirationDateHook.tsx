@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
+import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import fetcher from "src/modules/fetching/fetcher";
+import {
+  deleteDataErrMessage,
+  getDataErrMessage,
+} from "static/hooks/expiration/ExpirationDateHook.static";
 
 /**
  * @jojayeon 24.08.05
@@ -12,6 +18,12 @@ import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
  */
 
 export const ExpirationDateHook = () => {
+  const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
+  const LOG = process.env.NEXT_PUBLIC_LOG as string;
+  const LOG_DELSTOCK = process.env.NEXT_PUBLIC_LOG_DELSTOCK as string;
+  const LOG_ADDMENU = process.env.NEXT_PUBLIC_LOG_ADDMENU as string;
+
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,14 +31,18 @@ export const ExpirationDateHook = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/productsDate");
+      const response = await fetcher(
+        serverUrlGenerator(EP_PRODUCTS_DATE),
+        "get",
+        { credentials: "include" },
+      );
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError("데이터를 가져오는 데 실패했습니다.");
+      setError(`${getDataErrMessage}`);
     } finally {
       setLoading(false);
     }
@@ -35,17 +51,56 @@ export const ExpirationDateHook = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const deleteProduct = async (_id: string) => {
     try {
-      await fetch(`http://localhost:3001/productsDate/${_id}`, {
-        method: "DELETE",
+      await fetcher(serverUrlGenerator(LOG, LOG_DELSTOCK), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("재고삭제 중 에러 발생:", error);
+    }
+    try {
+      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete", {
+        credentials: "include",
       });
       fetchData();
     } catch (err) {
-      setError("데이터를 삭제하는 데 실패했습니다.");
+      setError(`${deleteDataErrMessage}`);
     }
   };
-
-  return { data, loading, error, deleteProduct };
+  const addProduct = async (product: ProductDTO) => {
+    const postUrl = serverUrlGenerator(EP_PRODUCTS, "orderproduct");
+    try {
+      const response = await fetch(postUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("POST 요청 오류");
+      }
+      await fetchData(); // 제품 추가 후 데이터 갱신
+    } catch (err) {
+      setError("데이터를 추가하는 데 실패했습니다.");
+    }
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_ADDMENU), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("메뉴 추가중 에러 발생", error);
+    }
+  };
+  return { data, loading, error, deleteProduct, addProduct };
 };

@@ -1,8 +1,26 @@
 import { useState } from "react";
+import { failedMessages } from "static/hooks/cart/contents/cartItemHook.static";
+
+/**
+ * @yuxincxoi 24.08.02
+ * * `CartItemHook` 훅은 장바구니 아이템의 수량과 가격을 관리합니다.
+ *
+ * @param {number} unitPrice - 아이템의 단가
+ * @param {(price: number) => void} onPriceChange - 가격이 변경될 때 호출되는 콜백 함수
+ *
+ * @returns {{
+ *   count: number,                  // 현재 아이템의 수량
+ *   price: number,                  // 현재 아이템의 총 가격 (단가 × 수량)
+ *   incrementCount: () => void,     // 아이템 수량을 증가시키는 함수
+ *   decrementCount: () => void,     // 아이템 수량을 감소시키는 함수
+ *   error: string | null            // 오류 메시지 (오류가 없으면 null)
+ * }}
+ */
 
 export const CartItemHook = (
   unitPrice: number,
-  onPriceChange: (price: number) => void,
+  onPriceChange: (price: number, count: number, menu: string) => void,
+  menu: string,
 ) => {
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(unitPrice);
@@ -12,10 +30,9 @@ export const CartItemHook = (
     try {
       const newPrice = newCount * unitPrice;
       setPrice(newPrice);
-      onPriceChange(newPrice - price);
+      onPriceChange(newPrice - price, newCount, menu);
     } catch (error) {
-      console.error("Failed to update price: ", error);
-      setError("가격 업데이트에 실패했습니다.");
+      setError(failedMessages.failedUpdatePriceMessage);
     }
   };
 
@@ -25,8 +42,7 @@ export const CartItemHook = (
       setCount(newCount);
       updatePrice(newCount);
     } catch (error) {
-      console.error("Failed to increment count: ", error);
-      setError("개수가 증가하지 않았습니다.");
+      setError(failedMessages.failedIncrementCountMessage);
     }
   };
 
@@ -38,8 +54,7 @@ export const CartItemHook = (
         updatePrice(newCount);
       }
     } catch (error) {
-      console.error("Failed to decrement count: ", error);
-      setError("개수가 감소하지 않았습니다.");
+      setError(failedMessages.failedDecrementCountMessage);
     }
   };
 
