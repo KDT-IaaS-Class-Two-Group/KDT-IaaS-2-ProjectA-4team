@@ -14,6 +14,7 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import Member from "src/interfaces/components/table/member/MemberInfoTable.interface";
 import useSearch from "src/hooks/useSearchHook";
+import SearchForm from "src/components/form/search/SearchForm";
 
 /**
  * @eonduck2 24.08.02
@@ -33,7 +34,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
   const { caption, head, data } = props;
 
   const [members, setMembers] = useState<Member[]>(data as Member[]);
-  const [searchQuery, handleSearch] = useSearch();
+  const [searchQuery, handleSearch] = useSearch(); // 검색 상태 및 핸들러 추가
 
   const handleRoleToggle = async (id: string, currentRole: number) => {
     const newRole = currentRole === 0 ? 1 : 0;
@@ -69,42 +70,48 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       throw error;
     }
   };
-  
-  const headers = useMemo(() => {
-    return head.map((item, key) => (
-      <TableHead className="font-bold text-base bg-gray-100" key={key}>
-        {item}
-      </TableHead>
-    ));
-  }, [head]);
 
-  const rows = useMemo(() => {
-    return members.map((row, rowKey) => (
-      <TableRow key={rowKey}>
-        {Object.entries(row).map(([key, value], cellKey) => {
-          if (key === "role") {
-            return null;
-          }
-          return <TableCell key={cellKey}>{value}</TableCell>;
-        })}
-        <TableCell className="w-32 flex justify-center">
-          <CheckCircle
-            className={`${row.role === "1" ? "text-green-400" : "text-gray-400"} cursor-pointer`}
-            onClick={() => handleRoleToggle(row.id, Number(row.role))}
-          />
-        </TableCell>
-      </TableRow>
-    ));
-  }, [members]);
+  // 필터링된 회원 목록을 생성
+  const filteredMembers = members.filter((member) =>
+    member.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <Table>
-      <TableCaption>{caption}</TableCaption>
-      <TableHeader>
-        <TableRow>{headers}</TableRow>
-      </TableHeader>
-      <TableBody>{rows}</TableBody>
-    </Table>
+    <>
+      <SearchForm onSearch={handleSearch} /> {/* 검색 폼 추가 */}
+      <Table>
+        <TableCaption>{caption}</TableCaption>
+        <TableHeader>
+          <TableRow>
+            {head.map((item, key) => (
+              <TableHead className="font-bold text-base bg-gray-100" key={key}>
+                {item}
+              </TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {filteredMembers.map((row, rowKey) => (
+            <TableRow key={rowKey}>
+              {Object.entries(row).map(([key, value], cellKey) => {
+                if (key === "role") {
+                  return null;
+                }
+                return <TableCell key={cellKey}>{value}</TableCell>;
+              })}
+              <TableCell className="w-32 flex justify-center">
+                <CheckCircle
+                  className={`${
+                    row.role === "1" ? "text-green-400" : "text-gray-400"
+                  } cursor-pointer`}
+                  onClick={() => handleRoleToggle(row.id, Number(row.role))}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 
