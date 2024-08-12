@@ -58,8 +58,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
         expirationDate: expirationDateISO,
       });
       try {
-        await onAddProduct(newProduct); // 제품 추가
-        await refetch(); // 수정된 부분: 데이터 갱신
+        await onAddProduct(newProduct);
         onClose(); // 모달 닫기
       } catch (error) {
         console.error("제품 추가 실패:", error);
