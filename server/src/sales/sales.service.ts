@@ -12,7 +12,7 @@ export class SaleService {
   constructor(
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
-  ) { }
+  ) {}
 
   async findAll(): Promise<ISale[]> {
     return this.saleModel.find().populate('memberID').exec();
@@ -34,16 +34,16 @@ export class SaleService {
   }
 
   async saleHistory(
-    memberID: string,
-    productID: string,
-    quantity: number,
+    email: string,
+    products: Array<{ productName: string; quantity: number }>,
     totalPrice: number,
     saleDate: string,
   ) {
+    //TODO 이메일로 멤버id 찾아오기
+    //TODO 제품 이름으로 id 찾아오기??
     const newSale = new this.saleModel({
-      memberID,
-      productID,
-      quantity,
+      // memberID,
+      products,
       totalPrice,
       saleDate,
     });

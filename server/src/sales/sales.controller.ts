@@ -26,22 +26,15 @@ export class SaleController {
   async buyProduct(
     @Body()
     body: {
-      memberID: string;
-      productID: string;
-      quantity: number;
+      email: string;
+      products: Array<{ productID: string; quantity: number }>;
       totalPrice: number;
       saleDate: string;
     },
   ) {
     try {
-      const { memberID, productID, quantity, totalPrice, saleDate } = body;
-      await this.saleService.saleHistory(
-        memberID,
-        productID,
-        quantity,
-        totalPrice,
-        saleDate,
-      );
+      const { email, products, totalPrice, saleDate } = body;
+      await this.saleService.saleHistory(email, products, totalPrice, saleDate);
 
       return { message: 'Sale recorded successfully' };
     } catch (error) {

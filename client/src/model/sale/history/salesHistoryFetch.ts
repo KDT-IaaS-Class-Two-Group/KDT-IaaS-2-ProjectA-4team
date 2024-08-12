@@ -2,7 +2,7 @@ import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 export default async (
-  memberID: string,
+  email: string,
   products: Array<{ productID: string; quantity: number }>,
   totalPrice: number,
   saleDate: string,
@@ -14,7 +14,7 @@ export default async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      memberID,
+      email,
       products,
       totalPrice,
       saleDate,
