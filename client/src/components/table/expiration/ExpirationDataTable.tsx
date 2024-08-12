@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -17,11 +17,15 @@ import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
  */
 
 export const ExpirationDataTable: React.FC = () => {
-  const { data, loading, error, deleteProduct } = ExpirationDateHook();
+  const { data, loading, error, deleteProduct, refetch } = ExpirationDateHook();
   const [open, setOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
+
+  useEffect(() => {
+    refetch(); // 컴포넌트 마운트 시 데이터 가져오기
+  }, [refetch]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -42,22 +46,19 @@ export const ExpirationDataTable: React.FC = () => {
     return a.productName.localeCompare(b.productName);
   });
 
-  // 도달창 띄우고 취소 확인
-  //확인
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (selectedProductId) {
-      deleteProduct(selectedProductId);
+      await deleteProduct(selectedProductId);
       setOpen(false);
+      refetch(); // 데이터 갱신
     }
   };
 
-  //폐기 버튼
   const openModal = (product: string) => {
     setSelectedProductId(product);
     setOpen(true);
   };
 
-  //취소 버튼
   const closeModal = () => {
     setOpen(false);
     setSelectedProductId(null);
@@ -97,7 +98,6 @@ export const ExpirationDataTable: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-      {/* 모달창 */}
       <ConfirmDeleteModal
         open={open}
         onClose={closeModal}
