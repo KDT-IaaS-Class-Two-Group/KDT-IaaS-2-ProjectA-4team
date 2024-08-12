@@ -6,4 +6,7 @@ export default {
   experimental: {
     externalDir: true,
   },
+  images: {
+    domains: [process.env.NEXT_PUBLIC_CLOUD_FRONT], // CloudFront 도메인 추가
+  },
 };

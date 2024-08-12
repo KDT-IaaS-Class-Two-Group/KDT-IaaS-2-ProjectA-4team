@@ -14,7 +14,8 @@ import LogoProps from "src/interfaces/components/logo/Logo.interface";
  * @returns {JSXElement} - 로고 컴포넌트
  */
 const Logo: React.FC<LogoProps> = ({ ...props }) => {
-  return <Image src="/clclLogo.png" {...props} alt="logo" />;
+  const clcl_logo = process.env.NEXT_PUBLIC_S3_CLCL_LOGO_URL as string;
+  return <Image src={clcl_logo} {...props} alt="logo" />;
 };
 
 export default Logo;
