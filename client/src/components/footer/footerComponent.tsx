@@ -16,7 +16,18 @@ import FooterLinksProps from "src/interfaces/components/footer/FooterComponent.i
 async function logout(): Promise<void> {
   try {
     const LOGOUT = process.env.NEXT_PUBLIC_LOGOUT as string;
-    // 서버에 로그아웃 요청 보내기
+    const LOG = process.env.NEXT_PUBLIC_LOG as string;
+    const LOG_LOGOUT = process.env.NEXT_PUBLIC_LOG_LOGOUT as string;
+    // 서버에 로그아웃 요청 보내기 (로그 기록)
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_LOGOUT), "post", {
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("로그아웃 로그 기록 중 에러 발생:", error);
+    }
+
+    // 실제 로그아웃 처리
     await fetcher(serverUrlGenerator(LOGOUT), "post", {
       headers: {
         "Content-Type": "application/json",
@@ -27,6 +38,7 @@ async function logout(): Promise<void> {
     // 로그아웃 후 리다이렉트
     window.location.href = process.env.NEXT_PUBLIC_BASE_URL as string;
   } catch (error) {
+    console.error("로그아웃 중 에러 발생:", error);
     throw error;
   }
 }

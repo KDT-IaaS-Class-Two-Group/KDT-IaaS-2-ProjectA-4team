@@ -4,12 +4,14 @@ import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { TokenUtils } from '../utils/token.utils';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
     private readonly jwtService: JwtService,
+    private readonly tokenUtils: TokenUtils,
   ) {}
 
   async validateUser(email: string, password: string): Promise<IMember | null> {
@@ -108,12 +110,7 @@ export class AuthService {
   async findUserNameToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];
-      if (!token) {
-        return null;
-      }
-
-      const decoded = this.jwtService.verify(token);
-      return decoded.name;
+      return await this.tokenUtils.findNameByToken(token, this.memberModel);
     } catch (error) {
       console.error('Token decoding failed:', error);
       return null;

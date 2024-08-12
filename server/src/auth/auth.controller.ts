@@ -63,6 +63,7 @@ export class AuthController {
         .json({ success: false, message: 'Invalid credentials' });
     }
   }
+
   @Get('user-info')
   async getUserInfo(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['token'];
@@ -132,8 +133,7 @@ export class AuthController {
   }
 
   @Post('logout')
-  logout(@Res() res: Response) {
-    console.log('로그아웃 요청');
+  async logout(@Res() res: Response) {
     // 쿠키를 만료시키고 응답
     res.cookie('token', '', {
       expires: new Date(0),
@@ -141,5 +141,8 @@ export class AuthController {
       path: '/',
     });
     res.status(200).send('Logged out');
+  }
+  catch(err) {
+    err;
   }
 }

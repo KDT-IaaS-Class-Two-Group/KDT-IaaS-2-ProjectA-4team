@@ -19,15 +19,17 @@ import {
 
 export const ExpirationDateHook = () => {
   const EP_PRODUCTS = process.env.NEXT_PUBLIC_EP_PRODUCTS as string;
+  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
+  const LOG = process.env.NEXT_PUBLIC_LOG as string;
+  const LOG_DELSTOCK = process.env.NEXT_PUBLIC_LOG_DELSTOCK as string;
+  const LOG_ADDMENU = process.env.NEXT_PUBLIC_LOG_ADDMENU as string;
 
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
 
   const fetchData = async () => {
     setLoading(true);
-
     try {
       const response = await fetcher(
         serverUrlGenerator(EP_PRODUCTS_DATE),
@@ -49,8 +51,18 @@ export const ExpirationDateHook = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const deleteProduct = async (_id: string) => {
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_DELSTOCK), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("재고삭제 중 에러 발생:", error);
+    }
     try {
       await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete", {
         credentials: "include",
@@ -74,10 +86,20 @@ export const ExpirationDateHook = () => {
       if (!response.ok) {
         throw new Error("POST 요청 오류");
       }
-      console.log("오나유!");
       await fetchData(); // 제품 추가 후 데이터 갱신
     } catch (err) {
       setError("데이터를 추가하는 데 실패했습니다.");
+    }
+    try {
+      await fetcher(serverUrlGenerator(LOG, LOG_ADDMENU), "post", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product }),
+        credentials: "include",
+      });
+    } catch (error) {
+      console.log("메뉴 추가중 에러 발생", error);
     }
   };
   return { data, loading, error, deleteProduct, addProduct };

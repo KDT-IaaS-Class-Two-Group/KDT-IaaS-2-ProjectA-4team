@@ -37,8 +37,6 @@ export class StockService {
       const { _id, ...productWithoutId } = product;
       const createdProduct = new this.productModel(productWithoutId);
       const savedProduct = await createdProduct.save();
-      console.log('저장중:', createdProduct);
-      console.log('저장됨:', savedProduct);
       return savedProduct;
     } catch (error) {
       console.error('Error details:', error);

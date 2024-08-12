@@ -26,6 +26,9 @@ export const saveProductData = async (
 ): Promise<ProductDTO> => {
   const EP_PRODUCT = process.env.NEXT_PUBLIC_EP_PRODUCT as string;
   const EP_ORDER = process.env.NEXT_PUBLIC_EP_ORDER as string;
+  const LOG = process.env.NEXT_PUBLIC_LOG as string;
+  const LOG_ADDSTOCK = process.env.NEXT_PUBLIC_LOG_ADDSTOCK as string;
+
   const response = await fetcher(
     serverUrlGenerator(EP_PRODUCT, EP_ORDER),
     "post",
@@ -37,6 +40,18 @@ export const saveProductData = async (
       credentials: "include",
     },
   );
+
+  try {
+    await fetcher(serverUrlGenerator(LOG, LOG_ADDSTOCK), "post", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+      credentials: "include",
+    });
+  } catch (error) {
+    console.log("재고추가 중 에러 발생:", error);
+  }
 
   const savedProduct = await response.json();
   return new ProductDTO(savedProduct);
