@@ -12,7 +12,7 @@ export class SaleService {
   constructor(
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
-  ) { }
+  ) {}
 
   async findAll(): Promise<ISale[]> {
     return this.saleModel.find().populate('memberID').exec();
