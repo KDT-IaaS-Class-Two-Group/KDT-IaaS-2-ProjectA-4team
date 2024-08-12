@@ -6,11 +6,7 @@ import React from "react";
 import h1 from "src/interfaces/components/title/TitleComponent.interface";
 
 const TitleComponent: React.FC<h1> = ({ titletext }) => {
-  return (
-    <h1 className=" text-center text-xl font-bold w-50 h-10 mt-3">
-      {titletext}
-    </h1>
-  );
+  return <h1 className="text-3xl font-bold w-50 h-10 mt-3">{titletext}</h1>;
 };
 
 export default TitleComponent;
