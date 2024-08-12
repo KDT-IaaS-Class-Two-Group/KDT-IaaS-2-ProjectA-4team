@@ -45,17 +45,17 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
         "put",
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          credentials: 'include',
+          credentials: "include",
         },
-        { roleID: newRole } // 요청 본문 설정
+        { roleID: newRole }, // 요청 본문 설정
       );
-  
+
       if (!response.ok) {
-        throw new Error('Failed to update role');
+        throw new Error("Failed to update role");
       }
-  
+
       const data = await response.json();
       console.log(data);
       setMembers(

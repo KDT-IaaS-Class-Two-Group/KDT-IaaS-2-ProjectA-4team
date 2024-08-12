@@ -1,21 +1,11 @@
 import React from "react";
 import CardComponent from "src/components/card/Card";
 import { MenuItemHook } from "src/hooks/menu/menuItemHook";
+import IProduct from "../../../../db/products/product.interface";
 
 interface MenuItemsProps {
   selectCategory: string;
   onAddToCart: (title: string, price: number, id: string) => void;
-}
-
-interface Product {
-  id: string;
-  productID: string;
-  productName: string;
-  productCategory: string;
-  unitPrice: number;
-  quantity: number;
-  restockDate: Date;
-  expirationDate: Date;
 }
 
 /**
@@ -33,11 +23,11 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   const { productList } = MenuItemHook();
 
   const renderMenuItems = () => {
-    const productBread: Product[] = [];
-    const productPatty: Product[] = [];
-    const productSource: Product[] = [];
-    const productSide: Product[] = [];
-    const productDrink: Product[] = [];
+    const productBread: IProduct[] = [];
+    const productPatty: IProduct[] = [];
+    const productSource: IProduct[] = [];
+    const productSide: IProduct[] = [];
+    const productDrink: IProduct[] = [];
 
     productList.forEach((product) => {
       if (product.productCategory === "bread") {
@@ -53,20 +43,16 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       }
     });
 
-    const renderMenu = (products: Product[]) => (
+    const renderMenu = (products: IProduct[]) => (
       <>
         {products.map((product) => (
           <CardComponent
-            key={product.id}
-            id={product.productID}
+            key={product._id}
+            id={product._id}
             title={product.productName}
             content={product.unitPrice}
             onAddToCart={() =>
-              onAddToCart(
-                product.productName,
-                product.unitPrice,
-                product.productID,
-              )
+              onAddToCart(product.productName, product.unitPrice, product._id)
             }
           />
         ))}

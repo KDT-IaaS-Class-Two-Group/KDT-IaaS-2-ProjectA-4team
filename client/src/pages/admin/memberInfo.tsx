@@ -19,19 +19,23 @@ const MemberInfoPage: React.FC = () => {
       try {
         const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
         const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
-        
-        const res = await fetcher(serverUrlGenerator(EP_API, EP_MEMBERS), "get", {
-          credentials: "include"
-        });
+
+        const res = await fetcher(
+          serverUrlGenerator(EP_API, EP_MEMBERS),
+          "get",
+          {
+            credentials: "include",
+          },
+        );
 
         if (!res.ok) {
-          throw new Error('Failed to fetch members');
+          throw new Error("Failed to fetch members");
         }
 
         const data: IMemberInfo[] = await res.json();
         setMembers(data);
       } catch (err) {
-        setError('Failed to load data');
+        setError("Failed to load data");
         console.error(err);
       } finally {
         setLoading(false);
