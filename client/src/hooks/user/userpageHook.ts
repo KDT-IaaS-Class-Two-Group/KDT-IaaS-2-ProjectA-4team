@@ -73,7 +73,7 @@ export const UserpageHook = () => {
 
     setCartItems([]);
     setIsPurchaseModalOpen(false);
-
+    console.log(purchaseData);
     return purchaseData;
   };
 
@@ -122,23 +122,19 @@ export const UserpageHook = () => {
   };
 
   const onCount = (count: number, menu: string) => {
-    if (products.length === 0) {
-      cartItems.map((cartItem) => {
-        const newProduct = { productID: cartItem.menu, quantity: 1 };
-        products.push(newProduct);
-      });
-    }
-    const productIndex = products.findIndex(
-      (product) => product.productID === menu,
-    );
+    setProducts((prevProducts) => {
+      const productIndex = prevProducts.findIndex(
+        (product) => product.productID === menu,
+      );
 
-    if (productIndex !== -1) {
-      products[productIndex].quantity = count;
-    } else {
-      const selectedProduct = { productID: menu, quantity: count };
-      products.push(selectedProduct);
-    }
-    return products;
+      if (productIndex !== -1) {
+        prevProducts[productIndex].quantity = count;
+      } else {
+        prevProducts.push({ productID: menu, quantity: count });
+      }
+
+      return [...prevProducts];
+    });
   };
 
   const { totalPrice } = CartHook(cartItems, onCount);
