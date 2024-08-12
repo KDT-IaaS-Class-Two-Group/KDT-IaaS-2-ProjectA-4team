@@ -6,13 +6,23 @@ import { StockModule } from './stock/stock.module';
 import { MembersModule } from './member/members.module';
 import { productModule } from './product/produdct.module';
 import { expirationDateStockModule } from './expirationDateStock/expirationDateProduct.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    // ConfigModule 설정 - 환경 변수 관리
-    ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/rockcodersERP'),
+    ConfigModule.forRoot({
+      envFilePath:
+        process.env.NODE_ENV === 'production'
+          ? '.env.production'
+          : '.env.development',
+      isGlobal: true, // 환경 변수를 전역에서 사용 가능하도록 설정
+    }),
+    MongooseModule.forRootAsync({
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URI'),
+      }),
+      inject: [ConfigService],
+    }),
     SaleModule,
     AuthModule,
     StockModule,
