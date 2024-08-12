@@ -4,7 +4,7 @@ import ButtonComponent from "../../button/customized/CustomButton";
 import InputComponent from "../../input/Input";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-
+import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
 /**
  * @jojayeon 20.083.09
  * 추가 제품 구매하는 모달창
@@ -20,6 +20,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   onClose,
   onAddProduct,
 }) => {
+  const { refetch } = ExpirationDateHook();
   const [productName, setProductName] = useState<string>("");
   const [productCategory, setProductCategory] = useState<string>("");
   const [quantity, setQuantity] = useState<number | "">("");
@@ -36,7 +37,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPrice(Number(e.target.value) || "");
 
-  const handleOrder = () => {
+  const handleOrder = async () => {
     if (productName && quantity && unitPrice) {
       //현재날짜, 유통기한 - 한달 후
       const now = new Date();
@@ -56,7 +57,13 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
         restockDate,
         expirationDate: expirationDateISO,
       });
-      onAddProduct(newProduct);
+      try {
+        await onAddProduct(newProduct); // 제품 추가
+        await refetch(); // 수정된 부분: 데이터 갱신
+        onClose(); // 모달 닫기
+      } catch (error) {
+        console.error("제품 추가 실패:", error);
+      }
     } else {
       alert("모든 필드를 입력해주세요.");
     }
@@ -64,7 +71,10 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
 
   //모달창
   return (
-    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen: boolean) => !isOpen && onClose()}
+    >
       <DialogContent className="fixed inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-lg z-50 w-full max-w-md h-1/3">
         <DialogTitle className="text-xl font-bold mb-4">제품 구매</DialogTitle>
         <div className="grid grid-cols-4 items-center gap-4 mb-4">
@@ -125,12 +135,8 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
           />
         </div>
         <div className="flex justify-end gap-4">
-          <ButtonComponent onClick={onClose} variant="outline">
-            취소
-          </ButtonComponent>
-          <ButtonComponent onClick={handleOrder} variant="default">
-            주문
-          </ButtonComponent>
+          <ButtonComponent onClick={onClose}>취소</ButtonComponent>
+          <ButtonComponent onClick={handleOrder}>주문</ButtonComponent>
         </div>
       </DialogContent>
     </Dialog>
