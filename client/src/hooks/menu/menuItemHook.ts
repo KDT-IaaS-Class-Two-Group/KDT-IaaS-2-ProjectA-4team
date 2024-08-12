@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import productFetchMenu from "src/model/product/menu/productFetchMenu";
 import Product from "src/interfaces/product/Product.interface";
 import { failedLoadingDataMessage } from "static/hooks/menu/menuItemHook.static";
+import IProduct from "../../../../db/products/product.interface";
 
 /**
  * @yuxincxoi 24.08.05
@@ -18,7 +19,7 @@ import { failedLoadingDataMessage } from "static/hooks/menu/menuItemHook.static"
  * console.log(productList); // 로드된 제품 목록을 출력
  */
 export const MenuItemHook = () => {
-  const [productList, setProductList] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<IProduct[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
