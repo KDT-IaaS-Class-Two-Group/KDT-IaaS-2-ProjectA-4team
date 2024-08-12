@@ -77,17 +77,17 @@ export class AuthService {
   /**
    * * 비밀번호 변경
    * @crystal23733 24.08.06
-   * @param name
+   * @param email
    * @param oldPassword
    * @param newPassword
    * @returns 상태
    */
   async changePassword(
-    name: string,
+    email: string,
     oldPassword: string,
     newPassword: string,
   ): Promise<any> {
-    const member = await this.memberModel.findOne({ name });
+    const member = await this.memberModel.findOne({ email });
     if (!member) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }
