@@ -3,7 +3,7 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 
 export default async (
   email: string,
-  products: Array<{ productID: string; quantity: number }>,
+  products: Array<{ productName: string; quantity: number }>,
   totalPrice: number,
   saleDate: string,
 ) => {
