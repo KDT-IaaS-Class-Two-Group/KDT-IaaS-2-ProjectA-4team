@@ -5,12 +5,12 @@ import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TokenUtils } from '../utils/token.utils';
 import IMember from '@db/members/member.interface';
-import { Model } from 'mongoose';
 import IProduct from '@db/products/product.interface';
+import { Model } from 'mongoose';
 
 @UseGuards(JwtAuthGuard)
 @Controller('log')
-export class LogsController {
+export class LogCreationController {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
     @InjectModel('Product') private readonly productModel: Model<IProduct>,
