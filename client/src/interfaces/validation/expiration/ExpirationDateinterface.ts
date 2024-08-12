@@ -4,6 +4,5 @@ interface ConfirmDeleteModalProps {
   onConfirm: () => void;
   title: string;
   content: string;
-  onsave: () => void;
 }
 export default ConfirmDeleteModalProps;

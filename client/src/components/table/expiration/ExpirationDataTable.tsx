@@ -17,20 +17,11 @@ import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
  */
 
 export const ExpirationDataTable: React.FC = () => {
-  const { data, loading, error, deleteProduct, refetch } = ExpirationDateHook();
+  const { data, loading, error, deleteProduct } = ExpirationDateHook();
   const [open, setOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
-  const handleSave = async () => {
-    try {
-      await refetch();
-      handleDelete();
-      closeModal();
-    } catch (err) {
-      throw err;
-    }
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -113,7 +104,6 @@ export const ExpirationDataTable: React.FC = () => {
         onConfirm={handleDelete}
         title="폐기 확인"
         content="제품을 폐기하시겠습니까?"
-        onsave={handleSave}
       />
     </>
   );
