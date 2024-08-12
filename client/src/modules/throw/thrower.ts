@@ -7,5 +7,9 @@
  */
 
 export default (errMessage: string | Error) => {
-  throw new Error(errMessage);
+  if (errMessage instanceof Error) {
+    throw errMessage; // Error 객체라면 그대로 던짐
+  } else {
+    throw new Error(errMessage); // string이라면 새로운 Error 객체 생성
+  }
 };

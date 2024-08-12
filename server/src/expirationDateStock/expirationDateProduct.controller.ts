@@ -1,5 +1,13 @@
 //컨트롤러
-import { Controller, Get, Delete, Param, UseGuards, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Delete,
+  Param,
+  UseGuards,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { productsServiceDate } from './expirationDateProduct.service';
 import IProduct from '@db/products/product.interface';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -8,6 +16,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
  * * 유통기한 관리 페이지 서버 컨트롤러
  */
 @UseGuards(JwtAuthGuard)
+@Controller('productsDate')
 export class ProductsController {
   constructor(private readonly productsServiceDate: productsServiceDate) {}
 

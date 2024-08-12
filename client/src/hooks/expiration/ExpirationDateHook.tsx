@@ -29,7 +29,11 @@ export const ExpirationDateHook = () => {
     setLoading(true);
 
     try {
-      const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE));
+      const response = await fetcher(
+        serverUrlGenerator(EP_PRODUCTS_DATE),
+        "get",
+        { credentials: "include" },
+      );
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
       }
@@ -48,7 +52,9 @@ export const ExpirationDateHook = () => {
 
   const deleteProduct = async (_id: string) => {
     try {
-      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete");
+      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete", {
+        credentials: "include",
+      });
       fetchData();
     } catch (err) {
       setError(`${deleteDataErrMessage}`);
@@ -63,6 +69,7 @@ export const ExpirationDateHook = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(product),
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error("POST 요청 오류");
