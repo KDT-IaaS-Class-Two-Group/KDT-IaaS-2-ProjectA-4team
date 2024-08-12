@@ -16,13 +16,16 @@ async function bootstrap() {
         styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", 'data:', 'https:'],
         connectSrc: ["'self'", 'https://release.dyi1fscmksq0r.amplifyapp.com'],
-        upgradeInsecureRequests: [],
+        // upgradeInsecureRequests: [],
       },
     }),
   );
 
   app.enableCors({
-    origin: 'https://release.dyi1fscmksq0r.amplifyapp.com',
+    origin: [
+      'https://release.dyi1fscmksq0r.amplifyapp.com',
+      'http://13.125.186.170:3001',
+    ],
     methods: 'GET, POST, PUT, PATCH, DELETE',
     allowedHeaders: 'Content-type, Authorization',
     credentials: true,
