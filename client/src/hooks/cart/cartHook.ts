@@ -13,16 +13,20 @@ import { failedPriceMessages } from "static/hooks/cart/cartHook.static";
  *   error: string | null             // 오류 메시지 (오류가 없으면 null)
  * }}
  */
-export const CartHook = (items: { menu: string; unitPrice: number }[]) => {
+export const CartHook = (
+  items: { menu: string; unitPrice: number }[],
+  onCount: (count: number, menu: string) => void,
+) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePriceChange = (price: number) => {
+  const handlePriceChange = (price: number, count: number, menu: string) => {
     try {
       setTotalPrice((prevTotal) => {
         const updatedTotal = prevTotal + price;
         return updatedTotal;
       });
+      onCount(count, menu);
     } catch (error) {
       setError(failedPriceMessages.failedCalcPriceMessage);
     }

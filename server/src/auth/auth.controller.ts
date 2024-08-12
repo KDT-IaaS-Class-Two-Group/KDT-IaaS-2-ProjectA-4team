@@ -34,7 +34,6 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
-    console.log('로그인요청들어옴');
     // 사용자 검증 및 로그인 처리
     try {
       const user = await this.authService.validateUser(
@@ -124,6 +123,12 @@ export class AuthController {
   async getLoginInfo(@Req() request: Request, @Res() res: Response) {
     const userName = await this.authService.findUserNameToToken(request);
     res.status(HttpStatus.OK).json(userName);
+  }
+
+  @Get('getUserEmail')
+  async getUserEmail(@Req() request: Request, @Res() res: Response) {
+    const userEmail = await this.authService.findUserEmailToToken(request);
+    res.status(HttpStatus.OK).json(userEmail);
   }
 
   @Post('logout')
