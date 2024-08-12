@@ -73,14 +73,24 @@ export const ExpirationDataTable: React.FC = () => {
   return (
     <>
       <SearchForm onSearch={handleSearch} />
-      <Table>
+      <Table className="min-w-full bg-white text-center">
         <TableHeader>
           <TableRow>
-            <TableHead>분류</TableHead>
-            <TableHead>제품명</TableHead>
-            <TableHead>수량</TableHead>
-            <TableHead className="">유통기한</TableHead>
-            <TableHead className="text-right pr-10">폐기</TableHead>
+            <TableHead className="min-w-full bg-white text-center">
+              분류
+            </TableHead>
+            <TableHead className="min-w-full bg-white text-center">
+              제품명
+            </TableHead>
+            <TableHead className="min-w-full bg-white text-center">
+              수량
+            </TableHead>
+            <TableHead className="min-w-full bg-white text-center">
+              유통기한
+            </TableHead>
+            <TableHead className="min-w-full bg-white text-center">
+              폐기
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -94,6 +104,7 @@ export const ExpirationDataTable: React.FC = () => {
               </TableCell>
               <TableCell className="text-right">
                 <ButtonComponent
+                  className="min-w-full bg-white text-center text-gray-500 underline text-sm leading-loose hover:text-black"
                   variant="default"
                   type="button"
                   onClick={() => openModal(product._id)}
