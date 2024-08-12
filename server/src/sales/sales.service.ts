@@ -48,6 +48,14 @@ export class SaleService {
       saleDate,
     });
 
-    return await newSale.save();
+    const savedSale = await newSale.save();
+
+    return this.saleModel
+      .findById(savedSale._id)
+      .populate({
+        path: 'products.productName',
+        select: 'productCategory unitPrice restockDate expirationDate',
+      })
+      .exec();
   }
 }
