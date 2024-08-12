@@ -5,13 +5,6 @@ import getUserEmailFetch from "src/model/user/email/getUserEmailFetch";
 import { userPageHookErrMessages } from "static/hooks/user/userPageHook.static";
 import { CartHook } from "../cart/cartHook";
 
-type CartItem = {
-  menu: string;
-  unitPrice: number;
-  id: string;
-  quantity: number;
-};
-
 /**
  * @yuxincxoi 24.08.07
  * * `UserpageHook` 훅은 사용자 페이지에서 카테고리 선택, 장바구니 관리, 모달 상태 등을 처리합니다.
@@ -34,7 +27,9 @@ type CartItem = {
 export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<
+    [] | { menu: string; unitPrice: number; id: string }[]
+  >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
@@ -111,28 +106,25 @@ export const UserpageHook = () => {
   }, [router.query.category]);
 
   const handleAddToCart = (menu: string, unitPrice: number, id: string) => {
-    setCartItems((prevItems) => {
-      const itemIndex = prevItems.findIndex((item) => item.menu === menu);
-      if (itemIndex === -1) {
-        setProducts((prevProducts) => [...prevProducts, { productName: id, quantity: 1 }]);
-        return [...prevItems, { menu, unitPrice, id, quantity: 1 }];
-      }
-      // 이미 존재하는 아이템의 수량을 증가
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.productName === id ? { ...product, quantity: product.quantity + 1 } : product
-        )
-      );
-      return prevItems.map((item, index) =>
-        index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
-      );
-    });
+    try {
+      setCartItems((prevItems) => {
+        const itemIndex = prevItems.findIndex((item) => item.menu === menu);
+        if (itemIndex === -1) {
+          setProducts([...products, { productName: menu, quantity: 1 }]);
+          return [...prevItems, { menu, unitPrice, id }];
+        }
+        openModal();
+        return prevItems;
+      });
+    } catch (error) {
+      setError(userPageHookErrMessages.failedAddCategories);
+    }
   };
 
   const onCount = (count: number, menu: string) => {
     setProducts((prevProducts) => {
       const productIndex = prevProducts.findIndex(
-        (product) => product.productName === menu
+        (product) => product.productName === menu,
       );
 
       if (productIndex !== -1) {
