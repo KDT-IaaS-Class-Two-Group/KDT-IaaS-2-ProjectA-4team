@@ -44,7 +44,7 @@ const DynamicTable = <T extends object>({
               }
             >
               {key.charAt(0).toUpperCase() + key.slice(1)}
-              <ArrowUpDown className="w-4 h-4 ml-2" />
+              <ArrowUpDown className="w-3 h-3 m-auto" />
             </Button>
           ),
         }))
@@ -66,14 +66,14 @@ const DynamicTable = <T extends object>({
   return (
     <>
       <div>
-        <Table className="min-w-full bg-white">
+        <Table className="min-w-full bg-white text-center">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className={`px-4 py-2 border-b border-gray-200 ${header.column.id === "_id" ? "hidden" : ""}`}
+                    className={`px-4 py-2 border-b border-gray-200 text-center ${header.column.id === "_id" ? "hidden" : ""}`}
                   >
                     {header.isPlaceholder
                       ? null
@@ -84,7 +84,7 @@ const DynamicTable = <T extends object>({
                   </TableHead>
                 ))}
                 {renderActions && (
-                  <TableHead className="px-4 py-2 border-b border-gray-200">
+                  <TableHead className="px-4 py-2 border-b border-gray-200 text-center">
                     Actions
                   </TableHead>
                 )}
@@ -99,7 +99,7 @@ const DynamicTable = <T extends object>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className={`px-4 py-2 border-b border-gray-200 ${cell.column.id === "_id" ? "hidden" : ""}`}
+                    className={`px-4 py-1 border-b border-gray-200 ${cell.column.id === "_id" ? "hidden" : ""}`}
                   >
                     {typeof cell.renderValue() === "undefined"
                       ? ""
