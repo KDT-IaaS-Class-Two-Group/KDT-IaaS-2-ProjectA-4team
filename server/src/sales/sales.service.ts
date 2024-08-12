@@ -15,7 +15,7 @@ export class SaleService {
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
     @InjectModel(Product.name) private readonly productModel: Model<IProduct>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
-  ) {}
+  ) { }
 
   async findAll(): Promise<ISale[]> {
     return this.saleModel.find().populate('memberID').exec();
@@ -50,7 +50,7 @@ export class SaleService {
     const productSales = await Promise.all(
       products.map(async (product) => {
         const productDoc = await this.productModel
-          .findOne({ name: product.productName })
+          .findOne({ productName: product.productName })
           .exec();
         if (!productDoc) {
           throw new Error(`Product not found: ${product.productName}`);
