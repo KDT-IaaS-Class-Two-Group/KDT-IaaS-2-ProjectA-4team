@@ -110,6 +110,7 @@ export const UserpageHook = () => {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
         if (itemIndex === -1) {
+          setProducts([...products, { productID: menu, quantity: 1 }]);
           return [...prevItems, { menu, unitPrice, id }];
         }
         openModal();
