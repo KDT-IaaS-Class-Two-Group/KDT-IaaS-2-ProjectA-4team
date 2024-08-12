@@ -34,10 +34,9 @@ export const UserpageHook = () => {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const products: {
-    productID: string;
-    quantity: number;
-  }[] = [];
+  const [products, setProducts] = useState<
+    { productID: string; quantity: number }[]
+  >([]);
 
   const purchase = () => {
     try {
