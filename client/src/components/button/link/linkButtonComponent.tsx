@@ -16,8 +16,8 @@ const LinkButtonComponent: React.FC<LinkButtonComponentProps> = ({
 }) => {
   return (
     <div className="w-20 text-center">
-      <Link href={href} onClick={onClick}>
-        <Button className={className}>{children}</Button>
+      <Link href={href} onClick={onClick} className={className}>
+        <Button>{children}</Button>
       </Link>
     </div>
   );
