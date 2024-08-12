@@ -40,10 +40,24 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
       const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-      await fetcher(serverUrlGenerator(EP_API, EP_MEMBERS, id), "put", {
-        roleID: newRole,
-      });
-
+      const response = await fetcher(
+        serverUrlGenerator(EP_API, EP_MEMBERS, id),
+        "put",
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        },
+        { roleID: newRole } // 요청 본문 설정
+      );
+  
+      if (!response.ok) {
+        throw new Error('Failed to update role');
+      }
+  
+      const data = await response.json();
+      console.log(data);
       setMembers(
         members.map((member) =>
           member.id === id ? { ...member, role: newRole.toString() } : member,

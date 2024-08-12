@@ -5,6 +5,10 @@ import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 
+/**
+ * @crystal23733 24.08.12
+ * @returns {JSX.Element} - 회원 조회 컴포넌트
+ */
 const MemberInfoPage: React.FC = () => {
   const [members, setMembers] = useState<IMemberInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
