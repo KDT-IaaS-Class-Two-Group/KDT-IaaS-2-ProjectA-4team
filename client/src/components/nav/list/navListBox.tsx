@@ -1,6 +1,5 @@
 import React from "react";
 import LinkButtonComponent from "../../button/link/linkButtonComponent";
-import FooterLinks from "../../footer/footerComponent";
 
 /**
  * @crystal23733 24.07.29
@@ -8,8 +7,8 @@ import FooterLinks from "../../footer/footerComponent";
  */
 const NavListBox: React.FC = () => {
   return (
-    <nav className="flex flex-col h-90% p-4 gap-4">
-      <div className="text-lg font-semibold">재고 관리</div>
+    <nav className="px-10">
+      <div className="font-extrabold text-xl">재고 관리</div>
       <ul className="pl-4 space-y-2">
         <li className="mb-4">
           <LinkButtonComponent href="/admin/stockInfo">
@@ -38,7 +37,6 @@ const NavListBox: React.FC = () => {
           </LinkButtonComponent>
         </li>
       </ul>
-      <FooterLinks />
     </nav>
   );
 };
