@@ -73,7 +73,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
 
   // 필터링된 회원 목록을 생성
   const filteredMembers = members.filter((member) =>
-    member.email.toLowerCase().includes(searchQuery.toLowerCase())
+    member.email.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
