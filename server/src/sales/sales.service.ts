@@ -39,11 +39,29 @@ export class SaleService {
     totalPrice: number,
     saleDate: string,
   ) {
-    //TODO 이메일로 멤버id 찾아오기
-    //TODO 제품 이름으로 id 찾아오기??
+    const member = await this.memberModel.findOne({ email }).exec();
+    if (!member) {
+      throw new Error('Member not found');
+    }
+
+    const productSales = await Promise.all(
+      products.map(async (product) => {
+        const productDoc = await this.productModel
+          .findOne({ name: product.productName })
+          .exec();
+        if (!productDoc) {
+          throw new Error(`Product not found: ${product.productName}`);
+        }
+        return {
+          productID: productDoc._id,
+          quantity: product.quantity,
+        };
+      }),
+    );
+
     const newSale = new this.saleModel({
-      // memberID,
-      products,
+      memberID: member._id,
+      products: productSales,
       totalPrice,
       saleDate,
     });
@@ -53,8 +71,8 @@ export class SaleService {
     return this.saleModel
       .findById(savedSale._id)
       .populate({
-        path: 'products.productName',
-        select: 'productCategory unitPrice restockDate expirationDate',
+        path: 'products.productID',
+        select: 'name category price',
       })
       .exec();
   }
