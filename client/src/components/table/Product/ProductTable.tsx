@@ -73,7 +73,6 @@ const ProductTable: React.FC = () => {
         renderActions={(row) => (
           <>
             <ButtonComponent
-              variant="default"
               type="button"
               onClick={() => openOrderModal(row)}
               className="mb-1 text-xs bg-slate-500 hover:bg-black"
@@ -81,7 +80,6 @@ const ProductTable: React.FC = () => {
               발주하기
             </ButtonComponent>
             <ButtonComponent
-              variant="default"
               type="button"
               onClick={() => openUpdateModal(row)}
               className="mt-1 text-xs bg-slate-500 hover:bg-black"

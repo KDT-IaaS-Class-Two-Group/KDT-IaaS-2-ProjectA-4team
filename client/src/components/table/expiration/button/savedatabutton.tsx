@@ -29,9 +29,7 @@ const ProductPage: React.FC = () => {
 
   return (
     <div>
-      <ButtonComponent onClick={openModal} variant="default">
-        제품 구매
-      </ButtonComponent>
+      <ButtonComponent onClick={openModal}>제품 구매</ButtonComponent>
       <AddProductModal
         open={isModalOpen}
         onClose={closeModal}
