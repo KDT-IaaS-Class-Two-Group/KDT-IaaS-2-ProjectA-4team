@@ -43,7 +43,7 @@ export const ExpirationDateHook = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [EP_PRODUCTS_DATE]);
 
   useEffect(() => {
     fetchData(); // 컴포넌트 마운트 시 데이터 가져오기
