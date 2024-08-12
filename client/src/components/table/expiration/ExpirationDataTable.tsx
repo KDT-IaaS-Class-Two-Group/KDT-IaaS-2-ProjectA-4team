@@ -10,6 +10,8 @@ import {
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
+import { AddProductModal } from "src/components/modal/addmodal/AddProductModal";
+import { ProductDTO } from "@shared/DTO/products/product.dto";
 
 /**
  * @jojayeon 24.08.07
@@ -17,8 +19,10 @@ import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
  */
 
 export const ExpirationDataTable: React.FC = () => {
-  const { data, loading, error, deleteProduct, refetch } = ExpirationDateHook();
+  const { data, loading, error, deleteProduct, addProduct, refetch } =
+    ExpirationDateHook();
   const [open, setOpen] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
@@ -63,7 +67,11 @@ export const ExpirationDataTable: React.FC = () => {
     setOpen(false);
     setSelectedProductId(null);
   };
-
+  const handleAddProduct = async (product: ProductDTO) => {
+    await addProduct(product);
+    setOpenAddModal(false);
+    refetch(); // 제품 추가 후 데이터 갱신
+  };
   return (
     <>
       <Table>
@@ -104,6 +112,11 @@ export const ExpirationDataTable: React.FC = () => {
         onConfirm={handleDelete}
         title="폐기 확인"
         content="제품을 폐기하시겠습니까?"
+      />
+      <AddProductModal
+        open={openAddModal}
+        onClose={() => setOpenAddModal(false)}
+        onAddProduct={handleAddProduct}
       />
     </>
   );
