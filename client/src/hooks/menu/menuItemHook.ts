@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import productFetchMenu from "src/model/product/menu/productFetchMenu";
-import Product from "src/interfaces/product/Product.interface";
 import { failedLoadingDataMessage } from "static/hooks/menu/menuItemHook.static";
 import IProduct from "../../../../db/products/product.interface";
 
