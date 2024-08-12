@@ -10,20 +10,7 @@ const LoginPage = () => {
     <div className="relative w-screen h-screen overflow-hidden">
       {/* 배경 이미지 */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <div className="relative w-7/10 h-7/10">
-          <Image
-            src="/background.png"
-            alt="Background"
-            layout="responsive"
-            width={700}
-            height={700}
-            style={{
-              objectFit: "cover",
-              opacity: 0.4,
-            }}
-            quality={100}
-          />
-        </div>
+        <div className="relative w-7/10 h-7/10"></div>
       </div>
 
       {/* 콘텐츠 */}
