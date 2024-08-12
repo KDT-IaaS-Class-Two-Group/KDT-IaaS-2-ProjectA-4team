@@ -4,12 +4,14 @@ import { Model } from 'mongoose';
 import IMember from '@db/members/member.interface';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { TokenUtils } from '../utils/token.utils';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel('Member') private readonly memberModel: Model<IMember>,
     private readonly jwtService: JwtService,
+    private readonly tokenUtils: TokenUtils,
   ) {}
 
   async validateUser(email: string, password: string): Promise<IMember | null> {
@@ -77,17 +79,17 @@ export class AuthService {
   /**
    * * 비밀번호 변경
    * @crystal23733 24.08.06
-   * @param name
+   * @param email
    * @param oldPassword
    * @param newPassword
    * @returns 상태
    */
   async changePassword(
-    name: string,
+    email: string,
     oldPassword: string,
     newPassword: string,
   ): Promise<any> {
-    const member = await this.memberModel.findOne({ name });
+    const member = await this.memberModel.findOne({ email });
     if (!member) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }
@@ -108,12 +110,7 @@ export class AuthService {
   async findUserNameToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];
-      if (!token) {
-        return null;
-      }
-
-      const decoded = this.jwtService.verify(token);
-      return decoded.name;
+      return await this.tokenUtils.findNameByToken(token, this.memberModel);
     } catch (error) {
       console.error('Token decoding failed:', error);
       return null;

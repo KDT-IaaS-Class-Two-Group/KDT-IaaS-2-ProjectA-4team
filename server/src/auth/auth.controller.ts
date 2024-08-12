@@ -63,6 +63,7 @@ export class AuthController {
         .json({ success: false, message: 'Invalid credentials' });
     }
   }
+
   @Get('user-info')
   async getUserInfo(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['token'];
@@ -91,33 +92,33 @@ export class AuthController {
   }
 
   @Post('changePassword')
-  async changePassword(
-    @Req() req: Request,
-    @Body('password') oldPassword: string,
-    @Body('changePassword') newPassword: string,
-    @Res() res: Response,
-  ): Promise<any> {
-    const token = req.cookies['token'];
-    console.log('TOKEN:', token);
-    if (!token) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json({ message: '인증되지 않았습니다.' });
-      return;
-    }
-    try {
-      const decoded = this.authService.verifyToken(token);
-      const userName = decoded.name;
-      await this.authService.changePassword(userName, oldPassword, newPassword);
-      res
-        .status(HttpStatus.OK)
-        .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
-    } catch (error) {
-      if (error instanceof Error) {
-        res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
-      }
-    }
+async changePassword(
+  @Req() req: Request,
+  @Body('password') oldPassword: string,
+  @Body('changePassword') newPassword: string,
+  @Res() res: Response,
+): Promise<any> {
+  const token = req.cookies['token'];
+  if (!token) {
+    return res
+      .status(HttpStatus.UNAUTHORIZED)
+      .json({ message: '인증되지 않았습니다.' });
   }
+  try {
+    const decoded = this.authService.verifyToken(token);
+    const userName = decoded.name;
+    await this.authService.changePassword(userName, oldPassword, newPassword);
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
+  } catch (error) {
+    console.error('Error in changePassword:', error);
+    if (error instanceof Error) {
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: "기존 비밀번호가 일치하지 않습니다." });
+    }
+    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: '서버 오류가 발생했습니다.' });
+  }
+}
 
   @Get('login-info')
   async getLoginInfo(@Req() request: Request, @Res() res: Response) {
@@ -132,8 +133,7 @@ export class AuthController {
   }
 
   @Post('logout')
-  logout(@Res() res: Response) {
-    console.log('로그아웃 요청');
+  async logout(@Res() res: Response) {
     // 쿠키를 만료시키고 응답
     res.cookie('token', '', {
       expires: new Date(0),
@@ -141,5 +141,8 @@ export class AuthController {
       path: '/',
     });
     res.status(200).send('Logged out');
+  }
+  catch(err) {
+    err;
   }
 }
