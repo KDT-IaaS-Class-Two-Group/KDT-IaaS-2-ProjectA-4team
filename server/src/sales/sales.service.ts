@@ -6,11 +6,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Sale } from '../schemas/sale.schema';
 import { Member } from '../schemas/member.schema';
+import { Product } from '../schemas/product.schema';
+import IProduct from '@db/products/product.interface';
 
 @Injectable()
 export class SaleService {
   constructor(
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
+    @InjectModel(Product.name) private readonly productModel: Model<IProduct>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
   ) {}
 
