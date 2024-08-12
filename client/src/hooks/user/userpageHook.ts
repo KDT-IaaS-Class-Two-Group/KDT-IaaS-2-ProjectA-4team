@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import salesHistoryFetch from "src/model/sale/history/salesHistoryFetch";
+import getUserEmailFetch from "src/model/user/email/getUserEmailFetch";
 import { userPageHookErrMessages } from "static/hooks/user/userPageHook.static";
+import { CartHook } from "../cart/cartHook";
 
 /**
  * @yuxincxoi 24.08.07
@@ -25,19 +28,18 @@ export const UserpageHook = () => {
   const router = useRouter();
   const [selectCategory, setSelectCategory] = useState("bread");
   const [cartItems, setCartItems] = useState<
-    [] | { menu: string; unitPrice: number }[]
+    [] | { menu: string; unitPrice: number; id: string }[]
   >([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const products: {
+    productID: string;
+    quantity: number;
+  }[] = [];
 
-  /**
-   * 구매 모달 창을 열기 위한 함수입니다.
-   *
-   * @throws {Error} 모달 열기 중 오류가 발생할 경우
-   */
-  const purchase = async () => {
+  const purchase = () => {
     try {
       setIsPurchaseModalOpen(true);
     } catch (error) {
@@ -45,12 +47,35 @@ export const UserpageHook = () => {
     }
   };
 
-  /**
-   * 구매를 확인하고 장바구니를 비우는 함수입니다.
-   */
-  const confirmPurchase = () => {
+  const loadData = async () => {
+    try {
+      const userEmail = await getUserEmailFetch();
+      return userEmail;
+    } catch (error) {
+      console.error("사용자 이메일을 가져오지 못했습니다.");
+      return null;
+    }
+  };
+
+  const confirmPurchase = async () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    const userEmail = await loadData();
+    if (!userEmail) {
+      throw new Error("User email is required but was not found.");
+    }
+
+    const purchaseData = await salesHistoryFetch(
+      userEmail,
+      products,
+      totalPrice,
+      today,
+    );
+
     setCartItems([]);
     setIsPurchaseModalOpen(false);
+
+    return purchaseData;
   };
 
   /**
@@ -81,12 +106,12 @@ export const UserpageHook = () => {
     }
   }, [router.query.category]);
 
-  const handleAddToCart = (menu: string, unitPrice: number) => {
+  const handleAddToCart = (menu: string, unitPrice: number, id: string) => {
     try {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
         if (itemIndex === -1) {
-          return [...prevItems, { menu, unitPrice }];
+          return [...prevItems, { menu, unitPrice, id }];
         }
         openModal();
         return prevItems;
@@ -95,6 +120,28 @@ export const UserpageHook = () => {
       setError(userPageHookErrMessages.failedAddCategories);
     }
   };
+
+  const onCount = (count: number, menu: string) => {
+    if (products.length === 0) {
+      cartItems.map((cartItem) => {
+        const newProduct = { productID: cartItem.menu, quantity: 1 };
+        products.push(newProduct);
+      });
+    }
+    const productIndex = products.findIndex(
+      (product) => product.productID === menu,
+    );
+
+    if (productIndex !== -1) {
+      products[productIndex].quantity = count;
+    } else {
+      const selectedProduct = { productID: menu, quantity: count };
+      products.push(selectedProduct);
+    }
+    return products;
+  };
+
+  const { totalPrice } = CartHook(cartItems, onCount);
 
   const handleRemoveItem = (menu: string) => {
     try {
@@ -116,6 +163,7 @@ export const UserpageHook = () => {
     confirmPurchase,
     error,
     handleAddToCart,
+    onCount,
     handleRemoveItem,
     purchase,
   };

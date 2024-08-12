@@ -1,7 +1,13 @@
 import React, { FC } from "react";
 import { Card, CardTitle, CardDescription } from "../../../components/ui/card";
 import Image from "next/image";
-import CardComponentProps from "src/interfaces/components/card/Card.interface";
+
+interface CardComponentProps {
+  title: string;
+  content: number;
+  id: string;
+  onAddToCart: (title: string, price: number, id: string) => void;
+}
 
 /**
  * @yuxincxoi 24.07.25
@@ -15,10 +21,11 @@ import CardComponentProps from "src/interfaces/components/card/Card.interface";
 const CardComponent: FC<CardComponentProps> = ({
   title,
   content,
+  id,
   onAddToCart,
 }) => {
   return (
-    <div onClick={() => onAddToCart(title, content)}>
+    <div onClick={() => onAddToCart(title, content, id)}>
       <Card className="h-56 rounded-xl hover:cursor-pointer">
         <Image
           id="burgerImage"

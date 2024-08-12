@@ -1,8 +1,22 @@
 import React from "react";
 import CardComponent from "src/components/card/Card";
 import { MenuItemHook } from "src/hooks/menu/menuItemHook";
-import MenuItemsProps from "src/interfaces/components/menu/MenuItems.interface";
-import Product from "src/interfaces/product/Product.interface";
+
+interface MenuItemsProps {
+  selectCategory: string;
+  onAddToCart: (title: string, price: number, id: string) => void;
+}
+
+interface Product {
+  id: string;
+  productID: string;
+  productName: string;
+  productCategory: string;
+  unitPrice: number;
+  quantity: number;
+  restockDate: Date;
+  expirationDate: Date;
+}
 
 /**
  * @yuxincxoi 24.07.30
@@ -28,7 +42,6 @@ const MenuItems: React.FC<MenuItemsProps> = ({
     productList.forEach((product) => {
       if (product.productCategory === "bread") {
         productBread.push(product);
-        console.log(productBread);
       } else if (product.productCategory === "patty") {
         productPatty.push(product);
       } else if (product.productCategory === "source") {
@@ -40,16 +53,20 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       }
     });
 
-    // 카테고리에 따라 제품을 렌더링합니다.
     const renderMenu = (products: Product[]) => (
       <>
         {products.map((product) => (
           <CardComponent
             key={product.id}
+            id={product.productID}
             title={product.productName}
             content={product.unitPrice}
             onAddToCart={() =>
-              onAddToCart(product.productName, product.unitPrice)
+              onAddToCart(
+                product.productName,
+                product.unitPrice,
+                product.productID,
+              )
             }
           />
         ))}
