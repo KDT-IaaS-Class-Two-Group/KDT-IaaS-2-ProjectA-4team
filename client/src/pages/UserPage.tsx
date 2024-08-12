@@ -10,15 +10,6 @@ import Logo from "src/components/logo/logo";
 import Modal from "src/components/modal/Modal";
 import { ConfirmDeleteModal } from "src/components/modal/expiration/ExpirationDateModal";
 
-// interface ItemsContextType {
-//   items: string;
-//   setItems: React.Dispatch<React.SetStateAction<string>>;
-// }
-
-// interface ItemsProviderProps {
-//   children: ReactNode;
-// }
-
 /**
  * @yuxincxoi 24.07.25
  * * 물건을 구입할 수 있는 사용자 페이지
@@ -38,6 +29,7 @@ const UserPage: FC = () => {
     error,
     handleAddToCart,
     handleRemoveItem,
+    onCount,
     purchase,
   } = UserpageHook();
 
@@ -58,7 +50,11 @@ const UserPage: FC = () => {
       />
       <div className="fixed top-0 right-0 h-screen shadow-xl w-72">
         <LoginInfoComponent className="mt-6 mb-20 ml-6 w-72" />
-        <Cart items={cartItems} removedItem={handleRemoveItem} />
+        <Cart
+          items={cartItems}
+          removedItem={handleRemoveItem}
+          onCount={onCount}
+        />
         <ButtonComponent
           type="submit"
           className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"

@@ -12,13 +12,6 @@ import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
 
-interface ILoginLogout {
-  memberId: string;
-  ipAddress: string;
-  device: string;
-}
-type LoginLogoutRequest = IMember & ILoginLogout;
-
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -40,10 +33,8 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(
-    @Body() data: LoginLogoutRequest,
-    @Res() res: Response,
-  ): Promise<void> {
+  async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
+    // 사용자 검증 및 로그인 처리
     try {
       const user = await this.authService.validateUser(
         data.email,
@@ -133,6 +124,12 @@ export class AuthController {
   async getLoginInfo(@Req() request: Request, @Res() res: Response) {
     const userName = await this.authService.findUserNameToToken(request);
     res.status(HttpStatus.OK).json(userName);
+  }
+
+  @Get('getUserEmail')
+  async getUserEmail(@Req() request: Request, @Res() res: Response) {
+    const userEmail = await this.authService.findUserEmailToToken(request);
+    res.status(HttpStatus.OK).json(userEmail);
   }
 
   @Post('logout')

@@ -1,7 +1,12 @@
 import React, { FC } from "react";
 import CartItemComponent from "./contents/CartItem";
 import { CartHook } from "src/hooks/cart/cartHook";
-import CartProps from "src/interfaces/components/cart/Cart.interface";
+
+interface CartProps {
+  items: { menu: string; unitPrice: number; id: string }[];
+  removedItem: (data: string) => void;
+  onCount: (count: number, menu: string) => void;
+}
 
 /**
  * @yuxincxoi 24.07.25
@@ -12,8 +17,8 @@ import CartProps from "src/interfaces/components/cart/Cart.interface";
  * @returns { JSX.Element }
  */
 
-const Cart: FC<CartProps> = ({ items, removedItem }) => {
-  const { totalPrice, handlePriceChange, error } = CartHook(items);
+const Cart: FC<CartProps> = ({ items, removedItem, onCount }) => {
+  const { totalPrice, handlePriceChange, error } = CartHook(items, onCount);
 
   if (error) {
     return <div>{error}</div>;

@@ -1,42 +1,53 @@
-// pages/memberInfo.tsx
-
-import { GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
 import AdminNav from "src/components/nav/admin/adminNav";
 import MemberInfoTable from "src/components/table/member/MemberInfoTable";
 import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 
-interface Props {
-  members: IMemberInfo[];
-}
+/**
+ * @crystal23733 24.08.12
+ * @returns {JSX.Element} - 회원 조회 컴포넌트
+ */
+const MemberInfoPage: React.FC = () => {
+  const [members, setMembers] = useState<IMemberInfo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
-  const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const EP_API = process.env.NEXT_PUBLIC_EP_API as string;
+        const EP_MEMBERS = process.env.NEXT_PUBLIC_EP_MEMBERS as string;
 
-  const res = await fetcher(serverUrlGenerator(EP_API, EP_MEMBERS), "get", {
-    credentials: "include",
-  });
+        const res = await fetcher(
+          serverUrlGenerator(EP_API, EP_MEMBERS),
+          "get",
+          {
+            credentials: "include",
+          },
+        );
 
-  if (!res.ok) {
-    return {
-      props: {
-        members: [],
-      },
+        if (!res.ok) {
+          throw new Error("Failed to fetch members");
+        }
+
+        const data: IMemberInfo[] = await res.json();
+        setMembers(data);
+      } catch (err) {
+        setError("Failed to load data");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
-  }
 
-  const members: IMemberInfo[] = await res.json();
+    fetchMembers();
+  }, []);
 
-  return {
-    props: {
-      members,
-    },
-  };
-};
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
-const MemberInfoPage: React.FC<Props> = ({ members }) => {
   const formattedData = members.map((member) => ({
     id: member._id,
     member: member.name,

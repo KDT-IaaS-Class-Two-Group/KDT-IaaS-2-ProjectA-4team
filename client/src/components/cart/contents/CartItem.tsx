@@ -1,7 +1,13 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import { CartItemHook } from "src/hooks/cart/contents/cartItemHook";
-import CartItemComponentProps from "src/interfaces/components/cart/contents/CartItem.interface";
+
+interface CartItemComponentProps {
+  menu: string;
+  unitPrice: number;
+  onPriceChange: (price: number, count: number, menu: string) => void;
+  removedItem: (data: string) => void;
+}
 
 /**
  * @yuxincxoi 24.07.25
@@ -22,6 +28,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
   const { count, price, incrementCount, decrementCount, error } = CartItemHook(
     unitPrice,
     onPriceChange,
+    menu,
   );
 
   if (error) return <div>{error}</div>;

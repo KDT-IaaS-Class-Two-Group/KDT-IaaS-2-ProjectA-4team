@@ -34,9 +34,7 @@ export const ExpirationDateHook = () => {
       const response = await fetcher(
         serverUrlGenerator(EP_PRODUCTS_DATE),
         "get",
-        {
-          credentials: "include",
-        },
+        { credentials: "include" },
       );
       if (!response.ok) {
         throw new Error("네트워크 응답이 올바르지 않습니다.");
