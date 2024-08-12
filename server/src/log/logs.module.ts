@@ -2,13 +2,14 @@ import { UserLogService } from './userlog.service';
 import { UserLog, UserLogSchema } from '../schemas/userLog.schema';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LogsController } from './logs.controller';
+import { LogCreationController } from './logCreation.controller';
 import { TokenUtils } from '../utils/token.utils';
 import { Member, MemberSchema } from '../schemas/member.schema';
 import { JwtStrategy } from '../auth/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { Product, ProductSchema } from '../schemas/product.schema';
+import { LogQueryController } from './logQuery.controller';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { Product, ProductSchema } from '../schemas/product.schema';
       }),
     }),
   ],
-  controllers: [LogsController],
+  controllers: [LogCreationController, LogQueryController],
   providers: [UserLogService, TokenUtils, JwtStrategy],
   exports: [UserLogService],
 })
