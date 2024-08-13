@@ -106,8 +106,10 @@ async changePassword(
   }
   try {
     const decoded = this.authService.verifyToken(token);
-    const userName = decoded.name;
-    await this.authService.changePassword(userName, oldPassword, newPassword);
+    console.log("decoded", decoded);
+    const userEmail = decoded.email;
+    console.log("change password:", userEmail);
+    await this.authService.changePassword(userEmail, oldPassword, newPassword);
     return res
       .status(HttpStatus.OK)
       .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
