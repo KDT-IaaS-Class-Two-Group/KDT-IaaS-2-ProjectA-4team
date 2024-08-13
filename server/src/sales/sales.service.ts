@@ -15,14 +15,22 @@ export class SaleService {
     @InjectModel(Sale.name) private readonly saleModel: Model<ISale>,
     @InjectModel(Product.name) private readonly productModel: Model<IProduct>,
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
-  ) { }
+  ) {}
 
   async findAll(): Promise<ISale[]> {
-    return this.saleModel.find().populate('memberID').populate('products.productID').exec();
+    return this.saleModel
+      .find()
+      .populate('memberID')
+      .populate('products.productID')
+      .exec();
   }
 
   async findById(id: string): Promise<ISale | null> {
-    return this.saleModel.findById(id).populate('memberID').populate('productID').exec();
+    return this.saleModel
+      .findById(id)
+      .populate('memberID')
+      .populate('productID')
+      .exec();
   }
 
   async findByMemberName(email: string): Promise<ISale[]> {
