@@ -49,7 +49,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
       //데이터 들어갈 부분
       const newProduct = new ProductDTO({
         _id: "",
-        product_Category: productCategory,
+        productCategory: productCategory,
         productName,
         unitPrice,
         quantity,

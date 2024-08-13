@@ -80,7 +80,7 @@ export class LogCreationController {
       );
       const {
         _id,
-        product_Category: productCategory,
+        productCategory: productCategory,
         productName,
         quantity,
       } = data;
@@ -108,7 +108,7 @@ export class LogCreationController {
       if (data) {
         const {
           _id,
-          product_Category: productCategory,
+          productCategory: productCategory,
           productName,
           quantity,
         } = data;
