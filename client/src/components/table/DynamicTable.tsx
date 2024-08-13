@@ -99,7 +99,7 @@ const DynamicTable = <T extends object>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className={`px-4 py-1 border-b border-gray-200 ${cell.column.id === "_id" ? "hidden" : ""}`}
+                    className={`px-4 border-b border-gray-200 ${cell.column.id === "_id" ? "hidden" : ""}`}
                   >
                     {typeof cell.renderValue() === "undefined"
                       ? ""
@@ -109,7 +109,7 @@ const DynamicTable = <T extends object>({
                 ))}
                 {/* renderActions이 제공되면, 각 행의 마지막 열에 액션을 렌더링 */}
                 {renderActions && (
-                  <TableCell className="px-4 py-2 text-center border-b border-gray-200">
+                  <TableCell className="px-4 py-1 text-center border-b border-gray-200">
                     {renderActions(row.original)}
                   </TableCell>
                 )}
