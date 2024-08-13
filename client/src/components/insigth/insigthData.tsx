@@ -25,6 +25,12 @@ const DatePickerWithRange = ({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) => {
   const LOGS = process.env.NEXT_PUBLIC_LOGS as string;
+  const star = process.env.NEXT_PUBLIC_S3_NEW_URL as string;
+  const order = process.env.NEXT_PUBLIC_S3_ORDER_URL as string;
+  const time = process.env.NEXT_PUBLIC_S3_TIME_URL as string;
+  const trash = process.env.NEXT_PUBLIC_S3_TRASH_URL as string;
+  const truck = process.env.NEXT_PUBLIC_S3_TRUCK_URL as string;
+  const user = process.env.NEXT_PUBLIC_S3_USER_URL as string;
 
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: addDays(new Date(), -20),
@@ -121,7 +127,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/user.png"
+                  src={user}
                   alt="mostVisitior"
                 />
                 <h3 className="font-semibold text-xl mt-2">
@@ -136,7 +142,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/time.png"
+                  src={time}
                   alt="stayTime"
                 />
                 <h3 className="font-semibold text-xl mt-2">
@@ -151,7 +157,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/truck.png"
+                  src={truck}
                   alt="mostOrder"
                 />
                 <h3 className="font-semibold text-xl mt-2">최다 발주</h3>
@@ -164,7 +170,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/order.png"
+                  src={order}
                   alt="mostSeller"
                 />
                 <h3 className="font-semibold text-xl mt-2">최다 주문내역</h3>
@@ -177,7 +183,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/order.png"
+                  src={order}
                   alt="worstSeller"
                 />
                 <h3 className="font-semibold text-xl mt-2">최소 주문내역</h3>
@@ -190,7 +196,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/trash.png"
+                  src={trash}
                   alt="trash"
                 />
                 <h3 className="font-semibold text-xl mt-2">폐기 메뉴</h3>
@@ -203,7 +209,7 @@ const DatePickerWithRange = ({
                   className="mt-3 w-8 h-8 mx-auto"
                   width={36}
                   height={36}
-                  src="/new.png"
+                  src={star}
                   alt="new"
                 />
                 <h3 className="font-semibold text-xl mt-2">신메뉴</h3>
