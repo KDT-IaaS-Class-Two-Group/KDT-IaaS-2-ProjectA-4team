@@ -102,9 +102,9 @@ export const ExpirationDataTable: React.FC = () => {
               <TableCell>
                 {new Date(product.expirationDate).toDateString()}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell>
                 <ButtonComponent
-                  className="min-w-full bg-white text-center text-gray-500 underline text-sm leading-loose hover:text-black"
+                  className="w-24 text-center bg-cyan-500 rounded-xl text-white text-sm leading-loose hover:font-medium hover:text-cyan-500 hover:bg-white hover:border hover:border-cyan-500"
                   variant="default"
                   type="button"
                   onClick={() => openModal(product._id)}
