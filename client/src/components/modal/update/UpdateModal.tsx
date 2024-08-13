@@ -38,7 +38,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
       // ProductDTO 생성
       const updatedProductDTO = new ProductDTO({
         _id: product._id,
-        product_Category: product.productCategory,
+        productCategory: product.productCategory,
         productName: newProductName,
         unitPrice: newUnitPrice,
         quantity: product.quantity,
