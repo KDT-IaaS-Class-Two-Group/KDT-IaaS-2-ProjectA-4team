@@ -6,10 +6,10 @@ export default function MyDocument(props: DocumentProps) {
   return (
     <Html>
       <Head>
-        {/* <meta
-          httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; connect-src 'self' http://13.125.186.170:3001;"
-        /> */}
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <link rel="icon" type="image/x-icon" href={favicon} />
       </Head>
       <body>
