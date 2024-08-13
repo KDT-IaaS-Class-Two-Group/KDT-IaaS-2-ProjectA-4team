@@ -57,7 +57,7 @@ const UserPage: FC = () => {
         />
         <ButtonComponent
           type="submit"
-          className="w-60 bg-yellow-400 text-white hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border text-lg font-bold rounded-3xl mx-6 my-8"
+          className="mx-6 my-8 text-lg font-bold text-white bg-yellow-400 w-60 hover:bg-white hover:text-yellow-400 hover:border-yellow-400 hover:border rounded-3xl"
           onClick={purchase}
         >
           Buy !

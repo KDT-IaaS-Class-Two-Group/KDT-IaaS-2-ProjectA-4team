@@ -27,7 +27,7 @@ const CardComponent: FC<CardComponentProps> = ({
   const BURGER_URL = process.env.NEXT_PUBLIC_S3_BURGER_URL as string;
   return (
     <div onClick={() => onAddToCart(title, content, id)}>
-      <Card className="h-56 rounded-xl hover:cursor-pointer">
+      <Card className="h-56 rounded-xl hover:cursor-pointer hover:border-1 hover:border-yellow-400">
         <Image
           id="burgerImage"
           width={200}

@@ -8,6 +8,7 @@ import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import DynamicTable from "../DynamicTable";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
+import ProductPage from "../expiration/button/savedatabutton";
 
 /**
  * @moonhr 24.07.31
@@ -74,7 +75,10 @@ const ProductTable: React.FC = () => {
   );
   return (
     <>
-      <SearchForm onSearch={handleSearch} />
+      <div className="flex justify-between mt-8">
+        <ProductPage />
+        <SearchForm onSearch={handleSearch} />
+      </div>
       <DynamicTable<ProductDTO>
         data={filteredData}
         renderActions={(row) => (
@@ -83,7 +87,7 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openOrderModal(row)}
-              className="mb-1 text-xs bg-slate-500 hover:bg-black"
+              className="text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
             >
               발주하기
             </ButtonComponent>
@@ -91,7 +95,7 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openUpdateModal(row)}
-              className="mt-1 text-xs bg-slate-500 hover:bg-black"
+              className="mt-1 text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
             >
               수정하기
             </ButtonComponent>

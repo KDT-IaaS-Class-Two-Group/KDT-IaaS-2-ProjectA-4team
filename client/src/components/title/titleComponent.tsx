@@ -5,13 +5,11 @@
 import React from "react";
 import h1 from "src/interfaces/components/title/TitleComponent.interface";
 
-const TitleComponent: React.FC<h1> = ({ className, titletext }) => {
+const TitleComponent: React.FC<h1> = ({ titletext, className }) => {
   return (
-    <div className={className}>
-      <h1 className="h-10 mt-3 text-xl font-bold text-center w-50">
-        {titletext}
-      </h1>
-    </div>
+    <h1 className={`text-3xl font-bold w-50 h-10 mt-3 ${className}`}>
+      {titletext}
+    </h1>
   );
 };
 
