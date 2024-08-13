@@ -1,3 +1,10 @@
 {
-  "workspaces":["client", "server", "db"]
+  "workspaces": [
+    "client",
+    "server",
+    "db"
+  ],
+  "dependencies": {
+    "tailwind-scrollbar-hide": "^1.1.7"
+  }
 }
