@@ -24,6 +24,7 @@ const CardComponent: FC<CardComponentProps> = ({
   id,
   onAddToCart,
 }) => {
+  const BURGER_URL = process.env.NEXT_PUBLIC_S3_BURGER_URL as string;
   return (
     <div onClick={() => onAddToCart(title, content, id)}>
       <Card className="h-56 rounded-xl hover:cursor-pointer">
@@ -32,7 +33,7 @@ const CardComponent: FC<CardComponentProps> = ({
           width={200}
           height={150}
           className="mx-auto mt-2"
-          src="/burger.jpeg"
+          src={BURGER_URL}
           alt="burgerImage"
         />
         <div className="my-2">

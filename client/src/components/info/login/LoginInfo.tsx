@@ -22,6 +22,8 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
   const [userName, setUserName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const user_icon = process.env.NEXT_PUBLIC_S3_USER_ICON_URL as string;
+
   useEffect(() => {
     const fetchUserName = async () => {
       const EP_LOGININFO = process.env.NEXT_PUBLIC_EP_LOGININFO as string;
@@ -54,7 +56,7 @@ const LoginInfoComponent: FC<LoginInfoComponentProps> = ({ className }) => {
         id="userIcon"
         width={40}
         height={40}
-        src="/userIcon.png"
+        src={user_icon}
         alt="userIcon"
       />
       <div className="ml-3 text-sm font-light">
