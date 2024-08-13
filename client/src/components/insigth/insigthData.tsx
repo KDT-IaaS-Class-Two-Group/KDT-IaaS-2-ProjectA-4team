@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import ILogsData from "@shared/interface/logsData.interface";
+import Image from "next/image";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -15,6 +18,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@components/ui/popover";
+import TitleComponent from "../title/titleComponent";
+import AdminNav from "../nav/admin/adminNav";
 
 const DatePickerWithRange = ({
   className,
@@ -22,8 +27,8 @@ const DatePickerWithRange = ({
   const LOGS = process.env.NEXT_PUBLIC_LOGS as string;
 
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2024, 0, 20),
-    to: addDays(new Date(2024, 0, 20), 20),
+    from: addDays(new Date(), -20),
+    to: new Date(),
   });
 
   const [logsData, setLogsData] = useState<ILogsData | null>(null);
@@ -58,83 +63,160 @@ const DatePickerWithRange = ({
   };
 
   return (
-    <div className={cn("grid gap-2", className)}>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            id="date"
-            variant={"outline"}
-            className={cn(
-              "w-[300px] justify-start text-left font-normal",
-              !date && "text-muted-foreground",
-            )}
-          >
-            <CalendarIcon className="w-4 h-4 mr-2" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
-              ) : (
-                format(date.from, "LLL dd, y")
-              )
-            ) : (
-              <span>Pick a date</span>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            initialFocus
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
-            numberOfMonths={2}
-          />
-        </PopoverContent>
-      </Popover>
-
-      <Button onClick={fetchLogs} className="mt-4">
-        Fetch Logs
-      </Button>
-
-      {logsData && (
-        <div className="mt-4">
-          <h2>기간 내 Insigth Data:</h2>
-          <div>
-            <h3>최다 방문자 top10</h3>
-            <p>{JSON.stringify(logsData.top10Users)}</p>
-          </div>
-          <div>
-            <h3>평균 사용자 체류 시간</h3>
-            <p>{JSON.stringify(logsData.averageUserTime)}</p>
-          </div>
-          <div>
-            <h3>카테고리별 최다 주문내역</h3>
-            <p>{JSON.stringify(logsData.topSellingProduct)}</p>
-          </div>
-          <div>
-            <h3>카테고리별 최소 주문내역</h3>
-            <p>{JSON.stringify(logsData.leastSellingProduct)}</p>
-          </div>
-          <div>
-            <h3>최다 발주</h3>
-            <p>{JSON.stringify(logsData.mostOrdered)}</p>
-          </div>
-          <div>
-            <h3>폐기 메뉴</h3>
-            <p>{JSON.stringify(logsData.discardedMenu)}</p>
-          </div>
-          <div>
-            <h3>신메뉴</h3>
-            <p>{JSON.stringify(logsData.newMenu)}</p>
-          </div>
-          {/* <pre>{JSON.stringify(logsData, null, 2)}</pre> */}
+    <>
+      <div className="grid w-screen gap-2 p-3 overflow-hidden grid-cols-custom-30-70">
+        <div>
+          <AdminNav />
         </div>
-      )}
-    </div>
+        <div className="flex flex-col gap-4 mr-5">
+          <TitleComponent className="font-jamsil" titletext="인사이트" />
+          <div className="flex mt-5">
+            <div className={cn(className)}>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id="date"
+                    variant={"outline"}
+                    className={cn(
+                      "w-[300px] justify-start text-left font-normal",
+                      !date && "text-muted-foreground",
+                    )}
+                  >
+                    <CalendarIcon className="w-4 h-4 mr-2" />
+                    {date?.from ? (
+                      date.to ? (
+                        <>
+                          {format(date.from, "LLL dd, y")} -{" "}
+                          {format(date.to, "LLL dd, y")}
+                        </>
+                      ) : (
+                        format(date.from, "LLL dd, y")
+                      )
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    initialFocus
+                    mode="range"
+                    defaultMonth={date?.from}
+                    selected={date}
+                    onSelect={setDate}
+                    numberOfMonths={2}
+                  />
+                </PopoverContent>
+              </Popover>
+
+              <Button onClick={fetchLogs} className="mt-4">
+                <FontAwesomeIcon icon={faSearch} />
+              </Button>
+            </div>
+          </div>
+          {logsData && (
+            <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/user.png"
+                  alt="mostVisitior"
+                />
+                <h3 className="font-semibold text-xl mt-2">
+                  최다 방문자 top10
+                </h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.top10Users)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/time.png"
+                  alt="stayTime"
+                />
+                <h3 className="font-semibold text-xl mt-2">
+                  평균 사용자 체류 시간
+                </h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.averageUserTime)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/truck.png"
+                  alt="mostOrder"
+                />
+                <h3 className="font-semibold text-xl mt-2">최다 발주</h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.mostOrdered)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/order.png"
+                  alt="mostSeller"
+                />
+                <h3 className="font-semibold text-xl mt-2">최다 주문내역</h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.topSellingProduct)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/order.png"
+                  alt="worstSeller"
+                />
+                <h3 className="font-semibold text-xl mt-2">최소 주문내역</h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.leastSellingProduct)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/trash.png"
+                  alt="trash"
+                />
+                <h3 className="font-semibold text-xl mt-2">폐기 메뉴</h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.discardedMenu)}
+                </p>
+              </div>
+              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+                <Image
+                  className="mt-3 w-8 h-8 mx-auto"
+                  width={36}
+                  height={36}
+                  src="/new.png"
+                  alt="new"
+                />
+                <h3 className="font-semibold text-xl mt-2">신메뉴</h3>
+                <p className="mt-1 text-xl font-thin">
+                  {JSON.stringify(logsData.newMenu)}
+                </p>
+              </div>
+              {/* <pre>{JSON.stringify(logsData, null, 2)}</pre> */}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 
