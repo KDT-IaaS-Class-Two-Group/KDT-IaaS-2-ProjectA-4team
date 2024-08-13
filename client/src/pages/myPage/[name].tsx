@@ -28,11 +28,11 @@ const MyPage: React.FC = () => {
       id="root"
       className="flex flex-col items-center justify-center w-screen h-screen"
     >
-      <LoginInfoComponent />
-      <div className="h-90% w-80% flex flex-col justify-center items-center">
+      <div className="h-90% w-55% flex flex-col justify-center items-center gap-5">
         <div id="content-header" className="w-full h-10% flex">
           <button onClick={redirect}>&larr; 돌아가기</button>
         </div>
+        <LoginInfoComponent />
         {redirectError && <p className="mt-2 text-red-500">{redirectError}</p>}
         <MyPageFormComponent />
         {loading ? (
