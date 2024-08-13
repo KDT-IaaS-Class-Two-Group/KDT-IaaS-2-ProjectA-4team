@@ -6,7 +6,7 @@ export class ProductDTO extends BaseDTO {
   constructor(product: IProduct) {
     super(
       product._id,
-      product.product_Category,
+      product.productCategory,
       product.productName,
       product.unitPrice,
       product.quantity,
