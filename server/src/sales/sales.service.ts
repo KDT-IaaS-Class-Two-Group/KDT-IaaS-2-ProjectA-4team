@@ -39,7 +39,6 @@ export class SaleService {
   async saleHistory(
     email: string,
     products: Array<{ productName: string; quantity: number }>,
-    totalPrice: number,
     saleDate: string,
   ) {
     const member = await this.memberModel.findOne({ email }).exec();
@@ -47,6 +46,7 @@ export class SaleService {
       throw new Error('Member not found');
     }
 
+    let totalPrice = 0;
     const productSales = await Promise.all(
       products.map(async (product) => {
         const productDoc = await this.productModel
@@ -55,6 +55,7 @@ export class SaleService {
         if (!productDoc) {
           throw new Error(`Product not found: ${product.productName}`);
         }
+        totalPrice += productDoc.unitPrice * product.quantity;
         return {
           productID: productDoc._id,
           quantity: product.quantity,

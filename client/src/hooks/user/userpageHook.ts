@@ -67,12 +67,7 @@ export const UserpageHook = () => {
     // 확인을 위한 디버깅 로그 추가
     console.log("Products before purchase:", products);
 
-    const purchaseData = await salesHistoryFetch(
-      userEmail,
-      products,
-      totalPrice,
-      today,
-    );
+    const purchaseData = await salesHistoryFetch(userEmail, products, today);
 
     // 장바구니 비우기
     setCartItems([]);
