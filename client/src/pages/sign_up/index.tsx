@@ -3,6 +3,7 @@ import SignUpForm from "../../components/sign_up/Form";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import { SignUpFormRef } from "src/interfaces/components/sign_up/Form.interface";
+import Logo from "src/components/logo/logo";
 
 const SignUpPage: React.FC = () => {
   const formRef = useRef<SignUpFormRef>(null);
@@ -52,12 +53,49 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
-    <div className="w-svw h-svh">
-      <SignUpForm ref={formRef} />
-      <button className="w-20 h-6 bg-slate-500" onClick={handleClick}>
-        회원 가입
-      </button>
-      {responseMessage && <p className="text-red-500">{responseMessage}</p>}
+    <div className="relative w-screen h-screen overflow-hidden">
+      {/* 콘텐츠 */}
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-6xl italic font-bold">Welcome To</h1>
+        <h1 className="m-2 italic font-extrabold text-8xl">CRAPCRAP</h1>
+        <h1 className="text-6xl italic font-bold">Burger</h1>
+        <div className="relative flex flex-col items-center justify-center overflow-hidden w-80% h-96">
+          <div
+            id="main"
+            className={`absolute flex flex-col items-center transition-transform duration-700 -translate-x-44`}
+          >
+            <Logo
+              className="relative w-auto"
+              width={300}
+              height={100}
+              alt="logo"
+              priority={true}
+            />
+            <div
+              id="clickButton"
+              onClick={handleClick}
+              className="relative p-3 text-xl text-center bg-gray-200 rounded-full w-50% font-bold italic mt-5 hover:bg-amber-400 cursor-pointer"
+            >
+              Click Me!
+            </div>
+          </div>
+          <div className="h-auto translate-x-44 w-300px">
+            <h1 className="relative mb-3 text-3xl italic font-bold">Sing Up</h1>
+            <SignUpForm ref={formRef} />
+            <button
+              className="w-full p-2 text-lg text-white rounded-xl bg-amber-400 hover:font-semibold"
+              onClick={handleClick}
+            >
+              회원 가입
+            </button>
+            {responseMessage && (
+              <p className="text-xs font-thin text-red-500">
+                {responseMessage}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
