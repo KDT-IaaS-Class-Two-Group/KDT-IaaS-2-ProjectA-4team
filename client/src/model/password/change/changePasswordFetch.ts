@@ -9,7 +9,8 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
  * @returns responseData 응답 값
  */
 export default async (password: string, changePassword: string) => {
-  const EP_CHANGE_PASSWORD = process.env.NEXT_PUBLIC_EP_CHANGE_PASSWORD as string;
+  const EP_CHANGE_PASSWORD = process.env
+    .NEXT_PUBLIC_EP_CHANGE_PASSWORD as string;
 
   try {
     const response = await fetcher(
@@ -26,18 +27,20 @@ export default async (password: string, changePassword: string) => {
 
     const responseData = await response.json();
     console.log(responseData);
-    
+
     if (!response.ok) {
       console.log(responseData);
-      throw new Error(responseData.message || '비밀번호 변경 중 오류가 발생했습니다.');
+      throw new Error(
+        responseData.message || "비밀번호 변경 중 오류가 발생했습니다.",
+      );
     }
 
     return responseData;
   } catch (error) {
-    console.error('Error in changePasswordFetch:', error);
+    console.error("Error in changePasswordFetch:", error);
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('알 수 없는 오류가 발생했습니다.');
+    throw new Error("알 수 없는 오류가 발생했습니다.");
   }
 };

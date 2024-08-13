@@ -17,6 +17,12 @@ const commonConfig = {
       screens: {
         "2xl": "1400px",
       },
+      transitionProperty: {
+        "border-radius": "border-radius", // 사용자 정의 전환 속성 추가
+      },
+      transitionDuration: {
+        300: "300ms", // 사용자 정의 전환 지속 시간
+      },
     },
     extend: {
       gridTemplateColumns: {
@@ -27,6 +33,7 @@ const commonConfig = {
         "20vw": "20vw",
         "80vw": "80vw",
         "62%": "62%",
+        "300px": "300px",
       },
       height: {
         "80vh": "80vh",

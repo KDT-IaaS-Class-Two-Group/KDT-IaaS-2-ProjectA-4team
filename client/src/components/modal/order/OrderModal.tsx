@@ -43,7 +43,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
     try {
       const newProduct = new ProductDTO({
         _id: product._id,
-        productCategory: product.productCategory,
+        product_Category: product.product_Category,
         productName: product.productName,
         unitPrice: product.unitPrice,
         quantity: quantity,

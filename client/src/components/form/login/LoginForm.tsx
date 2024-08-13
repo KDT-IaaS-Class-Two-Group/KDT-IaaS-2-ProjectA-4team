@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import InputComponent from "../../input/Input";
-import CustomButton from "../../button/customized/CustomButton";
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { Button } from "@components/ui/button";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import routeUrlGenerator from "src/modules/generator/routeUrlGenerator";
+import { Input } from "@components/ui/input";
+
+interface LoginFormProps {
+  className?: string;
+}
 
 /**
  * @moonhr 24.07.25
@@ -14,7 +17,7 @@ import routeUrlGenerator from "src/modules/generator/routeUrlGenerator";
  * @param onSuccessRedirect 이동할 페이지
  * @returns 로그인 폼
  */
-export const LoginForm = () => {
+export const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -64,29 +67,36 @@ export const LoginForm = () => {
     }
   };
 
+  // 스타일
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <form className="flex flex-col items-center justify-center w-full gap-4 ">
-      <InputComponent
-        type="text"
-        className="w-full bg-white opacity-50 hover:bg-red-400/70"
-        placeholder="email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <InputComponent
-        type="password"
-        className="w-full bg-white opacity-50 hover:bg-red-400/70"
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <CustomButton
-        variant="outline"
-        type="submit"
-        size="default"
-        className="text-lg text-white rounded-3xl w-28 bg-rose-400"
-        onClick={handleAction}
-      >
-        Login
-      </CustomButton>
-    </form>
+    <div className={className}>
+      <form className="flex flex-col items-start justify-start w-full gap-4 ">
+        <Input
+          type="text"
+          className="w-full bg-gray-200 opacity-50 p-7 hover:bg-amber-400/70 rounded-xl"
+          placeholder="email"
+          autoComplete="user-email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          className="w-full bg-gray-200 opacity-50 p-7 hover:bg-amber-400/70 rounded-xl"
+          placeholder="password"
+          autoComplete="current-password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          variant="outline"
+          type="submit"
+          size="default"
+          className="w-full p-3 text-lg text-white rounded-xl bg-amber-400 hover:font-semibold"
+          onClick={handleAction}
+        >
+          Login
+        </Button>
+      </form>
+    </div>
   );
 };

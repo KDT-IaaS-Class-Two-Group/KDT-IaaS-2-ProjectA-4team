@@ -1,3 +1,3 @@
 export default interface IProductCategory {
-  productCategory: string;
+  product_Category: string;
 }
