@@ -104,7 +104,7 @@ export const ExpirationDataTable: React.FC = () => {
               </TableCell>
               <TableCell>
                 <ButtonComponent
-                  className="w-24 text-center bg-cyan-500 rounded-xl text-white text-sm leading-loose hover:font-medium hover:text-cyan-500 hover:bg-white hover:border hover:border-cyan-500"
+                  className="w-24 text-center bg-cyan-500 rounded-xl text-white text-sm leading-loose border border-transparent hover:text-cyan-500 hover:bg-white hover:border hover:border-cyan-500"
                   variant="default"
                   type="button"
                   onClick={() => openModal(product._id)}
