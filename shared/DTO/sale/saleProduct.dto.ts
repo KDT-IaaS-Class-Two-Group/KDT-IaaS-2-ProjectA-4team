@@ -1,31 +1,28 @@
 // src/dtos/product.dto.ts
-
+import { Types } from "mongoose";
 import ISaleProducts from "./interface/SaleProducts.interface";
 
 export class SaleProductDTO implements ISaleProducts {
-  public _id: string;
-  public productID: number | undefined;
+  public _id: Types.ObjectId;
+  public productID: Types.ObjectId;
+  public quantity: number;
   public productName: string;
   public unitPrice: number;
-  public quantity: number;
-  public totalPrice: number;
 
   constructor(product: ISaleProducts) {
     this._id = product._id;
     this.productID = product.productID;
-    this.productName = product.productName;
-    this.unitPrice = product.unitPrice;
     this.quantity = product.quantity;
-    this.totalPrice = product.totalPrice;
+    this.productName = product.productName
+    this.unitPrice = product.unitPrice
   }
 
   public toJSON(): object {
     return {
+      _id: this._id,
       productID: this.productID,
-      productName: this.productName,
-      unitPrice: this.unitPrice,
       quantity: this.quantity,
-      totalPrice: this.totalPrice,
+      unitPrice: this.unitPrice
     };
   }
 }
