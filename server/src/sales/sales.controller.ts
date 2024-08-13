@@ -28,15 +28,18 @@ export class SaleController {
     body: {
       email: string;
       products: Array<{ productName: string; quantity: number }>;
-      totalPrice: number;
       saleDate: string;
     },
   ) {
     try {
-      const { email, products, totalPrice, saleDate } = body;
-      await this.saleService.saleHistory(email, products, totalPrice, saleDate);
+      const { email, products, saleDate } = body;
+      const result = await this.saleService.saleHistory(
+        email,
+        products,
+        saleDate,
+      );
 
-      return { message: 'Sale recorded successfully' };
+      return { message: 'Sale recorded successfully', data: result };
     } catch (error) {
       console.error('Error in buyProduct:', error);
       throw new Error('Failed to process purchase');

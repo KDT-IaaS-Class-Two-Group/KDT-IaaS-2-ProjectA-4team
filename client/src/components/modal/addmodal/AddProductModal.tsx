@@ -49,7 +49,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
       //데이터 들어갈 부분
       const newProduct = new ProductDTO({
         _id: "",
-        productCategory,
+        productCategory: productCategory,
         productName,
         unitPrice,
         quantity,
@@ -65,9 +65,9 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   //모달창
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="fixed inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-lg z-50 w-full max-w-md h-1/3">
-        <DialogTitle className="text-xl font-bold mb-4">제품 구매</DialogTitle>
-        <div className="grid grid-cols-4 items-center gap-4 mb-4">
+      <DialogContent className="fixed z-50 w-full max-w-md p-6 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg inset-1/2 h-1/3">
+        <DialogTitle className="mb-4 text-xl font-bold">제품 구매</DialogTitle>
+        <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="category" className="text-right border-r-black">
             분류
           </Label>
@@ -96,7 +96,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
             placeholder="제품을 입력"
           />
         </div>
-        <div className="grid grid-cols-4 items-center gap-4 mb-4">
+        <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="quantity" className="text-right border-r-black">
             수량
           </Label>
@@ -110,7 +110,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
             min="1"
           />
         </div>
-        <div className="grid grid-cols-4 items-center gap-4 mb-4">
+        <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="unitPrice" className="text-right border-r-black">
             가격
           </Label>

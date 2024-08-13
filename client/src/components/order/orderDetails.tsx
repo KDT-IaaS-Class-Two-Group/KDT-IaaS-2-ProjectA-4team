@@ -9,23 +9,20 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
   return (
     <div id="order-details" className="h-50% w-full">
       <div id="order-details__header">
-        <h1 className="font-bold text-lg">주문내역</h1>
+        <h1 className="text-lg font-bold">주문내역</h1>
       </div>
-      <div
-        id="order-details__content"
-        className="flex flex-col h-full overflow-y-scroll"
-      >
+      <div id="order-details__content" className="flex flex-col h-full">
         {orderDetails.length > 0 ? (
           orderDetails.map((order) => (
             <div
               key={order._id}
-              className="order-details__items flex flex-col mt-4"
+              className="flex flex-col mt-4 order-details__items"
             >
               <h2 className="font-semibold text-md">매출 번호: {order._id}</h2>
               {order.products.map((product, index) => (
                 <div
                   key={index}
-                  className="flex justify-between items-center mt-2"
+                  className="flex items-center justify-between mt-2"
                 >
                   <p>{product.productName}</p>
                   <p>
@@ -34,7 +31,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
                   <p>{(product.unitPrice * product.quantity).toFixed(2)} 원</p>
                 </div>
               ))}
-              <div className="flex justify-between items-center mt-4 font-bold">
+              <div className="flex items-center justify-between mt-4 font-bold">
                 <p>총 가격:</p>
                 <p>{order.totalPrice.toFixed(2)} 원</p>
               </div>

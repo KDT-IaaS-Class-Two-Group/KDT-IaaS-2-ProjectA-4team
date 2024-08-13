@@ -22,7 +22,7 @@ export const ExpirationDateHook = () => {
   const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
   const LOG = process.env.NEXT_PUBLIC_LOG as string;
   const LOG_DELSTOCK = process.env.NEXT_PUBLIC_LOG_DELSTOCK as string;
-  const LOG_ADDMENU = process.env.NEXT_PUBLIC_LOG_ADDMENU as string;
+  const LOG_NEWMENU = process.env.NEXT_PUBLIC_LOG_NEWMENU as string;
 
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -91,11 +91,11 @@ export const ExpirationDateHook = () => {
       setError("데이터를 추가하는 데 실패했습니다.");
     }
     try {
-      await fetcher(serverUrlGenerator(LOG, LOG_ADDMENU), "post", {
+      await fetcher(serverUrlGenerator(LOG, LOG_NEWMENU), "post", {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ product }),
+        body: JSON.stringify(product),
         credentials: "include",
       });
     } catch (error) {

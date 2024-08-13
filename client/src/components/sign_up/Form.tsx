@@ -86,7 +86,6 @@ const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
 
           return (
             <React.Fragment key={index}>
-              <p>{label}</p>
               <InputComponent
                 ref={(el: HTMLInputElement | null) => {
                   inputRefs.current[index] = el;
@@ -95,6 +94,7 @@ const SignUpForm = forwardRef<SignUpFormRef, SignUpFormProps>((props, ref) => {
                 name={name}
                 placeholder={placeholder}
                 type={type}
+                className="mb-4 bg-gray-200 opacity-50 hover:bg-amber-400/70 rounded-xl"
               />
               {errors[name] && <p className="text-red-500">{errors[name]}</p>}
             </React.Fragment>

@@ -35,7 +35,7 @@ export const UserpageHook = () => {
     useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<
-    { productID: string; quantity: number }[]
+    { productName: string; quantity: number }[]
   >([]);
 
   const purchase = () => {
@@ -64,14 +64,15 @@ export const UserpageHook = () => {
       throw new Error("User email is required but was not found.");
     }
 
-    const purchaseData = await salesHistoryFetch(
-      userEmail,
-      products,
-      totalPrice,
-      today,
-    );
+    // 확인을 위한 디버깅 로그 추가
+    console.log("Products before purchase:", products);
 
+    const purchaseData = await salesHistoryFetch(userEmail, products, today);
+
+    // 장바구니 비우기
     setCartItems([]);
+    setProducts([]); // <-- 추가: 장바구니와 제품 목록 비우기
+
     setIsPurchaseModalOpen(false);
     console.log(purchaseData);
     return purchaseData;
@@ -110,7 +111,7 @@ export const UserpageHook = () => {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
         if (itemIndex === -1) {
-          setProducts([...products, { productID: menu, quantity: 1 }]);
+          setProducts([...products, { productName: menu, quantity: 1 }]);
           return [...prevItems, { menu, unitPrice, id }];
         }
         openModal();
@@ -124,13 +125,13 @@ export const UserpageHook = () => {
   const onCount = (count: number, menu: string) => {
     setProducts((prevProducts) => {
       const productIndex = prevProducts.findIndex(
-        (product) => product.productID === menu,
+        (product) => product.productName === menu,
       );
 
       if (productIndex !== -1) {
         prevProducts[productIndex].quantity = count;
       } else {
-        prevProducts.push({ productID: menu, quantity: count });
+        prevProducts.push({ productName: menu, quantity: count });
       }
 
       return [...prevProducts];

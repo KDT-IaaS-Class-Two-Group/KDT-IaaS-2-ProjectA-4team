@@ -78,7 +78,12 @@ export class LogCreationController {
         token,
         this.memberModel,
       );
-      const { _id, productCategory, productName, quantity } = data;
+      const {
+        _id,
+        productCategory: productCategory,
+        productName,
+        quantity,
+      } = data;
       await this.userLogService.createLog(await memberId, 'addStock', {
         product_id: _id,
         productCategory: productCategory,
@@ -101,7 +106,12 @@ export class LogCreationController {
       );
       const data = await this.productModel.findById(id).exec();
       if (data) {
-        const { _id, productCategory, productName, quantity } = data;
+        const {
+          _id,
+          productCategory: productCategory,
+          productName,
+          quantity,
+        } = data;
         await this.userLogService.createLog(await memberId, 'delStock', {
           product_id: _id,
           productCategory: productCategory,
