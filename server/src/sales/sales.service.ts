@@ -18,11 +18,19 @@ export class SaleService {
   ) {}
 
   async findAll(): Promise<ISale[]> {
-    return this.saleModel.find().populate('memberID').exec();
+    return this.saleModel
+      .find()
+      .populate('memberID')
+      .populate('products.productID')
+      .exec();
   }
 
   async findById(id: string): Promise<ISale | null> {
-    return this.saleModel.findById(id).populate('memberID').exec();
+    return this.saleModel
+      .findById(id)
+      .populate('memberID')
+      .populate('productID')
+      .exec();
   }
 
   async findByMemberName(email: string): Promise<ISale[]> {
@@ -33,6 +41,7 @@ export class SaleService {
     return this.saleModel
       .find({ memberID: member._id })
       .populate('memberID')
+      .populate('productID')
       .exec();
   }
 

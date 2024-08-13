@@ -1,17 +1,18 @@
 import ISale from "../../../db/sale/Sale.interface";
 import { SaleProductDTO } from "./saleProduct.dto";
+import { Types } from 'mongoose';
 
 export class SaleDTO implements ISale {
-  public _id: string; // ObjectId를 문자열로 처리
-  public memberID: string;
-  public products: SaleProductDTO[]; 
-  public saleDate: string; // Date를 string으로 처리
+  public _id: string;
+  public memberID: Types.ObjectId;
+  public products: SaleProductDTO[];
+  public saleDate: string;
   public totalPrice: number;
 
   constructor(sale: ISale) {
-    this._id = sale._id.toString(); // ObjectId를 문자열로 변환
+    this._id = sale._id.toString();
     this.memberID = sale.memberID;
-    this.products = sale.products.map((product: any) => new SaleProductDTO(product)); // 배열로 변환
+    this.products = sale.products.map(product => new SaleProductDTO(product));
     this.saleDate = sale.saleDate;
     this.totalPrice = sale.totalPrice;
   }
@@ -20,7 +21,7 @@ export class SaleDTO implements ISale {
     return {
       _id: this._id,
       memberID: this.memberID,
-      products: this.products.map(product => product.toJSON()), // 배열로 변환
+      products: this.products.map(product => product.toJSON()),
       saleDate: this.saleDate,
       totalPrice: this.totalPrice,
     };

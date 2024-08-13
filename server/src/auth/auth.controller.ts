@@ -107,7 +107,11 @@ export class AuthController {
     try {
       const decoded = this.authService.verifyToken(token);
       const userEmail = decoded.email;
-      await this.authService.changePassword(userEmail, oldPassword, newPassword);
+      await this.authService.changePassword(
+        userEmail,
+        oldPassword,
+        newPassword,
+      );
       return res
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });

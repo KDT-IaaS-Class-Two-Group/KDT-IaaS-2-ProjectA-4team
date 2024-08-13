@@ -4,7 +4,15 @@ import DynamicTable from "../DynamicTable";
 import filterData from "src/utils/filterData";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
-import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
+import { ClientSaleDTO } from "@shared/DTO/sale/clientSale.interface";
+
+interface AggregatedData {
+  [key: string]: {
+    totalQuantity: number;
+    totalPrice: number;
+    unitPrice: number;
+  };
+}
 
 /**
  * @crystal23733 24.08.02
@@ -29,43 +37,36 @@ const SalesInquiryTable: React.FC = () => {
   }
 
   // 제품별 집계 처리
-  const aggregatedData = (data as SaleDTO[]).reduce(
-    (acc, sale) => {
-      sale.products.forEach((product) => {
-        const productName = product.productName;
+  const aggregatedData = (data as ClientSaleDTO[]).reduce((acc, sale) => {
+    sale.products.forEach((product) => {
+      const productName = product.productID.productName;
 
-        if (!acc[productName]) {
-          acc[productName] = {
-            totalQuantity: 0,
-            totalPrice: 0,
-            unitPrice: product.unitPrice,
-          };
-        }
+      if (!acc[productName]) {
+        acc[productName] = {
+          totalQuantity: 0,
+          totalPrice: 0,
+          unitPrice: product.productID.unitPrice,
+        };
+      }
 
-        acc[productName].totalQuantity += product.quantity;
-        acc[productName].totalPrice += product.unitPrice * product.quantity; // 각 제품의 총액 계산
-      });
-      return acc;
-    },
-    {} as Record<
-      string,
-      { totalQuantity: number; totalPrice: number; unitPrice: number }
-    >,
-  );
+      acc[productName].totalQuantity += product.quantity;
+      acc[productName].totalPrice +=
+        product.productID.unitPrice * product.quantity;
+    });
+    return acc;
+  }, {} as AggregatedData);
 
-  const tableData = Object.keys(aggregatedData)
-    .map((productName) => ({
-      productName,
-      ...aggregatedData[productName],
-    }))
-    .filter(
-      (item) => filterData([item], searchQuery, "productName").length > 0,
-    );
+  const tableData = Object.keys(aggregatedData).map((productName) => ({
+    productName,
+    ...aggregatedData[productName],
+  }));
+
+  const filteredData = filterData(tableData, searchQuery, "productName");
 
   return (
     <>
       <SearchForm onSearch={handleSearch} />
-      <DynamicTable data={tableData} />
+      <DynamicTable data={filteredData} />
     </>
   );
 };

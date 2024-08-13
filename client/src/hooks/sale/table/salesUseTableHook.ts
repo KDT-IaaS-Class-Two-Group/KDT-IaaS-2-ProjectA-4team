@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { SaleDTO } from "../../../../../shared/DTO/sale/sale.dto";
 import salesFetchTableData from "src/model/sale/table/salesFetchTableData";
 import { failedLoadDataMessage } from "static/hooks/sale/table/salesUseTableHook.static";
+import { ClientSaleDTO } from "@shared/DTO/sale/clientSale.interface";
 
 /**
  * @crystal23733 24.07.30
@@ -9,7 +9,7 @@ import { failedLoadDataMessage } from "static/hooks/sale/table/salesUseTableHook
  * @return data, loading, error
  */
 export default () => {
-  const [data, setData] = useState<SaleDTO[]>([]);
+  const [data, setData] = useState<ClientSaleDTO[]>([]); // SaleDTO를 ClientSaleDTO로 변경
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
