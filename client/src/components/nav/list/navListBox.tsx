@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LinkButtonComponent from "../../button/link/linkButtonComponent";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 /**
  * @crystal23733 24.07.29
  * @returns aside list
  */
 const NavListBox: React.FC = () => {
-  const [selectMenu, setSelectMenu] = useState("stockInfo");
+  const router = useRouter();
+  const [selectMenu, setSelectMenu] = useState("");
+
+  useEffect(() => {
+    const currentPath = router.pathname.split("/").pop() || "stockInfo";
+    setSelectMenu(currentPath);
+  }, [router.pathname]);
+
   const menus = {
     menusKo: [
       "재고 관리",
@@ -31,7 +39,11 @@ const NavListBox: React.FC = () => {
         {menus.menusEn.map((menu, index) => (
           <li
             key={menu}
-            className="flex hover:bg-cyan-500 hover:bg-opacity-15 hover:rounded-lg hover:font-medium font-normal text-gray-500 my-1 px-4 py-3"
+            className={
+              selectMenu === menu
+                ? "flex bg-cyan-500 bg-opacity-15 rounded-lg font-medium my-1 px-4 py-3"
+                : "flex hover:bg-cyan-500 hover:bg-opacity-15 hover:rounded-lg font-normal text-gray-500 my-1 px-4 py-3"
+            }
           >
             <div className="pt-1">
               <Image
@@ -43,7 +55,11 @@ const NavListBox: React.FC = () => {
             </div>
             <LinkButtonComponent
               onClick={() => setSelectMenu(menu)}
-              className="hover:font-medium font-normal text-gray-500 my-1 px-4 py-3"
+              className={
+                selectMenu === menu
+                  ? "text-cyan-500 font-medium my-1 px-4 py-3"
+                  : "font-normal text-gray-500 my-1 px-4 py-3"
+              }
               href={`/admin/${menu}`}
             >
               {menus.menusKo[index]}
