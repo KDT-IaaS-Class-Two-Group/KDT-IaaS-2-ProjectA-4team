@@ -17,7 +17,7 @@ const AdminstockDate: React.FC = () => {
         </div>
         <div className="flex flex-col gap-4 mr-5">
           <div className="items-centerw-auto h-10 py-3">
-            <TitleComponent titletext="유통기한 관리" />
+            <TitleComponent className="font-jamsil" titletext="유통기한 관리" />
           </div>
           <ExpirationDataTable />
         </div>

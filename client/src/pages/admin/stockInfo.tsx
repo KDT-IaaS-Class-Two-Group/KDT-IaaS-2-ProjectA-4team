@@ -12,7 +12,7 @@ const StockInfo = () => {
         </div>
         <div className="flex flex-col gap-4 mr-5">
           <div className="items-center w-auto h-10 py-3">
-            <TitleComponent titletext="재고 조회" />
+            <TitleComponent className="font-jamsil" titletext="재고 조회" />
           </div>
           {/* 각 페이지에 맞는 테이블 배치 */}
           <ProductTable></ProductTable>
