@@ -83,7 +83,7 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openOrderModal(row)}
-              className="text-gray-500 underline text-xs leading-loose hover:text-black"
+              className="text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
             >
               발주하기
             </ButtonComponent>
@@ -91,7 +91,7 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openUpdateModal(row)}
-              className="mt-1 text-gray-500 underline text-xs leading-loose hover:text-black"
+              className="mt-1 text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
             >
               수정하기
             </ButtonComponent>
