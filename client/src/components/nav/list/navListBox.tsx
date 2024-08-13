@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LinkButtonComponent from "../../button/link/linkButtonComponent";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { menus } from "static/components/menu/admin/navListBox.static";
 
 /**
  * @crystal23733 24.07.29
@@ -15,23 +16,6 @@ const NavListBox: React.FC = () => {
     const currentPath = router.pathname.split("/").pop() || "stockInfo";
     setSelectMenu(currentPath);
   }, [router.pathname]);
-
-  const menus = {
-    menusKo: [
-      "재고 관리",
-      "유통기한 관리",
-      "매출 관리",
-      "회원 관리",
-      "인사이트",
-    ],
-    menusEn: [
-      "stockInfo",
-      "stockDate",
-      "salesInquiry",
-      "memberInfo",
-      "insight",
-    ],
-  };
 
   return (
     <nav className="px-5">
