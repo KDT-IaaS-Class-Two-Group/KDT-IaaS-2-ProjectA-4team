@@ -60,7 +60,6 @@
     @apply border-border;
   }
   body {
-    font-family: "TheJamsil5Bold", sans-serif;
     @apply bg-background text-foreground;
     font-feature-settings:
       "rlig" 1,
