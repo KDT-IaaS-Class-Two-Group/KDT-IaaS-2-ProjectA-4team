@@ -28,7 +28,7 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="w-24 text-center bg-cyan-500 rounded-xl text-white text-sm leading-loose border border-transparent hover:text-cyan-500 hover:bg-white hover:border hover:border-cyan-500">
       <ButtonComponent onClick={openModal} variant="default">
         제품 구매
       </ButtonComponent>

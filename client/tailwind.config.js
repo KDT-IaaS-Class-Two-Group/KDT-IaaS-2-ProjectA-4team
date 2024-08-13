@@ -26,7 +26,7 @@ const commonConfig = {
     },
     extend: {
       gridTemplateColumns: {
-        "custom-20-80": "20% 80%",
+        "custom-30-70": "25% 75%",
       },
       width: {
         "15vw": "15vw",
@@ -107,6 +107,9 @@ const commonConfig = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        jamsil: ["TheJamsil4Medium", "sans-serif"],
       },
     },
   },
