@@ -28,7 +28,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex justify-end p-4">
+    <div className="flex justify-end pb-4">
       <form
         className="w-80 max-w-md flex items-center border border-gray-300 rounded-lg shadow-sm overflow-hidden"
         onSubmit={handleSubmit}
