@@ -73,7 +73,7 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
 
   // 필터링된 회원 목록을 생성
   const filteredMembers = members.filter((member) =>
-    member.email.toLowerCase().includes(searchQuery.toLowerCase())
+    member.email.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -84,7 +84,10 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
         <TableHeader>
           <TableRow>
             {head.map((item, key) => (
-              <TableHead className="font-bold text-base bg-gray-100" key={key}>
+              <TableHead
+                className={`px-4 py-2 border-b border-gray-200 text-center`}
+                key={key}
+              >
                 {item}
               </TableHead>
             ))}
@@ -99,10 +102,10 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
                 }
                 return <TableCell key={cellKey}>{value}</TableCell>;
               })}
-              <TableCell className="w-32 flex justify-center">
+              <TableCell className="flex">
                 <CheckCircle
-                  className={`${
-                    row.role === "1" ? "text-green-400" : "text-gray-400"
+                  className={`w-8 mx-auto ${
+                    row.role === "1" ? "text-cyan-400" : "text-gray-400"
                   } cursor-pointer`}
                   onClick={() => handleRoleToggle(row.id, Number(row.role))}
                 />
