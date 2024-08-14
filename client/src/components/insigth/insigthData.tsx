@@ -121,98 +121,96 @@ const DatePickerWithRange = ({
             </div>
           </div>
           {logsData && (
-            <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+            <div className="grid grid-cols-3 gap-2 mt-4 text-center">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={user}
                   alt="mostVisitior"
                 />
-                <h3 className="font-semibold text-xl mt-2">
-                  최다 방문자 top10
-                </h3>
+                <h3 className="mt-2 text-xl font-semibold">최다 방문자 top1</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.top10Users)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={time}
                   alt="stayTime"
                 />
-                <h3 className="font-semibold text-xl mt-2">
+                <h3 className="mt-2 text-xl font-semibold">
                   평균 사용자 체류 시간
                 </h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.averageUserTime)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={truck}
                   alt="mostOrder"
                 />
-                <h3 className="font-semibold text-xl mt-2">최다 발주</h3>
+                <h3 className="mt-2 text-xl font-semibold">최다 발주</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.mostOrdered)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={order}
                   alt="mostSeller"
                 />
-                <h3 className="font-semibold text-xl mt-2">최다 주문내역</h3>
+                <h3 className="mt-2 text-xl font-semibold">최다 주문내역</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.topSellingProduct)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={order}
                   alt="worstSeller"
                 />
-                <h3 className="font-semibold text-xl mt-2">최소 주문내역</h3>
+                <h3 className="mt-2 text-xl font-semibold">최소 주문내역</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.leastSellingProduct)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={trash}
                   alt="trash"
                 />
-                <h3 className="font-semibold text-xl mt-2">폐기 메뉴</h3>
+                <h3 className="mt-2 text-xl font-semibold">폐기 메뉴</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.discardedMenu)}
                 </p>
               </div>
-              <div className="h-32 mx-2 mt-3 rounded-xl bg-stone-100 hover:shadow-lg border border-transparent hover:border hover:border-cyan-300">
+              <div className="h-32 mx-2 mt-3 border border-transparent rounded-xl bg-stone-100 hover:shadow-lg hover:border hover:border-cyan-300">
                 <Image
-                  className="mt-3 w-8 h-8 mx-auto"
+                  className="w-8 h-8 mx-auto mt-3"
                   width={36}
                   height={36}
                   src={star}
                   alt="new"
                 />
-                <h3 className="font-semibold text-xl mt-2">신메뉴</h3>
+                <h3 className="mt-2 text-xl font-semibold">신메뉴</h3>
                 <p className="mt-1 text-xl font-thin">
                   {JSON.stringify(logsData.newMenu)}
                 </p>
