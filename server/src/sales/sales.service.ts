@@ -29,7 +29,7 @@ export class SaleService {
     return this.saleModel
       .findById(id)
       .populate('memberID')
-      .populate('productID')
+      .populate('products.productID')
       .exec();
   }
 
@@ -38,10 +38,11 @@ export class SaleService {
     if (!member) {
       throw new Error('Member not found');
     }
+    console.log(member);
     return this.saleModel
       .find({ memberID: member._id })
       .populate('memberID')
-      .populate('productID')
+      .populate('products.productID')
       .exec();
   }
 
