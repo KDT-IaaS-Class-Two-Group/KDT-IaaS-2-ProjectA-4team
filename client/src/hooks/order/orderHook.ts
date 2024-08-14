@@ -1,7 +1,7 @@
 // src/hooks/orderHook.ts
+import { ClientSaleDTO } from "@shared/DTO/sale/clientSale.interface";
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
-import TOrder from "src/types/order/Order.type";
 import { getOrderListErrMessage } from "static/hooks/order/orderHook.static";
 
 /**
@@ -11,16 +11,16 @@ import { getOrderListErrMessage } from "static/hooks/order/orderHook.static";
  * - orderDetails : 주문 데이터
  * - error : 에러 메세지
  */
-const useOrderHook = (name: string) => {
-  const [orderDetails, setOrderDetails] = useState<TOrder[]>([]);
+const useOrderHook = (email: string) => {
+  const [orderDetails, setOrderDetails] = useState<ClientSaleDTO[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
-      if (!name) return;
+      if (!email) return;
       try {
-        const orders: TOrder[] = await orderFetch(name);
+        const orders: ClientSaleDTO[] = await orderFetch(email);
         console.log(orders);
         const transformedOrders = orders.map((order) => {
           const orderDate = new Date(order.saleDate);
@@ -37,7 +37,7 @@ const useOrderHook = (name: string) => {
     };
 
     fetchOrderDetails();
-  }, [name]);
+  }, [email]);
   return { orderDetails, error, loading };
 };
 
