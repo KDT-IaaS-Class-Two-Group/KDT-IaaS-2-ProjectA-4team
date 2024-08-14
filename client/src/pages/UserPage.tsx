@@ -33,6 +33,8 @@ const UserPage: FC = () => {
     handleRemoveItem,
     onCount,
     purchase,
+    closeEmptyMoal,
+    isEmpty,
   } = UserpageHook();
 
   if (error) {
@@ -86,6 +88,13 @@ const UserPage: FC = () => {
         <Modal
           onClose={closeCompletePurchaseModal}
           title="구매가 완료되었습니다."
+          content=""
+        />
+      )}
+      {isEmpty && (
+        <Modal
+          onClose={closeEmptyMoal}
+          title="제품을 선택해주세요."
           content=""
         />
       )}

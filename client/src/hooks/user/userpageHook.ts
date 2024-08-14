@@ -33,6 +33,7 @@ export const UserpageHook = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [isCompletePurchase, setIsCompletePurchase] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<
@@ -41,7 +42,14 @@ export const UserpageHook = () => {
 
   const purchase = () => {
     try {
-      setIsPurchaseModalOpen(true);
+      if (cartItems.length === 0) {
+        setIsEmpty(true);
+        setTimeout(() => {
+          setIsEmpty(false);
+        }, 3000);
+      } else {
+        setIsPurchaseModalOpen(true);
+      }
     } catch (error) {
       throw error;
     }
@@ -109,6 +117,7 @@ export const UserpageHook = () => {
   const closePurchaseModal = () => setIsPurchaseModalOpen(false);
 
   const closeCompletePurchaseModal = () => setIsCompletePurchase(false);
+  const closeEmptyMoal = () => setIsEmpty(false);
 
   useEffect(() => {
     try {
@@ -178,5 +187,7 @@ export const UserpageHook = () => {
     handleRemoveItem,
     closeCompletePurchaseModal,
     purchase,
+    closeEmptyMoal,
+    isEmpty,
   };
 };
