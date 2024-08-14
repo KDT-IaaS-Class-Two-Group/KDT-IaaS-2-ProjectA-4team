@@ -138,8 +138,6 @@ export const UserpageHook = () => {
     });
   };
 
-  const { totalPrice } = CartHook(cartItems, onCount);
-
   const handleRemoveItem = (menu: string) => {
     try {
       const updatedItems = cartItems.filter((item) => item.menu !== menu);
