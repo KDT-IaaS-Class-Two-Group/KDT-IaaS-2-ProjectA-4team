@@ -23,14 +23,18 @@ const UserPage: FC = () => {
     cartItems,
     isModalOpen,
     isPurchaseModalOpen,
+    isCompletePurchase,
     closeModal,
     closePurchaseModal,
+    closeCompletePurchaseModal,
     confirmPurchase,
     error,
     handleAddToCart,
     handleRemoveItem,
     onCount,
     purchase,
+    closeEmptyMoal,
+    isEmpty,
   } = UserpageHook();
 
   if (error) {
@@ -77,6 +81,20 @@ const UserPage: FC = () => {
           onClose={closePurchaseModal}
           onConfirm={confirmPurchase}
           title="구매하시겠습니까 ?"
+          content=""
+        />
+      )}
+      {isCompletePurchase && (
+        <Modal
+          onClose={closeCompletePurchaseModal}
+          title="구매가 완료되었습니다."
+          content=""
+        />
+      )}
+      {isEmpty && (
+        <Modal
+          onClose={closeEmptyMoal}
+          title="제품을 선택해주세요."
           content=""
         />
       )}

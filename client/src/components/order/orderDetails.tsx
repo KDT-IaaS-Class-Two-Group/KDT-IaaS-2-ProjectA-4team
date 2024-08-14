@@ -19,6 +19,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
               key={order._id}
               className="flex flex-col mt-4 order-details__items"
             >
+              <hr />
+              <br />
               <h2 className="font-semibold text-md">매출 번호: {order._id}</h2>
               {order.products.map((product, index) => (
                 <div
