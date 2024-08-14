@@ -33,6 +33,7 @@ export const UserpageHook = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] =
     useState<boolean>(false);
+  const [isCompletePurchase, setIsCompletePurchase] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<
     { productName: string; quantity: number }[]
@@ -41,6 +42,17 @@ export const UserpageHook = () => {
   const purchase = () => {
     try {
       setIsPurchaseModalOpen(true);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const completePurchase = () => {
+    try {
+      setIsCompletePurchase(true);
+      setTimeout(() => {
+        setIsCompletePurchase(false);
+      }, 3000);
     } catch (error) {
       throw error;
     }
@@ -74,6 +86,7 @@ export const UserpageHook = () => {
     setProducts([]); // <-- 추가: 장바구니와 제품 목록 비우기
 
     setIsPurchaseModalOpen(false);
+    completePurchase();
     console.log(purchaseData);
     return purchaseData;
   };
@@ -94,6 +107,8 @@ export const UserpageHook = () => {
    * 구매 모달 창을 닫는 함수입니다.
    */
   const closePurchaseModal = () => setIsPurchaseModalOpen(false);
+
+  const closeCompletePurchaseModal = () => setIsCompletePurchase(false);
 
   useEffect(() => {
     try {
@@ -153,6 +168,7 @@ export const UserpageHook = () => {
     cartItems,
     isModalOpen,
     isPurchaseModalOpen,
+    isCompletePurchase,
     closeModal,
     closePurchaseModal,
     confirmPurchase,
@@ -160,6 +176,7 @@ export const UserpageHook = () => {
     handleAddToCart,
     onCount,
     handleRemoveItem,
+    closeCompletePurchaseModal,
     purchase,
   };
 };

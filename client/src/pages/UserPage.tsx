@@ -23,8 +23,10 @@ const UserPage: FC = () => {
     cartItems,
     isModalOpen,
     isPurchaseModalOpen,
+    isCompletePurchase,
     closeModal,
     closePurchaseModal,
+    closeCompletePurchaseModal,
     confirmPurchase,
     error,
     handleAddToCart,
@@ -77,6 +79,13 @@ const UserPage: FC = () => {
           onClose={closePurchaseModal}
           onConfirm={confirmPurchase}
           title="구매하시겠습니까 ?"
+          content=""
+        />
+      )}
+      {isCompletePurchase && (
+        <Modal
+          onClose={closeCompletePurchaseModal}
+          title="구매가 완료되었습니다."
           content=""
         />
       )}
