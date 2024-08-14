@@ -77,9 +77,12 @@ export class UserLogService {
       .exec();
   }
 
-  // 기간내 최다 방문자 Top 10 (이메일 반환)
-  async getTop10Users(startDate: Date, endDate: Date) {
-    const top10Users = await this.userLogModel.aggregate([
+  // 기간내 최다 방문자 Top 1 (이메일 반환)
+  async getMostFrequentVisitor(
+    startDate: Date,
+    endDate: Date,
+  ): Promise<string | null> {
+    const mostFrequentVisitor = await this.userLogModel.aggregate([
       {
         $match: {
           actionType: 'login',
@@ -96,7 +99,7 @@ export class UserLogService {
         $sort: { loginCount: -1 },
       },
       {
-        $limit: 10,
+        $limit: 1,
       },
       {
         $lookup: {
@@ -117,9 +120,7 @@ export class UserLogService {
       },
     ]);
 
-    return top10Users.length > 0
-      ? { name: top10Users.map((user) => user.email) }
-      : null;
+    return mostFrequentVisitor.length > 0 ? mostFrequentVisitor[0].email : null;
   }
 
   // 기간내 평균 사용자 체류 시간
@@ -211,8 +212,11 @@ export class UserLogService {
   }
 
   // 기간내 카테고리별 최다 주문내역
-  async getTopSellingProduct(startDate: Date, endDate: Date) {
-    const topSellingProducts = await this.userLogModel.aggregate([
+  async getTopSellingProduct(
+    startDate: Date,
+    endDate: Date,
+  ): Promise<string | null> {
+    const topSellingProduct = await this.userLogModel.aggregate([
       {
         $match: {
           actionType: 'purchase',
@@ -224,38 +228,35 @@ export class UserLogService {
       },
       {
         $group: {
-          _id: {
-            category: '$details.products.category',
-            productId: '$details.products.productId',
-          },
+          _id: '$details.products.productName',
           totalQuantity: { $sum: '$details.products.quantity' },
-          productName: { $first: '$details.products.productName' },
         },
       },
       {
-        $sort: { '_id.category': 1, totalQuantity: -1 },
+        $sort: { totalQuantity: -1 },
       },
       {
-        $group: {
-          _id: '$_id.category',
-          productName: { $first: '$productName' },
-        },
+        $limit: 1,
       },
       {
         $project: {
           _id: 0,
-          productCategory: '$_id',
-          productName: '$productName',
+          productName: '$_id',
         },
       },
     ]);
 
-    return topSellingProducts.length > 0 ? topSellingProducts : null;
+    return topSellingProduct.length > 0
+      ? topSellingProduct[0].productName
+      : null;
   }
 
   // 기간내 카테고리별 최소 주문내역
-  async getLeastSellingProduct(startDate: Date, endDate: Date) {
-    const leastSellingProducts = await this.userLogModel.aggregate([
+  async getLeastSellingProduct(
+    startDate: Date,
+    endDate: Date,
+  ): Promise<string | null> {
+    const leastSellingProduct = await this.userLogModel.aggregate([
       {
         $match: {
           actionType: 'purchase',
@@ -267,33 +268,27 @@ export class UserLogService {
       },
       {
         $group: {
-          _id: {
-            category: '$details.products.category',
-            productId: '$details.products.productId',
-          },
+          _id: '$details.products.productName',
           totalQuantity: { $sum: '$details.products.quantity' },
-          productName: { $first: '$details.products.productName' },
         },
       },
       {
-        $sort: { '_id.category': 1, totalQuantity: 1 },
+        $sort: { totalQuantity: 1 },
       },
       {
-        $group: {
-          _id: '$_id.category',
-          productName: { $first: '$productName' },
-        },
+        $limit: 1,
       },
       {
         $project: {
           _id: 0,
-          productCategory: '$_id',
-          productName: '$productName',
+          productName: '$_id',
         },
       },
     ]);
 
-    return leastSellingProducts.length > 0 ? leastSellingProducts : null;
+    return leastSellingProduct.length > 0
+      ? leastSellingProduct[0].productName
+      : null;
   }
 
   // 기간내 최다 발주
@@ -405,7 +400,7 @@ export class UserLogService {
       discardedMenu,
       newMenu,
     ] = await Promise.all([
-      this.getTop10Users(startDate, endDate),
+      this.getMostFrequentVisitor(startDate, endDate),
       this.getAverageUserTime(startDate, endDate),
       this.getTopSellingProduct(startDate, endDate),
       this.getLeastSellingProduct(startDate, endDate),
