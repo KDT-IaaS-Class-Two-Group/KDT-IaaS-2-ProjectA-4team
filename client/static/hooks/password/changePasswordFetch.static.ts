@@ -1,0 +1,1 @@
+export const changePasswordError = "비밀번호 변경 중 오류가 발생하였습니다.";
