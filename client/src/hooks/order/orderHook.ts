@@ -1,4 +1,3 @@
-// src/hooks/orderHook.ts
 import { ClientSaleDTO } from "@shared/DTO/sale/clientSale.interface";
 import { useEffect, useState } from "react";
 import orderFetch from "src/model/order/orderFetch";
@@ -21,7 +20,6 @@ const useOrderHook = (email: string) => {
       if (!email) return;
       try {
         const orders: ClientSaleDTO[] = await orderFetch(email);
-        console.log(orders);
         const transformedOrders = orders.map((order) => {
           const orderDate = new Date(order.saleDate);
           const orderDateFormat = orderDate.toISOString().split("T")[0];
