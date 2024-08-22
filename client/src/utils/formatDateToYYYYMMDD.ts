@@ -1,3 +1,9 @@
+/**
+ * @moonhr 24.08.07
+ * * 날짜값 string으로 변경하며 식 수정
+ * @param date
+ * @returns year-month-day
+ */
 export const formatDateToYYYYMMDD = (date: Date): string => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
