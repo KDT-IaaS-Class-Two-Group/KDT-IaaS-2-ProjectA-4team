@@ -35,7 +35,6 @@ export class AuthController {
         data: newUser,
       };
     } catch (error) {
-      console.error('회원 가입 오류:', error);
       throw new Error('회원 가입 처리 중 오류가 발생했습니다.');
     }
   }
@@ -143,7 +142,6 @@ export class AuthController {
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
     } catch (error) {
-      console.error('Error in changePassword:', error);
       if (error instanceof Error) {
         return res
           .status(HttpStatus.BAD_REQUEST)

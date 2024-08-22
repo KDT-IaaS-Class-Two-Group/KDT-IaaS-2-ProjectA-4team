@@ -29,7 +29,6 @@ export class LogCreationController {
       );
       await this.userLogService.createLog(await memberId, 'login');
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create login log');
     }
   }
@@ -45,7 +44,6 @@ export class LogCreationController {
       );
       await this.userLogService.createLog(await memberId, 'logout');
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create logout log');
     }
   }
@@ -65,7 +63,6 @@ export class LogCreationController {
         totalPrice: totalPrice,
       });
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create purchase log');
     }
   }
@@ -91,7 +88,6 @@ export class LogCreationController {
         quantity: quantity,
       });
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create addStock log');
     }
   }
@@ -120,7 +116,6 @@ export class LogCreationController {
         });
       }
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create delStock log');
     }
   }
@@ -141,7 +136,6 @@ export class LogCreationController {
         quantity: quantity,
       });
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create addMenu log');
     }
   }
