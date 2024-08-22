@@ -12,10 +12,18 @@ import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
 
+/**
+ * * 사용자 로직 처리될 컨트롤러
+ */
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * * 회원가입 시
+   * @param body
+   * @returns 가입완료 메세지, 사용자Data
+   */
   @Post('signup')
   async signUp(
     @Body() body: { username: string; email: string; password: string },
@@ -32,6 +40,12 @@ export class AuthController {
     }
   }
 
+  /**
+   * * 로그인 시
+   * @param data
+   * @param res
+   * @returns 토큰, 쿠키설정
+   */
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
     // 사용자 검증 및 로그인 처리
@@ -64,6 +78,12 @@ export class AuthController {
     }
   }
 
+  /**
+   * * user-info에 이름 제공
+   * @param req
+   * @param res
+   * @returns user
+   */
   @Get('user-info')
   async getUserInfo(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['token'];
@@ -90,6 +110,14 @@ export class AuthController {
     }
   }
 
+  /**
+   * * 비밀번호 변경 시
+   * @param req
+   * @param oldPassword
+   * @param newPassword
+   * @param res
+   * @returns status
+   */
   @Post('changePassword')
   async changePassword(
     @Req() req: Request,
@@ -127,18 +155,32 @@ export class AuthController {
     }
   }
 
+  /**
+   * * login info 요청 시
+   * @param request
+   * @param res
+   */
   @Get('login-info')
   async getLoginInfo(@Req() request: Request, @Res() res: Response) {
     const userName = await this.authService.findUserNameToToken(request);
     res.status(HttpStatus.OK).json(userName);
   }
 
+  /**
+   * * 이메일 요청 시
+   * @param request
+   * @param res
+   */
   @Get('getUserEmail')
   async getUserEmail(@Req() request: Request, @Res() res: Response) {
     const userEmail = await this.authService.findUserEmailToToken(request);
     res.status(HttpStatus.OK).json(userEmail);
   }
 
+  /**
+   * * 로그아웃 시
+   * @param res
+   */
   @Post('logout')
   async logout(@Res() res: Response) {
     // 쿠키를 만료시키고 응답
