@@ -1,6 +1,5 @@
 import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
-import { deleteDataErrMessage } from "static/hooks/expiration/ExpirationDateHook.static";
 
 /**
  * 제품 삭제를 처리하는 훅
