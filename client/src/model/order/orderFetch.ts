@@ -12,7 +12,7 @@ export default async (email: string): Promise<ClientSaleDTO[]> => {
 
   try {
     const response = await fetcher(
-      serverUrlGenerator(EP_SALES, `${EP_ORDERS}/${email}`),
+      serverUrlGenerator(EP_SALES, EP_ORDERS,email),
       "get",
       {
         credentials: "include",
