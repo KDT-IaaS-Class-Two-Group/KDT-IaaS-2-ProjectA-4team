@@ -12,7 +12,8 @@ import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import ProductOrderModalHook from "src/hooks/product/order/modal/ProductOrderModalHook";
 import IProduct from "../../../../../db/products/product.interface";
-import OrderModalProps from "static/components/modal/order/OrderModal.interface";
+import OrderModalProps from "src/interfaces/components/modal/order/OrderModal.interface";
+import { orderModalStaticMessage } from "static/components/modal/order/OrderModal.static";
 
 /**
  * @moonhr 24.08.02
@@ -65,9 +66,11 @@ const OrderModal: React.FC<OrderModalProps> = ({
     product,
   }) => (
     <DialogHeader>
-      <DialogTitle>발주하기</DialogTitle>
+      <DialogTitle>{orderModalStaticMessage.title}</DialogTitle>
       <DialogDescription>
-        {product ? `제품명: ${product.productName}` : "선택된 제품이 없습니다."}
+        {product
+          ? `${orderModalStaticMessage.productName} ${product.productName}`
+          : `${orderModalStaticMessage.errMessage}`}
       </DialogDescription>
     </DialogHeader>
   );
@@ -78,13 +81,13 @@ const OrderModal: React.FC<OrderModalProps> = ({
         <OrderModalHeader product={product} />
         <form onSubmit={handleSubmit}>
           <Label htmlFor="quantity">
-            수량:
+            ${orderModalStaticMessage.productQuantity}
             <InputComponent
               type="number"
               value={quantity === 0 ? "" : quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
               min="1"
-              placeholder="주문수량"
+              placeholder={orderModalStaticMessage.productQuantityPlaceholder}
               className="mb-3"
             />
           </Label>
@@ -94,14 +97,19 @@ const OrderModal: React.FC<OrderModalProps> = ({
               className="bg-red-200"
               type="submit"
             >
-              주문하기
+              {orderModalStaticMessage.orderButton}
             </ButtonComponent>
             <ButtonComponent variant="outline" onClick={onClose}>
-              닫기
+              {orderModalStaticMessage.closeButton}
             </ButtonComponent>
           </div>
-          {loading && <p>주문 중...</p>}
-          {error && <p>Error: {error}</p>}
+          {loading && <p>{orderModalStaticMessage.loading}</p>}
+          {error && (
+            <p>
+              {orderModalStaticMessage.error}
+              {error}
+            </p>
+          )}
         </form>
       </DialogContent>
     </Dialog>
