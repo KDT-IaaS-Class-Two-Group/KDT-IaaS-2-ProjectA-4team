@@ -26,10 +26,8 @@ export default async (password: string, changePassword: string) => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
 
     if (!response.ok) {
-      console.log(responseData);
       throw new Error(
         responseData.message || "비밀번호 변경 중 오류가 발생했습니다.",
       );
