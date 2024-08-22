@@ -31,6 +31,7 @@ const CartItemComponent: FC<CartItemComponentProps> = ({
     menu,
   );
 
+  // 개수 변경 버튼 img src
   const minus_sign = process.env.NEXT_PUBLIC_S3_MINUS_SIGN_URL as string;
   const plus_sign = process.env.NEXT_PUBLIC_S3_PLUS_SIGN_URL as string;
 

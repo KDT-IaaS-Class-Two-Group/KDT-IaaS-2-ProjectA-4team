@@ -43,10 +43,13 @@ export const UserpageHook = () => {
     { productName: string; quantity: number }[]
   >([]);
 
+  // 구매하기 버튼 클릭시 실행되는 함수
   const purchase = () => {
     try {
+      // 장바구니에 제품이 존재하지 않을 때
       if (cartItems.length === 0) {
         setIsEmpty(true);
+        // 모달창 자동닫기
         setTimeout(() => {
           setIsEmpty(false);
         }, 3000);
@@ -61,6 +64,7 @@ export const UserpageHook = () => {
   const completePurchase = () => {
     try {
       setIsCompletePurchase(true);
+      // 모달창 자동닫기
       setTimeout(() => {
         setIsCompletePurchase(false);
       }, 3000);
@@ -69,6 +73,7 @@ export const UserpageHook = () => {
     }
   };
 
+  // 구매한 사용자 이메일 데이터베이스에서 가져오는 함수
   const loadData = async () => {
     try {
       const userEmail = await getUserEmailFetch();
@@ -79,7 +84,9 @@ export const UserpageHook = () => {
     }
   };
 
+  // 구매 확정시 실행되는 함수
   const confirmPurchase = async () => {
+    // 구매 날짜
     const today = new Date().toISOString().split("T")[0];
 
     const userEmail = await loadData();
@@ -90,11 +97,11 @@ export const UserpageHook = () => {
     // 확인을 위한 디버깅 로그 추가
     console.log("Products before purchase:", products);
 
+    // 구매 정보 데이터 데이터베이스에 저장
     const purchaseData = await salesHistoryFetch(userEmail, products, today);
 
-    // 장바구니 비우기
-    setCartItems([]);
-    setProducts([]); // <-- 추가: 장바구니와 제품 목록 비우기
+    setCartItems([]); // 장바구니 비우기
+    setProducts([]); // 장바구니와 제품 목록 비우기
 
     setIsPurchaseModalOpen(false);
     completePurchase();
@@ -122,6 +129,7 @@ export const UserpageHook = () => {
   const closeCompletePurchaseModal = () => setIsCompletePurchase(false);
   const closeEmptyMoal = () => setIsEmpty(false);
 
+  // 카테고리 변경시 실행
   useEffect(() => {
     try {
       const category = router.query.category as string;
@@ -133,10 +141,12 @@ export const UserpageHook = () => {
     }
   }, [router.query.category]);
 
+  // 장바구니에 제품 추가하는 함수
   const handleAddToCart = (menu: string, unitPrice: number, id: string) => {
     try {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
+        // 제품이 장바구니에 존재하지 않는다면 제품 추가
         if (itemIndex === -1) {
           setProducts([...products, { productName: menu, quantity: 1 }]);
           return [...prevItems, { menu, unitPrice, id }];
@@ -149,12 +159,15 @@ export const UserpageHook = () => {
     }
   };
 
+  // 클릭한 제품이 장바구니에 존재하지 않으면 장바구니에 제품을 추가하거나
+  // 이미 존재하는 경우 수량을 업데이트하는 함수
   const onCount = (count: number, menu: string) => {
     setProducts((prevProducts) => {
       const productIndex = prevProducts.findIndex(
         (product) => product.productName === menu,
       );
 
+      // 제품이 장바구니에 존재하면 수량 업데이트
       if (productIndex !== -1) {
         prevProducts[productIndex].quantity = count;
       } else {
@@ -165,6 +178,7 @@ export const UserpageHook = () => {
     });
   };
 
+  // 장바구니 제품을 제거하는 함수
   const handleRemoveItem = (menu: string) => {
     try {
       const updatedItems = cartItems.filter((item) => item.menu !== menu);

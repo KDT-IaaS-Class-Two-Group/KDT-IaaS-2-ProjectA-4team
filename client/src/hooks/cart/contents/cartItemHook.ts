@@ -24,16 +24,18 @@ export const CartItemHook = (
   const [price, setPrice] = useState(unitPrice);
   const [error, setError] = useState<string | null>(null);
 
+  // 가격을 업데이트하는 함수
   const updatePrice = (newCount: number) => {
     try {
-      const newPrice = newCount * unitPrice;
-      setPrice(newPrice);
-      onPriceChange(newPrice - price, newCount, menu);
+      const newPrice = newCount * unitPrice; // 수량 x 단가
+      setPrice(newPrice); // 가격 상태 업데이트
+      onPriceChange(newPrice - price, newCount, menu); // 가격 차, 수량, 메뉴를 기반으로 콜백 함수 호출
     } catch (error) {
       setError(failedMessages.failedUpdatePriceMessage);
     }
   };
 
+  // 수량을 증가시키는 함수
   const incrementCount = () => {
     try {
       const newCount = count + 1;
@@ -44,6 +46,7 @@ export const CartItemHook = (
     }
   };
 
+  // 수량을 감소시키는 함수
   const decrementCount = () => {
     try {
       if (count > 1) {

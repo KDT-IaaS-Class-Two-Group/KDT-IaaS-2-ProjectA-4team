@@ -19,6 +19,7 @@ export const CartHook = (
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
+  // 장바구니 총액을 업데이트하는 함수
   const handlePriceChange = (price: number, count: number, menu: string) => {
     try {
       setTotalPrice((prevTotal) => {
@@ -31,6 +32,7 @@ export const CartHook = (
     }
   };
 
+  // 장바구니 제품이 변경될 때마다 총액 업데이트
   useEffect(() => {
     try {
       const initialTotalPrice = items.reduce(

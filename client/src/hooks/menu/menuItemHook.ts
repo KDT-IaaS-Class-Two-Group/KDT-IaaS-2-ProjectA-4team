@@ -8,10 +8,13 @@ import IProduct from "../../../../db/products/product.interface";
  * * 데이터베이스에서 가져온 제품 목록 상태 관리
  * @returns productList product 데이터베이스 제품 목록
  */
+
 export const MenuItemHook = () => {
   const [productList, setProductList] = useState<IProduct[]>([]);
 
+  // 컴포넌트 마운트 될 때 실행
   useEffect(() => {
+    // 데이터베이스에서 제품 목록 가져와서 업데이트
     const loadData = async () => {
       try {
         const productData = await productFetchMenu();

@@ -14,8 +14,11 @@ const NavListBox: React.FC = () => {
   const router = useRouter();
   const [selectMenu, setSelectMenu] = useState("");
 
+  // 컴포넌트가 렌더링될 떄, pathname 변경 때 실행
   useEffect(() => {
+    // 현재 경로의 마지막 부분 추출
     const currentPath = router.pathname.split("/").pop() || "stockInfo";
+    // 추출한 경로를 selectMenu 상태로 설정
     setSelectMenu(currentPath);
   }, [router.pathname]);
 

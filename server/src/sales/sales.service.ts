@@ -59,11 +59,14 @@ export class SaleService {
     products: Array<{ productName: string; quantity: number }>,
     saleDate: string,
   ) {
+    // member 데이터베이스에서 특정 email을 가진 사용자 찾기
     const member = await this.memberModel.findOne({ email }).exec();
     if (!member) {
       throw new Error('Member not found');
     }
 
+    // 구매한 제품을 데이터베이스에서 조회하여
+    // 단가와 구매한 개수로 총액 계산, 제품 id와 구매 수량 반환
     let totalPrice = 0;
     const productSales = await Promise.all(
       products.map(async (product) => {
@@ -81,6 +84,7 @@ export class SaleService {
       }),
     );
 
+    // 구매 내역 객체 생성
     const newSale = new this.saleModel({
       memberID: member._id,
       products: productSales,
@@ -88,6 +92,7 @@ export class SaleService {
       saleDate,
     });
 
+    // 구매 내역 sale 데이터베이스에 저장
     const savedSale = await newSale.save();
 
     return this.saleModel
