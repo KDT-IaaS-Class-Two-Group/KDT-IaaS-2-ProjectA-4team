@@ -34,7 +34,11 @@ const MemberInfoPage: React.FC = () => {
         const data: IMemberInfo[] = await res.json();
         setMembers(data);
       } catch (err) {
+<<<<<<< HEAD
         setError(failedLoadDataMessage);
+=======
+        setError("Failed to load data");
+>>>>>>> b3247e7 (:fire:memberInfo.tsx console삭제)
       } finally {
         setLoading(false);
       }
