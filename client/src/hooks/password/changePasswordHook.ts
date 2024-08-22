@@ -52,7 +52,6 @@ const useChangePasswordHook = () => {
 
     try {
       const result = await changePasswordFetch(password, changePassword);
-      console.log(result);
       setError(null);
       setSuccessMessage(succeedChangePwMessage);
       // 변경 성공 시 새로고침
