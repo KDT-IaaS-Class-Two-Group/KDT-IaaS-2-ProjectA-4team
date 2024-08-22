@@ -12,6 +12,7 @@ import ButtonComponent from "../../button/customized/CustomButton";
 import ProductUpdateHook from "src/hooks/product/update/ProductUpdateHook";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import UpdateModalProps from "src/interfaces/components/modal/update/UpdateModal.interface";
+import { updateModalStaticMessage } from "static/components/modal/update/UpdateModal.static";
 
 /**
  * @moonhr 24.07.31
@@ -58,9 +59,9 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className=" bg-slate-100">
         <DialogHeader>
-          <DialogTitle>수정하기</DialogTitle>
+          <DialogTitle>{updateModalStaticMessage.title}</DialogTitle>
           <DialogDescription>
-            제품명과, 판매가를 수정할 수 있습니다.
+            {updateModalStaticMessage.description}
           </DialogDescription>
         </DialogHeader>
         <form
@@ -68,7 +69,9 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
           className="flex flex-col items-center justify-center"
         >
           <div className="w-80">
-            <Label htmlFor="cartegory">제품명</Label>
+            <Label htmlFor="cartegory">
+              {updateModalStaticMessage.laberProduct}
+            </Label>
             <Textarea
               placeholder={product.productName}
               value={newProductName}
@@ -78,7 +81,9 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
             ></Textarea>
           </div>
           <div className="w-80">
-            <Label htmlFor="cartegory">판매가</Label>
+            <Label htmlFor="cartegory">
+              {updateModalStaticMessage.laberUnitprice}
+            </Label>
             <Textarea
               placeholder={String(product.unitPrice)}
               value={newUnitPrice.toString()}
@@ -88,10 +93,14 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
             ></Textarea>
           </div>
           <ButtonComponent variant="default" type="submit" className="mt-5">
-            수정하기
+            {updateModalStaticMessage.button}
           </ButtonComponent>
-          {loading && <p>Updating...</p>}
-          {error && <p>Error: {error}</p>}
+          {loading && <p>{updateModalStaticMessage.loading}</p>}
+          {error && (
+            <p>
+              {updateModalStaticMessage.error} {error}
+            </p>
+          )}
         </form>
       </DialogContent>
     </Dialog>
