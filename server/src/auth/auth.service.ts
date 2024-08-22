@@ -14,6 +14,12 @@ export class AuthService {
     private readonly tokenUtils: TokenUtils,
   ) {}
 
+  /**
+   * * 유효성검사
+   * @param email
+   * @param password
+   * @returns user
+   */
   async validateUser(email: string, password: string): Promise<IMember | null> {
     const user = await this.memberModel.findOne({ email }).exec();
     if (user && user.password === password) {
@@ -22,6 +28,11 @@ export class AuthService {
     return null;
   }
 
+  /**
+   * * 회원가입 시 진행되는 사용자 생성
+   * @param createUserDto
+   * @returns 사용자 데이터 저장
+   */
   async createUser(createUserDto: {
     username: string;
     email: string;
@@ -116,6 +127,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * * 토큰에서 사용자이메일 반환
+   * @param request
+   * @returns user.email
+   */
   async findUserEmailToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];
