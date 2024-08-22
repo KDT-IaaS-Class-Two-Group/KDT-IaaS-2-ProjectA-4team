@@ -15,8 +15,8 @@ export const useDeleteProduct = (fetchData: () => void, epProductsDate: string) 
         credentials: "include",
       });
       fetchData();
-    } catch (err) {
-      console.error(`${deleteDataErrMessage}`, err);
+    } catch (error) {
+      throw error;
     }
   };
 

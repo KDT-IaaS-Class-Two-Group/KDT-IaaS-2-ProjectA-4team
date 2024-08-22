@@ -21,7 +21,6 @@ export const useAddProduct = (fetchData: () => void, epProductsDate: string) => 
       });
       fetchData();
     } catch (error) {
-      console.error("메뉴 추가 중 에러 발생", error);
       throw error;
     }
   };
