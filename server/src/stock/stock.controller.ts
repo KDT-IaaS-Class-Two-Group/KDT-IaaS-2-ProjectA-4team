@@ -32,7 +32,6 @@ export class StockController {
     @Param('id') id: string,
     @Body() productDto: IProduct,
   ): Promise<IProduct> {
-    console.log('패치들어옴.');
     const updatedProduct = await this.stockService.updateProduct(
       id,
       productDto,

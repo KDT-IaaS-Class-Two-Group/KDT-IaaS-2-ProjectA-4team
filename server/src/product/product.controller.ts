@@ -9,7 +9,6 @@ export class ProductController {
 
   @Get()
   async getAllProducts(): Promise<IProduct[]> {
-    console.log('유저페이지');
     return this.productService.getAllProducts();
   }
 }

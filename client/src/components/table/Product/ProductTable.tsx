@@ -9,6 +9,7 @@ import DynamicTable from "../DynamicTable";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
 import ProductPage from "../expiration/button/savedatabutton";
+import { productTableStatic } from "static/components/table/productTable.static";
 
 /**
  * @moonhr 24.07.31
@@ -87,17 +88,17 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openOrderModal(row)}
-              className="text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
+              className="text-xs leading-loose text-gray-500 underline hover:text-cyan-500"
             >
-              발주하기
+              {productTableStatic.orderButton}
             </ButtonComponent>
             <ButtonComponent
               variant="default"
               type="button"
               onClick={() => openUpdateModal(row)}
-              className="mt-1 text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
+              className="mt-1 text-xs leading-loose text-gray-500 underline hover:text-cyan-500"
             >
-              수정하기
+              {productTableStatic.updateButton}
             </ButtonComponent>
           </>
         )}

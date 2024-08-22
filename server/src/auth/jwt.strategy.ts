@@ -7,7 +7,6 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
-    console.log('JwtStrategy initialized');
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (req) => req.cookies?.token, // 쿠키에서 JWT 추출
