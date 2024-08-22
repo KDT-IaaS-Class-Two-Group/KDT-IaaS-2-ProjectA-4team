@@ -24,7 +24,6 @@ export class UserLogService {
       });
       return await newLog.save();
     } catch (error) {
-      console.error('Error creating log:', error);
       throw new Error('Failed to create log');
     }
   }

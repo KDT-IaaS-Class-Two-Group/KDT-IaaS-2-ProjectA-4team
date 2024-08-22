@@ -22,7 +22,6 @@ export class TokenUtils {
       const decoded = this.jwtService.verify<DecodedToken>(token);
       return decoded;
     } catch (error) {
-      console.error('Error in verifyAndDecodeToken:', error);
       return null;
     }
   }

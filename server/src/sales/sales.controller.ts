@@ -41,7 +41,6 @@ export class SaleController {
 
       return { message: 'Sale recorded successfully', data: result };
     } catch (error) {
-      console.error('Error in buyProduct:', error);
       throw new Error('Failed to process purchase');
     }
   }
