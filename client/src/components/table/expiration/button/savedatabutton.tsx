@@ -3,6 +3,7 @@ import { AddProductModal } from "../../../modal/addmodal/AddProductModal";
 import ButtonComponent from "src/components/button/customized/CustomButton";
 import { useExpirationDate } from "src/model/expiration/useExpirationDate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import { PRODUCT_ORDER } from "static/components/table/expiration/button/savedatabutton.static";
 /**
  * @jojayeon 24.08.09
  * @returns 제품 구매 버튼
@@ -23,14 +24,14 @@ const ProductPage: React.FC = () => {
       await addProduct(productData);
       closeModal();
     } catch (error) {
-      console.error("제품 추가 실패:", error);
+      throw error;
     }
   };
 
   return (
     <div className="w-24 h-8 mt-6 text-center bg-cyan-500 rounded-xl text-white text-sm leading-loose border border-transparent hover:text-cyan-500 hover:bg-white hover:border hover:border-cyan-500">
       <ButtonComponent onClick={openModal} variant="default">
-        제품 구매
+        {PRODUCT_ORDER}
       </ButtonComponent>
       <AddProductModal
         open={isModalOpen}
