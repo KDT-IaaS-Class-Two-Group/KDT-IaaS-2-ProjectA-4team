@@ -2,24 +2,14 @@ import { useState, useEffect } from "react";
 import { ProductDTO } from "../../../../shared/DTO/products/product.dto";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
-import {
-  deleteDataErrMessage,
-  DataErrMessage,
-  getDataErrMessage,
-} from "static/hooks/expiration/ExpirationDateHook.static";
+import { getDataErrMessage, DataErrMessage } from "static/hooks/expiration/ExpirationDateHook.static";
 
 /**
- * @jojayeon 24.08.05
- * @returns {{
- *  data : ProductDTO[] 제품정보 ,
- *  loading : boolean 로딩 ,
- *  error : string | null 에러 ,
- *  deleteProduct: (id: string) => void 제품 정보 삭제
- * }}
+ * 제품 데이터를 가져오는 훅
+ * @param {string} epProductsDate - 제품 날짜를 위한 엔드포인트
+ * @returns {Object} 데이터, 로딩 상태, 에러 메시지, 데이터 가져오기 함수
  */
-
-export const ExpirationDateHook = () => {
-  const EP_PRODUCTS_DATE = process.env.NEXT_PUBLIC_EP_PRODUCTS_DATE as string;
+export const useFetchData = (epProductsDate: string) => {
   const [data, setData] = useState<ProductDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,8 +17,7 @@ export const ExpirationDateHook = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE), "get", { credentials: "include", 
-      });
+      const response = await fetcher(serverUrlGenerator(epProductsDate), "get", { credentials: "include" });
       if (!response.ok) {
         throw new Error(`${getDataErrMessage}`);
       }
@@ -43,33 +32,7 @@ export const ExpirationDateHook = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [epProductsDate]);
 
-  const deleteProduct = async (_id: string) => {
-    try {
-      await fetcher(serverUrlGenerator(EP_PRODUCTS_DATE, _id), "delete", {
-        credentials: "include",
-      });
-      fetchData();
-    } catch (err) {
-      setError(`${deleteDataErrMessage}`);
-    }
-  };
-  
-  const addProduct = async (product: ProductDTO) => {
-    const postUrl = serverUrlGenerator(EP_PRODUCTS_DATE, "orderproduct");
-    try {
-      await fetcher(postUrl, "post", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-        credentials: "include",
-      });
-      fetchData();
-    } catch (error) {
-      throw error
-    }
-  };
-  return { data, loading, error, deleteProduct, addProduct };
+  return { data, loading, error, fetchData };
 };
