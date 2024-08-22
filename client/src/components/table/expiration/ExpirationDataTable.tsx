@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DynamicTable from "../DynamicTable";
 import ButtonComponent from "src/components/button/customized/CustomButton";
-import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
+import { useExpirationDate } from "src/model/expiration/useExpirationDate";
 import { ConfirmDeleteModal } from "../../modal/expiration/ExpirationDateModal";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
@@ -14,7 +14,7 @@ import { AA, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expir
  */
 
 export const ExpirationDataTable: React.FC = () => {
-  const { data, loading, error, deleteProduct } = ExpirationDateHook();
+  const { data, loading, error, deleteProduct } = useExpirationDate();
   const [open, setOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<ProductDTO | null>(
     null,
