@@ -50,7 +50,7 @@ export const saveProductData = async (
       credentials: "include",
     });
   } catch (error) {
-    console.log("재고추가 중 에러 발생:", error);
+    throw error;
   }
 
   const savedProduct = await response.json();
