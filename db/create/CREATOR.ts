@@ -38,8 +38,10 @@ class implementedCreator extends AbstractedCreator {
     super();
     mongoose
       .connect(uri)
-      .then(() => console.log("Mongo DB 서버 연결 성공"))
-      .catch((err: Error) => console.error("Mongo DB 서버 연결 실패", err));
+      .then()
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
 
   /**
@@ -95,9 +97,8 @@ class implementedCreator extends AbstractedCreator {
     const doc = new model(data);
     try {
       await doc.save();
-      console.log("데이터 저장 성공");
     } catch (err) {
-      throw new Error(`데이터 저장 실패: ${err}`);
+      throw new Error(err as string);
     }
   }
 
@@ -115,9 +116,8 @@ class implementedCreator extends AbstractedCreator {
   ): Promise<void> {
     try {
       await model.insertMany(datas, options || {});
-      console.log("다중 데이터 저장 성공");
     } catch (err) {
-      throw new Error(`다중 데이터 저장 실패: ${err}`);
+      throw new Error(err as string);
     }
   }
 }

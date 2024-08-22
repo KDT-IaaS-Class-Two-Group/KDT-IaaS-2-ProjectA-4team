@@ -55,10 +55,6 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
         { roleID: newRole }, // 요청 본문 설정
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to update role");
-      }
-
       const data = await response.json();
       console.log(data);
       setMembers(
