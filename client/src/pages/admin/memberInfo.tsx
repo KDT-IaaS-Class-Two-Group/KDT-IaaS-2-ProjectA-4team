@@ -38,7 +38,10 @@ const MemberInfoPage: React.FC = () => {
         setError(failedLoadDataMessage);
 =======
         setError("Failed to load data");
+<<<<<<< HEAD
 >>>>>>> b3247e7 (:fire:memberInfo.tsx console삭제)
+=======
+>>>>>>> a4c6369 (:fire:memberInfo.tsx console삭제)
       } finally {
         setLoading(false);
       }
