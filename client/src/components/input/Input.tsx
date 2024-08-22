@@ -2,9 +2,12 @@ import React, { forwardRef } from "react";
 import { Input, InputProps } from "../../../components/ui/input";
 
 /**
+ * @yuxincxoi 24.07.24
+ * * input 입력창 컴포넌트
  * @param props input 태그가 가질 수 있는 속성들
  * @param ref input 요소에 대한 참조
  */
+
 const InputComponent = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     return (

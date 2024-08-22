@@ -117,6 +117,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * @moonhr 24.08.09
+   * * 토큰에서 사용자의 이메일을 찾아 리턴한다.
+   * @param cookie
+   * @returns userEmail
+   */
   async findUserEmailToToken(request: Request): Promise<string | null> {
     try {
       const token = request.cookies['token'];

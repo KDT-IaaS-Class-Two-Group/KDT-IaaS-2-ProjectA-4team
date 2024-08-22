@@ -9,6 +9,11 @@ export class ProductService {
     @InjectModel('Product') private readonly productModel: Model<IProduct>,
   ) {}
 
+  /**
+   * @yuxincxoi 24.08.08
+   * * 데이터베이스의 product 전제 데이터 가져오기
+   * @returns product
+   */
   async getAllProducts(): Promise<IProduct[]> {
     try {
       const product = await this.productModel.find().exec();

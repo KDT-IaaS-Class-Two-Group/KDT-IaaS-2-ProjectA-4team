@@ -46,6 +46,14 @@ export class SaleService {
       .exec();
   }
 
+  /**
+   * @yuxincxoi 24.08.12
+   * * 구매 정보를 sale 데이터베이스에 저장
+   * @param {string} email 구매한 사용자 이메일
+   * @param {array} products 구매한 제품 데이터
+   * @param {string} saleDate 구매한 날짜
+   * @returns Promise<ISale> 구매 내역
+   */
   async saleHistory(
     email: string,
     products: Array<{ productName: string; quantity: number }>,

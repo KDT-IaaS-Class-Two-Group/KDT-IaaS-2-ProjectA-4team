@@ -5,9 +5,11 @@ import { useRouter } from "next/router";
 import { menus } from "static/components/menu/admin/navListBox.static";
 
 /**
- * @crystal23733 24.07.29
- * @returns aside list
+ * @yuxincxoi 24.08.13
+ * * 관리자 페이지 네비게이션
+ * @returns {JSXElement}
  */
+
 const NavListBox: React.FC = () => {
   const router = useRouter();
   const [selectMenu, setSelectMenu] = useState("");
