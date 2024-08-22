@@ -59,7 +59,6 @@ export class AuthService {
       maxAge: 3600000,
     };
 
-    console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
 
