@@ -14,6 +14,12 @@ export class AuthService {
     private readonly tokenUtils: TokenUtils,
   ) {}
 
+  /**
+   * * 유효성검사
+   * @param email
+   * @param password
+   * @returns user
+   */
   async validateUser(email: string, password: string): Promise<IMember | null> {
     const user = await this.memberModel.findOne({ email }).exec();
     if (user && user.password === password) {
@@ -22,6 +28,11 @@ export class AuthService {
     return null;
   }
 
+  /**
+   * * 회원가입 시 진행되는 사용자 생성
+   * @param createUserDto
+   * @returns 사용자 데이터 저장
+   */
   async createUser(createUserDto: {
     username: string;
     email: string;
@@ -59,7 +70,6 @@ export class AuthService {
       maxAge: 3600000,
     };
 
-    console.log('토큰 출력 직전');
     return { token, cookieOptions };
   }
 
@@ -112,16 +122,15 @@ export class AuthService {
       const token = request.cookies['token'];
       return await this.tokenUtils.findNameByToken(token, this.memberModel);
     } catch (error) {
-      console.error('Token decoding failed:', error);
       return null;
     }
   }
 
   /**
    * @moonhr 24.08.09
-   * * 토큰에서 사용자의 이메일을 찾아 리턴한다.
-   * @param cookie
-   * @returns userEmail
+   * * 토큰에서 사용자이메일 반환
+   * @param request
+   * @returns user.email
    */
   async findUserEmailToToken(request: Request): Promise<string | null> {
     try {
@@ -133,7 +142,6 @@ export class AuthService {
       const decoded = this.jwtService.verify(token);
       return decoded.email;
     } catch (error) {
-      console.error(error);
       return null;
     }
   }

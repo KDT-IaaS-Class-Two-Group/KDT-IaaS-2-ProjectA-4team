@@ -15,7 +15,7 @@ const addExampleData = () => {
     addProductData();
     addSaleData();
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

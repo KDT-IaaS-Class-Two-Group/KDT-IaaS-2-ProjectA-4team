@@ -9,6 +9,7 @@ import DynamicTable from "../DynamicTable";
 import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
 import ProductPage from "../expiration/button/savedatabutton";
+import { productTableStatic } from "static/components/table/productTable.static";
 
 /**
  * @moonhr 24.07.31
@@ -23,26 +24,43 @@ const ProductTable: React.FC = () => {
   );
   const [searchQuery, handleSearch] = useSearch();
 
+  /**
+   * * 수정모달 열기
+   * @param product
+   */
   const openUpdateModal = (product: ProductDTO) => {
     setSelectedProduct(product);
     setUpdateModalOpen(true);
   };
 
+  /**
+   * * 수정모달 닫기
+   */
   const closeUpdateModal = () => {
     setUpdateModalOpen(false);
     setSelectedProduct(null);
   };
 
+  /**
+   * * 주문모달 열기
+   * @param product
+   */
   const openOrderModal = (product: ProductDTO) => {
     setSelectedProduct(product);
     setOrderModalOpen(true);
   };
 
+  /**
+   * * 주문모달 닫기
+   */
   const closeOrderModal = () => {
     setOrderModalOpen(false);
     setSelectedProduct(null);
   };
 
+  /**
+   * * 모달 기능 버튼 작동
+   */
   const handleSave = async () => {
     try {
       await refetch();
@@ -61,7 +79,9 @@ const ProductTable: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  // 데이터 전처리 (예: ProductDTO 인스턴스로 변환)
+  /**
+   * * 데이터 전처리 (예: ProductDTO 인스턴스로 변환)
+   */
   const processedData = data.map((item) => {
     const formattedItem = {
       ...item,
@@ -87,17 +107,17 @@ const ProductTable: React.FC = () => {
               variant="default"
               type="button"
               onClick={() => openOrderModal(row)}
-              className="text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
+              className="text-xs leading-loose text-gray-500 underline hover:text-cyan-500"
             >
-              발주하기
+              {productTableStatic.orderButton}
             </ButtonComponent>
             <ButtonComponent
               variant="default"
               type="button"
               onClick={() => openUpdateModal(row)}
-              className="mt-1 text-gray-500 underline text-xs leading-loose hover:text-cyan-500"
+              className="mt-1 text-xs leading-loose text-gray-500 underline hover:text-cyan-500"
             >
-              수정하기
+              {productTableStatic.updateButton}
             </ButtonComponent>
           </>
         )}

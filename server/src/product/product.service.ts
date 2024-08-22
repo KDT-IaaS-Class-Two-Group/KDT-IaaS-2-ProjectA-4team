@@ -19,7 +19,6 @@ export class ProductService {
       const product = await this.productModel.find().exec();
       return product;
     } catch (error) {
-      console.error(error);
       return [];
     }
   }

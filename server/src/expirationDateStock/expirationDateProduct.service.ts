@@ -15,13 +15,11 @@ export class productsServiceDate {
 
   async findAll(): Promise<IProduct[]> {
     const product = await this.productModel.find().exec();
-    console.log('찾을게유');
     return product;
   }
 
   async remove(id: string): Promise<void> {
     await this.productModel.deleteOne({ _id: id }).exec();
-    console.log('폐기해유');
   }
 
   async create(product: IProduct): Promise<IProduct> {

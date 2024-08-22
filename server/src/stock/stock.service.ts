@@ -32,7 +32,6 @@ export class StockService {
 
   async createProduct(product: IProduct): Promise<IProduct> {
     try {
-      console.log('프로덕트:', product);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { _id, ...productWithoutId } = product;
       const createdProduct = new this.productModel(productWithoutId);
@@ -51,7 +50,6 @@ export class StockService {
   }
 
   async updateProduct(id: string, product: IProduct): Promise<IProduct | null> {
-    console.log('패치로 들어온 제품:', product);
     try {
       const updatedProduct = await this.productModel
         .findByIdAndUpdate(id, product, { new: true })

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { AddProductModal } from "../../../modal/addmodal/AddProductModal";
 import ButtonComponent from "src/components/button/customized/CustomButton";
-import { ExpirationDateHook } from "src/hooks/expiration/ExpirationDateHook";
+import { useExpirationDate } from "src/model/expiration/useExpirationDate";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 /**
  * @jojayeon 24.08.09
  * @returns 제품 구매 버튼
  */
 const ProductPage: React.FC = () => {
-  const { addProduct } = ExpirationDateHook();
+  const { addProduct } = useExpirationDate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 모달 열기

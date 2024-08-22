@@ -5,6 +5,8 @@ import IMemberInfo from "../../interfaces/member/MemberInfo.interface";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
 import fetcher from "src/modules/fetching/fetcher";
 import TitleComponent from "src/components/title/titleComponent";
+import { failedLoadDataMessage } from "static/hooks/sale/table/salesUseTableHook.static";
+import { memberInfoHeadDatas } from "static/pages/admin/memberInfo.static";
 
 /**
  * @crystal23733 24.08.12
@@ -29,15 +31,10 @@ const MemberInfoPage: React.FC = () => {
           },
         );
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch members");
-        }
-
         const data: IMemberInfo[] = await res.json();
         setMembers(data);
       } catch (err) {
-        setError("Failed to load data");
-        console.error(err);
+        setError(failedLoadDataMessage);
       } finally {
         setLoading(false);
       }
@@ -65,10 +62,7 @@ const MemberInfoPage: React.FC = () => {
         <div className="items-center w-auto h-10 py-3">
           <TitleComponent className="font-jamsil" titletext="회원 조회" />
         </div>
-        <MemberInfoTable
-          head={["Data ID", "이름", "이메일", "관리자 권한"]}
-          data={formattedData}
-        />
+        <MemberInfoTable head={memberInfoHeadDatas} data={formattedData} />
       </div>
     </div>
   );
