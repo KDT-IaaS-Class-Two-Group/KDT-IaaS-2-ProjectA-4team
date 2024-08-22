@@ -21,6 +21,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
 }) => {
   const { productList } = MenuItemHook();
 
+  // 카테고리별 제품 배열 생성하는 함수
   const renderMenuItems = () => {
     const productBread: IProduct[] = [];
     const productPatty: IProduct[] = [];
@@ -28,6 +29,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
     const productSide: IProduct[] = [];
     const productDrink: IProduct[] = [];
 
+    // 카테고리별 제품 배열에 제품 추가
     productList.forEach((product) => {
       if (product.productCategory === "bread") {
         productBread.push(product);
@@ -42,6 +44,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       }
     });
 
+    // 카테고리별 메뉴 카드 컴포넌트 생성하는 함수
     const renderMenu = (products: IProduct[]) => (
       <>
         {products.map((product) => (
@@ -58,6 +61,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       </>
     );
 
+    // 카테고리별 메뉴 렌더링
     switch (selectCategory) {
       case "bread":
         return renderMenu(productBread);

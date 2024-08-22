@@ -1,3 +1,9 @@
+/**
+ * @yuxincxoi 24.08.09
+ * * 구매한 사용자 이메일 가져오기
+ * @returns object 구매한 사용자 이메일
+ */
+
 export default async (): Promise<string> => {
   try {
     const response = await fetch("http://localhost:3001/getUserEmail", {

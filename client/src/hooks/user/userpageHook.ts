@@ -7,22 +7,25 @@ import { CartHook } from "../cart/cartHook";
 
 /**
  * @yuxincxoi 24.08.07
- * * `UserpageHook` 훅은 사용자 페이지에서 카테고리 선택, 장바구니 관리, 모달 상태 등을 처리합니다.
- *
- * @returns {{
- *   selectCategory: string;              // 현재 선택된 카테고리
- *   setSelectCategory: React.Dispatch<React.SetStateAction<string>>; // 선택된 카테고리를 설정하는 함수
- *   cartItems: { menu: string; unitPrice: number }[]; // 장바구니에 담긴 항목들
- *   isModalOpen: boolean;                // 모달 창의 열림 상태
- *   isPurchaseModalOpen: boolean;        // 구매 모달 창의 열림 상태
- *   closeModal: () => void;              // 모달 창을 닫는 함수
- *   closePurchaseModal: () => void;      // 구매 모달 창을 닫는 함수
- *   confirmPurchase: () => void;         // 구매를 확인하고 장바구니를 비우는 함수
- *   error: string | null;                // 발생한 오류 메시지
- *   handleAddToCart: (menu: string, unitPrice: number) => void; // 장바구니에 항목을 추가하는 함수
- *   handleRemoveItem: (menu: string) => void; // 장바구니에서 항목을 제거하는 함수
- *   purchase: () => Promise<void>;       // 구매 모달 창을 열기 위한 함수
- * }}
+ * * 사용자 페이지의 카테고리 선택, 장바구니 관리, 모달 상태 등을 처리
+ * @returns
+ *   - selectCategory - 선택된 카테고리
+ *   - setSelectCategory - 선택된 카테고리를 설정하는 함수
+ *   - cartItems - 장바구니에 담긴 제품
+ *   - isModalOpen - 모달창(장바구니에 메뉴가 이미 존재합니다) 열기
+ *   - isPurchaseModalOpen - 모달창(구매하시겠습니까) 열기
+ *   - closeModal - 모달창(장바구니에 메뉴가 이미 존재합니다)을 닫는 함수
+ *   - closePurchaseModal 모달창(구매하시겠습니까)을 닫는 함수
+ *   - confirmPurchase - 구매 확정 후 실행되는 함수
+ *   - error - 에러 메세지
+ *   - handleAddToCart - 장바구니에 제품을 추가하는 함수
+ *   - handleRemoveItem - 장바구니 제품을 제거하는 함수
+ *   - purchase - 구매하기 버튼 클릭시 실행되는 함수
+ *   - isCompletePurchase - 모달창(구매완료) 열기
+ *   - onCount - 클릭한 제품이 장바구니에 존재하지 않으면 장바구니에 제품 추가하는 함수
+ *   - closeCompletePurchaseModal - 모달창(구매완료)을 닫는 함수
+ *   - closeEmptyMoal - 모달창(빈장바구니)을 닫는 함수
+ *   - isEmpty - 모달창(빈장바구니) 열기
  */
 export const UserpageHook = () => {
   const router = useRouter();
@@ -40,10 +43,13 @@ export const UserpageHook = () => {
     { productName: string; quantity: number }[]
   >([]);
 
+  // 구매하기 버튼 클릭시 실행되는 함수
   const purchase = () => {
     try {
+      // 장바구니에 제품이 존재하지 않을 때
       if (cartItems.length === 0) {
         setIsEmpty(true);
+        // 모달창 자동닫기
         setTimeout(() => {
           setIsEmpty(false);
         }, 3000);
@@ -58,6 +64,7 @@ export const UserpageHook = () => {
   const completePurchase = () => {
     try {
       setIsCompletePurchase(true);
+      // 모달창 자동닫기
       setTimeout(() => {
         setIsCompletePurchase(false);
       }, 3000);
@@ -66,6 +73,7 @@ export const UserpageHook = () => {
     }
   };
 
+  // 구매한 사용자 이메일 데이터베이스에서 가져오는 함수
   const loadData = async () => {
     try {
       const userEmail = await getUserEmailFetch();
@@ -76,7 +84,9 @@ export const UserpageHook = () => {
     }
   };
 
+  // 구매 확정시 실행되는 함수
   const confirmPurchase = async () => {
+    // 구매 날짜
     const today = new Date().toISOString().split("T")[0];
 
     const userEmail = await loadData();
@@ -87,11 +97,11 @@ export const UserpageHook = () => {
     // 확인을 위한 디버깅 로그 추가
     console.log("Products before purchase:", products);
 
+    // 구매 정보 데이터 데이터베이스에 저장
     const purchaseData = await salesHistoryFetch(userEmail, products, today);
 
-    // 장바구니 비우기
-    setCartItems([]);
-    setProducts([]); // <-- 추가: 장바구니와 제품 목록 비우기
+    setCartItems([]); // 장바구니 비우기
+    setProducts([]); // 장바구니와 제품 목록 비우기
 
     setIsPurchaseModalOpen(false);
     completePurchase();
@@ -119,6 +129,7 @@ export const UserpageHook = () => {
   const closeCompletePurchaseModal = () => setIsCompletePurchase(false);
   const closeEmptyMoal = () => setIsEmpty(false);
 
+  // 카테고리 변경시 실행
   useEffect(() => {
     try {
       const category = router.query.category as string;
@@ -130,10 +141,12 @@ export const UserpageHook = () => {
     }
   }, [router.query.category]);
 
+  // 장바구니에 제품 추가하는 함수
   const handleAddToCart = (menu: string, unitPrice: number, id: string) => {
     try {
       setCartItems((prevItems) => {
         const itemIndex = prevItems.findIndex((item) => item.menu === menu);
+        // 제품이 장바구니에 존재하지 않는다면 제품 추가
         if (itemIndex === -1) {
           setProducts([...products, { productName: menu, quantity: 1 }]);
           return [...prevItems, { menu, unitPrice, id }];
@@ -146,12 +159,15 @@ export const UserpageHook = () => {
     }
   };
 
+  // 클릭한 제품이 장바구니에 존재하지 않으면 장바구니에 제품을 추가하거나
+  // 이미 존재하는 경우 수량을 업데이트하는 함수
   const onCount = (count: number, menu: string) => {
     setProducts((prevProducts) => {
       const productIndex = prevProducts.findIndex(
         (product) => product.productName === menu,
       );
 
+      // 제품이 장바구니에 존재하면 수량 업데이트
       if (productIndex !== -1) {
         prevProducts[productIndex].quantity = count;
       } else {
@@ -162,6 +178,7 @@ export const UserpageHook = () => {
     });
   };
 
+  // 장바구니 제품을 제거하는 함수
   const handleRemoveItem = (menu: string) => {
     try {
       const updatedItems = cartItems.filter((item) => item.menu !== menu);

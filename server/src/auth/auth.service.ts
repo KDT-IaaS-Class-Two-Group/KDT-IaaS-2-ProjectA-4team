@@ -127,6 +127,7 @@ export class AuthService {
   }
 
   /**
+   * @moonhr 24.08.09
    * * 토큰에서 사용자이메일 반환
    * @param request
    * @returns user.email
