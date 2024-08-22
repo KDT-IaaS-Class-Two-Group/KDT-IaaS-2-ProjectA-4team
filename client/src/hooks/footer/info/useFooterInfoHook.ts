@@ -27,7 +27,6 @@ const useFooterInfoHook = () => {
           { credentials: "include" },
         );
         const result = await response.json();
-        console.log(result.email);
         if (response.ok) {
           setUserName(result.email);
         } else {
