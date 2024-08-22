@@ -4,6 +4,7 @@ import ButtonComponent from "../../button/customized/CustomButton";
 import InputComponent from "../../input/Input";
 import { Label } from "components/ui/label";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
+import { AddProduct_static } from "static/components/modal/addmodal/AddProductModal.static";
 
 /**
  * @jojayeon 20.083.09
@@ -24,6 +25,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   const [productCategory, setProductCategory] = useState<string>("");
   const [quantity, setQuantity] = useState<number | "">("");
   const [unitPrice, setPrice] = useState<number | "">("");
+  const [error, setError] = useState<string | null>(null);
 
   // 값 들어오는거 변환
   const handleproductCategoryChange = (
@@ -58,7 +60,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
       });
       onAddProduct(newProduct);
     } else {
-      alert("모든 필드를 입력해주세요.");
+      setError(AddProduct_static.ALL_FIELD);
     }
   };
 
@@ -66,10 +68,10 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="fixed z-50 w-full max-w-md p-6 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg inset-1/2 h-1/3">
-        <DialogTitle className="mb-4 text-xl font-bold">제품 구매</DialogTitle>
+        <DialogTitle className="mb-4 text-xl font-bold">{AddProduct_static.PURCHASE_PRODUCT}</DialogTitle>
         <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="category" className="text-right border-r-black">
-            분류
+            {AddProduct_static.CLASSIFICATION}
           </Label>
           <select
             aria-label="Select an option"
@@ -78,58 +80,58 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
             onChange={handleproductCategoryChange}
             className="col-span-3 border border-gray-300 rounded px-2 py-1 w-62%"
           >
-            <option value="">선택하세요</option>
-            <option value="음료">음료</option>
-            <option value="사이드">사이드</option>
-            <option value="패티">패티</option>
-            <option value="빵">빵</option>
-            <option value="소스">소스</option>
+            <option value="">{AddProduct_static.SELECT}</option>
+            <option value={AddProduct_static.BEVERAGE}>{AddProduct_static.BEVERAGE}</option>
+            <option value={AddProduct_static.SIDE}>{AddProduct_static.SIDE}</option>
+            <option value={AddProduct_static.PATTY}>{AddProduct_static.PATTY}</option>
+            <option value={AddProduct_static.BREAD}>{AddProduct_static.BREAD}</option>
+            <option value={AddProduct_static.SAUCE}>{AddProduct_static.SAUCE}</option>
           </select>
           <Label htmlFor="productName" className="text-right border-r-black">
-            제품
+            {AddProduct_static.PRODUCT}
           </Label>
           <InputComponent
             id="productName"
             value={productName}
             onChange={handleProductNameChange}
             className="w-max"
-            placeholder="제품을 입력"
+            placeholder={AddProduct_static.PRODUCT_INPUT}
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="quantity" className="text-right border-r-black">
-            수량
+          {AddProduct_static.QUANTITY}
           </Label>
           <InputComponent
             id="quantity"
             value={quantity}
             onChange={handleQuantityChange}
             className="w-max"
-            placeholder="숫자만 입력"
+            placeholder={AddProduct_static.ENTER_NUMBER}
             type="number"
             min="1"
           />
         </div>
         <div className="grid items-center grid-cols-4 gap-4 mb-4">
           <Label htmlFor="unitPrice" className="text-right border-r-black">
-            가격
+          {AddProduct_static.PRICE}
           </Label>
           <InputComponent
             id="unitPrice"
             value={unitPrice}
             onChange={handlePriceChange}
             className="w-max"
-            placeholder="숫자만 입력"
+            placeholder={AddProduct_static.ENTER_NUMBER}
             type="number"
             min="1"
           />
         </div>
         <div className="flex justify-end gap-4">
           <ButtonComponent onClick={onClose} variant="outline">
-            취소
+          {AddProduct_static.CANCEL}
           </ButtonComponent>
           <ButtonComponent onClick={handleOrder} variant="default">
-            주문
+            {AddProduct_static.ORDER}
           </ButtonComponent>
         </div>
       </DialogContent>
