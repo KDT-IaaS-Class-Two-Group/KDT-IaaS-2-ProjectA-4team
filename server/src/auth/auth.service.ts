@@ -122,7 +122,6 @@ export class AuthService {
       const token = request.cookies['token'];
       return await this.tokenUtils.findNameByToken(token, this.memberModel);
     } catch (error) {
-      console.error('Token decoding failed:', error);
       return null;
     }
   }
@@ -142,7 +141,6 @@ export class AuthService {
       const decoded = this.jwtService.verify(token);
       return decoded.email;
     } catch (error) {
-      console.error(error);
       return null;
     }
   }
