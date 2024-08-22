@@ -7,7 +7,7 @@ import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import { AA, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
+import { DISPOSE, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
 /**
  * @jojayeon 24.08.07
  * @returns 유통기한 관리 테이블
@@ -75,7 +75,7 @@ export const ExpirationDataTable: React.FC = () => {
               type="button"
               onClick={() => openModal(row)}
             >
-						{AA}
+						{DISPOSE}
             </ButtonComponent>
           </>
         )}
