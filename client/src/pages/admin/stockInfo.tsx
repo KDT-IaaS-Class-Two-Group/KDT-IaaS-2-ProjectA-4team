@@ -3,6 +3,11 @@ import ProductTable from "src/components/table/Product/ProductTable";
 import AdminNav from "src/components/nav/admin/adminNav";
 import TitleComponent from "src/components/title/titleComponent";
 
+/**
+ * @moonhr 24.07.30
+ * * 재고페이지
+ * @returns 재고 기본 페이지
+ */
 const StockInfo = () => {
   return (
     <>
