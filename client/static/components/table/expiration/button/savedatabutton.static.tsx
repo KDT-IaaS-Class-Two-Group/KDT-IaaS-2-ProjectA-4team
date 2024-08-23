@@ -1,0 +1,1 @@
+export const  PRODUCT_ORDER= "제품 구매" 

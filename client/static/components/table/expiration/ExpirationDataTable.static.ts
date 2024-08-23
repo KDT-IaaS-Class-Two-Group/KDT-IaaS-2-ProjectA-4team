@@ -1,4 +1,4 @@
-export const  AA = "폐기하기"
+export const  DISPOSE = "폐기하기"
 
 export const CONFIRM_TITLE = '폐기 확인'
 
