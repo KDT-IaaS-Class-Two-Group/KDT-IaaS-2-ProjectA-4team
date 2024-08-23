@@ -11,6 +11,17 @@ import { PassportModule } from '@nestjs/passport';
 import { LogsModule } from '../log/logs.module';
 import { TokenUtils } from '../utils/token.utils';
 
+/**
+ * @crystal23733
+ * @date 24.08.23
+ * @description AuthModule은 인증과 관련된 모든 기능을 담당하는 NestJS 모듈입니다.
+ *
+ * 이 모듈은 사용자의 인증을 위한 컨트롤러, 서비스 및 전략을 설정하고,
+ * JSON Web Token (JWT)과 관련된 설정을 포함합니다. Mongoose와 Passport 모듈도 포함되어
+ * MongoDB를 통한 데이터 관리와 JWT 전략을 사용한 인증을 제공합니다.
+ *
+ * @module AuthModule
+ */
 @Module({
   imports: [
     ConfigModule.forRoot(),
