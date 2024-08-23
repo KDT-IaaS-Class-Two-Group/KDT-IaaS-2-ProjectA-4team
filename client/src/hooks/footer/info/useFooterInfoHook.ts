@@ -5,8 +5,14 @@ import thrower from "src/modules/throw/thrower";
 import { failFetchedUserInfoMessage } from "static/hooks/footer/info/useFooterInfoHook.static";
 
 /**
- * @crystal23733 24.08.09
- * * `useFooterInfoHook` 훅은 사용자 정보를 가져와서 상태를 관리합니다.
+ * `useFooterInfoHook` 훅은 사용자 정보를 가져와서 상태를 관리합니다.
+ *
+ * 이 훅은 사용자 정보를 서버에서 비동기로 가져오고, 사용자 이름을 상태로 관리합니다.
+ * 데이터 로딩 상태와 함께 사용자 이름을 반환하여, 컴포넌트에서 사용자 정보를 비동기적으로 표시할 수 있습니다.
+ *
+ * @hook
+ * @crystal23733
+ * @date 24.08.09
  *
  * @returns {{
  *   userName: string | null,  // 사용자 이름 (정보를 성공적으로 가져온 경우) 또는 null (가져오는 도중 오류가 발생한 경우)
@@ -27,7 +33,6 @@ const useFooterInfoHook = () => {
           { credentials: "include" },
         );
         const result = await response.json();
-        console.log(result.email);
         if (response.ok) {
           setUserName(result.email);
         } else {

@@ -11,7 +11,10 @@ import { ProductDTO } from "@shared/DTO/products/product.dto";
  * @returns {Function} addProduct - ProductDTO타입의 product데이터를 비동기로 서버에 보내는역할
  *
  */
-export const useAddProduct = (fetchData: () => void, epProductsDate: string) => {
+export const useAddProduct = (
+  fetchData: () => void,
+  epProductsDate: string,
+) => {
   const addProduct = async (product: ProductDTO) => {
     const postUrl = serverUrlGenerator(epProductsDate, "orderproduct");
     try {

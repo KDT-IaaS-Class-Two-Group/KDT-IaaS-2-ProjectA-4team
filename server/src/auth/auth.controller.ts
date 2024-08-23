@@ -12,10 +12,18 @@ import { AuthService } from './auth.service';
 import IMember from '@db/members/member.interface';
 import { Request, Response } from 'express';
 
+/**
+ * * 사용자 로직 처리될 컨트롤러
+ */
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * * 회원가입 시
+   * @param body
+   * @returns 가입완료 메세지, 사용자Data
+   */
   @Post('signup')
   async signUp(
     @Body() body: { username: string; email: string; password: string },
@@ -27,11 +35,16 @@ export class AuthController {
         data: newUser,
       };
     } catch (error) {
-      console.error('회원 가입 오류:', error);
       throw new Error('회원 가입 처리 중 오류가 발생했습니다.');
     }
   }
 
+  /**
+   * * 로그인 시
+   * @param data
+   * @param res
+   * @returns 토큰, 쿠키설정
+   */
   @Post('login')
   async login(@Body() data: IMember, @Res() res: Response): Promise<void> {
     // 사용자 검증 및 로그인 처리
@@ -64,6 +77,12 @@ export class AuthController {
     }
   }
 
+  /**
+   * * user-info에 이름 제공
+   * @param req
+   * @param res
+   * @returns user
+   */
   @Get('user-info')
   async getUserInfo(@Req() req: Request, @Res() res: Response) {
     const token = req.cookies['token'];
@@ -90,6 +109,20 @@ export class AuthController {
     }
   }
 
+  /**
+   * @crystal23733
+   * @date 24.08.06
+   * @description 비밀번호를 변경하는 엔드포인트입니다.
+   *
+   * 사용자가 현재 비밀번호와 새 비밀번호를 제공하면, 토큰을 확인하여 사용자의 이메일을 추출한 후,
+   * 해당 이메일에 대해 비밀번호 변경을 시도합니다.
+   *
+   * @param {Request} req - Express의 Request 객체입니다. 요청에 포함된 쿠키와 사용자 정보를 제공합니다.
+   * @param {string} oldPassword - 현재 비밀번호입니다.
+   * @param {string} newPassword - 새로 설정할 비밀번호입니다.
+   * @param {Response} res - Express의 Response 객체입니다. 응답을 클라이언트에 전송합니다.
+   * @returns {Promise<Response>} - 비밀번호 변경 성공 또는 실패에 대한 상태와 메시지를 포함한 응답을 반환합니다.
+   */
   @Post('changePassword')
   async changePassword(
     @Req() req: Request,
@@ -115,7 +148,6 @@ export class AuthController {
         .status(HttpStatus.OK)
         .json({ message: '비밀번호가 성공적으로 변경되었습니다.' });
     } catch (error) {
-      console.error('Error in changePassword:', error);
       if (error instanceof Error) {
         return res
           .status(HttpStatus.BAD_REQUEST)
@@ -127,18 +159,32 @@ export class AuthController {
     }
   }
 
+  /**
+   * * login info 요청 시
+   * @param request
+   * @param res
+   */
   @Get('login-info')
   async getLoginInfo(@Req() request: Request, @Res() res: Response) {
     const userName = await this.authService.findUserNameToToken(request);
     res.status(HttpStatus.OK).json(userName);
   }
 
+  /**
+   * * 이메일 요청 시
+   * @param request
+   * @param res
+   */
   @Get('getUserEmail')
   async getUserEmail(@Req() request: Request, @Res() res: Response) {
     const userEmail = await this.authService.findUserEmailToToken(request);
     res.status(HttpStatus.OK).json(userEmail);
   }
 
+  /**
+   * * 로그아웃 시
+   * @param res
+   */
   @Post('logout')
   async logout(@Res() res: Response) {
     // 쿠키를 만료시키고 응답

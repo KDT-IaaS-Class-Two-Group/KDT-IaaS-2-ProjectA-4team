@@ -8,8 +8,11 @@ import {
 } from "static/hooks/password/changePasswordHook.static";
 
 /**
- * @crystal23733 24.08.02
+ * @crystal23733
+ * @date 24.08.02
+ *
  * `useChangePasswordHook` 훅은 비밀번호 변경 폼의 상태를 관리하고 비밀번호 변경 요청을 처리합니다.
+ * 이 훅은 비밀번호의 유효성을 검사하고, 비밀번호 변경 요청을 서버에 보내며, 결과에 따라 상태를 업데이트합니다.
  *
  * @returns {{
  *   password: string;                      // 현재 비밀번호 상태
@@ -25,7 +28,6 @@ import {
  * }}
  *
  * @throws {string} - 비밀번호 변경 중 오류가 발생하면 에러 메시지를 문자열로 던집니다.
- *
  */
 const useChangePasswordHook = () => {
   const [password, setPassword] = useState<string>("");
@@ -35,6 +37,14 @@ const useChangePasswordHook = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  /**
+   * 비밀번호 변경 폼을 제출하는 함수입니다.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - 폼 제출 이벤트
+   * @returns {Promise<void>} - 비동기 작업을 포함한 프라미스
+   *
+   * @throws {string} - 유효성 검사 실패 또는 비밀번호 변경 요청 실패 시 에러 메시지를 설정합니다.
+   */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -52,7 +62,6 @@ const useChangePasswordHook = () => {
 
     try {
       const result = await changePasswordFetch(password, changePassword);
-      console.log(result);
       setError(null);
       setSuccessMessage(succeedChangePwMessage);
       // 변경 성공 시 새로고침

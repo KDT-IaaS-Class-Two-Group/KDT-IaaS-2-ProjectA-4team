@@ -14,7 +14,6 @@ export default async (): Promise<ClientSaleDTO[]> => {
   });
 
   const data: ClientSaleDTO[] = await response.json();
-  console.log(data);
 
   return data;
 };

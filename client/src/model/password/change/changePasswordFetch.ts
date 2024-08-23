@@ -1,12 +1,20 @@
 import fetcher from "src/modules/fetching/fetcher";
 import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
+import { unknownErrMessage } from "static/error/unknown/unknownErr.static";
+import { changePasswordError } from "static/hooks/password/changePasswordFetch.static";
 
 /**
- * @crystal23733 24.08.01
- * @param name
- * @param password 기존 비밀번호
- * @param changePassword 변경할 비밀번호
- * @returns responseData 응답 값
+ * @crystal23733
+ * @date 24.08.01
+ *
+ * 사용자의 비밀번호를 변경하는 요청을 처리하는 함수입니다.
+ *
+ * @param {string} password - 현재 비밀번호입니다. 사용자 인증을 위해 필요합니다.
+ * @param {string} changePassword - 새로 변경할 비밀번호입니다.
+ *
+ * @returns {Promise<any>} - 서버로부터 받은 응답 데이터를 반환합니다. 응답 데이터의 형식은 서버에서 정의한 형식에 따릅니다.
+ *
+ * @throws {Error} - 요청 처리 중 오류가 발생할 경우 해당 오류를 던집니다. 응답 상태가 성공적이지 않거나, 네트워크 오류가 발생할 경우 오류 메시지를 던집니다.
  */
 export default async (password: string, changePassword: string) => {
   const EP_CHANGE_PASSWORD = process.env
@@ -26,21 +34,16 @@ export default async (password: string, changePassword: string) => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
 
     if (!response.ok) {
-      console.log(responseData);
-      throw new Error(
-        responseData.message || "비밀번호 변경 중 오류가 발생했습니다.",
-      );
+      throw new Error(responseData.message || changePasswordError);
     }
 
     return responseData;
   } catch (error) {
-    console.error("Error in changePasswordFetch:", error);
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error("알 수 없는 오류가 발생했습니다.");
+    throw new Error(unknownErrMessage);
   }
 };
