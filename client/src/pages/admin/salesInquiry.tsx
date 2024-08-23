@@ -3,6 +3,21 @@ import AdminNav from "src/components/nav/admin/adminNav";
 import SalesInquiryTable from "src/components/table/Sales/SalesInquiryTable";
 import TitleComponent from "src/components/title/titleComponent";
 
+/**
+ * @crystal23733
+ * @date 24.07.29
+ * 
+ * `SalesInquiry` 컴포넌트는 매출 조회 페이지를 렌더링합니다.
+ * 
+ * 이 컴포넌트는 다음을 포함합니다:
+ * - `AdminNav`: 관리자를 위한 네비게이션 바.
+ * - `TitleComponent`: 페이지 제목을 표시합니다.
+ * - `SalesInquiryTable`: 매출 데이터를 테이블 형식으로 표시합니다.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} - 매출 조회 페이지를 구성하는 JSX 요소를 반환합니다.
+ */
 const SalesInquiry: React.FC = () => {
   return (
     <>
