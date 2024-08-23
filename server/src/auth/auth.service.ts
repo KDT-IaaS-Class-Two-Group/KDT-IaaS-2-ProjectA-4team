@@ -74,25 +74,38 @@ export class AuthService {
   }
 
   /**
-   * @crystal23733 24.08.05
-   * @param email
-   * @returns 이메일 확인
+   * @crystal23733
+   * @date 24.08.05
+   * @description 주어진 이메일을 사용하여 사용자의 정보를 확인합니다.
+   * @param email 사용자의 이메일 주소
+   * @returns {Promise<IMember | null>} 이메일이 일치하는 사용자 정보를 반환합니다.
+   * 사용자 정보가 존재하지 않으면 null을 반환합니다.
    */
   async getUserInfo(email: string): Promise<IMember | null> {
     return this.memberModel.findOne({ email }).exec();
   }
 
+  /**
+   * @crystal23733
+   * @date 24.08.05
+   * @description JWT 토큰을 검증합니다.
+   * @param token 검증할 JWT 토큰
+   * @returns {any} 검증된 토큰의 페이로드를 반환합니다.
+   */
   public verifyToken(token: string): any {
     return this.jwtService.verify(token);
   }
 
   /**
-   * * 비밀번호 변경
-   * @crystal23733 24.08.06
-   * @param email
-   * @param oldPassword
-   * @param newPassword
-   * @returns 상태
+   * @crystal23733
+   * @date 24.08.06
+   * @description 사용자의 비밀번호를 변경합니다.
+   * @param email 사용자의 이메일 주소
+   * @param oldPassword 현재 비밀번호
+   * @param newPassword 새 비밀번호
+   * @returns {Promise<any>} 비밀번호 변경 상태를 나타내는 메시지를 반환합니다.
+   * @throws {NotFoundException} 사용자를 찾을 수 없는 경우
+   * @throws {Error} 이전 비밀번호가 일치하지 않는 경우
    */
   async changePassword(
     email: string,

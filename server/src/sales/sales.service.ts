@@ -9,6 +9,12 @@ import { Member } from '../schemas/member.schema';
 import { Product } from '../schemas/product.schema';
 import IProduct from '@db/products/product.interface';
 
+/**
+ * @crystal23733
+ * @date 24.08.09
+ * @description SaleService는 매출 기록을 처리하고 관리하는 서비스입니다.
+ * 이 서비스는 판매 내역 조회, 특정 회원의 판매 내역 조회 및 판매 기록 생성 기능을 제공합니다.
+ */
 @Injectable()
 export class SaleService {
   constructor(
@@ -17,6 +23,12 @@ export class SaleService {
     @InjectModel(Member.name) private readonly memberModel: Model<IMember>, // Member 모델 주입
   ) {}
 
+  /**
+   * @crystal23733
+   * @date 24.08.14
+   * @description 모든 매출 기록을 조회합니다.
+   * @returns {Promise<ISale[]>} 모든 매출 기록의 배열
+   */
   async findAll(): Promise<ISale[]> {
     return this.saleModel
       .find()
@@ -25,6 +37,13 @@ export class SaleService {
       .exec();
   }
 
+  /**
+   * @crystal23733
+   * @date 24.07.29
+   * @description 특정 매출 기록을 ID로 조회합니다.
+   * @param {string} id - 매출 기록의 ID
+   * @returns {Promise<ISale | null>} 특정 매출 기록 또는 null
+   */
   async findById(id: string): Promise<ISale | null> {
     return this.saleModel
       .findById(id)
@@ -33,6 +52,14 @@ export class SaleService {
       .exec();
   }
 
+  /**
+   * @crystal23733
+   * @date 24.08.10
+   * @description 특정 회원의 이메일을 기반으로 매출 기록을 조회합니다.
+   * @param {string} email - 회원의 이메일
+   * @returns {Promise<ISale[]>} 특정 회원의 매출 기록 배열
+   * @throws {Error} 회원을 찾을 수 없는 경우 발생
+   */
   async findByMemberName(email: string): Promise<ISale[]> {
     const member = await this.memberModel.findOne({ email }).exec();
     if (!member) {

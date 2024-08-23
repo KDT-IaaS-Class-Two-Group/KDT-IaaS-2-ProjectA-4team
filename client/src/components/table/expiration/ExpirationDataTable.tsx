@@ -7,7 +7,11 @@ import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import { AA, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
+import {
+  AA,
+  CONFIRM_TITLE,
+  CONFIRM_CONTENT,
+} from "static/components/table/expiration/ExpirationDataTable.static";
 /**
  * @jojayeon 24.08.07
  * @returns 유통기한 관리 테이블
@@ -42,10 +46,10 @@ export const ExpirationDataTable: React.FC = () => {
 
   // 도달창 띄우고 취소 확인
   //확인
-    const handleDelete = () => {
+  const handleDelete = () => {
     if (selectedProductId) {
       // selectedProductId의 id를 추출하여 deleteProduct 함수에 전달합니다.
-      deleteProduct(selectedProductId._id); 
+      deleteProduct(selectedProductId._id);
       setOpen(false);
     }
   };
@@ -75,7 +79,7 @@ export const ExpirationDataTable: React.FC = () => {
               type="button"
               onClick={() => openModal(row)}
             >
-						{AA}
+              {AA}
             </ButtonComponent>
           </>
         )}
@@ -85,7 +89,7 @@ export const ExpirationDataTable: React.FC = () => {
         open={open}
         onClose={closeModal}
         onConfirm={handleDelete}
-        title= {CONFIRM_TITLE}
+        title={CONFIRM_TITLE}
         content={CONFIRM_CONTENT}
       />
     </>

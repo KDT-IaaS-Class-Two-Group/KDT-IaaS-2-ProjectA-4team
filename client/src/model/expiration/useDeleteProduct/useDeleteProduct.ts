@@ -7,7 +7,10 @@ import serverUrlGenerator from "src/modules/generator/serverUrlGenerator";
  * @param {string} epProductsDate - 제품 날짜를 위한 엔드포인트
  * @returns {Function} 제품 삭제 함수
  */
-export const useDeleteProduct = (fetchData: () => void, epProductsDate: string) => {
+export const useDeleteProduct = (
+  fetchData: () => void,
+  epProductsDate: string,
+) => {
   const deleteProduct = async (_id: string) => {
     try {
       await fetcher(serverUrlGenerator(epProductsDate, _id), "delete", {
