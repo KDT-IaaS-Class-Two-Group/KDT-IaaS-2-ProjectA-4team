@@ -26,9 +26,6 @@ app.use(express.json());
 app.post("/join", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    // 데이터가 잘 들어왔는지 확인하기 위해 로그 출력
-    console.log("Received data:", { name, email, password });
-
     // 필요한 모든 필드가 제공되었는지 확인
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required." });
@@ -43,7 +40,6 @@ app.post("/join", async (req, res) => {
 
     const member = new Member({ name, email, password, roleID: 1 }); // 기본 roleID를 1로 설정
     await member.save();
-    console.log("데이터 저장 성공함");
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("유저 저장 실패", error);
