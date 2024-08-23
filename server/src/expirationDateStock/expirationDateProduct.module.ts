@@ -6,6 +6,9 @@ import { Product, ProductSchema } from '../schemas/product.schema';
 /**
  * @jojayeon 24.08.06
  * * 유통기한 관리 페이지 서버 모듈
+ * @description
+ * *controllers 컨트롤러 요청 처리
+ * *providers 서비스 데이터 처리
  */
 
 @Module({
