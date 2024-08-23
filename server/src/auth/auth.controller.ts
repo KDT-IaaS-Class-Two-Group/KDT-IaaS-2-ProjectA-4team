@@ -111,7 +111,7 @@ export class AuthController {
 
   /**
    * @crystal23733
-   * @date 24.08.23
+   * @date 24.08.06
    * @description 비밀번호를 변경하는 엔드포인트입니다.
    *
    * 사용자가 현재 비밀번호와 새 비밀번호를 제공하면, 토큰을 확인하여 사용자의 이메일을 추출한 후,
