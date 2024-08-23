@@ -8,7 +8,10 @@ import { ProductDTO } from "@shared/DTO/products/product.dto";
  * @param {string} epProductsDate - 제품 날짜를 위한 엔드포인트
  * @returns {Function} 제품 추가 함수
  */
-export const useAddProduct = (fetchData: () => void, epProductsDate: string) => {
+export const useAddProduct = (
+  fetchData: () => void,
+  epProductsDate: string,
+) => {
   const addProduct = async (product: ProductDTO) => {
     const postUrl = serverUrlGenerator(epProductsDate, "orderproduct");
     try {

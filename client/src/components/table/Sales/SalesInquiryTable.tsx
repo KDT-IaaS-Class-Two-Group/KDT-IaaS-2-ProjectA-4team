@@ -1,74 +1,84 @@
 import React from "react";
-import salesUseTableHook from "src/hooks/sale/table/salesUseTableHook";
-import DynamicTable from "../DynamicTable";
-import filterData from "src/utils/filterData";
-import useSearch from "src/hooks/useSearchHook";
-import SearchForm from "src/components/form/search/SearchForm";
 import { ClientSaleDTO } from "@shared/DTO/sale/clientSale.interface";
 
-interface AggregatedData {
-  [key: string]: {
-    totalQuantity: number;
-    totalPrice: number;
-    unitPrice: number;
-  };
+/**
+ * `OrderDetailsProps` 인터페이스는 `OrderDetails` 컴포넌트에 전달되는 props의 타입을 정의합니다.
+ *
+ * @interface
+ * @crystal23733
+ * @date 24.08.02
+ *
+ * @property {ClientSaleDTO[]} orderDetails - 주문 내역을 포함하는 배열입니다. 각 항목은 `ClientSaleDTO` 타입으로, 판매와 관련된 정보를 담고 있습니다.
+ * @property {string | null} error - 오류 메시지를 나타내는 문자열입니다. 오류가 없으면 `null`입니다.
+ */
+interface OrderDetailsProps {
+  /**
+   * 주문 내역을 포함하는 배열입니다.
+   * @type {ClientSaleDTO[]}
+   */
+  orderDetails: ClientSaleDTO[];
+
+  /**
+   * 오류 메시지를 나타내는 문자열입니다. 오류가 없으면 `null`입니다.
+   * @type {string | null}
+   */
+  error: string | null;
 }
 
 /**
- * @crystal23733 24.08.02
- * * `SalesInquiryTable` 컴포넌트는 판매 데이터를 집계하여 표 형식으로 표시합니다.
+ * `OrderDetails` 컴포넌트는 주문 내역을 표시하는 컴포넌트입니다.
  *
- * * 이 컴포넌트는 판매 데이터의 집계를 처리하고, 검색 기능을 통해 데이터를 필터링하며, 결과를 동적 테이블로 렌더링합니다.
+ * 이 컴포넌트는 `orderDetails`와 `error`를 props로 받아, 주문 내역을 렌더링합니다. 주문 내역이 없는 경우에는 해당 메시지를 표시하며,
+ * 오류가 있을 경우에는 오류 메시지를 표시합니다.
  *
  * @component
- *
- * @returns {JSX.Element} - 판매 데이터를 집계하여 표시하는 테이블을 반환합니다.
+ * @param {OrderDetailsProps} props - `OrderDetails` 컴포넌트에 전달되는 props입니다.
+ * @returns {JSX.Element} - 주문 내역을 표시하는 JSX 요소를 반환합니다.
+ * @crystal23733
+ * @date 24.08.02
  */
-const SalesInquiryTable: React.FC = () => {
-  const { data, loading, error } = salesUseTableHook();
-  const [searchQuery, handleSearch] = useSearch();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  // 제품별 집계 처리
-  const aggregatedData = (data as ClientSaleDTO[]).reduce((acc, sale) => {
-    sale.products.forEach((product) => {
-      const productName = product.productID.productName;
-
-      if (!acc[productName]) {
-        acc[productName] = {
-          totalQuantity: 0,
-          totalPrice: 0,
-          unitPrice: product.productID.unitPrice,
-        };
-      }
-
-      acc[productName].totalQuantity += product.quantity;
-      acc[productName].totalPrice +=
-        product.productID.unitPrice * product.quantity;
-    });
-    return acc;
-  }, {} as AggregatedData);
-
-  const tableData = Object.keys(aggregatedData).map((productName) => ({
-    productName,
-    ...aggregatedData[productName],
-  }));
-
-  const filteredData = filterData(tableData, searchQuery, "productName");
-
+const OrderDetails: React.FC<OrderDetailsProps> = ({ orderDetails, error }) => {
   return (
-    <>
-      <SearchForm onSearch={handleSearch} />
-      <DynamicTable data={filteredData} />
-    </>
+    <div id="order-details" className="h-50% w-full overflow-y-scroll">
+      <div id="order-detailsheader">
+        <h1 className="text-lg font-bold">주문내역</h1>
+      </div>
+      <div id="order-detailscontent" className="flex flex-col h-full">
+        {orderDetails.length > 0 ? (
+          orderDetails.map((order) => (
+            <div
+              key={order._id}
+              className="flex flex-col mt-4 order-details__items"
+            >
+              <hr />
+              <br />
+              <h2 className="font-semibold text-md">매출 번호: {order._id}</h2>
+              {order.products.map((product, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between mt-2"
+                >
+                  <p>{product.productID.productName}</p>
+                  <p>
+                    {product.productID.unitPrice} 원 x {product.quantity}
+                  </p>
+                  <p>{product.productID.unitPrice * product.quantity} 원</p>
+                </div>
+              ))}
+              <div className="flex items-center justify-between mt-4 font-bold">
+                <p>총 가격:</p>
+                <p>{order.totalPrice} 원</p>
+              </div>
+              <p className="mt-2">판매 날짜: {order.saleDate}</p>
+            </div>
+          ))
+        ) : (
+          <p>주문 내역이 없습니다.</p>
+        )}
+        {error && <p className="error">{error}</p>}
+      </div>
+    </div>
   );
 };
 
-export default SalesInquiryTable;
+export default OrderDetails;
