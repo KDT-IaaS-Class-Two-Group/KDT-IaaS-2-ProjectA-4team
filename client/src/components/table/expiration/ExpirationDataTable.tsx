@@ -8,9 +8,18 @@ import SearchForm from "src/components/form/search/SearchForm";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
 import { DISPOSE, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
+
 /**
  * @jojayeon 24.08.07
- * @returns 유통기한 관리 테이블
+ * * 유통기한 관리 테이블 컴포넌트입니다.
+ * * 검색기능과 제품 삭제 테이블을 보여주는 역할을 합니다.
+ * @returns {React.ReactElement} 유통기한 관리 테이블을 렌더링하는 React 컴포넌트입니다.
+ * @description
+ * * processedData는 테이블 정보는 필터링
+ * * restockDate,expirationDate는 `YYYY-MM-DD` 형식 변환
+ * * openModal 폐기 버튼이고 누르면 모달창으로 연결합니다.
+ * * handleDelete 확인버튼 
+ * * closeModal 취소버튼
  */
 
 export const ExpirationDataTable: React.FC = () => {
