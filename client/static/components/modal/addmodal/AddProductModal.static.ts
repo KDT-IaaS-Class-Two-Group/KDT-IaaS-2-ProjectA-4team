@@ -1,0 +1,18 @@
+export const AddProduct_static = {
+  ALL_FIELD: "모든 필드를 입력해주세요.",
+  PURCHASE_PRODUCT: "제품 구매",
+  CLASSIFICATION: "분류",
+  SELECT: "선택하세요",
+  BEVERAGE: "음료",
+  SIDE: "사이드",
+  PATTY: "패티",
+  BREAD: "빵",
+  SAUCE: "소스",
+  PRODUCT: "제품",
+  PRODUCT_INPUT: "제품 입력",
+  QUANTITY: "수량",
+  PRICE: "가격",
+  ENTER_NUMBER: "숫자 입력",
+  CANCEL: "취소",
+  ORDER: "주문",
+};

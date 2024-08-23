@@ -1,0 +1,1 @@
+export const PAGE_TITLE = "유통기한 관리";

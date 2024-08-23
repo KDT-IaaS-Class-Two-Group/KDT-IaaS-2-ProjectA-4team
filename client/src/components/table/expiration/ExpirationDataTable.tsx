@@ -7,10 +7,19 @@ import useSearch from "src/hooks/useSearchHook";
 import SearchForm from "src/components/form/search/SearchForm";
 import { formatDateToYYYYMMDD } from "src/utils/formatDateToYYYYMMDD";
 import { ProductDTO } from "@shared/DTO/products/product.dto";
-import { AA, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
+import { DISPOSE, CONFIRM_TITLE,CONFIRM_CONTENT } from "static/components/table/expiration/ExpirationDataTable.static";
+
 /**
  * @jojayeon 24.08.07
- * @returns 유통기한 관리 테이블
+ * * 유통기한 관리 테이블 컴포넌트입니다.
+ * * 검색기능과 제품 삭제 테이블을 보여주는 역할을 합니다.
+ * @returns {React.ReactElement} 유통기한 관리 테이블을 렌더링하는 React 컴포넌트입니다.
+ * @description
+ * * processedData는 테이블 정보는 필터링
+ * * restockDate,expirationDate는 `YYYY-MM-DD` 형식 변환
+ * * openModal 폐기 버튼이고 누르면 모달창으로 연결합니다.
+ * * handleDelete 확인버튼 
+ * * closeModal 취소버튼
  */
 
 export const ExpirationDataTable: React.FC = () => {
@@ -42,10 +51,10 @@ export const ExpirationDataTable: React.FC = () => {
 
   // 도달창 띄우고 취소 확인
   //확인
-    const handleDelete = () => {
+  const handleDelete = () => {
     if (selectedProductId) {
       // selectedProductId의 id를 추출하여 deleteProduct 함수에 전달합니다.
-      deleteProduct(selectedProductId._id); 
+      deleteProduct(selectedProductId._id);
       setOpen(false);
     }
   };
@@ -75,7 +84,7 @@ export const ExpirationDataTable: React.FC = () => {
               type="button"
               onClick={() => openModal(row)}
             >
-						{AA}
+						{DISPOSE}
             </ButtonComponent>
           </>
         )}
@@ -85,7 +94,7 @@ export const ExpirationDataTable: React.FC = () => {
         open={open}
         onClose={closeModal}
         onConfirm={handleDelete}
-        title= {CONFIRM_TITLE}
+        title={CONFIRM_TITLE}
         content={CONFIRM_CONTENT}
       />
     </>

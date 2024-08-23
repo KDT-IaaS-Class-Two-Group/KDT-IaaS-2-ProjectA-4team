@@ -1,11 +1,15 @@
 import React from "react";
 import AdminNav from "src/components/nav/admin/adminNav";
 import { ExpirationDataTable } from "src/components/table/expiration/ExpirationDataTable";
-import Logo from "src/components/logo/logo";
 import TitleComponent from "src/components/title/titleComponent";
+import { PAGE_TITLE } from "static/pages/admin/stockDate.syatic";
 /**
  * @jojayeon 24.08.05
- * @returns 유통관리 페이지
+ * @returns {React.ReactElement} AdminstockDate 유통관리 페이지 
+ * @description 
+ * * AdminNav : 사이드바
+ * * TitleComponent : 타이틀 컴포넌트 
+ * * ExpirationDataTable : 제품들의 동적 테이블
  */
 
 const AdminstockDate: React.FC = () => {
@@ -17,7 +21,7 @@ const AdminstockDate: React.FC = () => {
         </div>
         <div className="flex flex-col gap-4 mr-5">
           <div className="items-centerw-auto h-10 py-3">
-            <TitleComponent className="font-jamsil" titletext="유통기한 관리" />
+            <TitleComponent className="font-jamsil" titletext={PAGE_TITLE}/>
           </div>
           <ExpirationDataTable />
         </div>
