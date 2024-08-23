@@ -110,12 +110,18 @@ export class AuthController {
   }
 
   /**
-   * * 비밀번호 변경 시
-   * @param req
-   * @param oldPassword
-   * @param newPassword
-   * @param res
-   * @returns status
+   * @crystal23733
+   * @date 24.08.23
+   * @description 비밀번호를 변경하는 엔드포인트입니다.
+   *
+   * 사용자가 현재 비밀번호와 새 비밀번호를 제공하면, 토큰을 확인하여 사용자의 이메일을 추출한 후,
+   * 해당 이메일에 대해 비밀번호 변경을 시도합니다.
+   *
+   * @param {Request} req - Express의 Request 객체입니다. 요청에 포함된 쿠키와 사용자 정보를 제공합니다.
+   * @param {string} oldPassword - 현재 비밀번호입니다.
+   * @param {string} newPassword - 새로 설정할 비밀번호입니다.
+   * @param {Response} res - Express의 Response 객체입니다. 응답을 클라이언트에 전송합니다.
+   * @returns {Promise<Response>} - 비밀번호 변경 성공 또는 실패에 대한 상태와 메시지를 포함한 응답을 반환합니다.
    */
   @Post('changePassword')
   async changePassword(
