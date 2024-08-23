@@ -11,18 +11,13 @@ import { failFetchedUserInfoMessage } from "static/hooks/footer/info/useFooterIn
  * 데이터 로딩 상태와 함께 사용자 이름을 반환하여, 컴포넌트에서 사용자 정보를 비동기적으로 표시할 수 있습니다.
  *
  * @hook
- * @crystal23733 24.08.09
+ * @crystal23733
+ * @date 24.08.09
  *
  * @returns {{
  *   userName: string | null,  // 사용자 이름 (정보를 성공적으로 가져온 경우) 또는 null (가져오는 도중 오류가 발생한 경우)
  *   loading: boolean          // 데이터 로딩 상태 (true: 로딩 중, false: 로딩 완료)
  * }}
- *
- * @example
- * const { userName, loading } = useFooterInfoHook();
- * if (loading) return <div>Loading...</div>;
- * if (userName) return <div>Welcome, {userName}!</div>;
- * return <div>No user information available.</div>;
  */
 const useFooterInfoHook = () => {
   const [userName, setUserName] = useState<string | null>(null);
