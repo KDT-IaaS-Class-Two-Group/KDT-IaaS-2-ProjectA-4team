@@ -1,4 +1,6 @@
 /**
+ * @crystal23733
+ * @date 24.08.07
  * @function filterData
  * @description 검색어를 기반으로 데이터를 필터링하는 함수입니다.
  *
