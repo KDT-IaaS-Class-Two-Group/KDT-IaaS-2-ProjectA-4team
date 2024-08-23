@@ -5,7 +5,11 @@ import TitleComponent from "src/components/title/titleComponent";
 import { PAGE_TITLE } from "static/pages/admin/stockDate.syatic";
 /**
  * @jojayeon 24.08.05
- * @returns 유통관리 페이지
+ * @returns {React.ReactElement} AdminstockDate 유통관리 페이지 
+ * @description 
+ * * AdminNav : 사이드바
+ * * TitleComponent : 타이틀 컴포넌트 
+ * * ExpirationDataTable : 제품들의 동적 테이블
  */
 
 const AdminstockDate: React.FC = () => {
