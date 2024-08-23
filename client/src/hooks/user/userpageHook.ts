@@ -94,9 +94,6 @@ export const UserpageHook = () => {
       throw new Error("User email is required but was not found.");
     }
 
-    // 확인을 위한 디버깅 로그 추가
-    console.log("Products before purchase:", products);
-
     // 구매 정보 데이터 데이터베이스에 저장
     const purchaseData = await salesHistoryFetch(userEmail, products, today);
 
@@ -105,7 +102,6 @@ export const UserpageHook = () => {
 
     setIsPurchaseModalOpen(false);
     completePurchase();
-    console.log(purchaseData);
     return purchaseData;
   };
 

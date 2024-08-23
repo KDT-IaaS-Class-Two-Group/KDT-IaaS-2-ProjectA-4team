@@ -10,7 +10,6 @@ validationFunctions.forEach(({ elementId, validator }) => {
 
 const form = document.getElementById("join-container");
 form.addEventListener("submit", async () => {
-
   const isFormValid = validateAllFields();
 
   if (!isFormValid) {
@@ -49,7 +48,6 @@ form.addEventListener("submit", async () => {
     }
 
     const result = await response.json();
-    console.log(result);
     alert(result.message);
   } catch (error) {
     console.error("Error:", error);

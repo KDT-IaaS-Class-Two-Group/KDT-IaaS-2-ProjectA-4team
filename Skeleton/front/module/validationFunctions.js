@@ -21,7 +21,6 @@ const validationFunctions = [
 
 const validateField = (elementId, validator) => {
   const inputElement = document.getElementById(elementId).firstElementChild;
-  console.log("Input Value:", inputElement.value);
   const errorMessageElement = document.querySelector(".error-message");
 
   return new Promise((resolve) => {
@@ -34,7 +33,6 @@ const validateField = (elementId, validator) => {
         greenLight(fieldIndex);
         errorMessageElement.style.display = "none";
         resolve(true);
-        console.log("초록불");
       } else {
         redLight(fieldIndex);
         errorMessageElement.style.display = "block";

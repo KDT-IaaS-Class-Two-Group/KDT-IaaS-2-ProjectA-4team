@@ -46,7 +46,6 @@ const DatePickerWithRange = ({
     }
 
     try {
-      console.log("데이터읽기");
       const response = await fetcher(serverUrlGenerator(LOGS), "post", {
         headers: {
           "Content-Type": "application/json",
@@ -59,9 +58,6 @@ const DatePickerWithRange = ({
       });
       const data = await response.json();
       setLogsData(data);
-      console.log("data", data);
-      console.log("setLogsData", setLogsData);
-      console.log("logsData", logsData);
     } catch (error) {
       console.error("Error fetching logs:", error);
       alert("Failed to fetch logs. Please try again.");

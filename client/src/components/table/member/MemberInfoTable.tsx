@@ -56,7 +56,6 @@ const MemberInfoTable: React.FC<TMemberInfoTable> = (props) => {
       );
 
       const data = await response.json();
-      console.log(data);
       setMembers(
         members.map((member) =>
           member.id === id ? { ...member, role: newRole.toString() } : member,
